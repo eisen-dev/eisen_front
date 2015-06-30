@@ -1,3 +1,19 @@
+@charset "UTF-8";
+/*style.scss
+------------------------------------------------//
+prototype desu
+BEM記法みたいなものを使ってます
+https://en.bem.info/
+------------------------------------------------*/
+
+/* mediaquery
+------------------------------------------------*/
+$mediaquery-tablet: "screen and (min-width: 480px)";
+$mediaquery-desktop: "screen and (min-width: 768px)";
+$mediaquery-wide-desktop: "screen and (min-width: 1200px)";
+
+/* universal
+------------------------------------------------*/
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -17,8 +33,56 @@
   .clearfix:after {
     clear: both; }
 
+/* mobile styles
+------------------------------------------------*/
 body{
 margin: 0;
   font-size: 16px;
   /*1em = 16px*/
+}
+
+.wrapper{
+
+}
+.navigation{
+    position: fixed;
+	top: 0px;
+	z-index: 999;
+	width: 100%;
+    background-color: magenta;
+}
+.contentswrapper{
+    margin-top: 48px;
+}
+.contents{
+
+}
+.inner{
+    margin: 0 auto;
+    max-width: 960px;
+    background-color: aqua;
+    font-size: 1rem;
+}
+.inner--navigation{
+    height: 48px;
+    background-color: red;
+}
+
+.navigation__title{
+
+}
+.navigation__menu{
+
+}
+
+@media #{$mediaquery-tablet} {
+
+}
+
+@media #{$mediaquery-desktop} {
+
+}
+
+@media #{$mediaquery-wide-desktop} {
+
 }

@@ -1,4 +1,14 @@
-/* line 1, C:/Users/Owner/Documents/git/bayes_client/webd/sass/style.scss */
+@charset "UTF-8";
+/*style.scss
+------------------------------------------------//
+prototype desu
+BEM記法みたいなものを使ってます
+https://en.bem.info/
+------------------------------------------------*/
+/* mediaquery
+------------------------------------------------*/
+/* universal
+------------------------------------------------*/
 * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -7,25 +17,52 @@
   -moz-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
   -o-text-size-adjust: 100%;
-  text-size-adjust: 100%; }
+  text-size-adjust: 100%;
+}
 
-/* line 12, C:/Users/Owner/Documents/git/bayes_client/webd/sass/style.scss */
 .clearfix {
-  *zoom: 1; }
+  *zoom: 1;
+}
 
-/* line 14, C:/Users/Owner/Documents/git/bayes_client/webd/sass/style.scss */
 .clearfix:before, .clearfix:after {
   content: " ";
-  display: table; }
+  display: table;
+}
 
-/* line 17, C:/Users/Owner/Documents/git/bayes_client/webd/sass/style.scss */
 .clearfix:after {
-  clear: both; }
+  clear: both;
+}
 
-/* line 20, C:/Users/Owner/Documents/git/bayes_client/webd/sass/style.scss */
+/* mobile styles
+------------------------------------------------*/
 body {
   margin: 0;
   font-size: 16px;
-  /*1em = 16px*/ }
+  /*1em = 16px*/
+}
+
+.navigation {
+  position: fixed;
+  top: 0px;
+  z-index: 999;
+  width: 100%;
+  background-color: magenta;
+}
+
+.contentswrapper {
+  margin-top: 48px;
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 960px;
+  background-color: aqua;
+  font-size: 1rem;
+}
+
+.inner--navigation {
+  height: 48px;
+  background-color: red;
+}
 
 /*# sourceMappingURL=style.css.map */
