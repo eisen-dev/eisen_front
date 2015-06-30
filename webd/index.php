@@ -24,6 +24,8 @@
                     Untitled Document
                      <?php echo '<p>Hello World</p>'; 
                      require "/includes/jsonRPCClient.php";
+                     $serveraddress = "";
+                     $port = "";
                      $server= new jsonRPCClient("http://$serveraddress:$port");
                      ?>
                 </div>
