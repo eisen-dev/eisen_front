@@ -22,7 +22,10 @@
             <main class="contents">
                 <div class="inner">
                     Untitled Document
-                     <?php echo '<p>Hello World</p>'; ?>
+                     <?php echo '<p>Hello World</p>'; 
+                     require "/includes/jsonRPCClient.php";
+                     $server= new jsonRPCClient("http://$serveraddress:$port");
+                     ?>
                 </div>
             </main>
         </div>
