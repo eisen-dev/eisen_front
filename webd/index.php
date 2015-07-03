@@ -28,7 +28,8 @@
                      $port = "8080";
                      $server= new jsonRPCClient("http://$serveraddress:$port");
                      try {
-                     	echo 'Your name is <i>'.$server->add(3,2).'</i><br />'."\n";
+                     	//json-rpcでaddメソッドを呼び出して表示する。
+                     	echo 'Adding 3 plus 2 on Json-RPC = '.$server->add(3,2).'</i><br />'."\n";
                      } catch (Exception $e) {
                      	echo nl2br($e->getMessage()).'<br />'."\n";
                      }
