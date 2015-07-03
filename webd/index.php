@@ -23,10 +23,15 @@
                 <div class="inner">
                     Untitled Document
                      <?php echo '<p>Hello World</p>'; 
-                     require "/includes/jsonRPCClient.php";
-                     $serveraddress = "";
-                     $port = "";
+                     require_once "/includes/jsonRPCClient.php";
+                     $serveraddress = "192.168.233.130";
+                     $port = "8080";
                      $server= new jsonRPCClient("http://$serveraddress:$port");
+                     try {
+                     	echo 'Your name is <i>'.$server->add(3,2).'</i><br />'."\n";
+                     } catch (Exception $e) {
+                     	echo nl2br($e->getMessage()).'<br />'."\n";
+                     }
                      ?>
                 </div>
             </main>
