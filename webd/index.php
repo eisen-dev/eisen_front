@@ -27,15 +27,15 @@
                      $serveraddress = "192.168.233.130";
                      $port = "8080";
                      $server= new jsonRPCClient("http://$serveraddress:$port");
-                     //Ÿ‚ÍƒeƒXƒgƒƒ\ƒbƒh‚Å‚·B
+                     //æ¬¡ã¯ãƒ†ã‚¹ãƒˆãƒ¡ã‚½ãƒƒãƒ‰ã§ã™ã€‚
                      //try {
-                     	//json-rpc‚Åaddƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚Ä•\¦‚·‚éB
+                     	//json-rpcã§addãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¦è¡¨ç¤ºã™ã‚‹ã€‚
                      	//echo 'Adding 3 plus 2 on Json-RPC = '.$server->add(3,2).'</i><br />'."\n";
                      //} catch (Exception $e) {
                      	//echo nl2br($e->getMessage()).'<br />'."\n";
                      //}
                      try {
-                     	//json-rpc‚Å‘S•”PortageƒpƒbƒP[ƒWƒQƒbƒg‚Ìƒƒ\ƒbƒh‚ğŒÄ‚Ño‚µ‚Ä•\¦‚·‚éB
+                     	//json-rpcã§å…¨éƒ¨Portageãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã‚²ãƒƒãƒˆã®ãƒ¡ã‚½ãƒƒãƒ‰ã‚’å‘¼ã³å‡ºã—ã¦è¡¨ç¤ºã™ã‚‹ã€‚
                      	echo "printing all package:<br>";
                      	print_r($server->get_all_packages());
                      } catch (Exception $e) {
