@@ -27,9 +27,17 @@
                      $serveraddress = "192.168.233.130";
                      $port = "8080";
                      $server= new jsonRPCClient("http://$serveraddress:$port");
-                     try {
+                     //次はテストメソッドです。
+                     //try {
                      	//json-rpcでaddメソッドを呼び出して表示する。
-                     	echo 'Adding 3 plus 2 on Json-RPC = '.$server->add(3,2).'</i><br />'."\n";
+                     	//echo 'Adding 3 plus 2 on Json-RPC = '.$server->add(3,2).'</i><br />'."\n";
+                     //} catch (Exception $e) {
+                     	//echo nl2br($e->getMessage()).'<br />'."\n";
+                     //}
+                     try {
+                     	//json-rpcで全部Portageパッケージゲットのメソッドを呼び出して表示する。
+                     	echo "printing all package:<br>";
+                     	print_r($server->get_all_packages());
                      } catch (Exception $e) {
                      	echo nl2br($e->getMessage()).'<br />'."\n";
                      }
