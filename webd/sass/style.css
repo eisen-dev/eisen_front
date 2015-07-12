@@ -1,9 +1,6 @@
-@charset "UTF-8";
 /*style.scss
 ------------------------------------------------//
-prototype desu
-BEM記法みたいなものを使ってます
-https://en.bem.info/
+
 ------------------------------------------------*/
 /* mediaquery
 ------------------------------------------------*/
@@ -45,6 +42,7 @@ body {
   position: fixed;
   top: 0px;
   z-index: 999;
+  height: 48px;
   width: 100%;
   background-color: magenta;
 }
@@ -54,6 +52,11 @@ body {
 }
 
 .inner {
+  padding: 0 8px;
+}
+
+.section {
+  padding: 24px 0;
   margin: 0 auto;
   max-width: 960px;
   background-color: aqua;
@@ -61,8 +64,59 @@ body {
 }
 
 .inner--navigation {
-  height: 48px;
   background-color: red;
+}
+
+.title--section {
+  font-size: 1.7rem;
+  margin: 0;
+}
+
+.navigation__title {
+  background-color: dodgerblue;
+  display: block;
+  height: 48px;
+  max-width: 100%;
+  float: left;
+}
+
+.navigation__toggle {
+  background-color: darkorange;
+  padding: 0 16px 0 8px;
+  font-size: 32px;
+  line-height: 48px;
+  cursor: pointer;
+  float: left;
+}
+
+.menu {
+  background-color: blueviolet;
+  height: 48px;
+  float: right;
+}
+
+.machines, .notifications {
+  float: left;
+  padding: 0 12px;
+}
+
+.machines {
+  background-color: crimson;
+}
+
+.notifications {
+  background-color: darkgreen;
+}
+
+.menu__icon {
+  font-size: 24px;
+  line-height: 48px;
+}
+
+@media screen and (min-width: 768px) {
+  .navigation__toggle {
+    display: none;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
