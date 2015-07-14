@@ -111,6 +111,26 @@ margin: 0;
 .notifications{
 	background-color: darkgreen;
 }
+.notifications__list{
+    display: none;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    padding: 0 8px;
+    background-color: blue;
+    ul{
+        background-color: darkolivegreen;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        li{
+            padding: 8px 8px;
+        }
+    }
+}
+.menu__list__title{
+    border-bottom: 2px solid gray;
+}
 
 .menu__icon{
 	font-size: 24px;
