@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+body{
+margin: 0;
+  font-size: 16px;
+  /*1em = 16px*/
+        background-color: $md-grey-100;
+}
+
+.wrapper{
+
+}
+
+.contentswrapper{
+    margin-top: 48px;
+}
+.contents{
+
+}
+
+.inner{
+    padding: 0 8px;
+}
+
+.section{
+	padding: 24px 0px;
+	margin: 0 auto;
+    max-width: 960px;
+    //background-color: aqua;
+    font-size: 1rem;
+    background-color: $md-grey-50;
+}
+
+.inner--navigation{
+    //background-color: red;
+}
+.title--section{
+	font-size: 1.7rem;
+	margin: 0;
+}

@@ -1,0 +1,99 @@
+@charset "UTF-8";
+
+.navigation{
+    box-sizing: content-box;
+    /*下部ボーダーのためcontent-box*/
+    position: fixed;
+	top: 0px;
+	z-index: 999;
+	height: 48px;
+	width: 100%;
+    background-color: $md-grey-100;
+    border-bottom: 1px solid $md-grey-300;
+}
+
+.navigation__title{
+	//background-color: dodgerblue;
+	display: block;
+	height: 48px;
+	max-width: 100%;
+	float: left;
+}
+.navigation__toggle{
+	//background-color: darkorange;
+	padding: 0 16px 0 8px;
+	font-size: 32px;
+	line-height: 48px;
+    cursor: pointer;
+	float: left;
+}
+
+.menu{
+	//background-color: blueviolet;
+	height: 48px;
+	float: right;
+}
+.machines, .notifications{
+	float: left;
+}
+
+.machines{
+	//background-color: crimson;
+}
+.notifications{
+	//background-color: darkgreen;
+}
+.notifications__list{
+    display: none;
+    position: absolute;
+    top: 48px;
+    right: 0;
+    width: 100%;
+    padding: 0 8px;
+    //background-color: blue;
+
+    ul{
+        //background-color: darkolivegreen;
+        background-color: $md-grey-50;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        border-radius: 0px 0px 3px 3px;
+        border: 1px solid $md-grey-300;
+        li{
+            padding: 8px 8px;
+        }
+        li + li{
+            border-top: 1px solid $md-grey-200;
+        }
+    }
+}
+
+.notifications__time{
+    float: right;
+    font-size: 0.4em;
+
+}
+.notifications__machine-name{
+    float: left;
+    font-size: 0.9em;
+}
+.notifications__message{
+    font-size: 0.8em;
+    width: 100%;
+}
+
+.menu__list__title{
+    font-size: 1rem;
+    line-height: 1rem;
+    border-bottom: 2px solid $md-light-green-400;
+    background-color: $md-grey-50;
+}
+
+.menu__icon{
+	font-size: 24px;
+	line-height: 44px;
+    height: 48px;
+    padding: 0 14px;
+    //border-bottom: 4px solid $md-grey-400;
+}
