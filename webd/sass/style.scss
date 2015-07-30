@@ -39,47 +39,8 @@ $mediaquery-wide-desktop: "screen and (min-width: 1200px)";
   .clearfix:after {
     clear: both; }
 
-/* mobile styles
+/* parts
 ------------------------------------------------*/
+@import "main";
+@import "navigation";
 
-@mixin menu__icon__color($menu_iconbgcolor: 0, $border-bcolor: 0){
-    border-bottom: 4px solid $border-bcolor;
-    background-color: red;
-    &:hover{
-
-    }
-}
-
-.menu__icon--grey{
-    border-bottom: 4px solid $md-blue-grey-400;
-
-}
-.menu__icon--green{
-    border-bottom: 4px solid $success-color;
-}
-
-.menu__icon--orange{
-    border-bottom: 4px solid $infomation-color;
-}
-
-.menu__icon--red{
-    border-bottom: 4px solid $failed-color;
-}
-
-.fa-inline{
-    margin-right: 0.2em;
-}
-
-@media #{$mediaquery-tablet} {
-
-}
-
-@media #{$mediaquery-desktop} {
-	.navigation__toggle{
-		display: none;
-	}
-}
-
-@media #{$mediaquery-wide-desktop} {
-
-}

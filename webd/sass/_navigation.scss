@@ -4,52 +4,87 @@
     box-sizing: content-box;
     /*下部ボーダーのためcontent-box*/
     position: fixed;
-	top: 0px;
+	top: 0;
+    left: 0;
 	z-index: 999;
-	height: 48px;
-	width: 100%;
+	//height: 96px;
+    width: 100%;
     background-color: $md-grey-100;
     border-bottom: 1px solid $md-grey-300;
 }
 
 .navigation__title{
-	//background-color: dodgerblue;
 	display: block;
 	height: 48px;
 	max-width: 100%;
 	float: left;
 }
+
 .navigation__toggle{
-	//background-color: darkorange;
 	padding: 0 16px 0 8px;
-	font-size: 32px;
+    margin: 0 0 0 0;
+	font-size: 28px;
 	line-height: 48px;
     cursor: pointer;
-	float: left;
+	//float: left;
 }
 
 .menu{
-	//background-color: blueviolet;
-	height: 48px;
-	float: right;
-}
-.machines, .notifications{
-	float: left;
 }
 
-.machines{
-	//background-color: crimson;
+.menu__button{
+    float: left;
+    width: 50%;
+    background-color: $md-grey-100;
+    &:hover{
+        background-color: $md-grey-200;
+    }
 }
-.notifications{
-	//background-color: darkgreen;
+
+.menu__icon{
+	font-size: 24px;
+	line-height: 44px;
+    height: 44px;
+    text-align: center;
 }
+
+@mixin menu__icon__color($menu_iconbgcolor: 0, $border-bcolor: 0){
+    border-bottom: 4px solid $border-bcolor;
+    background-color: red;
+    &:hover{
+
+    }
+}
+
+.menu__border--grey{
+    border-bottom: 4px solid $md-blue-grey-400;
+
+}
+.menu__border--green{
+    border-bottom: 4px solid $success-color;
+}
+
+.menu__border--orange{
+    border-bottom: 4px solid $infomation-color;
+}
+
+.menu__border--red{
+
+    border-bottom: 4px solid $failed-color;
+}
+
+.fa-inline{
+    margin-right: 0.2em;
+}
+
+
 .notifications__list{
     display: none;
     position: absolute;
-    top: 48px;
+    top: 96px;
     right: 0;
     width: 100%;
-    padding: 0 8px;
+    padding: 0;
     //background-color: blue;
 
     ul{
@@ -58,8 +93,8 @@
         list-style: none;
         margin: 0;
         padding: 0;
-        border-radius: 0px 0px 3px 3px;
-        border: 1px solid $md-grey-300;
+        //border-radius: 0px 0px 3px 3px;
+        //border: 1px solid $md-grey-300;
         li{
             padding: 8px 8px;
         }
@@ -72,12 +107,13 @@
 .notifications__time{
     float: right;
     font-size: 0.4em;
-
 }
+
 .notifications__machine-name{
     float: left;
     font-size: 0.9em;
 }
+
 .notifications__message{
     font-size: 0.8em;
     width: 100%;
@@ -88,12 +124,23 @@
     line-height: 1rem;
     border-bottom: 2px solid $md-light-green-400;
     background-color: $md-grey-50;
+    padding: 0.5rem;
 }
 
-.menu__icon{
-	font-size: 24px;
-	line-height: 44px;
-    height: 48px;
-    padding: 0 14px;
-    //border-bottom: 4px solid $md-grey-400;
+
+@media #{$mediaquery-tablet} {
+
+}
+
+@media #{$mediaquery-desktop} {
+	.navigation__toggle{
+		display: none;
+	}
+    .notifications__list{
+        top: 48px;
+    }
+}
+
+@media #{$mediaquery-wide-desktop} {
+
 }

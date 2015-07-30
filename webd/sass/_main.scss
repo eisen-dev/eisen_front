@@ -12,8 +12,9 @@ margin: 0;
 }
 
 .contentswrapper{
-    margin-top: 48px;
+    margin-top: 96px;
 }
+
 .contents{
 
 }
@@ -32,9 +33,24 @@ margin: 0;
 }
 
 .inner--navigation{
-    //background-color: red;
+    padding: 0 0 0 0;
 }
+
 .title--section{
 	font-size: 1.7rem;
 	margin: 0;
+}
+
+@media #{$mediaquery-tablet} {
+
+}
+
+@media #{$mediaquery-desktop} {
+    .contentswrapper{
+        margin-top: 48px;
+    }
+}
+
+@media #{$mediaquery-wide-desktop} {
+
 }

@@ -12,20 +12,23 @@
 <body>
 	<div class="wrapper">
 		<nav class="navigation">
-			<div class="inner inner--navigation">
+			<div class="inner--navigation">
 				<i class="fa fa-bars navigation__toggle"></i>
 				<div class="navigation__title">
 				</div>
-				<div class="menu">
-					<div class="machines">
-						<i class="fa fa-server menu__icon menu__icon--grey"></i>
-
+				<div class="menu clearfix">
+					<div class="menu__button machines menu__border--red">
+                        <div class="menu__icon">
+						  <i class="fa fa-server menu__icon"></i>
+                        </div>
 					</div>
-					<div class="notifications">
-						<i class="fa fa-bell-o menu__icon notifications__toggle menu__icon--green"></i>
+					<div class="menu__button notifications menu__border--green">
+                        <div class="menu__icon">
+                            <i class="fa fa-bell-o"></i>
+                        </div>
                         <div class="notifications__list">
                         <ul>
-                            <li class="menu__list__title"><i class="fa fa-bell-o fa-inline"></i>Notifications</span></li>
+                            <div class="menu__list__title"><i class="fa fa-bell-o fa-inline"></i>Notifications</div>
                             <li>
                                 <span class="notifications__machine-name">WebServer</span>
                                 <span class="notifications__time">2015/07/07 14:44</span><br>
