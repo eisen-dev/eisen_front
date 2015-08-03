@@ -1,6 +1,6 @@
 $(function () {
-    $('.menu__button').css("cursor", "pointer");
-    $('.menu__button').click(function () {
+    $('.toggle--notifications').css("cursor", "pointer");
+    $('.toggle--notifications').click(function () {
         $('.notifications__list').slideToggle(200);
     });
 });

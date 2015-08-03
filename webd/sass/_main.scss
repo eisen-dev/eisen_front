@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 body{
-margin: 0;
-  font-size: 16px;
-  /*1em = 16px*/
-        background-color: $md-grey-100;
+    margin: 0;
+    font-size: 16px;
+    /*1em = 16px*/
+	background-color: $md-grey-100;
 }
 
 .wrapper{
@@ -13,27 +13,28 @@ margin: 0;
 
 .contentswrapper{
     margin-top: 96px;
+	/*ナビゲーションバー分のマージン*/
 }
 
 .contents{
-
 }
 
 .inner{
-    padding: 0 8px;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
-.section{
-	padding: 24px 0px;
-	margin: 0 auto;
-    max-width: 960px;
-    //background-color: aqua;
-    font-size: 1rem;
-    background-color: $md-grey-50;
+.inner--section{
+	padding: 0 8px;
 }
 
 .inner--navigation{
-    padding: 0 0 0 0;
+
+}
+
+.section{
+    font-size: 1rem;
+    background-color: $md-grey-50;
 }
 
 .title--section{
@@ -42,13 +43,14 @@ margin: 0;
 }
 
 @media #{$mediaquery-tablet} {
-
+    .contentswrapper{
+        margin-top: 48px;
+	/*ナビゲーションバー分のマージン*/
+    }
 }
 
 @media #{$mediaquery-desktop} {
-    .contentswrapper{
-        margin-top: 48px;
-    }
+
 }
 
 @media #{$mediaquery-wide-desktop} {
