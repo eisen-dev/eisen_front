@@ -5,8 +5,6 @@
 ------------------------------------------------*/
 /* colors
 ------------------------------------------------*/
-/* mediaquery
-------------------------------------------------*/
 /* universal
 ------------------------------------------------*/
 * {
@@ -39,12 +37,17 @@ body {
   margin: 0;
   font-size: 16px;
   /*1em = 16px*/
-  background-color: #f5f5f5;
+  background-color: #eeeeee;
+  font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
 
 .contentswrapper {
   margin-top: 96px;
   /*ナビゲーションバー分のマージン*/
+}
+
+.contentwrapper--nonav {
+  margin-top: 0;
 }
 
 .inner {
@@ -54,6 +57,10 @@ body {
 
 .inner--section {
   padding: 0 8px;
+}
+
+.inner--login {
+  padding: 0 16px;
 }
 
 .section {
@@ -70,6 +77,10 @@ body {
   .contentswrapper {
     margin-top: 48px;
     /*ナビゲーションバー分のマージン*/
+  }
+
+  .contentwrapper--nonav {
+    margin-top: 0;
   }
 }
 .navigation {
@@ -213,6 +224,73 @@ body {
   .menu__list__items {
     height: 300px;
   }
+}
+.login-header {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1rem 0;
+  text-align: center;
+}
+.login-header img {
+  margin: 0 auto;
+}
+.login-header span {
+  font-size: 1.5rem;
+  padding: 1rem 1rem;
+  color: #424242;
+}
+
+.login {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  background-color: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-radius: 3px;
+  padding: 24px;
+}
+.login form {
+  width: 100%;
+}
+.login form input {
+  width: 100%;
+  font-size: 1.2em;
+  padding: 0.5em;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 0.7em;
+  color: #424242;
+}
+.login form span {
+  font-size: 1em;
+  color: #424242;
+}
+
+@media screen and (min-width: 480px) {
+  .login-header {
+    max-width: 300px;
+  }
+
+  .login {
+    max-width: 300px;
+  }
+}
+.button {
+  display: inline-block;
+  margin: 1em 1em 1em 0;
+  padding: 12px 24px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: #68CC68;
+  color: #FAFAFA;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+}
+.button:hover {
+  color: #FAFAFA;
+  background-color: #42bf42;
 }
 
 /*# sourceMappingURL=style.css.map */

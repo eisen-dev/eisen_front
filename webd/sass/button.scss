@@ -1,0 +1,20 @@
+@charset "UTF-8";
+
+.button{
+	$color: #68CC68;
+	display: inline-block;
+	margin: 1em 1em 1em 0;
+	padding: 12px 24px;
+	width: 100%;
+	border-radius: 3px;
+	background-color: $color;
+	color: #FAFAFA;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 1rem;
+	&:hover{
+		color: #FAFAFA;
+		background-color: darken($color, 10%);
+	}
+}

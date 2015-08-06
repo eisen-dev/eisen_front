@@ -1,13 +1,13 @@
 @charset "UTF-8";
 
 .navigation{
-    position: fixed;
+	position: fixed;
 	top: 0;
-    left: 0;
+	left: 0;
 	z-index: 999;
-    width: 100%;
-    background-color: $md-grey-200;
-    border-bottom: 1px solid $md-grey-400;
+	width: 100%;
+	background-color: $md-grey-200;
+	border-bottom: 1px solid $md-grey-400;
 }
 
 .navigation__title{
@@ -19,10 +19,10 @@
 
 .navigation__toggle{
 	padding: 0 16px 0 8px;
-    margin: 0 0 0 0;
+	margin: 0 0 0 0;
 	font-size: 28px;
 	line-height: 48px;
-    cursor: pointer;
+	cursor: pointer;
 }
 
 .menu{
@@ -30,42 +30,42 @@
 }
 
 .menu__button{
-    float: left;
-    width: 50%;
-    background-color: $md-grey-200;
-    &:hover{
-        background-color: $md-grey-300;
-    }
+	float: left;
+	width: 50%;
+	background-color: $md-grey-200;
+	&:hover{
+		background-color: $md-grey-300;
+	}
 }
 
 .menu__icon{
 	font-size: 24px;
 	line-height: 44px;
-    height: 44px;
-    text-align: center;
+	height: 44px;
+	text-align: center;
 }
 
 .notifications__list{
-    display: none;
-    position: absolute;
-    top: 96px;
+	display: none;
+	position: absolute;
+	top: 96px;
 	right: 0px;
-    width: 100%;
-    padding: 0;
-    border: 1px solid $md-grey-400;
+	width: 100%;
+	padding: 0;
+	border: 1px solid $md-grey-400;
 	border-radius: 0 0 6px 6px;
 	background-color: $md-grey-50;
-    ul{
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        li{
-            padding: 8px 8px;
-        }
-        li + li{
-            border-top: 1px solid $md-grey-200;
-        }
-    }
+	ul{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		li{
+			padding: 8px 8px;
+		}
+		li + li{
+			border-top: 1px solid $md-grey-200;
+		}
+	}
 }
 
 .menu__list__items{
@@ -74,64 +74,67 @@
 }
 
 .notifications__time{
-    float: right;
-    font-size: 0.4em;
+	float: right;
+	font-size: 0.4em;
 }
 
 .notifications__machine-name{
-    float: left;
-    font-size: 0.9em;
+	float: left;
+	font-size: 0.9em;
 }
 
 .notifications__message{
-    font-size: 0.8em;
-    width: 100%;
+	font-size: 0.8em;
+	width: 100%;
 }
 
 .menu__list__title{
-    font-size: 1rem;
-    line-height: 1rem;
-    border-bottom: 2px solid $md-light-green-400;
-    background-color: $md-grey-50;
-    padding: 0.5rem;
+	font-size: 1rem;
+	line-height: 1rem;
+	border-bottom: 2px solid $md-light-green-400;
+	background-color: $md-grey-50;
+	padding: 0.5rem;
 }
 
 /*メニューボタン下のステータス表示*/
 
 .menu__border--grey{
-    border-bottom: 4px solid $md-blue-grey-400;
+	border-bottom: 4px solid $md-blue-grey-400;
 
 }
 .menu__border--green{
-    border-bottom: 4px solid $success-color;
+	border-bottom: 4px solid $success-color;
 }
 
 .menu__border--orange{
-    border-bottom: 4px solid $infomation-color;
+	border-bottom: 4px solid $infomation-color;
 }
 
 .menu__border--red{
-    border-bottom: 4px solid $failed-color;
+	border-bottom: 4px solid $failed-color;
 }
 
 .fa-inline{
-    margin-right: 0.2em;
+	margin-right: 0.2em;
 }
 
-@media #{$mediaquery-tablet} {
+@media screen and (min-width: 480px) {
 	.navigation__toggle{
 		float: left;
-
 	}
-    .notifications__list{
-        top: 48px;
-    }
+
+	.notifications__list{
+		top: 48px;
+	}
+
 	.menu{
 		float: right;
 	}
+
 	.menu__button{
 		position: relative;
 	}
+
 	.menu__icon{
 		width: 100px;
 	}
@@ -145,10 +148,10 @@
 	}
 }
 
-@media #{$mediaquery-desktop} {
+@media screen and (min-width: 768px) {
 
 }
 
-@media #{$mediaquery-wide-desktop} {
+@media screen and (min-width: 1200px) {
 
 }
