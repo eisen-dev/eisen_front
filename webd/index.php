@@ -101,6 +101,15 @@
 							//echo nl2br($e->getMessage()).'<br />'."\n";
 						//}
 						try {
+							//json-rpcで全部Portageパッケージゲットのメソッドを呼び出して表示する。
+							echo "printing installed package:<br>";
+							print_r($server->get_installed_packages());
+						} catch (Exception $e) {
+							echo nl2br($e->getMessage()).'<br />'."\n";
+						}
+						echo "<br></br>-----------------------------------------------------------------------------------------------------------------------------------------<br></br>";
+						echo "<br></br>";
+						try {
                      		//json-rpcで全部Portageパッケージゲットのメソッドを呼び出して表示する。
                      		echo "printing all package:<br>";
                      		print_r($server->get_all_packages());
