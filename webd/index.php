@@ -90,7 +90,7 @@
 						<h1 class="title--section">Hello</h1> Untitled Document!
 						<?php echo '<p>Hello World</p>';
 						require_once "/includes/jsonRPCClient.php";
-						require_once "connectvars.php";
+						require_once "/includes/connectvars.php";
 						$serveraddress = "192.168.233.130";
 						$port = "8080";
 						$server= new jsonRPCClient("http://$serveraddress:$port");
