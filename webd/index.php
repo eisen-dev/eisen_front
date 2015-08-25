@@ -90,9 +90,12 @@
 						<h1 class="title--section">Hello</h1> Untitled Document!
 						<?php echo '<p>Hello World</p>';
 						require_once "/includes/jsonRPCClient.php";
+						require_once "connectvars.php";
 						$serveraddress = "192.168.233.130";
 						$port = "8080";
 						$server= new jsonRPCClient("http://$serveraddress:$port");
+						//データベース接続
+						$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 						//次はテストメソッドです。
 						//try {
 							//json-rpcでaddメソッドを呼び出して表示する。

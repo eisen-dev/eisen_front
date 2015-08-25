@@ -10,49 +10,47 @@ CREATE TABLE `ユーザー情報` (
 CREATE TABLE `マシン情報` (
   `マシンID` INT AUTO_INCREMENT,
   `マシン名` VARCHAR(20),
-  `last_name` VARCHAR(20),
-  `email` VARCHAR(60),
-  PRIMARY KEY (`id`)
+  `IPアドレス` VARCHAR(20),
+  `ポート番号` VARCHAR(20),
+  `OS種類` VARCHAR(20),
+  `パッケージ管理システムID` VARCHAR(20),
+  `マシンステータスID` VARCHAR(20),
+  PRIMARY KEY (`マシンID`)
 );
 CREATE TABLE `パッケージ管理システム情報` (
-  `id` INT AUTO_INCREMENT,
-  `first_name` VARCHAR(20),
-  `last_name` VARCHAR(20),
-  `email` VARCHAR(60),
-  PRIMARY KEY (`id`)
+  `パッケージ管理システムID` INT AUTO_INCREMENT,
+  `パッケージ管理システム名` VARCHAR(20),
+  PRIMARY KEY (`パッケージ管理システムID`)
 );
 CREATE TABLE `インストール済みパッケージ` (
-  `id` INT AUTO_INCREMENT,
-  `first_name` VARCHAR(20),
-  `last_name` VARCHAR(20),
-  `email` VARCHAR(60),
-  PRIMARY KEY (`id`)
+  `マシンID` INT AUTO_INCREMENT,
+  `パッケージ管理システムID` VARCHAR(20),
+  `パッケージID` VARCHAR(20),
+  `現在のパッケージバージョン` VARCHAR(60),
+  PRIMARY KEY (`パッケージID`)
 );
 CREATE TABLE `パッケージ情報` (
-  `id` INT AUTO_INCREMENT,
-  `first_name` VARCHAR(20),
-  `last_name` VARCHAR(20),
-  `email` VARCHAR(60),
-  PRIMARY KEY (`id`)
+  `パッケージID` INT AUTO_INCREMENT,
+  `パッケージ名` VARCHAR(20),
+  `パッケージの説明` VARCHAR(60),
+  PRIMARY KEY (`パッケージID`)
 );
 CREATE TABLE `最新パッケージ情報` (
-  `id` INT AUTO_INCREMENT,
-  `first_name` VARCHAR(20),
-  `last_name` VARCHAR(20),
-  `email` VARCHAR(60),
-  PRIMARY KEY (`id`)
+  `時刻情報` INT AUTO_INCREMENT,
+  `パッケージID` VARCHAR(20),
+  `パッケージ管理システムID` VARCHAR(20),
+  `バージョン情報` VARCHAR(60),
+  `更新情報` VARCHAR(60),
+  PRIMARY KEY (`パッケージ管理システムID`)
 );
 CREATE TABLE `マシンステータス情報` (
-  `id` INT AUTO_INCREMENT,
-  `first_name` VARCHAR(20),
-  `last_name` VARCHAR(20),
-  `email` VARCHAR(60),
-  PRIMARY KEY (`id`)
+  `時刻情報` INT AUTO_INCREMENT,
+  `マシンID` VARCHAR(20),
+  `ステータスID` VARCHAR(20),
+  PRIMARY KEY (`ステータスID`)
 );
 CREATE TABLE `ステータス` (
-  `id` INT AUTO_INCREMENT,
-  `first_name` VARCHAR(20),
-  `last_name` VARCHAR(20),
-  `email` VARCHAR(60),
-  PRIMARY KEY (`id`)
+  `ステータスID` INT AUTO_INCREMENT,
+  `ステータス表示` VARCHAR(20),
+  PRIMARY KEY (`ステータスID`)
 );
