@@ -1,56 +1,50 @@
-CREATE TABLE `ƒ†[ƒU[î•ñ` (
-  `ƒ†ƒj[ƒNID` INT AUTO_INCREMENT,
-  `ƒ†[ƒU[ID` VARCHAR(20),
-  `ƒpƒXƒ[ƒh` VARCHAR(20),
-  `ƒ[ƒ‹ƒAƒhƒŒƒX` VARCHAR(60),
-  `ƒ†[ƒU[–¼` VARCHAR(60),
-  `ƒ}ƒVƒ“ID` VARCHAR(60),
-  PRIMARY KEY (`ƒ†ƒj[ƒNID`)
+CREATE TABLE `ãƒ¦ãƒ¼ã‚¶ãƒ¼æƒ…å ±` (
+  `ãƒ¦ãƒ‹ãƒ¼ã‚¯ID` INT AUTO_INCREMENT,
+  `ãƒ¦ãƒ¼ã‚¶ãƒ¼ID` VARCHAR(20),
+  `ãƒ‘ã‚¹ãƒ¯ãƒ¼ãƒ‰` VARCHAR(20),
+  `ãƒ¡ãƒ¼ãƒ«ã‚¢ãƒ‰ãƒ¬ã‚¹` VARCHAR(60),
+  `ãƒ¦ãƒ¼ã‚¶ãƒ¼å` VARCHAR(60),
+  PRIMARY KEY (`ãƒ¦ãƒ‹ãƒ¼ã‚¯ID`)
 );
-CREATE TABLE `ƒ}ƒVƒ“î•ñ` (
-  `ƒ}ƒVƒ“ID` INT AUTO_INCREMENT,
-  `ƒ}ƒVƒ“–¼` VARCHAR(20),
-  `IPƒAƒhƒŒƒX` VARCHAR(20),
-  `ƒ|[ƒg”Ô†` VARCHAR(20),
-  `OSŽí—Þ` VARCHAR(20),
-  `ƒpƒbƒP[ƒWŠÇ—ƒVƒXƒeƒ€ID` VARCHAR(20),
-  `ƒ}ƒVƒ“ƒXƒe[ƒ^ƒXID` VARCHAR(20),
-  PRIMARY KEY (`ƒ}ƒVƒ“ID`)
+CREATE TABLE `ãƒžã‚·ãƒ³æƒ…å ±` (
+  `ãƒžã‚·ãƒ³ID` INT AUTO_INCREMENT,
+  `ãƒžã‚·ãƒ³å` VARCHAR(20),
+  `IPã‚¢ãƒ‰ãƒ¬ã‚¹` VARCHAR(20),
+  `ãƒãƒ¼ãƒˆç•ªå·` VARCHAR(20),
+  `OSç¨®é¡ž` VARCHAR(20),
+  `ãƒžã‚·ãƒ³ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ID` VARCHAR(20),
+  PRIMARY KEY (`ãƒžã‚·ãƒ³ID`)
 );
-CREATE TABLE `ƒpƒbƒP[ƒWŠÇ—ƒVƒXƒeƒ€î•ñ` (
-  `ƒpƒbƒP[ƒWŠÇ—ƒVƒXƒeƒ€ID` INT AUTO_INCREMENT,
-  `ƒpƒbƒP[ƒWŠÇ—ƒVƒXƒeƒ€–¼` VARCHAR(20),
-  PRIMARY KEY (`ƒpƒbƒP[ƒWŠÇ—ƒVƒXƒeƒ€ID`)
+CREATE TABLE `ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ç®¡ç†ã‚·ã‚¹ãƒ†ãƒ æƒ…å ±` (
+  `ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ç®¡ç†ã‚·ã‚¹ãƒ†ãƒ ID` INT AUTO_INCREMENT,
+  `ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ç®¡ç†ã‚·ã‚¹ãƒ†ãƒ å` VARCHAR(20),
+  PRIMARY KEY (`ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ç®¡ç†ã‚·ã‚¹ãƒ†ãƒ ID`)
 );
-CREATE TABLE `ƒCƒ“ƒXƒg[ƒ‹Ï‚ÝƒpƒbƒP[ƒW` (
-  `ƒ}ƒVƒ“ID` INT AUTO_INCREMENT,
-  `ƒpƒbƒP[ƒWŠÇ—ƒVƒXƒeƒ€ID` VARCHAR(20),
-  `ƒpƒbƒP[ƒWID` VARCHAR(20),
-  `Œ»Ý‚ÌƒpƒbƒP[ƒWƒo[ƒWƒ‡ƒ“` VARCHAR(60),
-  PRIMARY KEY (`ƒpƒbƒP[ƒWID`)
+CREATE TABLE `ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«æ¸ˆã¿ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸` (
+  `ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ID` INT AUTO_INCREMENT,
+  `ç¾åœ¨ã®ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ãƒãƒ¼ã‚¸ãƒ§ãƒ³` VARCHAR(60),
+  PRIMARY KEY (`ã‚¤ãƒ³ã‚¹ãƒˆãƒ¼ãƒ«ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ID`)
 );
-CREATE TABLE `ƒpƒbƒP[ƒWî•ñ` (
-  `ƒpƒbƒP[ƒWID` INT AUTO_INCREMENT,
-  `ƒpƒbƒP[ƒW–¼` VARCHAR(20),
-  `ƒpƒbƒP[ƒW‚Ìà–¾` VARCHAR(60),
-  PRIMARY KEY (`ƒpƒbƒP[ƒWID`)
+CREATE TABLE `ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸æƒ…å ±` (
+  `ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ID` INT AUTO_INCREMENT,
+  `ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸å` VARCHAR(20),
+  `ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ã®èª¬æ˜Ž` VARCHAR(60),
+  PRIMARY KEY (`ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ID`)
 );
-CREATE TABLE `ÅVƒpƒbƒP[ƒWî•ñ` (
-  `Žžî•ñ` INT AUTO_INCREMENT,
-  `ƒpƒbƒP[ƒWID` VARCHAR(20),
-  `ƒpƒbƒP[ƒWŠÇ—ƒVƒXƒeƒ€ID` VARCHAR(20),
-  `ƒo[ƒWƒ‡ƒ“î•ñ` VARCHAR(60),
-  `XVî•ñ` VARCHAR(60),
-  PRIMARY KEY (`ƒpƒbƒP[ƒWŠÇ—ƒVƒXƒeƒ€ID`)
+CREATE TABLE `æœ€æ–°ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸æƒ…å ±` (
+  `æœ€æ–°ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ID` INT AUTO_INCREMENT,
+  `ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ç®¡ç†ã‚·ã‚¹ãƒ†ãƒ ID` VARCHAR(20),
+  `ãƒãƒ¼ã‚¸ãƒ§ãƒ³æƒ…å ±` VARCHAR(60),
+  `æ›´æ–°æƒ…å ±` VARCHAR(60),
+  PRIMARY KEY (`æœ€æ–°ãƒ‘ãƒƒã‚±ãƒ¼ã‚¸ID`)
 );
-CREATE TABLE `ƒ}ƒVƒ“ƒXƒe[ƒ^ƒXî•ñ` (
-  `Žžî•ñ` INT AUTO_INCREMENT,
-  `ƒ}ƒVƒ“ID` VARCHAR(20),
-  `ƒXƒe[ƒ^ƒXID` VARCHAR(20),
-  PRIMARY KEY (`ƒXƒe[ƒ^ƒXID`)
+CREATE TABLE `ãƒžã‚·ãƒ³ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹æƒ…å ±` (
+  `ãƒžã‚·ãƒ³ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ID` INT AUTO_INCREMENT,
+  PRIMARY KEY (`ãƒžã‚·ãƒ³ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ID`)
 );
-CREATE TABLE `ƒXƒe[ƒ^ƒX` (
-  `ƒXƒe[ƒ^ƒXID` INT AUTO_INCREMENT,
-  `ƒXƒe[ƒ^ƒX•\Ž¦` VARCHAR(20),
-  PRIMARY KEY (`ƒXƒe[ƒ^ƒXID`)
+CREATE TABLE `ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹` (
+  `ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ID` INT AUTO_INCREMENT,
+  `ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹è¡¨ç¤º` VARCHAR(20),
+  PRIMARY KEY (`ã‚¹ãƒ†ãƒ¼ã‚¿ã‚¹ID`)
 );
+
