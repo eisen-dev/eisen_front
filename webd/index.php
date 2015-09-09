@@ -96,29 +96,39 @@
 						$server= new jsonRPCClient("http://$serveraddress:$port");
 						//データベース接続
 						$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-						//次はテストメソッドです。
+						//次は例メソッドです。
 						//try {
 							//json-rpcでaddメソッドを呼び出して表示する。
 							//echo 'Adding 3 plus 2 on Json-RPC = '.$server->add(3,2).'</i><br />'."\n";
 						//} catch (Exception $e) {
 							//echo nl2br($e->getMessage()).'<br />'."\n";
 						//}
+						$sql = "insert into パッケージ情報(パッケージ名,パッケージの説明)";
 						try {
-							//json-rpcで全部Portageパッケージゲットのメソッドを呼び出して表示する。
+							//json-rpcでインストールしたのパッケージゲットメソッドを呼び出して表示する。
 							echo "printing installed package:<br>";
-							print_r($server->get_installed_packages());
+							$data=$server->get_installed_packages();
+							foreach ($data as $value){
+								$values=" values('".$value[0]."/".$value[1]."-".$value[2]."',NULL);";
+								//パッケージリストからqueryを作ります。
+								$query=($sql.$values);
+								//print($query);
+								//データベースに入れます。
+								$data = mysqli_query($dbc, $query);
+								print($data);
+							}
 						} catch (Exception $e) {
 							echo nl2br($e->getMessage()).'<br />'."\n";
 						}
 						echo "<br></br>-----------------------------------------------------------------------------------------------------------------------------------------<br></br>";
 						echo "<br></br>";
-						try {
+						//try {
                      		//json-rpcで全部Portageパッケージゲットのメソッドを呼び出して表示する。
-                     		echo "printing all package:<br>";
-                     		print_r($server->get_all_packages());
-						} catch (Exception $e) {
-							echo nl2br($e->getMessage()).'<br />'."\n";
-						}
+                     		//echo "printing all package:<br>";
+                     		//print_r($server->get_all_packages());
+						//} catch (Exception $e) {
+							//echo nl2br($e->getMessage()).'<br />'."\n";
+						//}
 						?>
 					</div>
 				</div>
