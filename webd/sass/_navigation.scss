@@ -10,14 +10,14 @@
 	border-bottom: 1px solid $md-grey-400;
 }
 
-.navigation__title{
+.navigation-title{
 	display: block;
 	height: 48px;
 	max-width: 100%;
 	float: left;
 }
 
-.navigation__toggle{
+.navigation-toggle{
 	padding: 0 16px 0 8px;
 	margin: 0 0 0 0;
 	font-size: 28px;
@@ -29,7 +29,7 @@
 
 }
 
-.menu__button{
+.menu-button{
 	float: left;
 	width: 50%;
 	background-color: $md-grey-200;
@@ -38,14 +38,14 @@
 	}
 }
 
-.menu__icon{
+.menu-icon{
 	font-size: 24px;
 	line-height: 44px;
 	height: 44px;
 	text-align: center;
 }
 
-.notifications__list{
+.notifications-list{
 	display: none;
 	position: absolute;
 	top: 96px;
@@ -68,49 +68,49 @@
 	}
 }
 
-.menu__list__items{
+.menu-list-items{
 	overflow: scroll;
 	overflow: auto;
 }
 
-.notifications__time{
+.notifications-time{
 	float: right;
 	font-size: 0.4em;
 }
 
-.notifications__machine-name{
+.notifications-machine-name{
 	float: left;
 	font-size: 0.9em;
 }
 
-.notifications__message{
+.notifications-message{
 	font-size: 0.8em;
 	width: 100%;
 }
 
-.menu__list__title{
-	font-size: 1rem;
-	line-height: 1rem;
+.menu-list-title{
+	font-size: 1em;
+	line-height: 1em;
 	border-bottom: 2px solid $md-light-green-400;
 	background-color: $md-grey-50;
-	padding: 0.5rem;
+	padding: 0.5em;
 }
 
 /*メニューボタン下のステータス表示*/
 
-.menu__border--grey{
+.menu-border-grey{
 	border-bottom: 4px solid $md-blue-grey-400;
 
 }
-.menu__border--green{
+.menu-border-green{
 	border-bottom: 4px solid $success-color;
 }
 
-.menu__border--orange{
+.menu-border-orange{
 	border-bottom: 4px solid $infomation-color;
 }
 
-.menu__border--red{
+.menu-border-red{
 	border-bottom: 4px solid $failed-color;
 }
 
@@ -119,11 +119,11 @@
 }
 
 @media screen and (min-width: 480px) {
-	.navigation__toggle{
+	.navigation-toggle{
 		float: left;
 	}
 
-	.notifications__list{
+	.notifications-list{
 		top: 48px;
 	}
 
@@ -131,19 +131,19 @@
 		float: right;
 	}
 
-	.menu__button{
+	.menu-button{
 		position: relative;
 	}
 
-	.menu__icon{
+	.menu-icon{
 		width: 100px;
 	}
 
-	.notifications__list{
+	.notifications-list{
 		width: 300px;
 	}
 
-	.menu__list__items{
+	.menu-list-items{
 		height: 300px;
 	}
 }
