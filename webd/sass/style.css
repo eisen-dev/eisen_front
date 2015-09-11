@@ -36,7 +36,6 @@
 body {
   margin: 0;
   font-size: 16px;
-  /*1em = 16px*/
   background-color: #eeeeee;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
@@ -46,7 +45,7 @@ body {
   /*ナビゲーションバー分のマージン*/
 }
 
-.contentwrapper--nonav {
+.contentwrapper-nonav {
   margin-top: 0;
 }
 
@@ -55,21 +54,21 @@ body {
   margin: 0 auto;
 }
 
-.inner--section {
-  padding: 0 8px;
+.inner-section {
+  padding: 16px 8px;
 }
 
-.inner--login {
+.inner-login {
   padding: 0 16px;
 }
 
 .section {
-  font-size: 1rem;
+  font-size: 1em;
   background-color: #fafafa;
 }
 
-.title--section {
-  font-size: 1.7rem;
+.title-section {
+  font-size: 1.7em;
   margin: 0;
 }
 
@@ -79,7 +78,7 @@ body {
     /*ナビゲーションバー分のマージン*/
   }
 
-  .contentwrapper--nonav {
+  .contentwrapper-nonav {
     margin-top: 0;
   }
 }
@@ -93,14 +92,14 @@ body {
   border-bottom: 1px solid #bdbdbd;
 }
 
-.navigation__title {
+.navigation-title {
   display: block;
   height: 48px;
   max-width: 100%;
   float: left;
 }
 
-.navigation__toggle {
+.navigation-toggle {
   padding: 0 16px 0 8px;
   margin: 0 0 0 0;
   font-size: 28px;
@@ -108,23 +107,23 @@ body {
   cursor: pointer;
 }
 
-.menu__button {
+.menu-button {
   float: left;
   width: 50%;
   background-color: #eeeeee;
 }
-.menu__button:hover {
+.menu-button:hover {
   background-color: #e0e0e0;
 }
 
-.menu__icon {
+.menu-icon {
   font-size: 24px;
   line-height: 44px;
   height: 44px;
   text-align: center;
 }
 
-.notifications__list {
+.notifications-list {
   display: none;
   position: absolute;
   top: 96px;
@@ -135,60 +134,60 @@ body {
   border-radius: 0 0 6px 6px;
   background-color: #fafafa;
 }
-.notifications__list ul {
+.notifications-list ul {
   list-style: none;
   margin: 0;
   padding: 0;
 }
-.notifications__list ul li {
+.notifications-list ul li {
   padding: 8px 8px;
 }
-.notifications__list ul li + li {
+.notifications-list ul li + li {
   border-top: 1px solid #eeeeee;
 }
 
-.menu__list__items {
+.menu-list-items {
   overflow: scroll;
   overflow: auto;
 }
 
-.notifications__time {
+.notifications-time {
   float: right;
   font-size: 0.4em;
 }
 
-.notifications__machine-name {
+.notifications-machine-name {
   float: left;
   font-size: 0.9em;
 }
 
-.notifications__message {
+.notifications-message {
   font-size: 0.8em;
   width: 100%;
 }
 
-.menu__list__title {
-  font-size: 1rem;
-  line-height: 1rem;
+.menu-list-title {
+  font-size: 1em;
+  line-height: 1em;
   border-bottom: 2px solid #9ccc65;
   background-color: #fafafa;
-  padding: 0.5rem;
+  padding: 0.5em;
 }
 
 /*メニューボタン下のステータス表示*/
-.menu__border--grey {
+.menu-border-grey {
   border-bottom: 4px solid #78909c;
 }
 
-.menu__border--green {
+.menu-border-green {
   border-bottom: 4px solid #8bc34a;
 }
 
-.menu__border--orange {
+.menu-border-orange {
   border-bottom: 4px solid #03a9f4;
 }
 
-.menu__border--red {
+.menu-border-red {
   border-bottom: 4px solid #f44336;
 }
 
@@ -197,11 +196,11 @@ body {
 }
 
 @media screen and (min-width: 480px) {
-  .navigation__toggle {
+  .navigation-toggle {
     float: left;
   }
 
-  .notifications__list {
+  .notifications-list {
     top: 48px;
   }
 
@@ -209,19 +208,19 @@ body {
     float: right;
   }
 
-  .menu__button {
+  .menu-button {
     position: relative;
   }
 
-  .menu__icon {
+  .menu-icon {
     width: 100px;
   }
 
-  .notifications__list {
+  .notifications-list {
     width: 300px;
   }
 
-  .menu__list__items {
+  .menu-list-items {
     height: 300px;
   }
 }

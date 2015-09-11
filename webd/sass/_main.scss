@@ -3,7 +3,6 @@
 body{
 	margin: 0;
 	font-size: 16px;
-	/*1em = 16px*/
 	background-color: $md-grey-200;
 	font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
@@ -16,7 +15,7 @@ body{
 	margin-top: 96px;
 	/*ナビゲーションバー分のマージン*/
 }
-.contentwrapper--nonav{
+.contentwrapper-nonav{
 	margin-top: 0;
 }
 
@@ -28,24 +27,25 @@ body{
 	margin: 0 auto;
 }
 
-.inner--section{
-	padding: 0 8px;
-}
-
-.inner--navigation{
+.inner-section{
+	padding: 16px 8px;
 
 }
-.inner--login{
+
+.inner-navigation{
+
+}
+.inner-login{
 	padding: 0 16px;
 }
 
 .section{
-	font-size: 1rem;
+	font-size: 1em;
 	background-color: $md-grey-50;
 }
 
-.title--section{
-	font-size: 1.7rem;
+.title-section{
+	font-size: 1.7em;
 	margin: 0;
 }
 
@@ -54,7 +54,7 @@ body{
 		margin-top: 48px;
 		/*ナビゲーションバー分のマージン*/
 	}
-	.contentwrapper--nonav{
+	.contentwrapper-nonav{
 		margin-top: 0;
 }
 }
