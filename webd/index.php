@@ -103,10 +103,10 @@
 						//} catch (Exception $e) {
 							//echo nl2br($e->getMessage()).'<br />'."\n";
 						//}
-						$sql = "insert into パッケージ情報(パッケージ名,パッケージの説明)";
+						$sql = "INSERT INTO パッケージ情報(パッケージ名,パッケージの説明)";
 						try {
 							//json-rpcでインストールしたのパッケージゲットメソッドを呼び出して表示する。
-							echo "printing installed package:<br>";
+							//echo "printing installed package:<br>";
 							$data=$server->get_installed_packages();
 							foreach ($data as $value){
 								$values=" values('".$value[0]."/".$value[1]."-".$value[2]."',NULL);";
@@ -115,7 +115,18 @@
 								//print($query);
 								//データベースに入れます。
 								$data = mysqli_query($dbc, $query);
-								print($data);
+								//print($data);
+							}
+						} catch (Exception $e) {
+							echo nl2br($e->getMessage()).'<br />'."\n";
+						}
+						try {
+							$query = "SELECT * FROM パッケージ情報";
+							//json-rpcでインストールしたのパッケージゲットメソッドを呼び出して表示する。
+							echo "printing installed package:<br>";
+							$data = mysqli_query($dbc, $query);
+							foreach ($data as $value){
+								print_r($value['パッケージ名'].'<br>');
 							}
 						} catch (Exception $e) {
 							echo nl2br($e->getMessage()).'<br />'."\n";
