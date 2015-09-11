@@ -89,57 +89,20 @@
 					<div class="inner inner--section">
 						<h1 class="title--section">Hello</h1> Untitled Document!
 						<?php echo '<p>Hello World</p>';
-						require_once "/includes/jsonRPCClient.php";
 						require_once "/includes/connectvars.php";
-						$serveraddress = "192.168.233.130";
-						$port = "8080";
-						$server= new jsonRPCClient("http://$serveraddress:$port");
 						//データベース接続
 						$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
-						//次は例メソッドです。
-						//try {
-							//json-rpcでaddメソッドを呼び出して表示する。
-							//echo 'Adding 3 plus 2 on Json-RPC = '.$server->add(3,2).'</i><br />'."\n";
-						//} catch (Exception $e) {
-							//echo nl2br($e->getMessage()).'<br />'."\n";
-						//}
-						$sql = "INSERT INTO パッケージ情報(パッケージ名,パッケージの説明)";
-						try {
-							//json-rpcでインストールしたのパッケージゲットメソッドを呼び出して表示する。
-							//echo "printing installed package:<br>";
-							$data=$server->get_installed_packages();
-							foreach ($data as $value){
-								$values=" values('".$value[0]."/".$value[1]."-".$value[2]."',NULL);";
-								//パッケージリストからqueryを作ります。
-								$query=($sql.$values);
-								//print($query);
-								//データベースに入れます。
-								$data = mysqli_query($dbc, $query);
-								//print($data);
-							}
-						} catch (Exception $e) {
-							echo nl2br($e->getMessage()).'<br />'."\n";
-						}
 						try {
 							$query = "SELECT * FROM パッケージ情報";
 							//json-rpcでインストールしたのパッケージゲットメソッドを呼び出して表示する。
 							echo "printing installed package:<br>";
 							$data = mysqli_query($dbc, $query);
 							foreach ($data as $value){
-								print_r($value['パッケージ名'].'<br>');
+								print_r($value['パッケージ名'].'-'.$value['パッケージバージョン'].'<br>');
 							}
 						} catch (Exception $e) {
 							echo nl2br($e->getMessage()).'<br />'."\n";
 						}
-						echo "<br></br>-----------------------------------------------------------------------------------------------------------------------------------------<br></br>";
-						echo "<br></br>";
-						//try {
-                     		//json-rpcで全部Portageパッケージゲットのメソッドを呼び出して表示する。
-                     		//echo "printing all package:<br>";
-                     		//print_r($server->get_all_packages());
-						//} catch (Exception $e) {
-							//echo nl2br($e->getMessage()).'<br />'."\n";
-						//}
 						?>
 					</div>
 				</div>

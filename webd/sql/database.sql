@@ -28,6 +28,7 @@ CREATE TABLE `インストール済みパッケージ` (
 CREATE TABLE `パッケージ情報` (
   `パッケージID` INT AUTO_INCREMENT,
   `パッケージ名` VARCHAR(20),
+  `パッケージバージョン` VARCHAR(20),
   `パッケージの説明` VARCHAR(60),
   PRIMARY KEY (`パッケージID`)
 );
