@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
-<?php require_once __DIR__ . '/parts/head.php'; ?>
+<?php 
+require_once __DIR__ . '/parts/head.php'; 
+require_once __DIR__.'/includes/connectvars.php';
+$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+?>
 <body>
 	<div class="wrapper">
 <?php require_once __DIR__ . '/parts/navigation.php'; ?>
@@ -13,22 +17,24 @@
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>パッケージカテゴリ</th>
-                                    <th>パッケージカテゴリ</th>
-                                    <th>パッケージカテゴリ</th>
+                                    <th>パッケージ名</th>
+                                    <th>パッケージバーション</th>
+                                    <th>パッケージ説明</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>aaa</td>
-                                    <td>aaa</td>
-                                    <td>aaa</td>
-                                </tr>
-                                <tr>
-                                    <td>aaa</td>
-                                    <td>aaa</td>
-                                    <td>aaa</td>
-                                </tr>
+	                            <?php
+								try {
+									$query = "SELECT * FROM パッケージ情報";
+									//json-rpcでインストールしたのパッケージゲットメソッドを呼び出して表示する。
+									$data = mysqli_query($dbc, $query);
+									foreach ($data as $value){
+										print_r('<tr><td>'.$value['パッケージ名'].'</td><td>'.$value['パッケージバージョン'].'</td><td></td></tr>');
+									}
+								} catch (Exception $e) {
+									echo nl2br($e->getMessage()).'<br />'."\n";
+								}
+								?>
                             </tbody>
                         </table>
                         </div>

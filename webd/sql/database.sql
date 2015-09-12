@@ -22,7 +22,9 @@ CREATE TABLE `パッケージ管理システム情報` (
 );
 CREATE TABLE `インストール済みパッケージ` (
   `インストールパッケージID` INT AUTO_INCREMENT,
-  `現在のパッケージバージョン` VARCHAR(60),
+  `パッケージカテゴリ` VARCHAR(20),
+  `パッケージ名` VARCHAR(20),
+  `パッケージバージョン` VARCHAR(20),
   PRIMARY KEY (`インストールパッケージID`)
 );
 CREATE TABLE `パッケージ情報` (
