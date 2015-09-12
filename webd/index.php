@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="ja">
-<?php require_once __DIR__ . '/parts/head.php'; ?>
+<?php 
+require_once __DIR__ . '/parts/head.php'; 
+require_once __DIR__ . '/includes/connectvars.php';
+$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+?>
 <body>
 	<div class="wrapper">
 <?php require_once __DIR__ . '/parts/navigation.php'; ?>
@@ -10,9 +14,6 @@
 					<div class="inner inner-section">
 						<h1>Hello</h1> Untitled Document!
 						<?php echo '<p>Hello World</p>';
-						require_once "/includes/connectvars.php";
-						//データベース接続
-						$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 						try {
 							$query = "SELECT * FROM パッケージ情報";
 							//json-rpcでインストールしたのパッケージゲットメソッドを呼び出して表示する。
