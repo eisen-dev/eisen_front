@@ -2,8 +2,8 @@
 <html lang="ja">
 <?php 
 require_once __DIR__ . '/parts/head.php'; 
-require_once __DIR__.'/includes/connectvars.php';
-$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+require_once __DIR__.'/connect.php';
+$dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 ?>
 <body>
 	<div class="wrapper">

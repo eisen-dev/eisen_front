@@ -1,11 +1,11 @@
 <?php echo '<p>Hello World</p>';
 require_once "/includes/jsonRPCClient.php";
-require_once "/includes/connectvars.php";
+require_once "/connect.php";
 $serveraddress = "192.168.233.130";
 $port = "8080";
 $server= new jsonRPCClient("http://$serveraddress:$port");
 //データベース接続
-$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+$dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 ini_set('max_execution_time', 0); //300 seconds = 5 minutes
 try {
 	$sql = "INSERT INTO パッケージ情報(パッケージカテゴリ, パッケージ名, パッケージバージョン, パッケージの説明)";

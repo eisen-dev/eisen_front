@@ -2,8 +2,8 @@
 <html lang="ja">
 <?php 
 require_once __DIR__ . '/parts/head.php'; 
-require_once __DIR__ . '/includes/connectvars.php';
-$dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
+require_once __DIR__ . '/connect.php';
+$dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 ?>
 <body>
 	<div class="wrapper">
@@ -13,19 +13,15 @@ $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PASSWORD, DB_NAME);
 				<div class="section">
 					<div class="inner inner-section">
 						<h1>Hello</h1> Untitled Document!
-						<?php echo '<p>Hello World</p>';
-						try {
-							$query = "SELECT * FROM パッケージ情報";
-							//json-rpcでインストールしたのパッケージゲットメソッドを呼び出して表示する。
-							echo "printing installed package:<br>";
-							$data = mysqli_query($dbc, $query);
-							foreach ($data as $value){
-								print_r($value['パッケージ名'].'-'.$value['パッケージバージョン'].'<br>');
-							}
-						} catch (Exception $e) {
-							echo nl2br($e->getMessage()).'<br />'."\n";
-						}
-						?>
+						<p>
+						<a href="/install.php">install database</a>
+						</p>
+						<p>
+						<a href="/dbupdate.php">update database</a>
+						</p>
+						<p>
+						<a href="/list.php">show list</a>
+						</p>
 					</div>
 				</div>
 			</main>
