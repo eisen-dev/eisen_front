@@ -151,7 +151,7 @@ class jsonRPCClient {
 			if ($response['id'] != $currentId) {
 				throw new Exception('Incorrect response id (request id: '.$currentId.', response id: '.$response['id'].')');
 			}
-			//�T�[�o�T�C�h��response['error']�̃��\�b�h���Ȃ��ł��B
+			//サーバサイドにresponse['error']のメソッドがないです。
 			//if (!is_null($response['error'])) {
 			//	throw new Exception('Request error: '.$response['error']);
 			//}
