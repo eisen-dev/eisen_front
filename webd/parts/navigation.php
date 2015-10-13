@@ -1,19 +1,21 @@
-<nav class="navigation">
+		<nav class="navigation">
 			<div class="inner">
 				<i class="fa fa-bars navigation-toggle"></i>
 				<div class="navigation-title">
 				</div>
 				<div class="menu clearfix">
-					<div class="menu-button machines menu-border-red">
+					<div class="menu-button menu-machines menu-border-red">
 						<div class="menu-icon">
-							<i class="fa fa-server menu-icon"></i>
+							<i class="fa fa-server"></i>
+							<div class="menu-icon-text">
+								<span class="current-machine">textsampleABCDEFG</span>
+							</div>
 						</div>
-
 					</div>
-
-					<div class="menu-button menu-border-green">
+					<div class="menu-button menu-notifications menu-border-green">
 						<div class="menu-icon toggle-notifications">
 							<i class="fa fa-bell-o"></i>
+
 						</div>
 						<div class="notifications-list">
 							<div class="menu-list-title"><i class="fa fa-bell-o fa-inline"></i>Notifications</div>

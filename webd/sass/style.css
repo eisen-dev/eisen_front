@@ -107,6 +107,7 @@ body {
   cursor: pointer;
 }
 
+/*メニューボタン*/
 .menu-button {
   float: left;
   width: 50%;
@@ -123,6 +124,11 @@ body {
   text-align: center;
 }
 
+.menu-icon-text {
+  display: none;
+}
+
+/*リスト*/
 .notifications-list {
   display: none;
   position: absolute;
@@ -196,6 +202,9 @@ body {
 }
 
 @media screen and (min-width: 480px) {
+  /*
+  , screen and (min-device-width: 480px)
+  */
   .navigation-toggle {
     float: left;
   }
@@ -206,14 +215,38 @@ body {
 
   .menu {
     float: right;
+    width: auto;
   }
 
   .menu-button {
     position: relative;
+    width: auto;
+  }
+
+  .menu-machines .menu-icon {
+    text-align: left;
   }
 
   .menu-icon {
-    width: 100px;
+    padding: 0 16px;
+  }
+  .menu-icon i {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .menu-icon-text {
+    vertical-align: middle;
+    display: inline-block;
+    max-width: 6em;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .menu-icon-text .current-machine {
+    display: inline;
+    font-size: 16px;
+    vertical-align: middle;
   }
 
   .notifications-list {
