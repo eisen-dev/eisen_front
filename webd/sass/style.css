@@ -76,6 +76,8 @@ body {
   .contentswrapper {
     margin-top: 48px;
     /*ナビゲーションバー分のマージン*/
+    /*コンテンツエリアに最小幅を設定
+    デスクトップ表示での幅縮小による表崩れを防止*/
   }
 
   .contentwrapper-nonav {
