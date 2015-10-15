@@ -29,7 +29,6 @@ body{
 
 .inner-section{
 	padding: 16px 8px;
-
 }
 
 .inner-navigation{
@@ -53,10 +52,13 @@ body{
 	.contentswrapper{
 		margin-top: 48px;
 		/*ナビゲーションバー分のマージン*/
+		//min-width: 756px;
+		/*コンテンツエリアに最小幅を設定
+		デスクトップ表示での幅縮小による表崩れを防止*/
 	}
 	.contentwrapper-nonav{
 		margin-top: 0;
-}
+	}
 }
 
 @media screen and (min-width: 768px) {

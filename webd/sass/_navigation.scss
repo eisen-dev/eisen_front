@@ -24,7 +24,7 @@
 	line-height: 48px;
 	cursor: pointer;
 }
-
+/*メニューボタン*/
 .menu{
 
 }
@@ -45,6 +45,13 @@
 	text-align: center;
 }
 
+.menu-icon-text{
+	display: none;
+}
+
+
+
+/*リスト*/
 .notifications-list{
 	display: none;
 	position: absolute;
@@ -102,6 +109,7 @@
 	border-bottom: 4px solid $md-blue-grey-400;
 
 }
+
 .menu-border-green{
 	border-bottom: 4px solid $success-color;
 }
@@ -119,6 +127,9 @@
 }
 
 @media screen and (min-width: 480px) {
+	/*
+	, screen and (min-device-width: 480px)
+	*/
 	.navigation-toggle{
 		float: left;
 	}
@@ -129,14 +140,45 @@
 
 	.menu{
 		float: right;
+		width: auto;
 	}
 
 	.menu-button{
 		position: relative;
+		width: auto;
+	}
+
+	.menu-machines{
+		.menu-icon{
+			text-align: left;
+		}
+	}
+
+	.menu-notifications{
+
 	}
 
 	.menu-icon{
-		width: 100px;
+		padding: 0 16px;
+		i{
+			display: inline-block;
+			vertical-align: middle;
+		}
+	}
+
+	.menu-icon-text{
+		vertical-align: middle;
+		display: inline-block;
+		max-width: 6em;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+
+		.current-machine{
+			display: inline;
+			font-size: 16px;
+			vertical-align: middle;
+		}
 	}
 
 	.notifications-list{
