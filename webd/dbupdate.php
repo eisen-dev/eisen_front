@@ -1,9 +1,7 @@
 <?php echo '<p>Hello World</p>';
 require_once "/includes/jsonRPCClient.php";
 require_once "/connect.php";
-$serveraddress = "192.168.233.130";
-$port = "8080";
-$server= new jsonRPCClient("http://$serveraddress:$port");
+$server= new jsonRPCClient("http://$js_host:$js_port");
 //データベース接続
 $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 ini_set('max_execution_time', 0); //300 seconds = 5 minutes
