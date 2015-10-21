@@ -11,7 +11,7 @@ try {
 	$data=$server->get_all_packages();
 	foreach ($data as $value){
 		$values=" VALUES('".$value[0]."','".$value[1]."','".$value[2]."',NULL);";
-		$sqlcheck = "SELECT * FROM パッケージ情報 WHERE パッケージカテゴリ ='".$value[0]."' AND パッケージ名 ='".$value[1]."' AND パッケージバージョン='".$value[2]."';";
+		$sqlcheck = "SELECT * FROM パッケージ情報 WHERE パッケージカテゴリ =:pack_cat AND パッケージ名 =:pack_name AND パッケージバージョン=:pack_version;";
 		//パッケージリストからqueryを作ります。
 		$query=($sql.$values);
 		//データベースに入れます。

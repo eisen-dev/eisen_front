@@ -1,54 +1,51 @@
-CREATE TABLE `ユーザー情報` (
-  `ユニークID` INT AUTO_INCREMENT,
-  `ユーザーID` VARCHAR(20),
-  `パスワード` VARCHAR(20),
-  `メールアドレス` VARCHAR(60),
-  `ユーザー名` VARCHAR(60),
-  PRIMARY KEY (`ユニークID`)
+CREATE TABLE `user_info` (
+  `unique_id` INT AUTO_INCREMENT,
+  `user_id` VARCHAR(20),
+  `password` VARCHAR(20),
+  `mailaddress` VARCHAR(60),
+  `user_name` VARCHAR(60),
+  PRIMARY KEY (`unique_id`)
 );
-CREATE TABLE `マシン情報` (
-  `マシンID` INT AUTO_INCREMENT,
-  `マシン名` VARCHAR(20),
-  `IPアドレス` VARCHAR(20),
-  `ポート番号` VARCHAR(20),
-  `OS種類` VARCHAR(20),
-  `マシンステータスID` VARCHAR(20),
-  PRIMARY KEY (`マシンID`)
+CREATE TABLE `machine_information` (
+  `machine_id` INT AUTO_INCREMENT,
+  `machine_name` VARCHAR(20),
+  `ipaddress` VARCHAR(20),
+  `port` VARCHAR(20),
+  `os` VARCHAR(20),
+  `machine_status_id` VARCHAR(20),
+  PRIMARY KEY (`machine_id`)
 );
-CREATE TABLE `パッケージ管理システム情報` (
-  `パッケージ管理システムID` INT AUTO_INCREMENT,
-  `パッケージ管理システム名` VARCHAR(20),
-  PRIMARY KEY (`パッケージ管理システムID`)
+CREATE TABLE `pack_management_system` (
+  `pack_sys_id` INT AUTO_INCREMENT,
+  `pack_sys_name` VARCHAR(20),
+  `pack_sys_version` VARCHAR(20),
+  `all_sys_pack_hash` VARCHAR(20),
+  `installed_sys_pack_hash` VARCHAR(20),
+  PRIMARY KEY (`pack_sys_id`)
 );
-CREATE TABLE `インストール済みパッケージ` (
-  `インストールパッケージID` INT AUTO_INCREMENT,
-  `パッケージカテゴリ` VARCHAR(20),
-  `パッケージ名` VARCHAR(20),
-  `パッケージバージョン` VARCHAR(20),
-  PRIMARY KEY (`インストールパッケージID`)
+CREATE TABLE `installed_package` (
+  `installed_pack_id` INT AUTO_INCREMENT,
+  `installed_pack_category` VARCHAR(20),
+  `installed_pack_name` VARCHAR(20),
+  `installed_pack_version` VARCHAR(20),
+  `installed_pack_summary` VARCHAR(20),
+  PRIMARY KEY (`installed_pack_id`)
 );
-CREATE TABLE `パッケージ情報` (
-  `パッケージID` INT AUTO_INCREMENT,
-  `パッケージカテゴリ` VARCHAR(20),
-  `パッケージ名` VARCHAR(20),
-  `パッケージバージョン` VARCHAR(20),
-  `パッケージの説明` VARCHAR(60),
-  PRIMARY KEY (`パッケージID`)
+CREATE TABLE `pack_info` (
+  `pack_id` INT AUTO_INCREMENT,
+  `pack_category` VARCHAR(20),
+  `pack_name` VARCHAR(20),
+  `pack_version` VARCHAR(20),
+  `pack_summary` VARCHAR(20),
+  PRIMARY KEY (`pack_id`)
 );
-CREATE TABLE `最新パッケージ情報` (
-  `最新パッケージID` INT AUTO_INCREMENT,
-  `パッケージ管理システムID` VARCHAR(20),
-  `バージョン情報` VARCHAR(60),
-  `更新情報` VARCHAR(60),
-  PRIMARY KEY (`最新パッケージID`)
+CREATE TABLE `machine_info` (
+  `machine_status_id` INT AUTO_INCREMENT,
+  `machine_id` VARCHAR(20),
+  PRIMARY KEY (`machine_status_id`)
 );
-CREATE TABLE `マシンステータス情報` (
-  `マシンステータスID` INT AUTO_INCREMENT,
-  PRIMARY KEY (`マシンステータスID`)
+CREATE TABLE `status` (
+  `status_id` INT AUTO_INCREMENT,
+  `status_info` VARCHAR(20),
+  PRIMARY KEY (`status_id`)
 );
-CREATE TABLE `ステータス` (
-  `ステータスID` INT AUTO_INCREMENT,
-  `ステータス表示` VARCHAR(20),
-  PRIMARY KEY (`ステータスID`)
-);
-
