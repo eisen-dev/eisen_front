@@ -1,29 +1,29 @@
 <?php
 require_once __DIR__ .'/../connect.php';
 
-$user_id = trim($_POST['user_id']);
+$user_name = trim($_POST['user_name']);
 $password = trim(sha1($_POST['password']));
 
-//ƒf[ƒ^ƒx[ƒX‚ÉÚ‘±‚·‚é‚½‚ß‚É•K—v‚Èî•ñ(PDO)
+//ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹ã«æŽ¥ç¶šã™ã‚‹ãŸã‚ã«å¿…è¦ãªæƒ…å ±(PDO)
 $dsn = "mysql:dbname=$db_name;host=$db_host;charset=utf8";
 
-//ƒf[ƒ^ƒx[ƒXÚ‘±
+//ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æŽ¥ç¶š
 try {
 $dbh = new PDO($dsn, $db_user, $db_pass,
 array(PDO::ATTR_EMULATE_PREPARES => false,
 		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 } catch (PDOException $e) {
- exit('ƒf[ƒ^ƒx[ƒXÚ‘±‚ÉŽ¸”s‚µ‚Ü‚µ‚½'.$e->getMessage());
+ exit('ãƒ‡ãƒ¼ã‚¿ãƒ™ãƒ¼ã‚¹æŽ¥ç¶šã«å¤±æ•—ã—ã¾ã—ãŸ'.$e->getMessage());
 }
 
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-$query = $dbh->prepare("SELECT * FROM user_info WHERE user_id = ? AND password = ? ");
-$query->bindParam(1, $user_id);
+$query = $dbh->prepare("SELECT * FROM user_info WHERE user_name = ? AND password = ? ");
+$query->bindParam(1, $user_name);
 $query->bindParam(2, $password);
 $query->execute();
 if ($query->rowCount() > 0){
-	print_r($user_id.'<br>');
+	print_r($user_name.'<br>');
 	print_r($password.'<br>');
 	//header('location:/index.html');
 } else{
