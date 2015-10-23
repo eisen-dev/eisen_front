@@ -25,12 +25,14 @@ array(PDO::ATTR_EMULATE_PREPARES => false,
 $data=$server->get_installed_packages();
 foreach ($data as $value){
 	try {
-		$sqlcheck = $dbh->prepare("SELECT * FROM installed_package WHERE installed_pack_category = :installed_pack_cat AND installed_pack_name = :installed_pack_name AND installed_pack_version = :installed_pack_version AND installed_pack_summary = NULL;");
+		$sqlcheck = $dbh->prepare("SELECT COUNT(*) FROM installed_package WHERE installed_pack_category = :installed_pack_cat AND installed_pack_name = :installed_pack_name AND installed_pack_version = :installed_pack_version;");
 		//connect as appropriate as above
 		$sqlcheck-> bindParam(':installed_pack_cat', $value[0], PDO::PARAM_STR);
 		$sqlcheck-> bindParam(':installed_pack_name', $value[1], PDO::PARAM_STR);
 		$sqlcheck-> bindParam(':installed_pack_version', $value[2], PDO::PARAM_STR);
-		if ($sqlcheck->execute())
+		$sqlcheck->execute();
+		$result = $sqlcheck->fetchAll(PDO::FETCH_NUM);
+		if (in_array(0,$result[0]))
 		{
 			try {
 				$query = $dbh->prepare('INSERT INTO installed_package (installed_pack_category, installed_pack_name, installed_pack_version, installed_pack_summary) VALUES (:installed_pack_cat, :installed_pack_name, :installed_pack_version, NULL)');
@@ -38,8 +40,7 @@ foreach ($data as $value){
 				$query-> bindParam(':installed_pack_name', $value[1], PDO::PARAM_STR);
 				$query-> bindParam(':installed_pack_version', $value[2], PDO::PARAM_STR);
 				//$query-> bindParam(':pack_expl', NULL, PDO::PARAM_STR);
-				echo var_dump($query);
-				$query->execute(); //invalid query!
+				$query->execute();
 			} catch(PDOException $ex) {
 				echo "An Error occured!"; //user friendly message
 				//some_logging_function($ex->getMessage());

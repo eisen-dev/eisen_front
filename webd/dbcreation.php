@@ -50,8 +50,8 @@ createdbtable(
 		'user_info', 
 		array(
 		'unique_id' => 'INT AUTO_INCREMENT',
-		'user_id'=> 'VARCHAR(20)',
-		'password' => 'VARCHAR(20)',
+		'user_id'=> 'VARCHAR(75)',
+		'password' => 'VARCHAR(40)',
 		'mail_address' => 'VARCHAR(60)',
 		'user_name' => 'VARCHAR(60)'	
 		),$dbh);

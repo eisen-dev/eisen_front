@@ -25,12 +25,14 @@ array(PDO::ATTR_EMULATE_PREPARES => false,
 $data=$server->get_all_packages();
 foreach ($data as $value){
 	try {
-		$sqlcheck = $dbh->prepare("SELECT * FROM pack_info WHERE pack_category = :pack_cat AND pack_name = :pack_name AND pack_version = :pack_version;");
+		$sqlcheck = $dbh->prepare("SELECT COUNT(*) FROM pack_info WHERE pack_category = :pack_cat AND pack_name = :pack_name AND pack_version = :pack_version;");
 		//connect as appropriate as above
 		$sqlcheck-> bindParam(':pack_cat', $value[0], PDO::PARAM_STR);
 		$sqlcheck-> bindParam(':pack_name', $value[1], PDO::PARAM_STR);
 		$sqlcheck-> bindParam(':pack_version', $value[2], PDO::PARAM_STR);
-		if ($sqlcheck->execute())
+		$sqlcheck->execute();
+		$result = $sqlcheck->fetchAll(PDO::FETCH_NUM);
+		if (in_array(0,$result[0]))		
 		{
 			try {
 				$query = $dbh->prepare('INSERT INTO pack_info (pack_category, pack_name, pack_version, pack_summary) VALUES (:pack_cat, :pack_name, :pack_version, NULL)');

@@ -2,8 +2,6 @@
 <html lang="ja">
 <?php
 require_once __DIR__ .'/parts/head.php';
-require_once __DIR__ .'/connect.php';
-$dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 ?>
 <body>
 	<div class="wrapper">
@@ -15,13 +13,13 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 						<span>ログイン</span>
 					</div>
 					<div class="login">
-						<form>
+						<form action='includes/user.php' method='POST'>
 							<span>ユーザーID</span>
-							<input type="text" name="userid">
+							<input type="text" name="user_id">
 							<span>パスワード</span>
 							<input type="password" name="password">
+							<input type="submit" value="ログイン" class="button" />
 						</form>
-						<a href="#" class="button">ログイン</a>
 					</div>
 				</div>
 			</main>
