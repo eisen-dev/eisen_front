@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
-<?php 
+<?php
+$title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__.'/connect.php';
 $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);

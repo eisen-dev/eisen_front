@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <?php
+$title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 ?>
 <body>

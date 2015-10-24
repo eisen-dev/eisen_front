@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
 <?php 
+$title = "index page";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ .'/connect.php';
 $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
@@ -9,7 +10,7 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 	<div class="wrapper">
 <?php require_once __DIR__ .'/parts/navigation.php'; ?>
 		<div class="contentswrapper">
-			<main class="contents">
+			<main class="contents  menu-visible">
 				<div class="section">
 					<div class="inner inner-section">
 						<h1>Hello</h1> Untitled Document!

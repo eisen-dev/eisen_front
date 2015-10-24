@@ -11,18 +11,18 @@ $failed-color: $md-red-500;
 $success-color: $md-light-green-500;
 $infomation-color: $md-light-blue-500;
 
-
 /* universal
 ------------------------------------------------*/
 * {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  -webkit-text-size-adjust: 100%;
-  -moz-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-  -o-text-size-adjust: 100%;
-  text-size-adjust: 100%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-text-size-adjust: 100%;
+	-moz-text-size-adjust: 100%;
+	-ms-text-size-adjust: 100%;
+	-o-text-size-adjust: 100%;
+	text-size-adjust: 100%;
+	//-webkit-appearance: none;
  }
 
 .clearfix {
@@ -33,9 +33,52 @@ $infomation-color: $md-light-blue-500;
   .clearfix:after {
     clear: both; }
 
+
+
+.title{
+	font-weight: normal;
+}
+
+h1.title{
+		font-size: 1.8em;
+}
+
+h2.title{
+		font-size: 1.5em;
+}
+
+h3.title{
+		font-size: 1.2em;
+}
+
+.title-c{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-weight: normal;
+}
+
+h1.title-c{
+		font-size: 1.8em;
+}
+
+h2.title-c{
+		font-size: 1.5em;
+}
+
+h3.title-c{
+		font-size: 1.2em;
+}
+
 /* parts
 ------------------------------------------------*/
 @import "main";
-@import "navigation";
-@import "login";
+@import "topbar";
+@import "navi";
+/*汎用パーツ*/
 @import "button";
+@import "table";
+@import "form";
+/*ページスタイル*/
+@import "login";
+@import "initsetup";
