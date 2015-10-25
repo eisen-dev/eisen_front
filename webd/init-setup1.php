@@ -38,7 +38,6 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);*/
 <!--<?php require_once __DIR__ .'/parts/navigation.php'; ?>-->
 		<div class="contentwrapper-nonav">
 			<main class="contents">
-				<div class="section">
 					<h1 class="title-c">初期設定</h1>
 					<div class="setup-step">
 						<div class="setup-step-container">
@@ -56,8 +55,8 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);*/
 							</div>
 						</div>
 					</div>
-					<form action="init-setup.php" method="post">
-						<div class="setting">
+					<div class="setting">
+						<form action="init-setup.php" method="post">
 							<h2 class="title">データベース設定</h2>
 							<div class="setting-container">
 								<div class="setting-item-left">
@@ -91,7 +90,6 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);*/
 									<input type="text" name="db_name">
 								</div>
 							</div>
-
 								<h2 class="title">json RPC設定</h2>
 							<div class="setting-container">
 								<div class="setting-item-left">
@@ -110,8 +108,8 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);*/
 								</div>
 							</div>
 							<input type="submit" name="submit" value="設定して次に進む" class="button">
-						</div>
-					</form>
+						</form>
+					</div>
 			</main>
 		</div>
 	</div>
