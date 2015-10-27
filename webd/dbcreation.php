@@ -95,12 +95,6 @@ createdbtable(
 		'pack_summary' => 'VARCHAR(60)',
 		),$dbh);
 createdbtable(
-		'pack_management_system',
-		array(
-		'machine_status_id' => 'INT AUTO_INCREMENT',
-		'machine_id'=> 'VARCHAR(20)',
-		),$dbh);
-createdbtable(
 		'status',
 		array(
 		'status_id' => 'INT AUTO_INCREMENT',
