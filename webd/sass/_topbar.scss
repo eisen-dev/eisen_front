@@ -1,6 +1,6 @@
 @charset "UTF-8";
 
-.navigation{
+.topbar{
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -10,7 +10,7 @@
 	border-bottom: 1px solid $md-grey-400;
 }
 
-.navigation-title{
+.topbar-title{
 	display: block;
 	height: 48px;
 	max-width: 100%;
@@ -24,6 +24,7 @@
 	line-height: 48px;
 	cursor: pointer;
 }
+
 /*メニューボタン*/
 .menu{
 
@@ -48,8 +49,6 @@
 .menu-icon-text{
 	display: none;
 }
-
-
 
 /*リスト*/
 .notifications-list{
@@ -105,21 +104,12 @@
 
 /*メニューボタン下のステータス表示*/
 
-.menu-border-grey{
-	border-bottom: 4px solid $md-blue-grey-400;
+.menu-border{
+	border-bottom:4px solid $md-blue-400;
+	&:hover{
+		border-bottom: 4px solid $md-blue-600;
+	}
 
-}
-
-.menu-border-green{
-	border-bottom: 4px solid $success-color;
-}
-
-.menu-border-orange{
-	border-bottom: 4px solid $infomation-color;
-}
-
-.menu-border-red{
-	border-bottom: 4px solid $failed-color;
 }
 
 .fa-inline{
@@ -136,6 +126,11 @@
 
 	.notifications-list{
 		top: 48px;
+	}
+
+	.navigation-toggle{
+		/*navigationのトグルはモバイルのみ*/
+		display: none;
 	}
 
 	.menu{

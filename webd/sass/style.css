@@ -31,30 +31,78 @@
   clear: both;
 }
 
+.title {
+  font-weight: normal;
+}
+
+h1.title {
+  font-size: 1.8em;
+}
+
+h2.title {
+  font-size: 1.5em;
+}
+
+h3.title {
+  font-size: 1.2em;
+}
+
+.title-c {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: normal;
+}
+
+h1.title-c {
+  font-size: 1.8em;
+}
+
+h2.title-c {
+  font-size: 1.5em;
+}
+
+h3.title-c {
+  font-size: 1.2em;
+}
+
 /* parts
 ------------------------------------------------*/
 body {
   margin: 0;
-  font-size: 16px;
+  font-size: 14px;
   background-color: #eeeeee;
   font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
 
-.contentswrapper {
-  margin-top: 96px;
-  /*ナビゲーションバー分のマージン*/
-}
-
-.contentwrapper-nonav {
-  margin-top: 0;
-}
-
-.inner {
+/*ナビゲーション部*/
+.topbar-inner {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.inner-section {
+/*コンテンツ部*/
+.contentswrapper {
+  /*ナビゲーションバー分のマージン(2列)*/
+  margin-top: 96px;
+  width: 100%;
+  font-size: 1em;
+  /*コンテンツエリアの背景色*/
+  background-color: #fafafa;
+}
+
+.contentwrapper-nonav {
+  width: 100%;
+  font-size: 1em;
+  margin-top: 0;
+}
+
+.contents {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section {
   padding: 16px 8px;
 }
 
@@ -62,29 +110,37 @@ body {
   padding: 0 16px;
 }
 
-.section {
-  font-size: 1em;
-  background-color: #fafafa;
-}
-
+/*文字関連*/
 .title-section {
   font-size: 1.7em;
   margin: 0;
 }
 
+/*navigation関連*/
+.menu-set {
+  padding-left: 0;
+}
+
 @media screen and (min-width: 480px) {
   .contentswrapper {
+    /*ナビゲーションバー分のマージン(1列)*/
     margin-top: 48px;
-    /*ナビゲーションバー分のマージン*/
-    /*コンテンツエリアに最小幅を設定
-    デスクトップ表示での幅縮小による表崩れを防止*/
   }
 
   .contentwrapper-nonav {
     margin-top: 0;
   }
+
+  .contents {
+    /*コンテンツエリアに最小幅を設定(検討中)*/
+  }
+
+  /*メニュートグル時に左側にpadding*/
+  .menu-set {
+    padding-left: 200px;
+  }
 }
-.navigation {
+.topbar {
   position: fixed;
   top: 0;
   left: 0;
@@ -94,7 +150,7 @@ body {
   border-bottom: 1px solid #bdbdbd;
 }
 
-.navigation-title {
+.topbar-title {
   display: block;
   height: 48px;
   max-width: 100%;
@@ -183,20 +239,11 @@ body {
 }
 
 /*メニューボタン下のステータス表示*/
-.menu-border-grey {
-  border-bottom: 4px solid #78909c;
+.menu-border {
+  border-bottom: 4px solid #42a5f5;
 }
-
-.menu-border-green {
-  border-bottom: 4px solid #8bc34a;
-}
-
-.menu-border-orange {
-  border-bottom: 4px solid #03a9f4;
-}
-
-.menu-border-red {
-  border-bottom: 4px solid #f44336;
+.menu-border:hover {
+  border-bottom: 4px solid #1e88e5;
 }
 
 .fa-inline {
@@ -213,6 +260,11 @@ body {
 
   .notifications-list {
     top: 48px;
+  }
+
+  .navigation-toggle {
+    /*navigationのトグルはモバイルのみ*/
+    display: none;
   }
 
   .menu {
@@ -259,6 +311,233 @@ body {
     height: 300px;
   }
 }
+.navigation {
+  padding: 96px 0 0 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 200px;
+  background-color: #424242;
+  height: 100vh;
+  /*モバイル初期状態では非表示*/
+  display: none;
+}
+
+.navigation-menu ul {
+  color: white;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.navigation-menu ul li a {
+  display: inline-block;
+  padding: 16px 8px;
+  width: 100%;
+  color: white;
+  text-decoration: none;
+}
+.navigation-menu ul li a:hover {
+  color: white;
+  background-color: #616161;
+}
+.navigation-menu ul li a:active {
+  color: white;
+}
+.navigation-menu ul li a:active {
+  color: white;
+}
+.navigation-menu ul li a i {
+  font-size: 1.8em;
+  padding: 0 8px 0 0;
+  width: 1.2em;
+  vertical-align: middle;
+}
+.navigation-menu ul li a span {
+  font-size: 0.9em;
+}
+
+@media screen and (min-width: 480px) {
+  .navigation {
+    padding: 48px 0 0 0;
+    /*タブレット初期状態では表示*/
+    display: block;
+  }
+}
+/*汎用パーツ*/
+input[type="submit"] {
+  -webkit-appearance: none;
+  border: none;
+}
+
+.button {
+  display: inline-block;
+  margin: 1em 1em 1em 0;
+  padding: 12px 24px;
+  width: 100%;
+  border-radius: 3px;
+  background-color: #68CC68;
+  color: #FAFAFA;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 1em;
+}
+.button:hover {
+  color: #FAFAFA;
+  background-color: #42bf42;
+}
+
+.button--form {
+  display: inline;
+  width: auto;
+  margin: 0;
+  padding: 0.2em 0.4em;
+  font-size: 1em;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #e0e0e0;
+}
+.table thead tr th {
+  text-align: left;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #bdbdbd;
+  height: 32px;
+  font-weight: normal;
+  font-size: 0.9em;
+  padding: 1em 0.5em;
+}
+.table thead tr .cbox__selectall {
+  width: 48px;
+  padding-left: 12px;
+}
+.table tbody tr {
+  border-bottom: 1px solid #e0e0e0;
+}
+.table tbody tr:last-child {
+  border-bottom: none;
+}
+.table tbody tr td {
+  text-align: left;
+  height: 32px;
+  font-weight: normal;
+  font-size: 0.9em;
+  padding: 0.8em 0.5em;
+}
+
+.list-tools {
+  height: 34px;
+}
+.list-tools .list-action {
+  float: left;
+  height: 100%;
+}
+.list-tools .search-box {
+  float: right;
+  height: 100%;
+}
+.list-tools .search-box input[type=text] {
+  border: 1px solid #bdbdbd;
+  border-bottom: none;
+}
+.list-tools .search-box .search-box__button {
+  height: 100%;
+  background-color: #64b5f6;
+  float: right;
+  display: table-cell;
+}
+.list-tools .search-box .search-box__button i {
+  font-size: 18px;
+  display: inline;
+  color: white;
+  line-height: 34px;
+  padding: 0 10px;
+}
+.list-tools .search-box > * {
+  height: 100%;
+}
+
+.f_w {
+  display: inline;
+}
+
+/*inputスタイル*/
+input[type=submit] {
+  margin: 0;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  vertical-align: middle;
+  content: "\f096";
+  width: 18px;
+  font-size: 18px;
+  color: #bdbdbd;
+}
+input[type=checkbox]:checked + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  vertical-align: middle;
+  content: "\f046";
+  width: 18px;
+  font-size: 18px;
+  color: #42a5f5;
+}
+
+input[type=radio] {
+  display: none;
+}
+input[type=radio] + label {
+  font-size: 1em;
+}
+input[type=radio] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  vertical-align: middle;
+  content: "\f10c";
+  width: 18px;
+  font-size: 18px;
+  color: #bdbdbd;
+}
+input[type=radio]:checked + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  vertical-align: middle;
+  content: "\f192";
+  width: 18px;
+  font-size: 18px;
+  color: #42a5f5;
+}
+
+input[type=text], input[type=password] {
+  border: 1px solid #bdbdbd;
+  padding: 4px;
+}
+
+/*実験的*/
+.input-textarea {
+  font-size: 1em;
+  padding: 0.2em;
+  border: 1px solid #eeeeee;
+}
+
+.input-textarea--r {
+  border-radius: 3px;
+}
+
+.input-list {
+  font-size: 1em;
+  padding: 0.2em;
+  border-bottom: none;
+}
+
+/*ページスタイル*/
 .login-header {
   width: 100%;
   max-width: 300px;
@@ -309,22 +588,77 @@ body {
     max-width: 300px;
   }
 }
-.button {
-  display: inline-block;
-  margin: 1em 1em 1em 0;
-  padding: 12px 24px;
-  width: 100%;
-  border-radius: 3px;
-  background-color: #68CC68;
-  color: #FAFAFA;
+.title-c {
+  font-size: 1.8em;
   text-align: center;
-  text-decoration: none;
-  cursor: pointer;
-  font-size: 1em;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: normal;
 }
-.button:hover {
-  color: #FAFAFA;
-  background-color: #42bf42;
+
+.setting {
+  width: 480px;
+  margin: 0 auto 24px auto;
+  padding: 24px 48px;
+  border: 1px solid #e0e0e0;
+  background-color: #fafafa;
+}
+.setting .setting-container {
+  display: flex;
+  flex-direction: row;
+  padding: 16px 0;
+}
+.setting .setting-container .setting-item-left {
+  flex-basis: 140px;
+  border-right: 1px solid #e0e0e0;
+}
+.setting .setting-container .setting-item-right {
+  flex-grow: 1;
+  padding-left: 24px;
+}
+.setting .setting-container .setting-item-right input {
+  width: 100%;
+}
+.setting .button {
+  margin-top: 16px;
+}
+
+.setup-step {
+  margin: 16px auto;
+  font-size: 0.9em;
+  width: 350px;
+}
+
+.setup-step-container {
+  display: flex;
+}
+.setup-step-container .setup-step-item {
+  flex-grow: 1;
+  width: 100%;
+}
+.setup-step-container .step-disp {
+  margin: 0 auto;
+  height: 50px;
+  width: 50px;
+  background-color: #bdbdbd;
+  border-radius: 50%;
+  margin-bottom: 4px;
+}
+.setup-step-container .step-disp .step-disp-text {
+  display: inline-block;
+  width: 100%;
+  line-height: 50px;
+  text-align: center;
+  font-size: 18px;
+  color: white;
+}
+.setup-step-container .setup-disp-current {
+  background-color: #42a5f5;
+}
+.setup-step-container .setup-desc {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */

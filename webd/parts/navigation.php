@@ -1,10 +1,20 @@
-		<nav class="navigation">
-			<div class="inner">
+	<div class="navigation">
+			<div class="navigation-menu">
+				<ul>
+					<li><a href="#"><i class="fa fa-tachometer"></i><span>ダッシュボード</span></a></li>
+					<li><a href="#"><i class="fa fa-list-alt"></i><span>パッケージリスト</span></a></li>
+					<li><a href="#"><i class="fa fa-server"></i><span>マシン管理</span></a></li>
+					<li><a href="#"><i class="fa fa-cog"></i><span>設定</span></a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="topbar">
+			<div class="topbar-inner">
 				<i class="fa fa-bars navigation-toggle"></i>
 				<div class="navigation-title">
 				</div>
 				<div class="menu clearfix">
-					<div class="menu-button menu-machines menu-border-red">
+					<div class="menu-button menu-machines menu-border">
 						<div class="menu-icon">
 							<i class="fa fa-server"></i>
 							<div class="menu-icon-text">
@@ -12,10 +22,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="menu-button menu-notifications menu-border-green">
+					<div class="menu-button menu-notifications menu-border">
 						<div class="menu-icon toggle-notifications">
 							<i class="fa fa-bell-o"></i>
-
 						</div>
 						<div class="notifications-list">
 							<div class="menu-list-title"><i class="fa fa-bell-o fa-inline"></i>Notifications</div>
@@ -72,4 +81,4 @@
 					</div>
 				</div>
 			</div>
-		</nav>
+		</div>

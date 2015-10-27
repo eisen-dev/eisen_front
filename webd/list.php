@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ja">
-<?php 
+<?php
+$title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__.'/connect.php';
 $dsn = "mysql:dbname=$db_name;host=$db_host;charset=utf8";

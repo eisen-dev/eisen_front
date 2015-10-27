@@ -2,7 +2,7 @@
 
 body{
 	margin: 0;
-	font-size: 16px;
+	font-size: 14px;
 	background-color: $md-grey-200;
 	font-family: "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
 }
@@ -10,54 +10,71 @@ body{
 .wrapper{
 
 }
-
-.contentswrapper{
-	margin-top: 96px;
-	/*ナビゲーションバー分のマージン*/
-}
-.contentwrapper-nonav{
-	margin-top: 0;
-}
-
-.contents{
-}
-
-.inner{
+/*ナビゲーション部*/
+.topbar-inner{
 	max-width: 1200px;
 	margin: 0 auto;
 }
 
-.inner-section{
+/*コンテンツ部*/
+.contentswrapper{
+	/*ナビゲーションバー分のマージン(2列)*/
+	margin-top: 96px;
+	width: 100%;
+	font-size: 1em;
+	/*コンテンツエリアの背景色*/
+	background-color: $md-grey-50;
+}
+
+.contentwrapper-nonav{
+	width: 100%;
+	font-size: 1em;
+	margin-top: 0;
+}
+
+.contents{
+	max-width: 1200px;
+	margin: 0 auto;
+}
+
+.section{
 	padding: 16px 8px;
 }
 
-.inner-navigation{
 
-}
 .inner-login{
 	padding: 0 16px;
 }
 
-.section{
-	font-size: 1em;
-	background-color: $md-grey-50;
-}
-
+/*文字関連*/
 .title-section{
 	font-size: 1.7em;
 	margin: 0;
 }
 
+/*navigation関連*/
+	.menu-set{
+		padding-left: 0;
+	}
+
 @media screen and (min-width: 480px) {
 	.contentswrapper{
+		/*ナビゲーションバー分のマージン(1列)*/
 		margin-top: 48px;
-		/*ナビゲーションバー分のマージン*/
-		//min-width: 756px;
-		/*コンテンツエリアに最小幅を設定
-		デスクトップ表示での幅縮小による表崩れを防止*/
 	}
+
 	.contentwrapper-nonav{
 		margin-top: 0;
+	}
+
+	.contents{
+		/*コンテンツエリアに最小幅を設定(検討中)*/
+		//min-width: 768px;
+	}
+
+	/*メニュートグル時に左側にpadding*/
+	.menu-set{
+		padding-left: 200px;
 	}
 }
 

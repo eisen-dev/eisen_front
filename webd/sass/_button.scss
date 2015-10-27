@@ -1,5 +1,10 @@
 @charset "UTF-8";
 
+input[type="submit"] {
+  -webkit-appearance: none;
+	border: none;
+}
+
 .button{
 	$color: #68CC68;
 	display: inline-block;
@@ -17,4 +22,13 @@
 		color: #FAFAFA;
 		background-color: darken($color, 10%);
 	}
+}
+
+.button--form{
+	display: inline;
+	width: auto;
+	margin: 0;
+	padding: 0.2em 0.4em;
+	font-size: 1em;
+
 }

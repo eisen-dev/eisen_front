@@ -1,0 +1,118 @@
+@charset "UTF-8";
+
+.list-tools{
+	height: 34px;
+	.list-action{
+		float: left;
+		height: 100%;
+	}
+	.search-box{
+		float: right;
+		height: 100%;
+		input[type=text]{
+			border: 1px solid $md-grey-400;
+			border-bottom: none;
+		}
+		.search-box__button{
+			height: 100%;
+			background-color: $md-blue-300;
+			float: right;
+			display: table-cell;
+			i{
+				font-size: 18px;
+				display: inline;
+				color: white;
+				line-height: 34px;
+				padding: 0 10px;
+			}
+		}
+
+		& > * {
+			height: 100%;
+		}
+	}
+}
+
+.cbox__wrapper{
+
+}
+
+.f_w{
+	display: inline;
+}
+
+
+/*inputスタイル*/
+input[type=submit]{
+	margin: 0;
+}
+
+input[type=checkbox] {
+	display: none;
+	& + label:before{
+		font-family: FontAwesome;
+		display: inline-block;
+		vertical-align: middle;
+		content: "\f096";
+		width: 18px;
+		font-size: 18px;
+		color: $md-grey-400;
+	}
+	&:checked + label:before{
+		font-family: FontAwesome;
+		display: inline-block;
+		vertical-align: middle;
+		content:"\f046";
+		width: 18px;
+		font-size: 18px;
+		color: $md-blue-400;
+	}
+}
+
+input[type=radio] {
+	display: none;
+	& + label{
+		font-size: 1em;
+	}
+	& + label:before{
+		font-family: FontAwesome;
+		display: inline-block;
+		vertical-align: middle;
+		content: "\f10c";
+		width: 18px;
+		font-size: 18px;
+		color: $md-grey-400;
+	}
+	&:checked + label:before{
+		font-family: FontAwesome;
+		display: inline-block;
+		vertical-align: middle;
+		content:"\f192";
+		width: 18px;
+		font-size: 18px;
+		color: $md-blue-400;
+	}
+}
+
+input[type=text],input[type=password]{
+	border: 1px solid $md-grey-400;
+	padding: 4px;
+}
+
+/*実験的*/
+.input-textarea{
+	font-size: 1em;
+	padding: 0.2em;
+	border: 1px solid $md-grey-200;
+}
+
+
+.input-textarea--r{
+	border-radius: 3px;
+}
+
+.input-list{
+	font-size: 1em;
+	padding: 0.2em;
+	border-bottom: none;
+}
