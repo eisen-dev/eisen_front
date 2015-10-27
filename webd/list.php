@@ -26,7 +26,7 @@ catch (PDOException $e) {
 <body>
 	<div class="wrapper">
 	<?php require_once __DIR__ .'/parts/navigation.php'; ?>
-	<div class="contentswrapper">
+		<div class="contentswrapper">
 			<main class="contents menu-set">
 				<div class="section">
 					<h2 class="title">パッケージリスト</h2>
@@ -46,28 +46,27 @@ catch (PDOException $e) {
 								</div>
 							</div>
 						</div>
-		<div class="contentswrapper">
-			<main class="contents">
-				<div class="section">
-					<div class="inner inner-section">
-						<h1>Hello</h1> Untitled Document!
-                        <div class="panel panel-default">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>パッケージ名</th>
-                                    <th>パッケージバーション</th>
-                                    <th>パッケージ説明</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+						<table class="table">
+							<thead>
+								<tr>
+									<th class="cbox__selectall">
+										<div class="cbox__wrapper">
+										<input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
+										</div>
+									</th>
+									<th>パッケージ名</th>
+									<th>パッケージバーション</th>
+									<th>パッケージ説明</th>
+								</tr>
+							</thead>
+							<tbody>
 	                            <?php
 	                            $stm = $dbh->prepare("select * from pack_info");
 	                            $stm->execute();
 	                            $data = $stm->fetchAll();
 	                            $cnt  = count($data); //in case you need to count all rows
 								foreach ($data as $i => $row)
-									print_r('<tr><td>'.$row['pack_name'].'</td><td>'.$row['pack_version'].'</td><td></td></tr>');
+									print_r('<td><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td><td>'.$row['pack_name'].'</td><td>'.$row['pack_version'].'</td><td></td></tr>');									
 								?>
                             </tbody>
                         </table>

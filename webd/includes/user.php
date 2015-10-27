@@ -25,7 +25,7 @@ $query->execute();
 if ($query->rowCount() > 0){
 	print_r($user_name.'<br>');
 	print_r($password.'<br>');
-	//header('location:/index.html');
+	header('location:../index.php');
 } else{
 	echo 'Error login.';
 }
