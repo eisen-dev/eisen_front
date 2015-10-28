@@ -54,6 +54,7 @@ catch (PDOException $e) {
 										<input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
 										</div>
 									</th>
+                                    <th>パッケージカテゴリ</th>
 									<th>パッケージ名</th>
 									<th>パッケージバーション</th>
 									<th>パッケージ説明</th>
@@ -66,7 +67,7 @@ catch (PDOException $e) {
 	                            $data = $stm->fetchAll();
 	                            $cnt  = count($data); //in case you need to count all rows
 								foreach ($data as $i => $row)
-									print_r('<td><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td><td>'.$row['pack_name'].'</td><td>'.$row['pack_version'].'</td><td></td></tr>');									
+									print_r('<td><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td><td>'.$row['pack_category'].'</td><td>'.$row['pack_name'].'</td><td>'.$row['pack_version'].'</td><td></td></tr>');
 								?>
                             </tbody>
                         </table>
