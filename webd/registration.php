@@ -14,7 +14,7 @@ require_once __DIR__ .'/parts/head.php';
 					</div>
 					<div class="login">
 						<form name="main-form" method="post" action="includes/user_registration.php">
-							<label>ユーザー名:</label> <input type="text" name="user_name" placeholder="ロマジを入れてください"/><br/>
+							<label>ユーザー名:</label> <input type="text" name="user_name" placeholder="ローマ字を入れてください"/><br/>
 							<label>Eメール:</label> <input type="text" name="mail_address" placeholder="kmx.?x?.@.gmail"/><br/>
 							<label>パスワード:</label> <input type="password" name="password_1" placeholder="８桁を入れてください"/><br/>
 							<label>パスワード確認:</label> <input type="password" name="password_2" placeholder="もう一度入れてください"/><br/>
@@ -25,7 +25,4 @@ require_once __DIR__ .'/parts/head.php';
 			</main>
 		</div>
 	</div>
-</div>
-       
-</body>
 </html>
