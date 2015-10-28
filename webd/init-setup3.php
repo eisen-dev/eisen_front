@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
@@ -34,16 +33,16 @@
 						</div>
 					</div>
 					<div class="setting">
-						<form action="../../../../Users/IT%20College/Google%20ドライブ/卒業制作/10_27%20プレゼンテーション/発表用デザイン見本/dashboard.html" method="post">
+						<form action="login.php" method="post">
 								<p>すべての初期設定が完了しました！</p>
-							<input type="submit" name="submit" value="ダッシュボードに進む" class="button">
+							<input type="submit" name="submit" value="ログインに進む" class="button">
 						</form>
 					</div>
 			</main>
 		</div>
 	</div>
-    <script src="../../../../Users/IT%20College/Google%20ドライブ/卒業制作/10_27%20プレゼンテーション/発表用デザイン見本/includes/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../../../../Users/IT%20College/Google%20ドライブ/卒業制作/10_27%20プレゼンテーション/発表用デザイン見本/js/script.js"></script>
+    <script src="includes/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>
