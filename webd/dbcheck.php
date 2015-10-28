@@ -1,4 +1,4 @@
-<?php echo '<p>Hello World</p>';
+<?php echo '<p>DB-check</p>';
 require_once "/includes/jsonRPCClient.php";
 require_once "/connect.php";
 
@@ -21,7 +21,7 @@ print_r($server->get_installed_packages_sha1());
 $install_pack_sha1=$server->get_installed_packages_sha1();
 $all_pack_sha1=$server->get_all_packages_sha1();
 
-print($install_pack_sha1.' '.$all_pack_sha1);
+print($install_pack_sha1.'<br>'.$all_pack_sha1);
 
 $pack_name = 'test';
 $pack_version = '1.2';
