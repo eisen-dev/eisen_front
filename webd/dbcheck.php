@@ -26,12 +26,19 @@ print($install_pack_sha1.'<br>'.$all_pack_sha1);
 $pack_name = 'test';
 $pack_version = '1.2';
 
-$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-$query = $dbh->prepare("INSERT INTO pack_management_system (pack_sys_name, pack_sys_version, all_sys_pack_hash, installed_sys_pack_hash) VALUES(?,?,?,?);");
-$query->bindParam(1, $pack_name);
-$query->bindParam(2, $pack_version);
-$query->bindParam(3, $all_pack_sha1);
-$query->bindParam(4, $install_pack_sha1);
-$query->execute();
+$dbh->prepare("select * from pack_management_system");
+$stm->execute();
+$data = $stm->fetchAll();
+$cnt  = count($data); //in case you need to count all rows
+foreach ($data as $i => $row)
+    print_r($row)
+
+//$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+//$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+//$query = $dbh->prepare("INSERT INTO pack_management_system (pack_sys_name, pack_sys_version, all_sys_pack_hash, installed_sys_pack_hash) VALUES(?,?,?,?);");
+//$query->bindParam(1, $pack_name);
+//$query->bindParam(2, $pack_version);
+//$query->bindParam(3, $all_pack_sha1);
+//$query->bindParam(4, $install_pack_sha1);
+//$query->execute();
 ?>
