@@ -56,7 +56,7 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);*/
 						</div>
 					</div>
 					<div class="setting">
-						<form action="init-setup.php" method="post">
+						<form action="init-setup1.php" method="post">
 							<h2 class="title">データベース設定</h2>
 							<div class="setting-container">
 								<div class="setting-item-left">
