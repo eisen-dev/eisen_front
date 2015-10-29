@@ -10,3 +10,8 @@ we are following this code style:
   - http://getbem.com/introduction/
 - Icon/Font
   - Font Awesome https://fortawesome.github.io/Font-Awesome/
+- Editor
+  - brackets http://brackets.io/
+  - pycharm, phpstorm, webstorm
+  - eclipse
+  - bootstrap studio http://bootstrapstudio.io/
