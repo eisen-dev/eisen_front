@@ -14,6 +14,9 @@ array(PDO::ATTR_EMULATE_PREPARES => false,
  exit('データベース接続に失敗しました'.$e->getMessage());
 }
 
+function some_logging_function($log){
+    echo 'LOG : ' . $log . '<br />';
+}
 //クライアントに接続
 $server= new jsonRPCClient("http://$js_host:$js_port");
 ini_set('max_execution_time', 0); //300 seconds = 5 mi.12
