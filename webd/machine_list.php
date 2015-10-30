@@ -47,13 +47,8 @@ catch (PDOException $e) {
     <div class="contentswrapper">
         <main class="contents menu-set">
             <div class="section">
-                <h2 class="title">パッケージリスト</h2>
+                <h2 class="title">マシンリスト</h2>
                     <div class="list-tools clearfix">
-                        <div class="list-action">
-                            <select name="list-action" class="input-list">
-                                <option value="0">一括操作</option>
-                                <option value="0">更新</option>
-                            </select>
                             <input type="submit" value="適用" class="button button--form">
                         </div>
                         <div class="search-box">
@@ -89,6 +84,26 @@ catch (PDOException $e) {
                         ?>
                         </tbody>
                     </table>
+            <div class="setting">
+                <form action="includes/machine_registration.php" method="post">
+            <h2 class="title">json RPC設定</h2>
+            <div class="setting-container">
+                <div class="setting-item-left">
+                    <span>ホスト名</span>
+                </div>
+                <div class="setting-item-right">
+                    <input type="text" name="js_host">
+            	</div>
+            </div>
+            <div class="setting-container">
+            	<div class="setting-item-left">
+            		<span>ポート番号</span>
+            	</div>
+            	<div class="setting-item-right">
+            		<input type="text" name="js_port">
+            	</div>
+            </div>
+            <input type="submit" name="submit" value="設定して次に進む" class="button">
             </div>
     </div>
 </div>
