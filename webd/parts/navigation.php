@@ -1,4 +1,4 @@
-	<div class="navigation">
+<div class="navigation">
 			<div class="navigation-menu">
 				<ul>
 					<li><a href="index.php"><i class="fa fa-tachometer"></i><span>ダッシュボード</span></a></li>
@@ -22,24 +22,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="menu-button menu-machines menu-border">
-						<div class="menu-icon">
-							<i class="fa fa-user"></i>
-							<div class="menu-icon-text">
-								<span class="current-machine">
-									<?php
-									session_start();
-									if(!isset($_SESSION['login_user'])) {
-										print "logged off";
-									} else {
-										print $_SESSION['login_user'];
-									}
-									?>
-								</span>
-							</div>
-						</div>
-					</div>
-					<div class="menu-button menu-notifications menu-border">
+                    <div class="menu-button menu-notifications menu-border">
 						<div class="menu-icon toggle-notifications">
 							<i class="fa fa-bell-o"></i>
 						</div>
@@ -96,6 +79,22 @@
 							</div>
 						</div>
 					</div>
-				</div>
+                    <div class="menu-button menu-machines menu-border">
+                        <div class="menu-icon">
+                            <i class="fa fa-user"></i>
+                            <div class="menu-icon-text">
+								<span class="current-machine">
+									<?php
+                                    if(!isset($_SESSION['login_user'])) {
+                                        print "logged off";
+                                    } else {
+                                        print $_SESSION['login_user'];
+                                    }
+                                    ?>
+								</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 			</div>
 		</div>

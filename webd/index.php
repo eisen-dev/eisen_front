@@ -4,6 +4,8 @@
 $title = "index page";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ .'/connect.php';
+require_once __DIR__ . '/parts/modal.php';
+
 $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 ?>
 <body>
@@ -25,26 +27,6 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 						Basic Modals
 					</button>
-					<!-- <?php require_once __DIR__ . '/parts/modal.php'; ?> -->
-					<!-- モーダルウィンドウここから -->
-					<div id="myModal" class="modal fade">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title">タイトル</h4>
-								</div>
-								<div class="modal-body">
-									モーダルのbody部分
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">閉じる</button>
-									<button type="button" class="btn btn-primary">保存</button>
-								</div>
-							</div>
-						</div>
-					</div>
-					<!-- モーダルウィンドウここまで -->
 				</div>
 			</main>
 		</div>

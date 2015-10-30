@@ -1,6 +1,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title; ?></title>
+	<?php session_start(); ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="includes/normalize.css">
 	<link rel="stylesheet" href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
