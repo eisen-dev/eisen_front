@@ -26,7 +26,7 @@ $os='Gentoo';
 $status_id=1;
 $user_id='test';
 try {
-    $query = $dbh->prepare('INSERT INTO machine_information (machine_name, ipaddress, port, os, status_id, user_id) VALUES ("test", :ipaddress, :port, "Gentoo", 1, "test");');
+    $query = $dbh->prepare('INSERT INTO machine_information (machine_name, ipaddress, port, os, status_id, user_id) VALUES (:machine_name, :ipaddress, :port, :os, :status_id, :user_id);');
     $query-> bindParam(':machine_name', $machine_name, PDO::PARAM_STR);
     $query-> bindParam(':ipaddress', $js_host, PDO::PARAM_STR);
     $query-> bindParam(':port', $js_port, PDO::PARAM_STR);
@@ -36,7 +36,7 @@ try {
     echo var_dump($query);
     $query->execute(); //invalid query!
 } catch(PDOException $ex) {
-    echo "An Error occured!"; //user friendly message
-    //some_logging_function($ex->getMessage());
+    //echo "An Error occured!"; //user friendly message
+    some_logging_function($ex->getMessage());
 }
 ?>

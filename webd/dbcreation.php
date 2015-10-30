@@ -51,8 +51,9 @@ function createdbtable($table,$fields,$dbh)
 createdbtable(
 		'user_info', 
 		array(
-		'unique_id' => 'VARCHAR(75) PRIMARY KEY NOT NULL',
-		'password' => 'VARCHAR(40)',
+        'unique_id' => 'INT AUTO_INCREMENT',
+        'user_id' => 'VARCHAR(75)',
+        'password' => 'VARCHAR(40)',
 		'mail_address' => 'VARCHAR(60)',
 		),$dbh);
 
@@ -65,7 +66,7 @@ createdbtable(
 		'port' => 'VARCHAR(60)',
 		'os' => 'VARCHAR(60)',
 		'status_id' => 'VARCHAR(60)',
-        'user_id' => 'INT NOT NULL'
+        'user_id' => 'VARCHAR(75)'
 		),$dbh);
 
 createdbtable(
