@@ -14,13 +14,13 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 				<div class="section">
 					<h1>Hello</h1> Untitled Document!
 					<p>
-					<a href="/install.php">install database</a>
+					<a href="install.php">install database</a>
 					</p>
 					<p>
-					<a href="/dbupdate.php">update database</a>
+					<a href="dbupdate.php">update database</a>
 					</p>
 					<p>
-					<a href="/list.php">show list</a>
+					<a href="list.php">show list</a>
 					</p>
 					<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">
 						Basic Modals

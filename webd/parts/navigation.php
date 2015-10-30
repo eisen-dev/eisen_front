@@ -18,7 +18,24 @@
 						<div class="menu-icon">
 							<i class="fa fa-server"></i>
 							<div class="menu-icon-text">
-								<span class="current-machine">textsampleABCDEFG</span>
+								<span class="current-machine">Agent01</span>
+							</div>
+						</div>
+					</div>
+					<div class="menu-button menu-machines menu-border">
+						<div class="menu-icon">
+							<i class="fa fa-user"></i>
+							<div class="menu-icon-text">
+								<span class="current-machine">
+									<?php
+									session_start();
+									if(!isset($_SESSION['login_user'])) {
+										print "logged off";
+									} else {
+										print $_SESSION['login_user'];
+									}
+									?>
+								</span>
 							</div>
 						</div>
 					</div>

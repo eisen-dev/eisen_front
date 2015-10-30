@@ -25,6 +25,8 @@ $query->execute();
 if ($query->rowCount() > 0){
 	print_r($user_name.'<br>');
 	print_r($password.'<br>');
+    session_start();
+    $_SESSION['login_user']= $user_name;
 	header('location:../index.php');
 } else{
 	echo 'Error login.';
