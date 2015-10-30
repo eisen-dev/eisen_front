@@ -64,23 +64,6 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);*/
 									<input type="text" name="db_name">
 								</div>
 							</div>
-								<h2 class="title">json RPC設定</h2>
-							<div class="setting-container">
-								<div class="setting-item-left">
-									<span>ホスト名</span>
-								</div>
-								<div class="setting-item-right">
-									<input type="text" name="js_host">
-								</div>
-							</div>
-							<div class="setting-container">
-								<div class="setting-item-left">
-									<span>ポート番号</span>
-								</div>
-								<div class="setting-item-right">
-									<input type="text" name="js_port">
-								</div>
-							</div>
 							<input type="submit" name="submit" value="設定して次に進む" class="button">
 						</form>
 					</div>

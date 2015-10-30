@@ -48,7 +48,6 @@ catch (PDOException $e) {
 			<main class="contents menu-set">
 				<div class="section">
 					<h2 class="title">パッケージリスト</h2>
-					<form>
 						<div class="list-tools clearfix">
 							<div class="list-action">
 								<select name="list-action" class="input-list">
@@ -85,7 +84,7 @@ catch (PDOException $e) {
 	                            $data = $stm->fetchAll();
 	                            $cnt  = count($data); //in case you need to count all rows
 								foreach ($data as $i => $row)
-									print_r('<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td><td>'.$row['pack_category'].'</td><td>'.$row['pack_name'].'</td><td>'.$row['pack_version'].'</td><td></td></tr>');
+									print_r('<tr class="cell-which-triggers-popup"><td class=""><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td><td>'.$row['pack_category'].'</td><td>'.$row['pack_name'].'</td><td>'.$row['pack_version'].'</td><td></td></tr>');
 								?>
                             </tbody>
                         </table>
