@@ -1,14 +1,8 @@
 <?php echo '<p>Hello World</p>';
 require_once "/includes/jsonRPCClient.php";
 require_once "/connect.php";
-
-//クライアントに接続
-$server= new jsonRPCClient("http://$js_host:$js_port");
-ini_set('max_execution_time', 0); //300 seconds = 5 mi.12
-
 //データベースに接続するために必要な情報(PDO)
 $dsn = "mysql:dbname=$db_name;host=$db_host;charset=utf8";
-
 global $dbh;
 
 //データベース接続
@@ -19,6 +13,11 @@ array(PDO::ATTR_EMULATE_PREPARES => false,
 } catch (PDOException $e) {
  exit('データベース接続に失敗しました'.$e->getMessage());
 }
+
+//クライアントに接続
+$server= new jsonRPCClient("http://$js_host:$js_port");
+ini_set('max_execution_time', 0); //300 seconds = 5 mi.12
+
 function createdbtable($table,$fields,$dbh)
 {
 

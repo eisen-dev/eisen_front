@@ -11,11 +11,17 @@ require_once __DIR__ .'/parts/head.php';
 			<main class="contents  menu-set">
 				<div class="section">
 					<h1>Welcome in Eisen</h1>
+                    <p>
+                    <a href="dbcreation.php">db create</a>
+                    </p>
 					<p>
-					<a href="install.php">install database</a>
+					<a href="init-setup1.php">install database</a>
 					</p>
+                    <p>
+                    <a href="machine_list.php">add machine</a>
+                    </p>
 					<p>
-					<a href="dbupdate.php">update database</a>
+					<a href="dbupdate-install.php">update database</a>
 					</p>
 					<p>
 					<a href="list.php">show list</a>
