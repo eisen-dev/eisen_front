@@ -62,7 +62,7 @@ catch (PDOException $e) {
 							</thead>
 							<tbody>
 	                            <?php
-	                            $stm = $dbh->prepare("select * from installed_package");
+	                            $stm = $dbh->prepare("select * from pack_info");
 	                            $stm->execute();
 	                            $data = $stm->fetchAll();
 	                            $cnt  = count($data); //in case you need to count all rows

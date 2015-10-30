@@ -28,19 +28,19 @@ if (isValidEmail($mail_address)){
 	if ($password_1 == $password_2){
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-		$query = $dbh->prepare("select * from user_info where user_name = ? ;");
+		$query = $dbh->prepare("select * from user_info where user_id = ? ;");
 		$query->bindParam(1, $user_name);
 		$query->execute();
 		print($query->rowCount());
 		if ($query->rowCount() == 0){
 			print_r($user_name.'<br>');
 			print_r($password_1.'<br>');
-			header('location:../login.php');
+			header('location:../init-setup3.php');
 			
 			//データベースに接続するために必要な情報(PDO)
 			$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 			$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-			$query = $dbh->prepare("INSERT INTO user_info (user_name, password, mail_address) VALUES(?,?,?);");
+			$query = $dbh->prepare("INSERT INTO user_info (user_id, password, mail_address) VALUES(?,?,?);");
 			$query->bindParam(1, $user_name);
 			$query->bindParam(2, $password_1);
 			$query->bindParam(3, $mail_address);

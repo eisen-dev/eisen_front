@@ -18,7 +18,7 @@ array(PDO::ATTR_EMULATE_PREPARES => false,
 
 $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-$query = $dbh->prepare("SELECT * FROM user_info WHERE user_name = ? AND password = ? ");
+$query = $dbh->prepare("SELECT * FROM user_info WHERE user_id = ? AND password = ? ");
 $query->bindParam(1, $user_name);
 $query->bindParam(2, $password);
 $query->execute();

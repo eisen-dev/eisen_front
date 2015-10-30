@@ -60,14 +60,14 @@ file_put_contents($file, $content);
 						</div>
 					</div>
 					<div class="setting">
-						<form action="init-setup3.php" method="post">
+						<form action="includes/user_registration.php" method="post">
 							<h2 class="title">ユーザー設定</h2>
 							<div class="setting-container">
 								<div class="setting-item-left">
 									<span>ユーザー名</span>
 								</div>
 								<div class="setting-item-right">
-									<input type="text" name="db_user">
+									<input type="text" name="user_name">
 								</div>
 							</div>
 							<div class="setting-container">
@@ -75,7 +75,7 @@ file_put_contents($file, $content);
 									<span>メールアドレス</span>
 								</div>
 								<div class="setting-item-right">
-									<input type="text" name="db_pass">
+									<input type="text" name="mail_address">
 								</div>
 							</div>
 							<div class="setting-container">
@@ -83,7 +83,7 @@ file_put_contents($file, $content);
 									<span>パスワード</span>
 								</div>
 								<div class="setting-item-right">
-									<input type="password" name="db_name">
+									<input type="password" name="password_1">
 								</div>
 							</div>
 							<div class="setting-container">
@@ -91,7 +91,7 @@ file_put_contents($file, $content);
 									<span>パスワード(確認)</span>
 								</div>
 								<div class="setting-item-right">
-									<input type="password" name="db_name">
+									<input type="password" name="password_2">
 								</div>
 							</div>
 							<input type="submit" name="submit" value="設定して次に進む" class="button">
@@ -100,8 +100,8 @@ file_put_contents($file, $content);
 			</main>
 		</div>
 	</div>
-    <script src="../../../../Users/IT%20College/Google%20ドライブ/卒業制作/10_27%20プレゼンテーション/発表用デザイン見本/includes/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="../../../../Users/IT%20College/Google%20ドライブ/卒業制作/10_27%20プレゼンテーション/発表用デザイン見本/js/script.js"></script>
+    <script src="includes/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
 </body>
 
 </html>
