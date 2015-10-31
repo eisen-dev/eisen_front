@@ -86,24 +86,25 @@ catch (PDOException $e) {
                     </table>
             <div class="setting">
                 <form action="includes/machine_registration.php" method="post">
-            <h2 class="title">json RPC設定</h2>
-            <div class="setting-container">
-                <div class="setting-item-left">
-                    <span>ホスト名</span>
-                </div>
-                <div class="setting-item-right">
-                    <input type="text" name="js_host">
-            	</div>
-            </div>
-            <div class="setting-container">
-            	<div class="setting-item-left">
-            		<span>ポート番号</span>
-            	</div>
-            	<div class="setting-item-right">
-            		<input type="text" name="js_port">
-            	</div>
-            </div>
-            <input type="submit" name="submit" value="設定して次に進む" class="button">
+                    <h2 class="title">json RPC設定</h2>
+                    <div class="setting-container">
+                        <div class="setting-item-left">
+                            <span>ホスト名</span>
+                        </div>
+                        <div class="setting-item-right">
+                            <input type="text" name="js_host">
+                        </div>
+                    </div>
+                    <div class="setting-container">
+                        <div class="setting-item-left">
+                            <span>ポート番号</span>
+                        </div>
+                        <div class="setting-item-right">
+                            <input type="text" name="js_port">
+                        </div>
+                    </div>
+                    <input type="submit" name="submit" value="設定して次に進む" class="button">
+                </form>
             </div>
     </div>
 </div>
@@ -115,7 +116,6 @@ catch (PDOException $e) {
     $( document ).ready(function() {
         $(document).on("click", ".cell-which-triggers-popup", function(event){
             var cell_value = $(event.target).text();
-            showPopup(cell_value)
             if (cell_value) {
                 showPopup(cell_value)
             }
