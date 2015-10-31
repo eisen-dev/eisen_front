@@ -34,7 +34,7 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);*/
 							<h2 class="title">データベース設定</h2>
 							<div class="setting-container">
 								<div class="setting-item-left">
-									<span>ホスト名</span>
+									<span>IPアドレス</span>
 								</div>
 								<div class="setting-item-right">
 									<input type="text" name="db_host">
