@@ -99,9 +99,10 @@ catch (PDOException $e) {
         $( document ).ready(function() {
             $(document).on("click", ".cell-which-triggers-popup", function(event){
                 var cell_value = $(event.target).text();
-                showPopup(cell_value)
+                if (cell_value) {
+                    showPopup(cell_value)
+                }
             });
-
             function showPopup(your_variable){
                 $("#popup").dialog({
                     width: 500,
