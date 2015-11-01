@@ -18,8 +18,8 @@ body{
 
 /*コンテンツ部*/
 .contentswrapper{
-	/*ナビゲーションバー分のマージン(2列)*/
-	margin-top: 96px;
+	/*ナビゲーションバー分のマージン(1列)*/
+	margin-top: 48px;
 	width: 100%;
 	font-size: 1em;
 	/*コンテンツエリアの背景色*/
@@ -58,11 +58,6 @@ body{
 	}
 
 @media screen and (min-width: 480px) {
-	.contentswrapper{
-		/*ナビゲーションバー分のマージン(1列)*/
-		margin-top: 48px;
-	}
-
 	.contentwrapper-nonav{
 		margin-top: 0;
 	}

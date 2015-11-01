@@ -15,7 +15,7 @@ require_once __DIR__ .'/parts/head.php';
 					</div>
 					<div class="login">
 						<form action='includes/login.php' method='POST'>
-							<span>ユーザーID</span>
+							<span>ユーザー名</span>
 							<input type="text" name="user_name">
 							<span>パスワード</span>
 							<input type="password" name="password">
