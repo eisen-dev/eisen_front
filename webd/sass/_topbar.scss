@@ -11,13 +11,16 @@
 }
 
 .topbar-title{
-	display: block;
-	height: 48px;
-	max-width: 100%;
-	float: left;
+	//作成中
+	display: none;
+}
+.eisen-logo{
+	//作成中
+	display: none;
 }
 
 .navigation-toggle{
+	float: left;
 	padding: 0 16px 0 8px;
 	margin: 0 0 0 0;
 	font-size: 28px;
@@ -27,12 +30,12 @@
 
 /*メニューボタン*/
 .menu{
-
+	float: right;
+	width: auto;
 }
 
 .menu-button{
 	float: left;
-	width: 50%;
 	background-color: $md-grey-200;
 	&:hover{
 		background-color: $md-grey-300;
@@ -40,6 +43,7 @@
 }
 
 .menu-icon{
+	padding: 0 8px;
 	font-size: 24px;
 	line-height: 44px;
 	height: 44px;
@@ -50,17 +54,35 @@
 	display: none;
 }
 
-/*リスト*/
-.notifications-list{
+/*ポップアップ*/
+.menu-popup{
 	display: none;
 	position: absolute;
-	top: 96px;
+	width: 250px;
+	top: 48px;
 	right: 0px;
-	width: 100%;
-	padding: 0;
 	border: 1px solid $md-grey-400;
 	border-radius: 0 0 6px 6px;
 	background-color: $md-grey-50;
+}
+
+.popup-title{
+	width: 100%;
+	padding: 8px;
+	font-size: 1em;
+	line-height: 1em;
+	border-bottom: 2px solid $md-light-green-400;
+	background-color: $md-grey-50;
+}
+
+.popup-contents{
+	height: 200px;
+	overflow: scroll;
+	overflow: auto;
+}
+
+/*通知リスト*/
+.menu-list-items{
 	ul{
 		list-style: none;
 		margin: 0;
@@ -69,7 +91,7 @@
 			padding: 8px 8px;
 		}
 		li + li{
-			border-top: 1px solid $md-grey-200;
+			border-top: 1px solid $md-grey-300;
 		}
 	}
 }
@@ -94,14 +116,6 @@
 	width: 100%;
 }
 
-.menu-list-title{
-	font-size: 1em;
-	line-height: 1em;
-	border-bottom: 2px solid $md-light-green-400;
-	background-color: $md-grey-50;
-	padding: 0.5em;
-}
-
 /*メニューボタン下のステータス表示*/
 
 .menu-border{
@@ -124,18 +138,13 @@
 		float: left;
 	}
 
-	.notifications-list{
-		top: 48px;
-	}
-
 	.navigation-toggle{
 		/*navigationのトグルはモバイルのみ*/
 		display: none;
 	}
 
 	.menu{
-		float: right;
-		width: auto;
+
 	}
 
 	.menu-button{
@@ -154,7 +163,7 @@
 	}
 
 	.menu-icon{
-		padding: 0 16px;
+	padding: 0 16px;
 		i{
 			display: inline-block;
 			vertical-align: middle;
@@ -169,19 +178,11 @@
 		white-space: nowrap;
 		text-overflow: ellipsis;
 
-		.current-machine{
+		span{
 			display: inline;
 			font-size: 16px;
 			vertical-align: middle;
 		}
-	}
-
-	.notifications-list{
-		width: 300px;
-	}
-
-	.menu-list-items{
-		height: 300px;
 	}
 }
 
