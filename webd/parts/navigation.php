@@ -30,11 +30,7 @@
                             <div class="menu-icon-text">
 								<span>
 									<?php
-										if(!isset($_SESSION['login_user'])) {
-											print "logged off";
-										} else {
-											print $_SESSION['login_user'];
-										}
+									print $me->get_user_id();
                                     ?>
 								</span>
                             </div>

@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ .'/../connect.php';
+require_once __DIR__."/session.php";
 
 $user_name = trim($_POST['user_name']);
 $password = trim(sha1($_POST['password']));
@@ -25,8 +26,10 @@ $query->execute();
 if ($query->rowCount() > 0){
 	print_r($user_name.'<br>');
 	print_r($password.'<br>');
-    session_start();
-    $_SESSION['login_user']= $user_name;
+	$me = new Session();
+	$me->start_session();
+	$me->is_session_started();
+	$me->set_user_id($user_name);
 	header('location:../index.php');
 } else{
 	echo 'Error login.';
