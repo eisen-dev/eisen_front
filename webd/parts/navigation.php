@@ -36,7 +36,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="menu-button menu-notifications menu-border">
 						<div class="menu-icon toggle-notifications">
 							<i class="fa fa-bell-o"></i>

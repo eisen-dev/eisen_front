@@ -24,22 +24,15 @@
 <?php
 $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
-require_once __DIR__.'/connect.php';
+require_once __DIR__ . '/includes/DBaction.php';
 require_once __DIR__ . '/parts/modal.php';
-$dsn = "mysql:dbname=$db_name;host=$db_host;charset=utf8";
-//データベース接続
-try {
-	$dbh = new PDO($dsn, $db_user, $db_pass,
-			array(PDO::ATTR_EMULATE_PREPARES => false,
-					PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-} 
-catch (PDOException $e) {
-	exit('データベース接続に失敗しました'.$e->getMessage());
-}
+
+$dba = new DBaction();
+$dbh = $dba->Connect();
 ?>
 <body>
     <div id="popup" data-name="name" class="dialog">
-        <a href="">Hello world!</a>
+        <a href="">Action bar</a>
         <p></p>
     </div>
 	<div class="wrapper">
@@ -108,7 +101,7 @@ catch (PDOException $e) {
                     width: 500,
                     height: 300,
                     open: function(){
-                        $(this).find("p").html("Hello " + your_variable)
+                        $(this).find("p").html("Install " + your_variable)
                     }
             });
             }
