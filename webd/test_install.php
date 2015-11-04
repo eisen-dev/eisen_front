@@ -9,6 +9,10 @@ $me = new Session();
 $me->is_session_started();
 $user_id = 'test';
 
+$data=$dba ->MachineList($user_id,$dbh);
+var_dump($data);
+/*
+
 $stm = $dbh->prepare("select * from machine_information WHERE user_id=:user_id;");
 $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
 $stm->execute();
@@ -22,4 +26,4 @@ $server= new jsonRPCClient("http://$js_host:$js_port");
 ini_set('max_execution_time', 0); //300 seconds = 5 mi.12
 
 $data=$server->install_package('games-misc/fortune-mod');
-var_dump($data);
+var_dump($data);*/

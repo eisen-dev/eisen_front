@@ -32,7 +32,7 @@ $dbh = $dba->Connect();
 <body>
 <!-- TODO better popup menu style -->
 <div id="popup" data-name="name" class="dialog">
-    <a href="">Hello world!</a>
+    <!--<a href="">Hello world!</a>-->
     <p></p>
 </div>
 <div class="wrapper">
@@ -75,16 +75,15 @@ $dbh = $dba->Connect();
                         $data = $stm->fetchAll();
                         $cnt  = count($data); //in case you need to count all rows
                         //var_dump($data);
-                        foreach ($data as $i => $row)
-                            # TODO: print_r need to be splitted for better reading.
-                            //$table ='<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td>';
-                            //$table.='<td class="machine_name">'.$row['machine_name'].'</td>';
-                            //$table.='<td class="ipaddress">'.$row['ipaddress'].'</td>';
-                            //$table.='<td>'.$row['port'].'</td>';
-                            //$table.='<td>'.$row['os'].'</td>';
-                            //$table.='<td>'.$row['status_id'].'</td></tr>';
-                            //var_dump($table);
-                            print_r('<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td><td class="machine_name">'.$row['machine_name'].'</td><td class="ipaddress">'.$row['ipaddress'].'</td><td>'.$row['port'].'</td><td>'.$row['os'].'</td><td>'.$row['status_id'].'</td></tr>');
+                        foreach ($data as $i => $row) {
+                            $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
+                            $table .= '<td class="machine_name">' . $row['machine_name'] . '</td>';
+                            $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
+                            $table .= '<td class="port">' . $row['port'] . '</td>';
+                            $table .= '<td class="os">' . $row['os'] . '</td>';
+                            $table .= '<td class="status_id">' . $row['status_id'] . '</td></tr>';
+                            print_r($table);
+                        }
                         ?>
                         </tbody>
                     </table>
@@ -120,19 +119,20 @@ $dbh = $dba->Connect();
     //TODO we need all the text in the row divided by some character.
     $( document ).ready(function() {
         $(document).on("click", ".cell-which-triggers-popup", function(event){
-            var cell_value = $(event.target).closest('tr').text();
-            console.log(cell_value);
-            if (cell_value) {
-                showPopup(cell_value)
+            var cell_value1 = $(event.target).closest('tr').find('.ipaddress').text();
+            var cell_value2 = $(event.target).closest('tr').find('.port').text();
+            //console.log(cell_value);
+            if (cell_value1 && cell_value2) {
+                showPopup(cell_value1,cell_value2)
             }
         });
 
-        function showPopup(your_variable){
+        function showPopup(cell_value1,cell_value2){
             $("#popup").dialog({
                 width: 500,
                 height: 300,
                 open: function(){
-                    $(this).find("p").html("Hello " + your_variable)
+                    $(this).find("p").html("<a href=includes/PackageAction.php?ip=" + cell_value1+"&port="+cell_value2+">install "+cell_value1+"</a>");
                 }
             });
         }

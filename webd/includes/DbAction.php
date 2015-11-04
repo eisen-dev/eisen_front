@@ -29,7 +29,21 @@ class DbAction {
     }
 
     public function MachineList($user_id, $dbh) {
-
+        $stm = $dbh->prepare("select * from machine_information WHERE user_id=:user_id;");
+        $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
+        $stm->execute();
+        $data = $stm->fetchAll();
+        $cnt  = count($data); //in case you need to count all rows
+        //var_dump($data);
+        $myMachine = array();
+        foreach ($data as $i => $row) {
+            $myMachine += array($row['machine_name'],
+            $row['ipaddress'],
+            $row['port'],
+            $row['os'],
+            $row['status_id']);
+            }
+        return $myMachine;
     }
 
     public function some_logging_function($log){
