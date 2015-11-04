@@ -1,18 +1,9 @@
 <?php echo '<p>Hello World</p>';
 require_once "/includes/jsonRPCClient.php";
-require_once "/connect.php";
-//データベースに接続するために必要な情報(PDO)
-$dsn = "mysql:dbname=$db_name;host=$db_host;charset=utf8";
-global $dbh;
+require_once __DIR__ . '/includes/DbAction.php';
 
-//データベース接続
-try {
-$dbh = new PDO($dsn, $db_user, $db_pass,
-array(PDO::ATTR_EMULATE_PREPARES => false,
-		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-} catch (PDOException $e) {
- exit('データベース接続に失敗しました'.$e->getMessage());
-}
+$dba = new DbAction();
+$dbh = $dba->Connect();
 
 function some_logging_function($log){
     echo 'LOG : ' . $log . '<br />';
@@ -21,34 +12,7 @@ function some_logging_function($log){
 $server= new jsonRPCClient("http://$js_host:$js_port");
 ini_set('max_execution_time', 0); //300 seconds = 5 mi.12
 
-function createdbtable($table,$fields,$dbh)
-{
-
-	$sql = "CREATE TABLE IF NOT EXISTS `$table` (";
-	$pk  = '';
-
-	foreach($fields as $field => $type)
-	{
-		$sql.= "`$field` $type,";
-
-		if (preg_match('/AUTO_INCREMENT/i', $type))
-		{
-			$pk = $field;
-		}
-	}
-
-	$sql = rtrim($sql,',') . ', PRIMARY KEY (`'.$pk.'`)';
-
-	$sql .= ") CHARACTER SET utf8 COLLATE utf8_general_ci"; 
-	try {
-		$dbh->query($sql); //invalid query!
-	} catch(PDOException $ex) {
-		echo "An Error occured!"; //user friendly message
-		some_logging_function($ex->getMessage());
-	}
-}
-
-createdbtable(
+$dba->CreateDbTable(
 		'user_info', 
 		array(
         'unique_id' => 'INT AUTO_INCREMENT',
@@ -57,7 +21,7 @@ createdbtable(
 		'mail_address' => 'VARCHAR(60)',
 		),$dbh);
 
-createdbtable(
+$dba->CreateDbTable(
 		'machine_information',
 		array(
 		'machine_id' => 'INT AUTO_INCREMENT',
@@ -69,7 +33,7 @@ createdbtable(
         'user_id' => 'VARCHAR(75)'
 		),$dbh);
 
-createdbtable(
+$dba->CreateDbTable(
 		'pack_management_system',
 		array(
 		'pack_sys_id' => 'INT AUTO_INCREMENT',
@@ -80,7 +44,7 @@ createdbtable(
         'machine_id'=> 'INT NOT NULL'
 		),$dbh);
 
-createdbtable(
+$dba->CreateDbTable(
 		'installed_package',
 		array(
 		'installed_pack_id' => 'INT AUTO_INCREMENT',
@@ -90,7 +54,8 @@ createdbtable(
 		'installed_pack_summary' => 'VARCHAR(60)',
 		'pack_sys_id' => 'INT NOT NULL'
 		),$dbh);
-createdbtable(
+
+$dba->CreateDbTable(
 		'pack_info',
 		array(
 		'pack_id' => 'INT AUTO_INCREMENT',
@@ -100,7 +65,8 @@ createdbtable(
 		'pack_summary' => 'VARCHAR(60)',
         'pack_sys_id' => 'INT NOT NULL'
 		),$dbh);
-createdbtable(
+
+$dba->CreateDbTable(
 		'status',
 		array(
 		'status_id' => 'INT AUTO_INCREMENT',
