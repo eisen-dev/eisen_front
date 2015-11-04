@@ -24,10 +24,10 @@
 <?php
 $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
-require_once __DIR__ . '/includes/DBaction.php';
+require_once __DIR__ . '/includes/DbAction.php';
 require_once __DIR__ . '/parts/modal.php';
 
-$dba = new DBaction();
+$dba = new DbAction();
 $dbh = $dba->Connect();
 ?>
 <body>

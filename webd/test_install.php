@@ -1,8 +1,8 @@
 <?php
 require_once "includes/session.php";
 require_once "/includes/jsonRPCClient.php";
-require_once __DIR__ . '/includes/DBaction.php';
-$dba = new DBaction();
+require_once __DIR__ . '/includes/DbAction.php';
+$dba = new DbAction();
 $dbh = $dba->Connect();
 
 $me = new Session();

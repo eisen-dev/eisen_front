@@ -1,8 +1,7 @@
 <?php
 
-class DBaction {
-    # start session if is not already started
-    # always needed for use session
+class DbAction {
+    # connect to database
     public function Connect()
     {
         require_once '/connect.php';
