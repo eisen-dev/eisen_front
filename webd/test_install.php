@@ -23,4 +23,3 @@ ini_set('max_execution_time', 0); //300 seconds = 5 mi.12
 
 $data=$server->install_package('games-misc/fortune-mod');
 var_dump($data);
-?>

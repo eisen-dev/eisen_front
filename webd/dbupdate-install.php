@@ -57,4 +57,3 @@ foreach ($data as $value){
 //$data=$server->get_all_packages();
 //print_r($data);
 //phpinfo();
-?>

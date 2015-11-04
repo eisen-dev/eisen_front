@@ -31,7 +31,7 @@ $stm->execute();
 $data = $stm->fetchAll();
 $cnt  = count($data); //in case you need to count all rows
 foreach ($data as $i => $row)
-    print_r($row)
+    print_r($row);
 
 //$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 //$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
@@ -41,4 +41,3 @@ foreach ($data as $i => $row)
 //$query->bindParam(3, $all_pack_sha1);
 //$query->bindParam(4, $install_pack_sha1);
 //$query->execute();
-?>

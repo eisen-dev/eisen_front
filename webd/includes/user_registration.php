@@ -57,4 +57,3 @@ if (isValidEmail($mail_address)){
 else{
 	print('email is invalid<br>');
 }
-?>

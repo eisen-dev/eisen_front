@@ -106,4 +106,3 @@ createdbtable(
 		'status_id' => 'INT AUTO_INCREMENT',
 		'status_info'=> 'VARCHAR(20)',
 		),$dbh);
-?>

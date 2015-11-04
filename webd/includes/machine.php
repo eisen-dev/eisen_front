@@ -10,4 +10,3 @@ foreach ($data as $i => $row)
     $ipaddress = $row['ipaddress'];
     $port = $row['port'];
     print ('ip: '.$ipaddress.'<br>port: '.$port);
-?>

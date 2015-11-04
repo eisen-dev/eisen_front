@@ -34,4 +34,3 @@ if ($query->rowCount() > 0){
 } else{
 	echo 'Error login.';
 }
-?>

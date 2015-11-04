@@ -52,4 +52,3 @@ if(!isset($_SESSION['login_user'])) {
             print "password is wrong!";
         }
 }
-?>

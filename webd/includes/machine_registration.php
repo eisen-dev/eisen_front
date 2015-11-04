@@ -1,5 +1,5 @@
 <?php
-//isset‚Åpost‚ğ‘S•”ƒ`ƒFƒbƒN‚µ‚½•û‚ª‚¢‚¢
+//issetï¿½ï¿½postï¿½ï¿½Sï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½Nï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 if(isset($_POST['submit'])){
     $js_host = htmlspecialchars($_POST["js_host"]);
     $js_port = htmlspecialchars($_POST["js_port"]);
@@ -9,16 +9,16 @@ require_once "../connect.php";
 function some_logging_function($log){
     echo 'LOG : ' . $log . '<br />';
 }
-//ƒf[ƒ^ƒx[ƒX‚ÉÚ‘±‚·‚é‚½‚ß‚É•K—v‚Èî•ñ(PDO)
+//ï¿½fï¿½[ï¿½^ï¿½xï¿½[ï¿½Xï¿½ÉÚ‘ï¿½ï¿½ï¿½ï¿½é‚½ï¿½ß‚É•Kï¿½vï¿½Èï¿½ï¿½(PDO)
 $dsn = "mysql:dbname=$db_name;host=$db_host;charset=utf8";
 
-//ƒf[ƒ^ƒx[ƒXÚ‘±
+//ï¿½fï¿½[ï¿½^ï¿½xï¿½[ï¿½Xï¿½Ú‘ï¿½
 try {
     $dbh = new PDO($dsn, $db_user, $db_pass,
         array(PDO::ATTR_EMULATE_PREPARES => false,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
 } catch (PDOException $e) {
-    exit('ƒf[ƒ^ƒx[ƒXÚ‘±‚É¸”s‚µ‚Ü‚µ‚½'.$e->getMessage());
+    exit('ï¿½fï¿½[ï¿½^ï¿½xï¿½[ï¿½Xï¿½Ú‘ï¿½ï¿½Éï¿½ï¿½sï¿½ï¿½ï¿½Ü‚ï¿½ï¿½ï¿½'.$e->getMessage());
 }
 print('jason rpc address= '.$js_host.'<br>json rpc port= '.$js_port);
 $machine_name='test';
@@ -39,4 +39,3 @@ try {
     //echo "An Error occured!"; //user friendly message
     some_logging_function($ex->getMessage());
 }
-?>

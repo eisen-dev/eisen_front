@@ -51,4 +51,3 @@ try {
 } catch (Exception $e) {
 	echo nl2br($e->getMessage()).'<br />'."\n";
 }
-?>
