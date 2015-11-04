@@ -72,6 +72,7 @@ $dbh = $dba->Connect();
 							</thead>
 							<tbody>
 	                            <?php
+								//TODO refactor inside class and divide print_r
 	                            $stm = $dbh->prepare("select * from pack_info");
 	                            $stm->execute();
 	                            $data = $stm->fetchAll();
