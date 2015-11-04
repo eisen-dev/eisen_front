@@ -73,8 +73,17 @@ $dbh = $dba->Connect();
                         $stm->execute();
                         $data = $stm->fetchAll();
                         $cnt  = count($data); //in case you need to count all rows
+                        //var_dump($data);
                         foreach ($data as $i => $row)
-                            print_r('<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td><td>'.$row['machine_name'].'</td><td>'.$row['ipaddress'].'</td><td>'.$row['port'].'</td><td>'.$row['os'].'</td><td>'.$row['status_id'].'</td></tr>');
+                            # TODO: print_r need to be splitted for better reading.
+                            //$table ='<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td>';
+                            //$table.='<td class="machine_name">'.$row['machine_name'].'</td>';
+                            //$table.='<td class="ipaddress">'.$row['ipaddress'].'</td>';
+                            //$table.='<td>'.$row['port'].'</td>';
+                            //$table.='<td>'.$row['os'].'</td>';
+                            //$table.='<td>'.$row['status_id'].'</td></tr>';
+                            //var_dump($table);
+                            print_r('<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td><td class="machine_name">'.$row['machine_name'].'</td><td class="ipaddress">'.$row['ipaddress'].'</td><td>'.$row['port'].'</td><td>'.$row['os'].'</td><td>'.$row['status_id'].'</td></tr>');
                         ?>
                         </tbody>
                     </table>
@@ -107,9 +116,11 @@ $dbh = $dba->Connect();
 <script type="text/javascript" src="includes/jquery/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="includes/jquery/jquery-ui.min.js"></script>
 <script>
+    //TODO we need all the text in the row divided by some character.
     $( document ).ready(function() {
         $(document).on("click", ".cell-which-triggers-popup", function(event){
-            var cell_value = $(event.target).text();
+            var cell_value = $(event.target).closest('tr').text();
+            console.log(cell_value);
             if (cell_value) {
                 showPopup(cell_value)
             }
