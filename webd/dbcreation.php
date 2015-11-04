@@ -1,16 +1,8 @@
 <?php echo '<p>Hello World</p>';
-require_once "/includes/jsonRPCClient.php";
 require_once __DIR__ . '/includes/DbAction.php';
 
 $dba = new DbAction();
 $dbh = $dba->Connect();
-
-function some_logging_function($log){
-    echo 'LOG : ' . $log . '<br />';
-}
-//クライアントに接続
-$server= new jsonRPCClient("http://$js_host:$js_port");
-ini_set('max_execution_time', 0); //300 seconds = 5 mi.12
 
 $dba->CreateDbTable(
 		'user_info', 

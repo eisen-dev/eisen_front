@@ -28,6 +28,14 @@ class DbAction {
         return $dbh;
     }
 
+    public function MachineList($user_id, $dbh) {
+
+    }
+
+    public function some_logging_function($log){
+        echo 'LOG : ' . $log . '<br />';
+    }
+
     public function CreateDbTable($table,$fields,$dbh)
     {
 
