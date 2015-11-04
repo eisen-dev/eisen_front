@@ -171,6 +171,7 @@ body {
 .menu-button {
   float: left;
   background-color: #eeeeee;
+  cursor: pointer;
 }
 .menu-button:hover {
   background-color: #e0e0e0;

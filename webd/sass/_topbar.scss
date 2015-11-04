@@ -37,6 +37,7 @@
 .menu-button{
 	float: left;
 	background-color: $md-grey-200;
+	cursor: pointer;
 	&:hover{
 		background-color: $md-grey-300;
 	}

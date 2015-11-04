@@ -23,6 +23,16 @@
 								<span>Agent01</span>
 							</div>
 						</div>
+						<div class="menu-popup">
+							<div class="popup-title">
+								<i class="fa fa-server fa-inline"></i>machine menu
+							</div>
+							<div class="popup-contents">
+								<div class="menu-list-items">
+									machine list and menu
+								</div>
+							</div>
+						</div>
 					</div>
                     <div class="menu-button menu-user menu-border">
                         <div class="menu-icon">
@@ -35,12 +45,24 @@
 								</span>
                             </div>
                         </div>
+
+						<div class="menu-popup">
+							<div class="popup-title">
+								<i class="fa fa-user fa-inline"></i>user menu
+							</div>
+							<div class="popup-contents">
+								<div class="menu-list-items">
+									<span>user menu</span>
+								</div>
+							</div>
+						</div>
                     </div>
+
                     <div class="menu-button menu-notifications menu-border">
-						<div class="menu-icon toggle-notifications">
+						<div class="menu-icon">
 							<i class="fa fa-bell-o"></i>
 						</div>
-						<div class="menu-popup notifi-tiggle-target">
+						<div class="menu-popup">
 							<div class="popup-title">
 								<i class="fa fa-bell-o fa-inline"></i>Notifications
 							</div>
