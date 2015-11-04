@@ -77,8 +77,14 @@ $dbh = $dba->Connect();
 	                            $stm->execute();
 	                            $data = $stm->fetchAll();
 	                            $cnt  = count($data); //in case you need to count all rows
-								foreach ($data as $i => $row)
-									print_r('<tr class="cell-which-triggers-popup"><td class=""><input type="checkbox" id="cbox-'.$i.'"><label for="cbox-'.$i.'"></label></td><td>'.$row['pack_category'].'</td><td>'.$row['pack_name'].'</td><td>'.$row['pack_version'].'</td><td></td></tr>');
+								foreach ($data as $i => $row){
+                                    $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
+                                    $table .= '<td class="pack_category">' . $row['pack_category'] . '</td>';
+                                    $table .= '<td class="pack_name">' . $row['pack_name'] . '</td>';
+                                    $table .= '<td class="pack_version">' . $row['pack_version'] . '</td>';
+                                    $table .= '<td class="summary"></td></tr>';
+                                    print_r($table);
+                                }
 								?>
                             </tbody>
                         </table>
@@ -92,19 +98,23 @@ $dbh = $dba->Connect();
     <script>
         $( document ).ready(function() {
             $(document).on("click", ".cell-which-triggers-popup", function(event){
-                var cell_value = $(event.target).text();
-                if (cell_value) {
-                    showPopup(cell_value)
+                var cell_value1 = $(event.target).closest('tr').find('.pack_category').text();
+                var cell_value2 = $(event.target).closest('tr').find('.pack_name').text();
+                var cell_value3 = $(event.target).closest('tr').find('.pack_version').text();
+                //console.log(cell_value);
+                if (cell_value1 && cell_value2 && cell_value3) {
+                    showPopup(cell_value1,cell_value2)
                 }
             });
-            function showPopup(your_variable){
+
+            function showPopup(cell_value1,cell_value2){
                 $("#popup").dialog({
                     width: 500,
                     height: 300,
                     open: function(){
-                        $(this).find("p").html("Install " + your_variable)
+                        $(this).find("p").html("<a href=includes/PackageAction.php?ip=" + cell_value1+"&port="+cell_value2+">install "+cell_value1+"</a>");
                     }
-            });
+                });
             }
         });
     </script>

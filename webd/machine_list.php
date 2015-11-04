@@ -116,7 +116,6 @@ $dbh = $dba->Connect();
 <script type="text/javascript" src="includes/jquery/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="includes/jquery/jquery-ui.min.js"></script>
 <script>
-    //TODO we need all the text in the row divided by some character.
     $( document ).ready(function() {
         $(document).on("click", ".cell-which-triggers-popup", function(event){
             var cell_value1 = $(event.target).closest('tr').find('.ipaddress').text();
