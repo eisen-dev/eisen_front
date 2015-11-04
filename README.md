@@ -1,6 +1,9 @@
 # bayes_website
 Website framework client interacting with the emira server application.
-  
+
+code style:
+4 space indent
+
 we are following this code style:  
 - PHP  
   - http://phpstyleguide.com/
