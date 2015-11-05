@@ -1,7 +1,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $title; ?></title>
-	<?php session_start();
+	<?php
 	require_once "includes/session.php";
 	$me = new Session();
 	$me->start_session();
