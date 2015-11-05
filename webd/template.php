@@ -19,7 +19,6 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 			</main>
 		</div>
 	</div>
-    <script src="includes/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+<?php require_once __DIR__ .'/parts/scripts.php'; ?>
 </body>
 </html>

@@ -26,7 +26,7 @@ require_once __DIR__ .'/parts/head.php';
 			</main>
 		</div>
 	</div>
-	<script type="text/javascript" src="js/script.js"></script>
+<?php require_once __DIR__ .'/parts/scripts.php'; ?>
 </body>
 
 </html>

@@ -98,10 +98,7 @@ catch (PDOException $e) {
             </div>
     </div>
 </div>
-<script type="text/javascript" src="includes/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/script.js"></script>
-<script type="text/javascript" src="includes/jquery/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="includes/jquery/jquery-ui.min.js"></script>
+<?php require_once __DIR__ .'/parts/scripts.php'; ?>
 <script>
     $( document ).ready(function() {
         $(document).on("click", ".cell-which-triggers-popup", function(event){

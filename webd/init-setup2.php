@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 //issetでpostを全部チェックした方がいい
 if(isset($_POST['submit'])){
 	$db_host = htmlspecialchars($_POST["db_host"]);
@@ -96,8 +96,7 @@ if(isset($_POST['submit'])){
 			</main>
 		</div>
 	</div>
-    <script src="includes/bootstrap-3.3.5-dist/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
+<?php require_once __DIR__ .'/parts/scripts.php'; ?>
 </body>
 
 </html>
