@@ -4,6 +4,7 @@ class DbAction {
     # connect to database
     public function Connect()
     {
+        //set static directory
         $dir = dirname(__FILE__);
         require_once $dir.'/../connect.php';
 
