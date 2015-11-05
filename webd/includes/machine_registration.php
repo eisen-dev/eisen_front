@@ -1,30 +1,20 @@
 <?php
-//isset��post��S���`�F�b�N������������
+require_once __DIR__ . '/DbAction.php';
+require_once __DIR__."/session.php";
+require_once __DIR__."/JsAction.php";
+
 if(isset($_POST['submit'])){
     $js_host = htmlspecialchars($_POST["js_host"]);
     $js_port = htmlspecialchars($_POST["js_port"]);
 }
-require_once "../connect.php";
+$me = new Session();
+$me->start_session();
+$me->is_session_started();
 
-function some_logging_function($log){
-    echo 'LOG : ' . $log . '<br />';
-}
-//�f�[�^�x�[�X�ɐڑ����邽�߂ɕK�v�ȏ��(PDO)
-$dsn = "mysql:dbname=$db_name;host=$db_host;charset=utf8";
+$dba = new DbAction();
+$dbh = $dba->Connect();
+$user_id = $me->get_user_id();
 
-//�f�[�^�x�[�X�ڑ�
-try {
-    $dbh = new PDO($dsn, $db_user, $db_pass,
-        array(PDO::ATTR_EMULATE_PREPARES => false,
-            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-} catch (PDOException $e) {
-    exit('�f�[�^�x�[�X�ڑ��Ɏ��s���܂���'.$e->getMessage());
-}
-print('jason rpc address= '.$js_host.'<br>json rpc port= '.$js_port);
-$machine_name='test';
-$os='Gentoo';
-$status_id=1;
-$user_id='test';
 try {
     $query = $dbh->prepare('INSERT INTO machine_information (machine_name, ipaddress, port, os, status_id, user_id) VALUES (:machine_name, :ipaddress, :port, :os, :status_id, :user_id);');
     $query-> bindParam(':machine_name', $machine_name, PDO::PARAM_STR);
