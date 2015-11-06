@@ -24,7 +24,7 @@ require_once __DIR__ .'/parts/head.php';
 					<a href="dbupdate-install.php">update database</a>
 					</p>
 					<p>
-					<a href="list.php">show list</a>
+					<a href="package_list.php">show list</a>
 					</p>
                     <!-- TODO グラフを追加 -->
                 </div>

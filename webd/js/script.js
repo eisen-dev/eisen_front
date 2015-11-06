@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).ready(function () {
 	$('.menu-button').click(function () {
 		var popup = $(this).children('.menu-popup');
 		if($(popup).css("display")=="none"){
