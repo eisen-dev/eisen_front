@@ -32,7 +32,3 @@ $test=1;
 $data=$server->get_installed_packages();
 
 $dba->UpdateInstalledPackageList($data,$dbh);
-
-//$data=$server->get_all_packages();
-//print_r($data);
-//phpinfo();
