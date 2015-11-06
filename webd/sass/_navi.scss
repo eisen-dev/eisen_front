@@ -1,15 +1,14 @@
 @charset "UTF-8";
 
 .navigation{
-	padding: 96px 0 0 0;
+	padding: 48px 0 0 0;
 	position: fixed;
 	top: 0;
-	left: 0;
+	//モバイルでは左に隠す
+	left: -200px;
 	width: 200px;
 	background-color: $md-grey-800;
 	height: 100vh;
-	/*モバイル初期状態では非表示*/
-	display: none;
 }
 
 .navigation-menu{
@@ -52,9 +51,7 @@
 
 @media screen and (min-width: 480px) {
 	.navigation{
-		padding: 48px 0 0 0;
-		/*タブレット初期状態では表示*/
-		display: block;
+		left: 0px;
 	}
 }
 
