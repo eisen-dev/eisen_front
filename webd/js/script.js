@@ -33,15 +33,15 @@ $(function () {
 	//ウィンドウ幅が切り替わった際のナビゲーション位置リセット
 	$(window).resize(function () {
 		var navw = $(".navigation").width();
-		var w = $(window).Width();
+		var w = $(window).width();
 		//innerwidthもある
 		var mobile = 480;
 		var desktop = 768;
 		var navw = 200;
-		if (w <= mobile) {
+		if (w < mobile) {
 			$('.navigation').css("left", "-" + navw + "px");
 		}
-		if (w >= mobile) {
+		if (w > mobile) {
 			$('.navigation').css("left","0px");
 		}
 	});
