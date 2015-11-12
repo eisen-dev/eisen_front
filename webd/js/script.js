@@ -45,4 +45,25 @@ $(function () {
 			$('.navigation').css("left","0px");
 		}
 	});
+	//モーダルウィンドウ関連
+	//リサイズ時のモーダル位置を設定
+	$(window).resize(function () {
+		var modalw = $(".modal-wrapper").outerWidth();
+		var areaw = $(".modal").width();
+		var modalcenter = (areaw / 2) - (modalw / 2);
+		$(".modal-wrapper").css("left",modalcenter + "px");
+	});
+	//モーダルの開閉
+	$('[data-modal="open"]').click(function () {
+		$('.modal').fadeIn('0', 'easeOutCubic');
+		//モーダルの初期位置を設定
+		var modalw = $(".modal-wrapper").outerWidth();
+		var areaw = $(".modal").width();
+		var modalcenter = (areaw / 2) - (modalw / 2);
+		$(".modal-wrapper").css("left",modalcenter + "px");
+	});
+
+	$('[data-modal="close"]').click(function () {
+		$('.modal').fadeOut('0', 'easeOutCubic');
+	});
 });

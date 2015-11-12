@@ -24,6 +24,7 @@ body{
 	font-size: 1em;
 	/*コンテンツエリアの背景色*/
 	background-color: $md-grey-50;
+	z-index: 1;
 }
 
 .contentwrapper-nonav{
@@ -35,12 +36,12 @@ body{
 .contents{
 	max-width: 1200px;
 	margin: 0 auto;
+	z-index: 0;
 }
 
 .section{
-	padding: 16px 8px;
+	padding: 16px 16px;
 }
-
 
 .inner-login{
 	padding: 0 16px;

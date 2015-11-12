@@ -89,6 +89,7 @@ body {
   font-size: 1em;
   /*コンテンツエリアの背景色*/
   background-color: #fafafa;
+  z-index: 1;
 }
 
 .contentwrapper-nonav {
@@ -100,10 +101,11 @@ body {
 .contents {
   max-width: 1200px;
   margin: 0 auto;
+  z-index: 0;
 }
 
 .section {
-  padding: 16px 8px;
+  padding: 16px 16px;
 }
 
 .inner-login {
@@ -143,6 +145,7 @@ body {
   width: 100%;
   background-color: #eeeeee;
   border-bottom: 1px solid #bdbdbd;
+  z-index: 3;
 }
 
 .topbar-title {
@@ -313,6 +316,7 @@ body {
   width: 200px;
   background-color: #424242;
   height: 100vh;
+  z-index: 2;
 }
 
 .navigation-menu ul {
@@ -525,6 +529,68 @@ input[type=text], input[type=password] {
   font-size: 1em;
   padding: 0.2em;
   border-bottom: none;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  z-index: 999;
+  overflow: scroll;
+  overflow: auto;
+}
+
+.modal-overlay {
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-height: 100vh;
+  width: 100%;
+  background-color: rgba(0, 17, 26, 0.5);
+}
+
+.modal-wrapper {
+  z-index: 2;
+  position: absolute;
+  width: auto;
+  max-width: 100%;
+  padding: 60px 12px 12px 12px;
+}
+
+.modal-window {
+  position: relative;
+  max-width: 500px;
+  background-color: #fafafa;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+}
+
+.modal-header {
+  padding: 18px 12px 18px 12px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.modal-title {
+  font-size: 18px;
+}
+
+.modal-close {
+  cursor: pointer;
+  position: absolute;
+  font-size: 24px;
+  padding: 4px 8px 8px 8px;
+  margin: 0;
+  top: 0;
+  right: 0;
+  color: #9e9e9e;
+}
+
+.modal-contents {
+  padding: 12px;
 }
 
 /*ページスタイル*/

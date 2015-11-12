@@ -1,0 +1,81 @@
+@charset "UTF-8";
+
+.modal{
+	display: none;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-height: 100vh;
+	width: 100%;
+	z-index: 999;
+	//modalが縦に長い場合スクロール
+	overflow: scroll;
+	overflow: auto;
+}
+
+.modal-overlay{
+	z-index: 1;
+	position: fixed;
+	top: 0;
+	left: 0;
+	min-height: 100vh;
+	width: 100%;
+	background-color: hsla(200, 100%, 5%, 0.5);
+}
+
+.modal-wrapper{
+	z-index: 2;
+	//位置はjsでセンタリング
+	position: absolute;
+	width: auto;
+	max-width: 100%;
+	padding: 60px 12px 12px 12px;
+}
+
+.modal-window{
+	position: relative;
+	//モーダルの最大幅
+	max-width: 500px;
+	background-color: $md-grey-50;
+	border-radius: 6px;
+	border: 1px solid $md-grey-300;
+}
+
+.modal-header{
+	padding: 18px 12px 18px 12px;
+	border-bottom: 1px solid $md-grey-300;
+
+}
+.modal-title{
+	font-size: 18px;
+}
+
+.modal-close{
+	cursor: pointer;
+	position: absolute;
+	font-size: 24px;
+	padding: 4px 8px 8px 8px;
+	margin: 0;
+	top: 0;
+	right: 0;
+	color: $md-grey-500;
+}
+
+.modal-contents{
+	padding: 12px;
+}
+
+@media screen and (min-width: 480px) {
+
+}
+
+
+
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (min-width: 1200px) {
+
+}

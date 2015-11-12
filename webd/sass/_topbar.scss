@@ -8,6 +8,8 @@
 	width: 100%;
 	background-color: $md-grey-200;
 	border-bottom: 1px solid $md-grey-400;
+	//一番手前
+	z-index: 3;
 }
 
 .topbar-title{

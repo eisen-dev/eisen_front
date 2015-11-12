@@ -9,6 +9,8 @@
 	width: 200px;
 	background-color: $md-grey-800;
 	height: 100vh;
+	//topbarの下
+	z-index: 2;
 }
 
 .navigation-menu{
