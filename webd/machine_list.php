@@ -59,17 +59,16 @@ $dbh = $dba->Connect();
                                     <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
                                 </div>
                             </th>
-                            <th>マシン名</th>
                             <th>IPアドレス</th>
                             <th>ポート</th>
-                            <th>OS</th>
+                            <th>module</th>
                             <th>ステータス</th>
                         </tr>
                         </thead>
                         <tbody>
                         <?php
                         $user_id = $me->get_user_id();
-                        $stm = $dbh->prepare("select * from machine_information WHERE user_id=:user_id;");
+                        $stm = $dbh->prepare("select * from machine_info WHERE user_id=:user_id;");
                         $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
                         $stm->execute();
                         $data = $stm->fetchAll();
@@ -77,10 +76,9 @@ $dbh = $dba->Connect();
                         //var_dump($data);
                         foreach ($data as $i => $row) {
                             $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
-                            $table .= '<td class="machine_name">' . $row['machine_name'] . '</td>';
                             $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
                             $table .= '<td class="port">' . $row['port'] . '</td>';
-                            $table .= '<td class="os">' . $row['os'] . '</td>';
+                            $table .= '<td class="module">' . $row['module'] . '</td>';
                             $table .= '<td class="status_id">' . $row['status_id'] . '</td></tr>';
                             print_r($table);
                         }
@@ -89,13 +87,13 @@ $dbh = $dba->Connect();
                     </table>
             <div class="setting">
                 <form action="includes/machine_registration.php" method="post">
-                    <h2 class="title">json RPC設定</h2>
+                    <h2 class="title">Agent設定</h2>
                     <div class="setting-container">
                         <div class="setting-item-left">
                             <span>ホスト名</span>
                         </div>
                         <div class="setting-item-right">
-                            <input type="text" name="js_host">
+                            <input type="text" name="rest_host">
                         </div>
                     </div>
                     <div class="setting-container">
@@ -103,7 +101,23 @@ $dbh = $dba->Connect();
                             <span>ポート番号</span>
                         </div>
                         <div class="setting-item-right">
-                            <input type="text" name="js_port">
+                            <input type="text" name="rest_port">
+                        </div>
+                    </div>
+                    <div class="setting-container">
+                        <div class="setting-item-left">
+                            <span>ユーザー名</span>
+                        </div>
+                        <div class="setting-item-right">
+                            <input type="text" name="rest_user">
+                        </div>
+                    </div>
+                    <div class="setting-container">
+                        <div class="setting-item-left">
+                            <span>パスワード</span>
+                        </div>
+                        <div class="setting-item-right">
+                            <input type="text" name="rest_pass">
                         </div>
                     </div>
                     <input type="submit" name="submit" value="設定して次に進む" class="button">

@@ -1,20 +1,15 @@
 <?php
 require_once __DIR__ .'/../connect.php';
+require_once __DIR__ . '/DbAction.php';
+
 $user_name = trim($_POST['user_name']);
 $mail_address = trim($_POST['mail_address']);
 $password_1 = trim(sha1($_POST['password_1']));
 $password_2 = trim(sha1($_POST['password_2']));
 print($user_name.'<br>');
-//データベースに接続するために必要な情報(PDO)
-$dsn = "mysql:dbname=$db_name;host=$db_host;charset=utf8";
-//データベース接続
-try {
-	$dbh = new PDO($dsn, $db_user, $db_pass,
-			array(PDO::ATTR_EMULATE_PREPARES => false,
-					PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-} catch (PDOException $e) {
-	exit('データベース接続に失敗しました'.$e->getMessage());
-}
+
+$dba = new DbAction();
+$dbh = $dba->Connect();
 
 function isValidEmail($value)
 {
@@ -26,6 +21,7 @@ function isValidEmail($value)
 
 if (isValidEmail($mail_address)){
 	if ($password_1 == $password_2){
+        #TODO check password length
 		$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		$query = $dbh->prepare("select * from user_info where user_id = ? ;");

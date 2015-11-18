@@ -1,12 +1,23 @@
 <?php
 
+
 class DbAction {
     # connect to database
+    /**
+     * @return PDO
+     */
     public function Connect()
     {
         //set static directory
-        $dir = dirname(__FILE__);
-        require_once $dir.'/../connect.php';
+        #TODO use ini config file instead of php.
+        include dirname(__FILE__).'/../connect.php';
+
+        if (!empty($db_name)) {
+            var_dump($db_name);
+        }
+        if (!empty($db_host)) {
+            var_dump($db_host);
+        }
 
         if (!empty($db_name)) {
             if (!empty($db_host)) {
@@ -31,7 +42,7 @@ class DbAction {
     }
 
     public function MachineList($user_id, $dbh) {
-        $stm = $dbh->prepare("select * from machine_information WHERE user_id=:user_id;");
+        $stm = $dbh->prepare("select * from machine_info WHERE user_id=:user_id;");
         $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
@@ -39,11 +50,13 @@ class DbAction {
         //var_dump($data);
         $myMachine = array();
         foreach ($data as $i => $row) {
-            $myMachine += array($row['machine_name'],
-            $row['ipaddress'],
-            $row['port'],
-            $row['os'],
-            $row['status_id']);
+            $myMachine += array($row['module'],
+                $row['ipaddress'],
+                $row['port'],
+                $row['username'],
+                $row['password'],
+                $row['status_id'],
+                $row['user_id']);
             }
         return $myMachine;
     }
