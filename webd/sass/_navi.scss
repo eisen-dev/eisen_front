@@ -11,6 +11,12 @@
 	height: 100vh;
 	//topbarの下
 	z-index: 2;
+		overflow: scroll;
+	overflow: auto;
+}
+
+.navigation-container{
+
 }
 
 .navigation-menu{

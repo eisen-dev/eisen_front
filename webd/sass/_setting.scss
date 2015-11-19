@@ -1,0 +1,49 @@
+@charset "UTF-8";
+.settings{
+	width: 100%;
+	height: auto;
+	display: flex;
+	flex-direction: column;
+}
+
+.setting-row{
+	flex-grow: 1;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	padding: 24px 0;
+	border-top: 1px solid $md-grey-300;
+}
+
+.setting-left{
+
+	flex-grow: 1;
+	flex-basis: 100%;
+}
+
+.setting-right{
+
+	flex-grow: 1;
+}
+
+
+@media screen and (min-width: 480px) {
+
+
+}
+
+@media screen and (min-width: 768px) {
+	.setting-left{
+		flex-grow:1;
+		max-width: 250px;
+	}
+
+	.setting-right{
+		flex-grow: 2;
+
+	}
+}
+
+@media screen and (min-width: 1200px) {
+
+}

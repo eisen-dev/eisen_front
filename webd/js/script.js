@@ -62,7 +62,6 @@ $(function () {
 		var modalcenter = (areaw / 2) - (modalw / 2);
 		$(".modal-wrapper").css("left",modalcenter + "px");
 	});
-
 	$('[data-modal="close"]').click(function () {
 		$('.modal').fadeOut('0', 'easeOutCubic');
 	});
