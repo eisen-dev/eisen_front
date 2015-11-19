@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="60" height="60" viewBox="0 0 60 60">
+  <defs>
+    <style>
+      .cls-1 {
+        stroke: #757575;
+        stroke-width: 5px;
+        fill: none;
+      }
+
+      .cls-2 {
+        fill: #2196f3;
+      }
+    </style>
+  </defs>
+  <g>
+    <circle cx="30" cy="30" r="25" class="cls-1"/>
+    <circle cx="30" cy="30" r="10" class="cls-2"/>
+  </g>
+</svg>

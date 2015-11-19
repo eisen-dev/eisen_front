@@ -33,70 +33,39 @@
 	}
 }
 
-.cbox__wrapper{
-
-}
-
-.f_w{
-	display: inline;
-}
-
-
 /*inputスタイル*/
-input[type=submit]{
-	margin: 0;
-}
-
-input[type=checkbox] {
+input[type="checkbox"]{
 	display: none;
-	& + label:before{
-		font-family: FontAwesome;
+	+ label .select{
 		display: inline-block;
 		vertical-align: middle;
-		content: "\f096";
-		width: 18px;
-		font-size: 18px;
-		color: $md-grey-400;
+		height: 1.3em;
+		width: 1.3em;
+		background-image: url(../images/form_check_a.svg);
+		background-size:100%;
 	}
-	&:checked + label:before{
-		font-family: FontAwesome;
-		display: inline-block;
-		vertical-align: middle;
-		content:"\f046";
-		width: 18px;
-		font-size: 18px;
-		color: $md-blue-400;
+	&:checked{
+		+ label .select{
+		background-image: url(../images/form_check_b.svg);
+		}
 	}
 }
 
-input[type=radio] {
+input[type="radio"]{
 	display: none;
-	& + label{
-		font-size: 1em;
-	}
-	& + label:before{
-		font-family: FontAwesome;
+	+ label .select{
 		display: inline-block;
 		vertical-align: middle;
-		content: "\f10c";
-		width: 18px;
-		font-size: 18px;
-		color: $md-grey-400;
+		height: 1.3em;
+		width: 1.3em;
+		background-image: url(../images/form_radio_a.svg);
+		background-size:100%;
 	}
-	&:checked + label:before{
-		font-family: FontAwesome;
-		display: inline-block;
-		vertical-align: middle;
-		content:"\f192";
-		width: 18px;
-		font-size: 18px;
-		color: $md-blue-400;
+	&:checked{
+		+ label .select{
+		background-image: url(../images/form_radio_b.svg);
+		}
 	}
-}
-
-input[type=text],input[type=password]{
-	border: 1px solid $md-grey-400;
-	padding: 4px;
 }
 
 /*実験的*/
