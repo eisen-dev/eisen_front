@@ -85,6 +85,7 @@ $dbh = $dba->Connect();
                         ?>
                         </tbody>
                     </table>
+            <!--TODO Use modal for this -->
             <div class="setting">
                 <form action="includes/machine_registration.php" method="post">
                     <h2 class="title">Agent設定</h2>

@@ -19,11 +19,12 @@ $username=$machine[3];
 $password=$machine[4];
 $rest = new restclient();
 //$rest->restconnect($ipaddress,$port,$username,$password);
-$hosts = $rest->host_list($ipaddress,$port,$username,$password);
+$hosts = $rest->tasks_list($ipaddress,$port,$username,$password);
 
-
-foreach ($hosts as $i) {
-    echo "<p>$i</p>";
+var_dump($hosts);
+foreach ($hosts as $i=>$row) {
+    var_dump($i);
+    var_dump($row->command);
 }
 //$response = \Httpful\Request::post($uri2)                  // Build a PUT request...
 //->sendsJson()                               // tell it we're sending (Content-Type) JSON...

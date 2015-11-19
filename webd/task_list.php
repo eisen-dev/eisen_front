@@ -40,7 +40,7 @@ $dbh = $dba->Connect();
     <div class="contentswrapper">
         <main class="contents menu-set">
             <div class="section">
-                <h2 class="title">ホストリスト</h2>
+                <h2 class="title">タスクリスト</h2>
                 <div class="list-tools clearfix">
                     <input type="submit" value="適用" class="button button--form">
                 </div>
@@ -59,7 +59,10 @@ $dbh = $dba->Connect();
                             <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
                         </div>
                     </th>
-                    <th>IPアドレス</th>
+                    <th>ID</th>
+                    <th>ホスト</th>
+                    <th>モジュール</th>
+                    <th>コマンド</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -75,10 +78,14 @@ $dbh = $dba->Connect();
                 $password=$machine[4];
                 $rest = new restclient();
                 //$rest->restconnect($ipaddress,$port,$username,$password);
-                $hosts = $rest->host_list($ipaddress,$port,$username,$password);
+                $hosts = $rest->tasks_list($ipaddress,$port,$username,$password);
                 foreach ($hosts as $i=>$row) {
                     $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
-                    $table .= '<td class="ipaddress">' . $row->host . '</td></tr>';
+                    $table .= '<td class="task_id">' . ($i+1) . '</td>';
+                    $table .= '<td class="host">' . $row->hosts . '</td>';
+                    $table .= '<td class="module">' . $row->module . '</td>';
+                    $table .= '<td class="command">' . $row->command . '</td></tr>';
+
                     print_r($table);
                 }
                 ?>
@@ -112,20 +119,21 @@ $dbh = $dba->Connect();
 <script>
     $( document ).ready(function() {
         $(document).on("click", ".cell-which-triggers-popup", function(event){
-            var cell_value1 = $(event.target).closest('tr').find('.ipaddress').text();
-            //var cell_value2 = $(event.target).closest('tr').find('.port').text();
+            var cell_value1 = $(event.target).closest('tr').find('.task_id').text();
+            var cell_value2 = $(event.target).closest('tr').find('.module').text();
+            var cell_value3 = $(event.target).closest('tr').find('.command').text();
             //console.log(cell_value);
-            if (cell_value1) {
-                showPopup(cell_value1)
+            if (cell_value1&&cell_value2) {
+                showPopup(cell_value1,cell_value2)
             }
         });
 
-        function showPopup(cell_value1){
+        function showPopup(cell_value1,cell_value2){
             $("#popup").dialog({
                 width: 500,
                 height: 300,
                 open: function(){
-                    $(this).find("p").html("<a href=includes/Ping.php?ip=" + cell_value1+">Ping "+cell_value1+"</a>");
+                    $(this).find("p").html("<a href=includes/TasksAction.php?id=" + cell_value1+">"+cell_value2+":"+cell_value1+"</a>");
                 }
             });
         }
