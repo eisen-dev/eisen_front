@@ -1,6 +1,7 @@
 <?php echo '<p>Hello World</p>';
 require_once __DIR__ . '/includes/DbAction.php';
 require_once __DIR__."/includes/session.php";
+#TODO change with RestAction
 require_once __DIR__."/includes/JsAction.php";
 
 $me = new Session();

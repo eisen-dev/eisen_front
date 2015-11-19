@@ -7,3 +7,23 @@
  */
 require_once __DIR__ . '/DbAction.php';
 require_once __DIR__."/session.php";
+require_once __DIR__."/restclient.php";
+
+$me = new Session();
+$me->start_session();
+$me->is_session_started();
+
+$dba = new DbAction();
+$dbh = $dba->Connect();
+$user_id = $me->get_user_id();
+
+$machine = $dba->MachineList($user_id,$dbh);
+$module=$machine[0];
+$ipaddress=$machine[1];
+$port=$machine[2];
+$username=$machine[3];
+$password=$machine[4];
+
+$rest = new restclient();
+//$rest->restconnect($ipaddress,$port,$username,$password);
+$rest->host_list($ipaddress,$port,$username,$password);

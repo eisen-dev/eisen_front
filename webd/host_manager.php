@@ -59,23 +59,27 @@ $dbh = $dba->Connect();
                             <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
                         </div>
                     </th>
-                    <th>マシン名</th>
                     <th>IPアドレス</th>
-                    <th>ポート</th>
-                    <th>OS</th>
-                    <th>ステータス</th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
+                $dba = new DbAction();
+                $dbh = $dba->Connect();
                 $user_id = $me->get_user_id();
-                $stm = $dbh->prepare("select * from pack_management_system WHERE user_id=:user_id;");
-                $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
-                $stm->execute();
-                $data = $stm->fetchAll();
-                $cnt  = count($data); //in case you need to count all rows
-                //var_dump($data);
-                foreach ($data as $i => $row) {
+                $machine = $dba->MachineList($user_id,$dbh);
+                $module=$machine[0];
+                $ipaddress=$machine[1];
+                $port=$machine[2];
+                $username=$machine[3];
+                $password=$machine[4];
+                $rest = new restclient();
+                //$rest->restconnect($ipaddress,$port,$username,$password);
+                $hosts = $rest->host_list($ipaddress,$port,$username,$password);
+                foreach ($hosts as $i) {
+                    echo '<tr><td class="ipaddress">' . $i . '</td></tr>';
+                }
+/*                foreach ($data as $i => $row) {
                     $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
                     $table .= '<td class="machine_name">' . $row['machine_name'] . '</td>';
                     $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
@@ -83,7 +87,7 @@ $dbh = $dba->Connect();
                     $table .= '<td class="os">' . $row['os'] . '</td>';
                     $table .= '<td class="status_id">' . $row['status_id'] . '</td></tr>';
                     print_r($table);
-                }
+                }*/
                 ?>
                 </tbody>
             </table>

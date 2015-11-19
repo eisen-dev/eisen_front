@@ -3,6 +3,7 @@
 	<title><?php echo $title; ?></title>
 	<?php
 	require_once "includes/session.php";
+	require_once "includes/restclient.php";
 	$me = new Session();
 	$me->start_session();
 	$me->is_session_started();
