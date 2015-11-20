@@ -41,61 +41,63 @@ if(isset($_POST['submit'])){
 	<div class="wrapper">
 		<div class="contentwrapper-nonav">
 			<main class="contents">
-					<h1 class="title-c">初期設定</h1>
-					<div class="setup-step">
-						<div class="setup-step-container">
-							<div class="setup-step-item">
-								<div class="step-disp"><span class="step-disp-text">1</span></div>
-								<span class="setup-desc">接続設定</span>
-							</div>
-							<div class="setup-step-item">
-								<div class="step-disp setup-disp-current"><span class="step-disp-text">2</span></div>
-								<span class="setup-desc">ユーザー設定</span>
-							</div>
-							<div class="setup-step-item">
-								<div class="step-disp"><span class="step-disp-text">3</span></div>
-								<span class="setup-desc">完了</span>
-							</div>
+				<h1 class="title-c">初期設定</h1>
+				<div class="setup-step">
+					<div class="setup-step-container">
+						<div class="setup-step-item">
+							<div class="step-disp"><span class="step-disp-text">1</span></div>
+							<span class="setup-desc">接続設定</span>
+						</div>
+						<div class="setup-step-item">
+							<div class="step-disp setup-disp-current"><span class="step-disp-text">2</span></div>
+							<span class="setup-desc">ユーザー設定</span>
+						</div>
+						<div class="setup-step-item">
+							<div class="step-disp"><span class="step-disp-text">3</span></div>
+							<span class="setup-desc">完了</span>
 						</div>
 					</div>
-					<div class="setting">
-						<form action="includes/user_registration.php" method="post">
-							<h2 class="title">ユーザー設定</h2>
-							<div class="setting-container">
-								<div class="setting-item-left">
+				</div>
+				<div class="card">
+					<form action="includes/user_registration.php" method="post">
+						<h2 class="title">ユーザー設定</h2>
+						<div class="compact-form">
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
 									<span>ユーザー名</span>
 								</div>
-								<div class="setting-item-right">
+								<div class="compact-form-item-right">
 									<input type="text" name="user_name">
 								</div>
 							</div>
-							<div class="setting-container">
-								<div class="setting-item-left">
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
 									<span>メールアドレス</span>
 								</div>
-								<div class="setting-item-right">
+								<div class="compact-form-item-right">
 									<input type="text" name="mail_address">
 								</div>
 							</div>
-							<div class="setting-container">
-								<div class="setting-item-left">
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
 									<span>パスワード</span>
 								</div>
-								<div class="setting-item-right">
+								<div class="compact-form-item-right">
 									<input type="password" name="password_1">
 								</div>
 							</div>
-							<div class="setting-container">
-								<div class="setting-item-left">
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
 									<span>パスワード(確認)</span>
 								</div>
-								<div class="setting-item-right">
+								<div class="compact-form-item-right">
 									<input type="password" name="password_2">
 								</div>
 							</div>
-							<input type="submit" name="submit" value="設定して次に進む" class="button">
-						</form>
-					</div>
+						</div>
+						<input type="submit" name="submit" value="設定して次に進む" class="button">
+					</form>
+				</div>
 			</main>
 		</div>
 	</div>

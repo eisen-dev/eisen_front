@@ -8,21 +8,27 @@
 	margin-right: auto;
 	font-weight: normal;
 }
-.setting{
-	width: 480px;
+
+.card{
+	max-width: 480px;
 	margin: 0 auto 24px auto;
 	padding: 24px 48px;
 	border: 1px solid $md-grey-300;
 	background-color: $md-grey-50;
-	.setting-container{
+	.button{
+		margin-top: 16px;
+	}
+}
+.compact-form{
+	.compact-form-row{
 		display: flex;
 		flex-direction: row;
 		padding: 16px 0;
-		.setting-item-left{
+		.compact-form-item-left{
 			flex-basis: 140px;
 			border-right: 1px solid $md-grey-300;
 		}
-		.setting-item-right{
+		.compact-form-item-right{
 			flex-grow: 1;
 			padding-left: 24px;
 			input{
@@ -30,12 +36,7 @@
 			}
 		}
 	}
-	.button{
-		margin-top: 16px;
-	}
 }
-
-
 .setup-step{
 	margin: 16px auto;
 	font-size: 0.9em;

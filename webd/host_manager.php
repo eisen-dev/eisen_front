@@ -86,25 +86,27 @@ $dbh = $dba->Connect();
                 ?>
                 </tbody>
             </table>
-            <div class="setting">
+            <div class="card">
                 <form action="includes/hosts_registration.php" method="post">
                     <h2 class="title">ホスト設定</h2>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
-                            <span>ホスト名</span>
-                        </div>
-                        <div class="setting-item-right">
-                            <input type="text" name="host">
-                        </div>
-                    </div>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
-                            <span>グループリスト</span>
-                        </div>
-                        <div class="setting-item-right">
-                            <input type="text" name="groups">
-                        </div>
-                    </div>
+					<div class="compact-form">
+             	       <div class="compact-form-row">
+             	           <div class="compact-form-item-left">
+             	               <span>ホスト名</span>
+             	           </div>
+             	           <div class="compact-form-item-right">
+             	               <input type="text" name="host">
+             	           </div>
+             	       </div>
+             	       <div class="compact-form-row">
+             	           <div class="compact-form-item-left">
+             	               <span>グループリスト</span>
+             	           </div>
+             	           <div class="compact-form-item-right">
+             	               <input type="text" name="groups">
+             	           </div>
+             	       </div>
+					</div>
                     <input type="submit" name="submit" value="設定して次に進む" class="button">
                 </form>
             </div>

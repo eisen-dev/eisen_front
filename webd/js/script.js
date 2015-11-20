@@ -55,7 +55,9 @@ $(function () {
 	});
 	//モーダルの開閉
 	$('[data-modal="open"]').click(function () {
-		$('.modal').fadeIn('0', 'easeOutCubic');
+		//開きたいモーダルのID
+		var target = '#' + $(this).attr("data-modal-target");
+		$(target).fadeIn('0', 'easeOutCubic');
 		//モーダルの初期位置を設定
 		var modalw = $(".modal-wrapper").outerWidth();
 		var areaw = $(".modal").width();

@@ -46,56 +46,57 @@ catch (PDOException $e) {
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
     <div class="contentswrapper">
         <main class="contents menu-set">
-            <div class="setting">
+            <div class="card">
                 <form action="includes/account.php" method="post">
                     <h2 class="title">アカウント設定</h2>
                     <div class="section">
                     <?php
                     $user_id=$_SESSION['login_user'];
-                    print '<div class="setting-container"><div class="setting-item-left"><span>ユーザー名:</span></div><div class="setting-item-right"><span>'.$user_id.'</span></div>';
+                    print '<div class="compact-form-row"><div class="compact-form-item-left"><span>ユーザー名:</span></div><div class="compact-form-item-right"><span>'.$user_id.'</span></div>';
                     $stm = $dbh->prepare("select * from user_info WHERE user_id = :user_id ;");
                     $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
                     $stm->execute();
                     $data = $stm->fetchAll();
                     $cnt  = count($data); //in case you need to count all rows
                     foreach ($data as $i => $row)
-                        print_r('</div><div class="setting-container"><div class="setting-item-left"><span>メール:</span></div><div class="setting-item-right"><span>'.$row['mail_address'].'</span></div></div>');
+                        print_r('</div><div class="compact-form-row"><div class="compact-form-item-left"><span>メール:</span></div><div class="compact-form-item-right"><span>'.$row['mail_address'].'</span></div></div>');
                     ?>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
+                    <div class="compact-form-row">
+                        <div class="compact-form-item-left">
                             <span>先パスワード</span>
                         </div>
-                        <div class="setting-item-right">
+                        <div class="compact-form-item-right">
                             <input type="password" name="old_pass" required='required'>
                         </div>
                     </div>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
+                    <div class="compact-form-row">
+                        <div class="compact-form-item-left">
                             <span>メール[任意]</span>
                         </div>
-                        <div class="setting-item-right">
+                        <div class="compact-form-item-right">
                             <input type="text" name="mail">
                         </div>
                     </div>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
+                    <div class="compact-form-row">
+                        <div class="compact-form-item-left">
                             <span>新パスワード[任意]</span>
                         </div>
-                        <div class="setting-item-right">
+                        <div class="compact-form-item-right">
                             <input type="password" name="new_pass">
                         </div>
                     </div>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
+                    <div class="compact-form-row">
+                        <div class="compact-form-item-left">
                             <span>パスワード確認[任意]</span>
                         </div>
-                        <div class="setting-item-right">
+                        <div class="compact-form-item-right">
                             <input type="password" name="confirm_pass">
                         </div>
                     </div>
                     <input type="submit" name="submit" value="設定して" class="button">
                 </form>
             </div>
+		</main>
     </div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>

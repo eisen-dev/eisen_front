@@ -91,28 +91,31 @@ $dbh = $dba->Connect();
                 ?>
                 </tbody>
             </table>
-            <div class="setting">
+            <div class="card">
                 <form action="includes/machine_registration.php" method="post">
                     <h2 class="title">ホスト設定</h2>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
-                            <span>ホスト名</span>
-                        </div>
-                        <div class="setting-item-right">
-                            <input type="text" name="js_host">
-                        </div>
-                    </div>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
-                            <span>ポート番号</span>
-                        </div>
-                        <div class="setting-item-right">
-                            <input type="text" name="js_port">
-                        </div>
-                    </div>
+					<div class="compact-form">
+                 	   <div class="compact-form-row">
+                 	       <div class="compact-form-item-left">
+                 	           <span>ホスト名</span>
+                 	       </div>
+                 	       <div class="compact-form-item-right">
+                 	           <input type="text" name="js_host">
+                 	       </div>
+                 	   </div>
+                 	   <div class="compact-form-row">
+                 	       <div class="compact-form-item-left">
+                 	           <span>ポート番号</span>
+                 	       </div>
+                 	       <div class="compact-form-item-right">
+                 	           <input type="text" name="js_port">
+                 	       </div>
+                 	   </div>
+					</div>
                     <input type="submit" name="submit" value="設定して次に進む" class="button">
                 </form>
             </div>
+		</main>
     </div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>

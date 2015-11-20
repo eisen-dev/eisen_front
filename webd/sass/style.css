@@ -317,6 +317,8 @@ body {
   background-color: #424242;
   height: 100vh;
   z-index: 2;
+  overflow: scroll;
+  overflow: auto;
 }
 
 .navigation-menu ul {
@@ -453,65 +455,35 @@ input[type="submit"] {
   height: 100%;
 }
 
-.f_w {
-  display: inline;
-}
-
 /*inputスタイル*/
-input[type=submit] {
-  margin: 0;
-}
-
-input[type=checkbox] {
+input[type="checkbox"] {
   display: none;
 }
-input[type=checkbox] + label:before {
-  font-family: FontAwesome;
+input[type="checkbox"] + label .select {
   display: inline-block;
   vertical-align: middle;
-  content: "\f096";
-  width: 18px;
-  font-size: 18px;
-  color: #bdbdbd;
+  height: 1.3em;
+  width: 1.3em;
+  background-image: url(../images/form_check_a.svg);
+  background-size: 100%;
 }
-input[type=checkbox]:checked + label:before {
-  font-family: FontAwesome;
-  display: inline-block;
-  vertical-align: middle;
-  content: "\f046";
-  width: 18px;
-  font-size: 18px;
-  color: #42a5f5;
+input[type="checkbox"]:checked + label .select {
+  background-image: url(../images/form_check_b.svg);
 }
 
-input[type=radio] {
+input[type="radio"] {
   display: none;
 }
-input[type=radio] + label {
-  font-size: 1em;
-}
-input[type=radio] + label:before {
-  font-family: FontAwesome;
+input[type="radio"] + label .select {
   display: inline-block;
   vertical-align: middle;
-  content: "\f10c";
-  width: 18px;
-  font-size: 18px;
-  color: #bdbdbd;
+  height: 1.3em;
+  width: 1.3em;
+  background-image: url(../images/form_radio_a.svg);
+  background-size: 100%;
 }
-input[type=radio]:checked + label:before {
-  font-family: FontAwesome;
-  display: inline-block;
-  vertical-align: middle;
-  content: "\f192";
-  width: 18px;
-  font-size: 18px;
-  color: #42a5f5;
-}
-
-input[type=text], input[type=password] {
-  border: 1px solid #bdbdbd;
-  padding: 4px;
+input[type="radio"]:checked + label .select {
+  background-image: url(../images/form_radio_b.svg);
 }
 
 /*実験的*/
@@ -558,7 +530,8 @@ input[type=text], input[type=password] {
   position: absolute;
   width: auto;
   max-width: 100%;
-  padding: 60px 12px 12px 12px;
+  padding: 0 12px;
+  margin-top: 64px;
 }
 
 .modal-window {
@@ -570,7 +543,7 @@ input[type=text], input[type=password] {
 }
 
 .modal-header {
-  padding: 18px 12px 18px 12px;
+  padding: 24px;
   border-bottom: 1px solid #e0e0e0;
 }
 
@@ -590,9 +563,53 @@ input[type=text], input[type=password] {
 }
 
 .modal-contents {
-  padding: 12px;
+  padding: 24px;
 }
 
+.modal-ctrl {
+  padding: 24px;
+}
+
+@media screen and (min-width: 768px) {
+  .modal-window {
+    max-width: 600px;
+  }
+}
+.settings {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.setting-row {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  padding: 24px 0;
+  border-top: 1px solid #e0e0e0;
+}
+
+.setting-left {
+  flex-grow: 1;
+  flex-basis: 100%;
+}
+
+.setting-right {
+  flex-grow: 1;
+}
+
+@media screen and (min-width: 768px) {
+  .setting-left {
+    flex-grow: 1;
+    max-width: 250px;
+  }
+
+  .setting-right {
+    flex-grow: 2;
+  }
+}
 /*ページスタイル*/
 .login-header {
   width: 100%;
@@ -652,31 +669,32 @@ input[type=text], input[type=password] {
   font-weight: normal;
 }
 
-.setting {
-  width: 480px;
+.card {
+  max-width: 480px;
   margin: 0 auto 24px auto;
   padding: 24px 48px;
   border: 1px solid #e0e0e0;
   background-color: #fafafa;
 }
-.setting .setting-container {
+.card .button {
+  margin-top: 16px;
+}
+
+.compact-form .compact-form-row {
   display: flex;
   flex-direction: row;
   padding: 16px 0;
 }
-.setting .setting-container .setting-item-left {
+.compact-form .compact-form-row .compact-form-item-left {
   flex-basis: 140px;
   border-right: 1px solid #e0e0e0;
 }
-.setting .setting-container .setting-item-right {
+.compact-form .compact-form-row .compact-form-item-right {
   flex-grow: 1;
   padding-left: 24px;
 }
-.setting .setting-container .setting-item-right input {
+.compact-form .compact-form-row .compact-form-item-right input {
   width: 100%;
-}
-.setting .button {
-  margin-top: 16px;
 }
 
 .setup-step {

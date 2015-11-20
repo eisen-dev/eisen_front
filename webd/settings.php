@@ -34,7 +34,6 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 									<div class="select"></div>
 									チェックボックスにチェックをいれる
 								</label>
-
 							</div>
 						</div>
 						<div class="setting-row">

@@ -32,7 +32,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="setting">
+					<div class="card">
 						<form action="login.php" method="post">
 								<p>すべての初期設定が完了しました！</p>
 							<input type="submit" name="submit" value="ログインに進む" class="button">

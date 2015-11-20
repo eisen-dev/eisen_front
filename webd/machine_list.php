@@ -86,54 +86,73 @@ $dbh = $dba->Connect();
                         </tbody>
                     </table>
             <!--TODO Use modal for this -->
-            <div class="setting">
-                <form action="includes/machine_registration.php" method="post">
-                    <h2 class="title">マネージャホスト設定</h2>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
-                            <span>マネージャホスト</span>
-                        </div>
-                        <div class="setting-item-right">
-                            <input type="text" name="rest_module">
-                        </div>
-                    </div>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
-                            <span>マネージャホスト名</span>
-                        </div>
-                        <div class="setting-item-right">
-                            <input type="text" name="rest_host">
-                        </div>
-                    </div>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
-                            <span>マネージャホストポート番号</span>
-                        </div>
-                        <div class="setting-item-right">
-                            <input type="text" name="rest_port">
-                        </div>
-                    </div>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
-                            <span>マネージャホストユーザー名</span>
-                        </div>
-                        <div class="setting-item-right">
-                            <input type="text" name="rest_user">
-                        </div>
-                    </div>
-                    <div class="setting-container">
-                        <div class="setting-item-left">
-                            <span>マネージャホストパスワード</span>
-                        </div>
-                        <div class="setting-item-right">
-                            <input type="text" name="rest_pass">
-                        </div>
-                    </div>
-                    <input type="submit" name="submit" value="設定して次に進む" class="button">
-                </form>
-            </div>
+
+            <!--data-modal-targetで開くモーダルのIDを指定する-->
+			<div class="button" data-modal="open" data-modal-target="machine_list-setting">open setting</div>
+		</main>
     </div>
 </div>
+	<!-- set modal before body tag -->
+	<div class="modal" id="machine_list-setting">
+		<div class="modal-wrapper">
+			<div class="modal-window">
+				<form action="includes/machine_registration.php" method="post">
+					<div class="modal-header">
+						<i class="fa fa-times modal-close" data-modal="close"></i>
+						<span class="modal-title">マネージャホスト設定</span>
+					</div>
+					<div class="modal-contents">
+						<div class="compact-form">
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホスト</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_module">
+								</div>
+							</div>
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホスト名</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_host">
+								</div>
+							</div>
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホストポート番号</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_port">
+								</div>
+							</div>
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホストユーザー名</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_user">
+								</div>
+							</div>
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホストパスワード</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_pass">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-ctrl">
+						<input type="submit" name="submit" value="設定して次に進む" class="button">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="modal-overlay" data-modal="close"></div>
+	</div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
 <script>
     $( document ).ready(function() {
