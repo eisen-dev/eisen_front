@@ -6,17 +6,20 @@ if(isset($_POST['submit'])){
 	$db_pass = htmlspecialchars($_POST["db_pass"]);
 	$db_name = htmlspecialchars($_POST["db_name"]);
     //Write file.
-    $content = '<?php'."\n";
-    $content = $content.'  $db_host = "'.$_POST['db_host'].'";'."\n";
-    $content = $content.'  $db_name = "'.$_POST['db_name'].'";'."\n";
-    $content = $content.'  $db_user = "'.$_POST['db_user'].'";'."\n";
-    $content = $content.'  $db_pass = "'.$_POST['db_pass'].'";'."\n";
-    $content = $content.'?>';
-//ファイルへの書き込み
-//$file = 'connect.php';
-//file_put_contents($file, $content);
-//ファイル書き込み後ユーザー設定ページに遷移
-//header('Location:./registration.php') ;
+	if(!empty($db_host)) {
+        $content = '<?php' . "\n";
+        $content = $content . '  $db_host = "' . $_POST['db_host'] . '";' . "\n";
+        $content = $content . '  $db_name = "' . $_POST['db_name'] . '";' . "\n";
+        $content = $content . '  $db_user = "' . $_POST['db_user'] . '";' . "\n";
+        $content = $content . '  $db_pass = "' . $_POST['db_pass'] . '";' . "\n";
+        $content = $content . '?>';
+
+        //ファイルへの書き込み
+        $file = 'connect.php';
+        file_put_contents($file, $content);
+        //ファイル書き込み後ユーザー設定ページに遷移
+        header('Location:./registration.php') ;
+    }
 }
 ?>
 

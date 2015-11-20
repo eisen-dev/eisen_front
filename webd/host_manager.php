@@ -60,6 +60,7 @@ $dbh = $dba->Connect();
                         </div>
                     </th>
                     <th>IPアドレス</th>
+                    <th>グループ</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -78,7 +79,8 @@ $dbh = $dba->Connect();
                 $hosts = $rest->host_list($ipaddress,$port,$username,$password);
                 foreach ($hosts as $i=>$row) {
                     $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
-                    $table .= '<td class="ipaddress">' . $row->host . '</td></tr>';
+                    $table .= '<td class="ipaddress">' . $row->host . '</td>';
+                    $table .= '<td class="groups">' . $row->groups . '</td></tr>';
                     print_r($table);
                 }
                 ?>

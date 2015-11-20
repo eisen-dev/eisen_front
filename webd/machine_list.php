@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>マシン管理</title>
+    <title>マネージャホスト</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="includes/normalize.css">
     <link rel="stylesheet" type="text/css" href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
@@ -40,7 +40,7 @@ $dbh = $dba->Connect();
     <div class="contentswrapper">
         <main class="contents menu-set">
             <div class="section">
-                <h2 class="title">マシンリスト</h2>
+                <h2 class="title">マネージャホスト</h2>
                     <div class="list-tools clearfix">
                             <input type="submit" value="適用" class="button button--form">
                         </div>
@@ -61,7 +61,7 @@ $dbh = $dba->Connect();
                             </th>
                             <th>IPアドレス</th>
                             <th>ポート</th>
-                            <th>module</th>
+                            <th>マネージメントツール</th>
                             <th>ステータス</th>
                         </tr>
                         </thead>
@@ -88,10 +88,18 @@ $dbh = $dba->Connect();
             <!--TODO Use modal for this -->
             <div class="setting">
                 <form action="includes/machine_registration.php" method="post">
-                    <h2 class="title">Agent設定</h2>
+                    <h2 class="title">マネージャホスト設定</h2>
                     <div class="setting-container">
                         <div class="setting-item-left">
-                            <span>ホスト名</span>
+                            <span>マネージャホスト</span>
+                        </div>
+                        <div class="setting-item-right">
+                            <input type="text" name="rest_module">
+                        </div>
+                    </div>
+                    <div class="setting-container">
+                        <div class="setting-item-left">
+                            <span>マネージャホスト名</span>
                         </div>
                         <div class="setting-item-right">
                             <input type="text" name="rest_host">
@@ -99,7 +107,7 @@ $dbh = $dba->Connect();
                     </div>
                     <div class="setting-container">
                         <div class="setting-item-left">
-                            <span>ポート番号</span>
+                            <span>マネージャホストポート番号</span>
                         </div>
                         <div class="setting-item-right">
                             <input type="text" name="rest_port">
@@ -107,7 +115,7 @@ $dbh = $dba->Connect();
                     </div>
                     <div class="setting-container">
                         <div class="setting-item-left">
-                            <span>ユーザー名</span>
+                            <span>マネージャホストユーザー名</span>
                         </div>
                         <div class="setting-item-right">
                             <input type="text" name="rest_user">
@@ -115,7 +123,7 @@ $dbh = $dba->Connect();
                     </div>
                     <div class="setting-container">
                         <div class="setting-item-left">
-                            <span>パスワード</span>
+                            <span>マネージャホストパスワード</span>
                         </div>
                         <div class="setting-item-right">
                             <input type="text" name="rest_pass">
