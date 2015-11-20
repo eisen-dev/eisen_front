@@ -72,29 +72,32 @@ class restclient
                 $body[] = ($response->body->task);
             }
         }
+        var_dump($response);
         return $body;
     }
 
-    public function Register($rest_host,$rest_port,$username,$password,$task_id)
+    public function host_register($rest_host,$rest_port,$username,$password,$host,$groups)
     {
-        //$response = \Httpful\Request::post($uri2)                  // Build a PUT request...
-        //->sendsJson()                               // tell it we're sending (Content-Type) JSON...
-        //->authenticateWith('ansible', 'default')  // authenticate with basic auth...
-        //->body('{"hosts":"vmware","command":"uptime","module":"shell"}')             // attach a body/payload...
-        //->send();                                   // and finally, fire that thing off!
-        include(dirname(__FILE__).'/rest_client/httpful.phar');
-        $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/task/'.$task_id.'/run';
-        $response = \Httpful\Request::get($uri)
-            ->authenticateWith('ansible', 'default')
-            ->send();
-        $body = array();
-        $max = sizeof($response->body->task);
-        //var_dump($response);
-        for($i = 0; $i < $max;$i++){
-            if (!empty($response->body->task)) {
-                $body[] = ($response->body->task);
-            }
+        if (empty($groups)){
+            $groups = '';
         }
-        return $body;
+        include(dirname(__FILE__).'/rest_client/httpful.phar');
+        $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/hosts';
+        $response = \Httpful\Request::post($uri)
+            ->sendsJson()                               // tell it we're sending (Content-Type) JSON...
+            ->authenticateWith('ansible', 'default')
+            ->body('{"host":"'.$host.'","groups":"'.$groups.'"}')   // attach a body/payload...
+            ->sendIt();
+    }
+
+    public function task_register($rest_host,$rest_port,$username,$password,$hosts,$command,$module)
+    {
+        include(dirname(__FILE__).'/rest_client/httpful.phar');
+        $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/tasks';
+        $response = \Httpful\Request::post($uri)
+            ->sendsJson()                               // tell it we're sending (Content-Type) JSON...
+            ->authenticateWith('ansible', 'default')
+            ->body('{"hosts":"'.$hosts.'","command":"'.$command.'","module":"'.$module.'"}')             // attach a body/payload...
+            ->sendIt();
     }
 }

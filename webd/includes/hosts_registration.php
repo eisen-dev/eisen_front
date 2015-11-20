@@ -9,6 +9,11 @@ require_once __DIR__ . '/DbAction.php';
 require_once __DIR__."/session.php";
 require_once __DIR__."/restclient.php";
 
+if(isset($_POST['submit'])){
+    $host = htmlspecialchars($_POST["host"]);
+    $groups = htmlspecialchars($_POST["groups"]);
+}
+
 $me = new Session();
 $me->start_session();
 $me->is_session_started();
@@ -26,4 +31,8 @@ $password=$machine[4];
 
 $rest = new restclient();
 //$rest->restconnect($ipaddress,$port,$username,$password);
-$rest->host_list($ipaddress,$port,$username,$password);
+//$hosts=$rest->host_register($ipaddress,$port,$username,$password,$host,$groups);
+
+//var_dump($ipaddress,$port,$username,$password,$host,$groups);
+
+$hos=$rest->task_register($ipaddress,$port,$username,$password,$host,'uptime','shell');
