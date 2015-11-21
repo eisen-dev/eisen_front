@@ -91,32 +91,54 @@ $dbh = $dba->Connect();
                 ?>
                 </tbody>
             </table>
-            <div class="card">
-                <form action="includes/machine_registration.php" method="post">
-                    <h2 class="title">ホスト設定</h2>
-					<div class="compact-form">
-                 	   <div class="compact-form-row">
-                 	       <div class="compact-form-item-left">
-                 	           <span>ホスト名</span>
-                 	       </div>
-                 	       <div class="compact-form-item-right">
-                 	           <input type="text" name="js_host">
-                 	       </div>
-                 	   </div>
-                 	   <div class="compact-form-row">
-                 	       <div class="compact-form-item-left">
-                 	           <span>ポート番号</span>
-                 	       </div>
-                 	       <div class="compact-form-item-right">
-                 	           <input type="text" name="js_port">
-                 	       </div>
-                 	   </div>
-					</div>
-                    <input type="submit" name="submit" value="設定して次に進む" class="button">
-                </form>
-            </div>
-		</main>
+            <div class="button" data-modal="open" data-modal-target="task_list-setting">open setting</div>
+        </main>
     </div>
+</div>
+<!-- set modal before body tag -->
+<div class="modal" id="task_list-setting">
+    <div class="modal-wrapper">
+        <div class="modal-window">
+            <form action="includes/machine_registration.php" method="post">
+                <div class="modal-header">
+                    <i class="fa fa-times modal-close" data-modal="close"></i>
+                    <span class="modal-title">タスク設定</span>
+                </div>
+                <div class="modal-contents">
+                    <div class="compact-form">
+                        <div class="compact-form-row">
+                            <div class="compact-form-item-left">
+                                <span>ホストやグループ</span>
+                            </div>
+                            <div class="compact-form-item-right">
+                                <input type="text" name="rest_module">
+                            </div>
+                        </div>
+                        <div class="compact-form-row">
+                            <div class="compact-form-item-left">
+                                <span>モジュール</span>
+                            </div>
+                            <div class="compact-form-item-right">
+                                <input type="text" name="rest_host">
+                            </div>
+                        </div>
+                        <div class="compact-form-row">
+                            <div class="compact-form-item-left">
+                                <span>コマンド</span>
+                            </div>
+                            <div class="compact-form-item-right">
+                                <input type="text" name="rest_port">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-ctrl">
+                    <input type="submit" name="submit" value="設定して次に進む" class="button">
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-overlay" data-modal="close"></div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
 <script>
