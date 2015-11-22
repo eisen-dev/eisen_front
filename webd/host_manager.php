@@ -86,30 +86,50 @@ $dbh = $dba->Connect();
                 ?>
                 </tbody>
             </table>
-            <div class="card">
-                <form action="includes/hosts_registration.php" method="post">
-                    <h2 class="title">ホスト設定</h2>
-					<div class="compact-form">
-             	       <div class="compact-form-row">
-             	           <div class="compact-form-item-left">
-             	               <span>ホスト名</span>
-             	           </div>
-             	           <div class="compact-form-item-right">
-             	               <input type="text" name="host">
-             	           </div>
-             	       </div>
-             	       <div class="compact-form-row">
-             	           <div class="compact-form-item-left">
-             	               <span>グループリスト</span>
-             	           </div>
-             	           <div class="compact-form-item-right">
-             	               <input type="text" name="groups">
-             	           </div>
-             	       </div>
-					</div>
+            <!--TODO Use modal for this -->
+
+            <!--data-modal-targetで開くモーダルのIDを指定する-->
+            <div class="button" data-modal="open" data-modal-target="target_host_list-setting">open setting</div>
+        </main>
+    </div>
+</div>
+<!-- set modal before body tag -->
+<div class="modal" id="target_host_list-setting">
+    <div class="modal-wrapper">
+        <div class="modal-window">
+            <form action="includes/hosts_registration.php" method="post">
+                <div class="modal-header">
+                    <i class="fa fa-times modal-close" data-modal="close"></i>
+                    <span class="modal-title">ホスト設定</span>
+                </div>
+                <div class="modal-contents">
+                    <div class="compact-form">
+                        <div class="compact-form-row">
+                            <div class="compact-form-item-left">
+                                <span>ホスト名</span>
+                            </div>
+                            <div class="compact-form-item-right">
+                                <input type="text" name="host">
+                            </div>
+                        </div>
+                        <div class="compact-form-row">
+                            <div class="compact-form-item-left">
+                                <span>グループリスト</span>
+                            </div>
+                            <div class="compact-form-item-right">
+                                <input type="text" name="groups">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-ctrl">
                     <input type="submit" name="submit" value="設定して次に進む" class="button">
-                </form>
-            </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="modal-overlay" data-modal="close"></div>
+</div>
     </div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
