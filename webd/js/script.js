@@ -57,10 +57,10 @@ $(function () {
 	$('[data-modal="open"]').click(function () {
 		//開きたいモーダルのID
 		var target = '#' + $(this).attr("data-modal-target");
-		$(target).fadeIn('0', 'easeOutCubic');
+		$(target).css('visibility','visible').hide().fadeIn('0', 'easeOutCubic');
 		//モーダルの初期位置を設定
-		var modalw = $(".modal-wrapper").outerWidth();
-		var areaw = $(".modal").width();
+		var modalw = $(target + ">" + ".modal-wrapper").outerWidth();
+		var areaw = $(target).width();
 		var modalcenter = (areaw / 2) - (modalw / 2);
 		$(".modal-wrapper").css("left",modalcenter + "px");
 	});
