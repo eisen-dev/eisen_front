@@ -48,23 +48,36 @@ $(function () {
 	//モーダルウィンドウ関連
 	//リサイズ時のモーダル位置を設定
 	$(window).resize(function () {
-		var modalw = $(".modal-wrapper").outerWidth();
-		var areaw = $(".modal").width();
+		//リサイズ対象の現在開かれているモーダル
+		var resizetarget = '[data-modal-active="true"]';
+		//モーダルの幅を取得
+		var modalw = $(resizetarget + '>' + ".modal-wrapper").outerWidth();
+		//描画エリアの幅を取得(この要素を基準に中央寄せ)
+		var areaw = $(resizetarget).width();
+		//positionの位置を計算
 		var modalcenter = (areaw / 2) - (modalw / 2);
-		$(".modal-wrapper").css("left",modalcenter + "px");
+		$(resizetarget + '>' + ".modal-wrapper").css("left",modalcenter + "px");
 	});
 	//モーダルの開閉
 	$('[data-modal="open"]').click(function () {
 		//開きたいモーダルのID
 		var target = '#' + $(this).attr("data-modal-target");
-		$(target).css('visibility','visible').hide().fadeIn('0', 'easeOutCubic');
+		//開きたいモーダルに属性追加
+		$(target).attr({'data-modal-active':'true'});
 		//モーダルの初期位置を設定
 		var modalw = $(target + ">" + ".modal-wrapper").outerWidth();
 		var areaw = $(target).width();
 		var modalcenter = (areaw / 2) - (modalw / 2);
-		$(".modal-wrapper").css("left",modalcenter + "px");
+		$(target + '>' + ".modal-wrapper").css("left",modalcenter + "px");
+		//モーダルを開く
+		$(target).css('visibility','visible').hide().fadeIn('0', 'easeOutCubic');
 	});
 	$('[data-modal="close"]').click(function () {
-		$('.modal').fadeOut('0', 'easeOutCubic');
+		//開かれているモーダルを閉じる
+		$('[data-modal-active="true"]').fadeOut('0', 'easeOutCubic', function(){
+			$('[data-modal-active="true"]').css('visibility','hidden').css('display','block');
+			$('[data-modal-active="true"]' + '>' + ".modal-wrapper").css("left", "0px");
+			$('[data-modal-active="true"]').attr({'data-modal-active':'false'});
+		});
 	});
 });
