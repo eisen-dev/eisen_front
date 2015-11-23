@@ -18,8 +18,6 @@ $me = new Session();
 $me->start_session();
 $me->is_session_started();
 
-$task_id = $_GET['id'];
-
 $dba = new DbAction();
 $dbh = $dba->Connect();
 $user_id = $me->get_user_id();
@@ -33,9 +31,10 @@ $password=$machine[4];
 $rest = new restclient();
 $task_module='shell';
 $hosts='192.168.233.129';
-$command="l	equery --no-pipe --quiet list python -F'{\"category\":\"$category\",
-\"name\":\"$name\",\"version\":\"$version\",\"revision\":\\\"$revision\\\"},' | sed '$s/
+$command="equery --no-pipe --quiet list python -F'{\"category\":\"\$category\",
+\"name\":\"\$name\",\"version\":\"\$version\",\"revision\":\"\$revision\"},' | sed '\$s/
 .$//'";
+printf($command);
 //$rest->task_register($ipaddress,$port,$username,$password,$hosts,$command,$task_module);
 //$hosts = $rest->tasks_run($ipaddress,$port,$username,$password,$task_id);
 //var_dump($hosts);
