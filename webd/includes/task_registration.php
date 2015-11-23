@@ -10,10 +10,12 @@ require_once __DIR__."/session.php";
 require_once __DIR__."/restclient.php";
 
 if(isset($_POST['submit'])){
-    $host = htmlspecialchars($_POST["host"]);
-    $groups = htmlspecialchars($_POST["groups"]);
+    $hosts = htmlspecialchars($_POST["hosts"]);
+    $command = htmlspecialchars($_POST["command"]);
+    # module variable already used for machinelist
+    $task_module = htmlspecialchars($_POST["module"]);
 }
-
+printf($command);
 $me = new Session();
 $me->start_session();
 $me->is_session_started();
@@ -30,8 +32,4 @@ $username=$machine[3];
 $password=$machine[4];
 
 $rest = new restclient();
-# TODO need to be fixed on the python side because the host
-# is actually not registered yet
-$hosts=$rest->host_register($ipaddress,$port,$username,$password,$host,$groups);
-# debugging
-var_dump($ipaddress,$port,$username,$password,$host,$groups);
+$rest->task_register($ipaddress,$port,$username,$password,$hosts,$command,$task_module);

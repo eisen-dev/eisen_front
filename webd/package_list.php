@@ -49,12 +49,19 @@ $dbh = $dba->Connect();
 								</select>
 								<input type="submit" value="適用" class="button button--form">
 							</div>
-							<div class="search-box">
-								<input type="text" placeholder="全てのパッケージを検索">
+                            <form method="post" action="includes/search.php">
+                            <div class="search-box">
+								<input type="text" placeholder="全てのパッケージを検索"
+                                       name="package">
+                                <!-- #TODO button size and fontawesome need to be fixed
+                                 -->
 								<div class="search-box__button">
-								<i class="fa fa-search"></i>
-								</div>
+                                    <button type="submit" name="submit" id="search">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
 							</div>
+                            </form>
 						</div>
 						<table class="table">
 							<thead>

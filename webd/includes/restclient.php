@@ -45,7 +45,7 @@ class restclient
         include(dirname(__FILE__).'/rest_client/httpful.phar');
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/tasks';
         $response = \Httpful\Request::get($uri)
-            ->authenticateWith('ansible', 'default')
+            ->authenticateWith($username, $password)
             ->send();
         $tasks = array();
         $max = sizeof($response->body->tasks);
@@ -62,7 +62,7 @@ class restclient
         include(dirname(__FILE__).'/rest_client/httpful.phar');
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/task/'.$task_id.'/run';
         $response = \Httpful\Request::get($uri)
-            ->authenticateWith('ansible', 'default')
+            ->authenticateWith($username, $password)
             ->send();
         $body = array();
         $max = sizeof($response->body->task);
@@ -85,7 +85,7 @@ class restclient
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/hosts';
         $response = \Httpful\Request::post($uri)
             ->sendsJson()                               // tell it we're sending (Content-Type) JSON...
-            ->authenticateWith('ansible', 'default')
+            ->authenticateWith($username, $password)
             ->body('{"host":"'.$host.'","groups":"'.$groups.'"}')   // attach a body/payload...
             ->sendIt();
     }
@@ -96,7 +96,7 @@ class restclient
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/tasks';
         $response = \Httpful\Request::post($uri)
             ->sendsJson()                               // tell it we're sending (Content-Type) JSON...
-            ->authenticateWith('ansible', 'default')
+            ->authenticateWith($username, $password)
             ->body('{"hosts":"'.$hosts.'","command":"'.$command.'","module":"'.$module.'"}')             // attach a body/payload...
             ->sendIt();
     }

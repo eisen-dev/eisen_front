@@ -735,4 +735,14 @@ input[type="radio"]:checked + label .select {
   text-align: center;
 }
 
+#search {
+  height:32px;
+  width:32px;
+  border: none;
+  cursor: pointer;
+  color:white;
+  background-color: transparent;
+  position:relative;
+}
+
 /*# sourceMappingURL=style.css.map */

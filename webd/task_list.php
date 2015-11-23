@@ -99,7 +99,7 @@ $dbh = $dba->Connect();
 <div class="modal" id="task_list-setting">
     <div class="modal-wrapper">
         <div class="modal-window">
-            <form action="includes/machine_registration.php" method="post">
+            <form action="includes/task_registration.php" method="post">
                 <div class="modal-header">
                     <i class="fa fa-times modal-close" data-modal="close"></i>
                     <span class="modal-title">タスク設定</span>
@@ -111,7 +111,7 @@ $dbh = $dba->Connect();
                                 <span>ホストやグループ</span>
                             </div>
                             <div class="compact-form-item-right">
-                                <input type="text" name="rest_module">
+                                <input type="text" name="hosts">
                             </div>
                         </div>
                         <div class="compact-form-row">
@@ -119,7 +119,7 @@ $dbh = $dba->Connect();
                                 <span>モジュール</span>
                             </div>
                             <div class="compact-form-item-right">
-                                <input type="text" name="rest_host">
+                                <input type="text" name="module">
                             </div>
                         </div>
                         <div class="compact-form-row">
@@ -127,7 +127,7 @@ $dbh = $dba->Connect();
                                 <span>コマンド</span>
                             </div>
                             <div class="compact-form-item-right">
-                                <input type="text" name="rest_port">
+                                <input type="text" name="command">
                             </div>
                         </div>
                     </div>
