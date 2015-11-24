@@ -49,14 +49,15 @@ $dbh = $dba->Connect();
 								</select>
 								<input type="submit" value="適用" class="button button--form">
 							</div>
-                            <form method="post" role="form" class="form" name="js">
+                            <form role="form" class="form" name="js">
+                            <form class="form" name="js">
                             <div class="search-box">
 								<input type="text" placeholder="全てのパッケージを検索" id="package" name="package" class="form-control">
                                 <div class="search-box__button">
                                     <!-- #TODO button size and fontawesome need to be fixed -->
-                                    <button type="submit" name="submit" class="btnSearch" id="search">
+                                    <div name="submit" class="btnSearch" id="search">
                                         <i class="fa fa-search"></i>
-                                    </button>
+                                    </div>
                                 </div>
 							</div>
                             </form>
@@ -114,14 +115,22 @@ $dbh = $dba->Connect();
 
         function makeAjaxRequest(type) {
             alert("ようこそ"+type+"さん！");
-            $.ajax({
-                url: 'include/search.php',
-                type: 'post',
-                data:  { 'package' : type },
-                success: function(response) {
-                    $('table#resultTable tbody').html(response);
-                }
-            });
+			alert(type);
+			$.ajax({
+				url: 'includes/search.php',
+				type: 'post',
+				dataType: 'json',
+				data: {
+					package: type,
+				}
+			})
+			.done(function (response) {
+				alert("成功しました");
+				alert(response.result);
+			})
+			.fail(function () {
+				alert("失敗しました");
+			});
         }
         });
     </script>

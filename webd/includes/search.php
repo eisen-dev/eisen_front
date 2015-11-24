@@ -49,3 +49,10 @@ foreach ($package as $i=>$row) {
     }
 }
 
+
+$return = "search.phpからの返り値です";
+
+echo json_encode([
+	'result' => $return
+]);
+
