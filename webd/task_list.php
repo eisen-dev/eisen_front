@@ -40,18 +40,23 @@ $dbh = $dba->Connect();
     <div class="contentswrapper">
         <main class="contents menu-set">
             <div class="section">
-                <h2 class="title">タスクリスト</h2>
-                <div class="list-tools clearfix">
-                    <input type="submit" value="適用" class="button button--form">
-                </div>
-                <div class="search-box">
-                    <input type="text" placeholder="全てのパッケージを検索">
-                    <div class="search-box__button">
-                        <i class="fa fa-search"></i>
-                    </div>
-                </div>
-            </div>
-            <table class="table">
+				<h2 class="title">タスクリスト</h2>
+						<div class="list-tools clearfix">
+							<div class="list-action">
+								<select name="list-action" class="input-list">
+									<option value="0">一括操作</option>
+									<option value="0">更新</option>
+								</select>
+								<input type="submit" value="適用" class="button button--form">
+							</div>
+							<div class="search-box">
+								<input type="text" placeholder="全てのパッケージを検索">
+								<button type="submit" name="submit" class="search-box__button">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
+			<table class="table">
                 <thead>
                 <tr>
                     <th class="cbox__selectall">
@@ -91,9 +96,10 @@ $dbh = $dba->Connect();
                 ?>
                 </tbody>
             </table>
-            <div class="button" data-modal="open" data-modal-target="task_list-setting">open setting</div>
-        </main>
-    </div>
+				<div class="button" data-modal="open" data-modal-target="task_list-setting">open setting</div>
+			</div>
+		</main>
+	</div>
 </div>
 <!-- set modal before body tag -->
 <div class="modal" id="task_list-setting">

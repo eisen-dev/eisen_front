@@ -41,16 +41,21 @@ $dbh = $dba->Connect();
         <main class="contents menu-set">
             <div class="section">
                 <h2 class="title">ホストリスト</h2>
-                <div class="list-tools clearfix">
-                    <input type="submit" value="適用" class="button button--form">
-                </div>
-                <div class="search-box">
-                    <input type="text" placeholder="全てのパッケージを検索">
-                    <div class="search-box__button">
-                        <i class="fa fa-search"></i>
-                    </div>
-                </div>
-            </div>
+						<div class="list-tools clearfix">
+							<div class="list-action">
+								<select name="list-action" class="input-list">
+									<option value="0">一括操作</option>
+									<option value="0">更新</option>
+								</select>
+								<input type="submit" value="適用" class="button button--form">
+							</div>
+							<div class="search-box">
+								<input type="text" placeholder="全てのパッケージを検索">
+								<button type="submit" name="submit" class="search-box__button">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
             <table class="table">
                 <thead>
                 <tr>
@@ -90,6 +95,7 @@ $dbh = $dba->Connect();
 
             <!--data-modal-targetで開くモーダルのIDを指定する-->
             <div class="button" data-modal="open" data-modal-target="target_host_list-setting">open setting</div>
+			</div>
         </main>
     </div>
 </div>
