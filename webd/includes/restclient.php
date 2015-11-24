@@ -5,11 +5,11 @@
  * Date: 2015/11/18
  * Time: 10:08
  */
+include(dirname(__FILE__).'/rest_client/httpful.phar');
 class restclient
 {
     public function restconnect($rest_host,$rest_port,$username,$password)
     {
-        include(dirname(__FILE__).'/rest_client/httpful.phar');
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/agent';
         $response = \Httpful\Request::get($uri)
             ->authenticateWith('ansible', 'default')
@@ -26,7 +26,6 @@ class restclient
 
     public function host_list($rest_host,$rest_port,$username,$password)
     {
-        include(dirname(__FILE__).'/rest_client/httpful.phar');
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/hosts';
         $response = \Httpful\Request::get($uri)
             ->authenticateWith('ansible', 'default')
@@ -42,7 +41,6 @@ class restclient
     }
     public function tasks_list($rest_host,$rest_port,$username,$password)
     {
-        include(dirname(__FILE__).'/rest_client/httpful.phar');
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/tasks';
         $response = \Httpful\Request::get($uri)
             ->authenticateWith($username, $password)
@@ -59,7 +57,6 @@ class restclient
 
     public function tasks_run($rest_host,$rest_port,$username,$password,$task_id)
     {
-        include(dirname(__FILE__).'/rest_client/httpful.phar');
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/task/'.$task_id.'/run';
         $response = \Httpful\Request::get($uri)
             ->authenticateWith($username, $password)
@@ -72,7 +69,6 @@ class restclient
                 $body[] = ($response->body->task);
             }
         }
-        var_dump($response);
         return $body;
     }
 
@@ -81,7 +77,6 @@ class restclient
         if (empty($groups)){
             $groups = '';
         }
-        include(dirname(__FILE__).'/rest_client/httpful.phar');
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/hosts';
         $response = \Httpful\Request::post($uri)
             ->sendsJson()                               // tell it we're sending (Content-Type) JSON...
@@ -92,12 +87,14 @@ class restclient
 
     public function task_register($rest_host,$rest_port,$username,$password,$hosts,$command,$module)
     {
-        include(dirname(__FILE__).'/rest_client/httpful.phar');
         $uri = 'http://'.$rest_host.':'.$rest_port.'/todo/api/v1.0/tasks';
         $response = \Httpful\Request::post($uri)
             ->sendsJson()                               // tell it we're sending (Content-Type) JSON...
             ->authenticateWith($username, $password)
             ->body('{"hosts":"'.$hosts.'","command":"'.$command.'","module":"'.$module.'"}')             // attach a body/payload...
             ->sendIt();
+        $uri=$response->body->task->uri;
+        $uri=explode("/",$uri);
+        return $uri[5];
     }
 }

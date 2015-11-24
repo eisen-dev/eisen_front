@@ -9,11 +9,10 @@ require_once __DIR__."/restclient.php";
 require_once __DIR__ . '/DbAction.php';
 require_once __DIR__."/session.php";
 
-if(isset($_POST['submit'])){
-    $package = htmlspecialchars($_POST["package"]);
-}
+//if(isset($_POST['submit'])){
+$search_package = htmlspecialchars($_GET["package"]);
+//}
 
-printf($package);
 $me = new Session();
 $me->start_session();
 $me->is_session_started();
@@ -29,18 +28,24 @@ $port=$machine[2];
 $username=$machine[3];
 $password=$machine[4];
 $rest = new restclient();
-$task_module='shell';
-$hosts='192.168.233.129';
-$command="equery --no-pipe --quiet list python -F'{\"category\":\"\$category\",
-\"name\":\"\$name\",\"version\":\"\$version\",\"revision\":\"\$revision\"},' | sed '\$s/
-.$//'";
-printf($command);
-//$rest->task_register($ipaddress,$port,$username,$password,$hosts,$command,$task_module);
-//$hosts = $rest->tasks_run($ipaddress,$port,$username,$password,$task_id);
-//var_dump($hosts);
 
-//foreach ($hosts as $i=>$row) {
-//    var_dump($i);
-//    var_dump($row);
-//}
+$task_module="shell";
+$hosts="192.168.233.129";
+$command= "equery --no-pipe --quiet list $search_package";
+
+$task_id=$rest->task_register($ipaddress,$port,$username,$password,$hosts,$command,$task_module);
+$package = $rest->tasks_run($ipaddress,$port,$username,$password,$task_id);
+//var_dump($package);
+
+foreach ($package as $i=>$row) {
+    //var_dump($i);
+    foreach ($row->contacted as $i=>$row){
+        foreach ( explode("\n",$row->stdout) as $item) {
+            echo "<tr>";
+            echo ("<td></td>");
+            echo ("<td>".$item."</td>");
+            echo "</tr>";
+        }
+    }
+}
 

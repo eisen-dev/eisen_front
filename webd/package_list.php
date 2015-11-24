@@ -49,14 +49,19 @@ $dbh = $dba->Connect();
 								</select>
 								<input type="submit" value="適用" class="button button--form">
 							</div>
-							<div class="search-box">
-								<input type="text" placeholder="全てのパッケージを検索">
-								<div class="search-box__button">
-								<i class="fa fa-search"></i>
-								</div>
+                            <form method="get" role="form" class="form" id="package">
+                            <div class="search-box">
+								<input type="text" placeholder="全てのパッケージを検索" id="package" name="package" class="form-control">
+                                <div class="search-box__button">
+                                    <!-- #TODO button size and fontawesome need to be fixed -->
+                                    <button type="submit" name="submit" class="btnSearch" id="search">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </div>
 							</div>
-						</div>
-						<table class="table">
+                            </form>
+                        </div>
+						<table class="table" id="resultTable">
 							<thead>
 								<tr>
 									<th class="cbox__selectall">
@@ -64,28 +69,10 @@ $dbh = $dba->Connect();
 										<input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
 										</div>
 									</th>
-                                    <th>パッケージカテゴリ</th>
 									<th>パッケージ名</th>
-									<th>パッケージバーション</th>
-									<th>パッケージ説明</th>
 								</tr>
 							</thead>
 							<tbody>
-	                            <?php
-								//TODO refactor inside class and divide print_r
-	                            $stm = $dbh->prepare("select * from pack_info");
-	                            $stm->execute();
-	                            $data = $stm->fetchAll();
-	                            $cnt  = count($data); //in case you need to count all rows
-								foreach ($data as $i => $row){
-                                    $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
-                                    $table .= '<td class="pack_category">' . $row['pack_category'] . '</td>';
-                                    $table .= '<td class="pack_name">' . $row['pack_name'] . '</td>';
-                                    $table .= '<td class="pack_version">' . $row['pack_version'] . '</td>';
-                                    $table .= '<td class="summary"></td></tr>';
-                                    print_r($table);
-                                }
-								?>
                             </tbody>
                         </table>
                         </div>
@@ -114,6 +101,23 @@ $dbh = $dba->Connect();
                     }
                 });
             }
+        $('.btnSearch').click(function(){
+            makeAjaxRequest();
+        });
+
+        function makeAjaxRequest(type) {
+            $.ajax({
+                url: 'include/search.php',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    package: $(this).serialize();
+                },
+                success: function(response) {
+                    $('table#resultTable tbody').html(response);
+                }
+            });
+        }
         });
     </script>
 </body>
