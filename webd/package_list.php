@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>パッケージリスト</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 	<link rel="stylesheet" type="text/css" href="includes/normalize.css">
 	<link rel="stylesheet" type="text/css" href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="sass/style.css">
@@ -49,7 +49,7 @@ $dbh = $dba->Connect();
 								</select>
 								<input type="submit" value="適用" class="button button--form">
 							</div>
-                            <form method="get" role="form" class="form" id="package">
+                            <form method="post" role="form" class="form" name="js">
                             <div class="search-box">
 								<input type="text" placeholder="全てのパッケージを検索" id="package" name="package" class="form-control">
                                 <div class="search-box__button">
@@ -61,7 +61,7 @@ $dbh = $dba->Connect();
 							</div>
                             </form>
                         </div>
-						<table class="table" id="resultTable">
+						<table class="table" name="table" id="resultTable">
 							<thead>
 								<tr>
 									<th class="cbox__selectall">
@@ -101,18 +101,23 @@ $dbh = $dba->Connect();
                     }
                 });
             }
-        $('.btnSearch').click(function(){
-            makeAjaxRequest();
-        });
+
+            $('.btnSearch').click(function(){
+                var str1=document.js.package.value;
+                makeAjaxRequest(str1);
+            });
+
+//            $('form').submit(function(e){
+//                var str1=document.js.package.value;
+//                makeAjaxRequest(str1);
+//            });
 
         function makeAjaxRequest(type) {
+            alert("ようこそ"+type+"さん！");
             $.ajax({
                 url: 'include/search.php',
-                type: 'get',
-                dataType: 'json',
-                data: {
-                    package: $(this).serialize();
-                },
+                type: 'post',
+                data:  { 'package' : type },
                 success: function(response) {
                     $('table#resultTable tbody').html(response);
                 }

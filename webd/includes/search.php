@@ -9,9 +9,9 @@ require_once __DIR__."/restclient.php";
 require_once __DIR__ . '/DbAction.php';
 require_once __DIR__."/session.php";
 
-//if(isset($_POST['submit'])){
-$search_package = htmlspecialchars($_GET["package"]);
-//}
+if(isset($_POST['package'])){
+    $search_package = htmlspecialchars($_POST["package"]);
+}
 
 $me = new Session();
 $me->start_session();
