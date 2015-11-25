@@ -24,11 +24,7 @@
 <?php
 $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
-require_once __DIR__ . '/includes/DbAction.php';
 require_once __DIR__ . '/parts/modal.php';
-
-$dba = new DbAction();
-$dbh = $dba->Connect();
 ?>
 <body>
     <div id="popup" data-name="name" class="dialog">
@@ -42,25 +38,19 @@ $dbh = $dba->Connect();
 				<div class="section">
 					<h2 class="title">パッケージリスト</h2>
 						<div class="list-tools clearfix">
-							<div class="list-action">
-								<select name="list-action" class="input-list">
-									<option value="0">一括操作</option>
-									<option value="0">更新</option>
-								</select>
-								<input type="submit" value="適用" class="button button--form">
-							</div>
-                            <form role="form" class="form" name="js">
-                            <form class="form" name="js">
+                            <div class="list-action">
+                                <select name="list-action" class="input-list">
+                                    <option value="0">一括操作</option>
+                                    <option value="0">更新</option>
+                                </select>
+                                <input type="submit" value="適用" class="button button--form">
+                            </div>
                             <div class="search-box">
-								<input type="text" placeholder="全てのパッケージを検索" id="package" name="package" class="form-control">
-                                <div class="search-box__button">
-                                    <!-- #TODO button size and fontawesome need to be fixed -->
-                                    <div name="submit" class="btnSearch" id="search">
-                                        <i class="fa fa-search"></i>
-                                    </div>
-                                </div>
-							</div>
-                            </form>
+                                <form id="form1">
+                                    <input type="text" name="field1" id="field1">
+                                    <input type="submit" name="submit" id="submit" value="Submit Form">
+                                </form>
+                            </div>
                         </div>
 						<table class="table" name="table" id="resultTable">
 							<thead>
@@ -76,24 +66,22 @@ $dbh = $dba->Connect();
 							<tbody>
                             </tbody>
                         </table>
-                        </div>
+                </div>
 			</main>
 		</div>
 	</div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
     <script>
         $( document ).ready(function() {
-            $(document).on("click", ".cell-which-triggers-popup", function(event){
-                var cell_value1 = $(event.target).closest('tr').find('.pack_category').text();
-                var cell_value2 = $(event.target).closest('tr').find('.pack_name').text();
-                var cell_value3 = $(event.target).closest('tr').find('.pack_version').text();
-                //console.log(cell_value);
-                if (cell_value1 && cell_value2 && cell_value3) {
-                    showPopup(cell_value1,cell_value2)
-                }
-            });
+                $(document).on("click", ".cell-which-triggers-popup", function (event) {
+                    var cell_value1 = $(event.target).closest('tr').find('.item').text();
+                    //console.log(cell_value);
+                    if (cell_value1) {
+                        showPopup(cell_value1)
+                    }
+                });
 
-            function showPopup(cell_value1,cell_value2){
+            function showPopup(cell_value1){
                 $("#popup").dialog({
                     width: 500,
                     height: 300,
@@ -102,36 +90,20 @@ $dbh = $dba->Connect();
                     }
                 });
             }
-
-            $('.btnSearch').click(function(){
-                var str1=document.js.package.value;
-                makeAjaxRequest(str1);
+        });
+        $('#form1').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: 'includes/search.php',
+                data: $(this).serialize(),
+                dataType: 'json',
+                success: function (data) {
+                    console.log(data);
+                    $('table#resultTable tbody').html(data.msg);
+                    table();
+                }
             });
-
-//            $('form').submit(function(e){
-//                var str1=document.js.package.value;
-//                makeAjaxRequest(str1);
-//            });
-
-        function makeAjaxRequest(type) {
-            alert("ようこそ"+type+"さん！");
-			alert(type);
-			$.ajax({
-				url: 'includes/search.php',
-				type: 'post',
-				dataType: 'json',
-				data: {
-					package: type,
-				}
-			})
-			.done(function (response) {
-				alert("成功しました");
-				alert(response.result);
-			})
-			.fail(function () {
-				alert("失敗しました");
-			});
-        }
         });
     </script>
 </body>
