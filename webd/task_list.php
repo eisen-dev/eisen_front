@@ -84,13 +84,17 @@ $dbh = $dba->Connect();
                 $rest = new restclient();
                 //$rest->restconnect($ipaddress,$port,$username,$password);
                 $hosts = $rest->tasks_list($ipaddress,$port,$username,$password);
+
                 foreach ($hosts as $i=>$row) {
-                    $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
-                    $table .= '<td class="task_id">' . ($i+1) . '</td>';
+                    # hack for get task_id
+                    $uri = ($row->uri);
+                    $uri=explode("/",$uri);
+                    $task_id = $uri[5];
+                    $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $task_id . '"><label for="cbox-' . $task_id . '"></label></td>';
+                    $table .= '<td class="task_id">' . ($task_id) . '</td>';
                     $table .= '<td class="host">' . $row->hosts . '</td>';
                     $table .= '<td class="module">' . $row->module . '</td>';
                     $table .= '<td class="command">' . $row->command . '</td></tr>';
-
                     print_r($table);
                 }
                 ?>
