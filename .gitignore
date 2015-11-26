@@ -7,3 +7,4 @@ out
 gen
 /webd/connect.php
 .sass-cache
+/webd/.sass-cache/
