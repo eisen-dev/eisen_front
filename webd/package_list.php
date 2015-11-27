@@ -72,10 +72,10 @@ require_once __DIR__ . '/parts/modal.php';
 	</div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
     <script>
-        $( document ).ready(function() {
+        $( document ).ajaxComplete(function() {
                 $(document).on("click", ".cell-which-triggers-popup", function (event) {
                     var cell_value1 = $(event.target).closest('tr').find('.item').text();
-                    //console.log(cell_value);
+                    console.log(cell_value);
                     if (cell_value1) {
                         showPopup(cell_value1)
                     }
@@ -86,7 +86,7 @@ require_once __DIR__ . '/parts/modal.php';
                     width: 500,
                     height: 300,
                     open: function(){
-                        $(this).find("p").html("<a href=includes/PackageAction.php?ip=" + cell_value1+"&port="+cell_value2+">install "+cell_value1+"</a>");
+                        $(this).find("p").html("<a href=includes/PackageAction.php?ip="+cell_value1 + "\>install "+cell_value1+"\</a>");
                     }
                 });
             }

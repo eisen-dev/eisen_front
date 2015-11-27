@@ -42,7 +42,7 @@ class ajaxValidate {
                 //echo($i);
                 foreach ($row->contacted as $i => $row) {
                     foreach (explode("\n", $row->stdout) as $item) {
-                        $return['msg'] .= '<tr>';
+                        $return['msg'] .= '<tr class="cell-which-triggers-popup">';
                         $return['msg'] .= "<td></td>";
                         $return['msg'] .= "<td class=\"item\">" . $item . "</td>";
                         $return['msg'] .= '</tr>';
@@ -50,6 +50,7 @@ class ajaxValidate {
                 }
             }
         }
+        $rest->tasks_delete($ipaddress,$port,$username,$password,$task_id);
         return json_encode($return);
     }
 }
