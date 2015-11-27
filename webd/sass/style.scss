@@ -84,3 +84,17 @@ h3.title-c{
 /*ページスタイル*/
 @import "login";
 @import "initsetup";
+
+#search {
+  height:32px;
+  width:32px;
+  border: none;
+  cursor: pointer;
+  color:white;
+  background-color: transparent;
+  position:relative;
+}
+
+//style.cssを編集しないでください
+//style.cssはstyle.scssのコンパイル時に上書きされます
+//スタイルを記述したい場合、HTMLのstyleタグを使うか、style.scssの末尾に記述してコンパイルしてください

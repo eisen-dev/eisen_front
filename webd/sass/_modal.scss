@@ -27,7 +27,9 @@
 	z-index: 2;
 	//位置はjsでセンタリング
 	position: absolute;
-	width: auto;
+	//モーダルの幅(モバイルでは常に100%)
+	width: 100%;
+	//最大幅(全デバイス共通)
 	max-width: 100%;
 	padding: 0 12px;
 	margin-top: 64px;
@@ -35,8 +37,7 @@
 
 .modal-window{
 	position: relative;
-	//モーダルの最大幅
-	max-width: 500px;
+	width: 100%;
 	background-color: $md-grey-50;
 	border-radius: 6px;
 	border: 1px solid $md-grey-300;
@@ -66,21 +67,25 @@
 	padding: 24px;
 }
 .modal-ctrl{
-		padding: 24px;
+		padding: 0 24px 24px 24px;
 }
 
 @media screen and (min-width: 480px) {
-
+	.modal-wrapper{
+		width: 600px;
+	}
 }
 
-
-
 @media screen and (min-width: 768px) {
-	.modal-window{
-		max-width: 600px;
+	.modal-wrapper{
+		width: 700px;
 	}
 }
 
 @media screen and (min-width: 1200px) {
+	.modal-wrapper{
+		width: 700px;
+	}
+
 
 }

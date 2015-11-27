@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+//list-toolsは修正予定
 .list-tools{
 	height: 34px;
 	.list-action{
@@ -26,7 +27,6 @@
 				padding: 0 10px;
 			}
 		}
-
 		& > * {
 			height: 100%;
 		}
@@ -39,8 +39,8 @@ input[type="checkbox"]{
 	+ label .select{
 		display: inline-block;
 		vertical-align: middle;
-		height: 1.3em;
-		width: 1.3em;
+		height: 16px;
+		width: 16px;
 		background-image: url(../images/form_check_a.svg);
 		background-size:100%;
 	}
@@ -56,8 +56,8 @@ input[type="radio"]{
 	+ label .select{
 		display: inline-block;
 		vertical-align: middle;
-		height: 1.3em;
-		width: 1.3em;
+		height: 16px;
+		width: 16px;
 		background-image: url(../images/form_radio_a.svg);
 		background-size:100%;
 	}

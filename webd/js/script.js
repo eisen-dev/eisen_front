@@ -80,4 +80,12 @@ $(function () {
 			$('[data-modal-active="true"]').attr({'data-modal-active':'false'});
 		});
 	});
+	//リストのドロップダウンメニューテスト
+	$('.list-data-option-icon').click(function () {
+		if ($('.dropdown-menu').css("display") == "none") {
+			$('.dropdown-menu').css("display", "block");
+		}else if($('.dropdown-menu').css("display") != "none") {
+			$('.dropdown-menu').css("display", "none");
+		}
+	});
 });

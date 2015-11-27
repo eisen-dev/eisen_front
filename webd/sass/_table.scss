@@ -1,10 +1,49 @@
+.list-tools{
+	height: 34px;
+	.list-action{
+		float: left;
+		height: 100%;
+	}
+	.search-box{
+		float: right;
+		height: 100%;
+		input[type=text]{
+			border: 1px solid $md-grey-400;
+			border-bottom: none;
+		}
+		.search-box__button{
+			height: 100%;
+			background-color: $md-blue-300;
+			float: right;
+			display: table-cell;
+			i{
+				font-size: 18px;
+				display: inline;
+				color: white;
+				line-height: 34px;
+				padding: 0 10px;
+			}
+		}
 
+		& > * {
+			height: 100%;
+		}
+	}
+}
+
+.table-wrapper{
+	//overflow: scroll;
+	//overflow: auto;
+}
 .table{
 	width: 100%;
 	border-collapse: collapse;
 	border: 1px solid $md-grey-300;
 	//border-radius: 6px;
 	//overflow: hidden;
+	//overflow: scroll;
+	//overflow: auto;
+
 	thead{
 		tr{
 			th{
@@ -28,6 +67,10 @@
 			&:last-child{
 				border-bottom: none;
 			}
+			&:hover{
+				background-color: white;
+			}
+
 			td{
 				text-align: left;
 				height: 32px;
@@ -36,6 +79,77 @@
 				padding: 0.8em 0.5em;
 
 
+			}
+		}
+	}
+}
+
+.list-data-ctrl{
+	height: 32px;
+	padding: 0;
+	width: auto;
+	vertical-align: middle;
+}
+
+.list-data-cbox{
+	//background-color: red;
+	display: inline-block;
+	//padding-left: 12px;
+	vertical-align: middle;
+	//font-size: 16px;
+	width: 1.5em;
+	text-align: center;
+}
+
+.list-data-option{
+	//background-color: green;
+	display: inline-block;
+	vertical-align: middle;
+	font-size: 16px;
+	width: 16px;
+	vertical-align: middle;
+	text-align: center;
+	color: $md-grey-600;
+	position: relative;
+}
+
+.list-data-option-icon{
+	cursor: pointer;
+}
+
+.dropdown-menu{
+	position: absolute;
+	display: none;
+	width: 100px;
+	background-color: $md-grey-100;
+	border-radius: 3px;
+	border: 1px solid $md-grey-500;
+	z-index: 999;
+		ul{
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		li{
+			margin: 0;
+			a{
+				display: inline-block;
+				//padding: 16px 8px;
+				width: 100%;
+				height: inherit;
+				font-size: 0.8em;
+				text-decoration: none;
+				padding: 4px;
+				color: $md-grey-700;
+				cursor: pointer;
+				&:hover{
+					background-color: $md-grey-200;
+				}
+				&:active{
+
+				}
+				&:active{
+
+				}
 			}
 		}
 	}

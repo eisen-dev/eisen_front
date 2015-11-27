@@ -8,9 +8,9 @@ input[type="submit"] {
 .button{
 	$color: #68CC68;
 	display: inline-block;
-	margin: 1em 1em 1em 0;
-	padding: 12px 24px;
-	width: 100%;
+	margin: 0 1em 0 0;
+	padding: 0px 24px;
+	width: auto;
 	border-radius: 3px;
 	background-color: $color;
 	color: #FAFAFA;
@@ -18,10 +18,47 @@ input[type="submit"] {
 	text-decoration: none;
 	cursor: pointer;
 	font-size: 1em;
+
+	//20151128削除予定
+	margin: 1em 1em 1em 0;
+	padding: 12px 24px;
+	width: 100%;
+
+	//20151128追加
+	//height: 40px;
+	//line-height: 40px;
 	&:hover{
 		color: #FAFAFA;
 		background-color: darken($color, 10%);
 	}
+}
+
+.button-il{
+	height: 1.2em;
+	vertical-align: middle;
+	padding: 0;
+	line-height: normal;
+}
+
+.button-red{
+
+}
+.button-glay{
+
+}
+.button-inline{
+
+}
+.button-fw{
+	width: 100%;
+	margin: auto 0;
+}
+.button-row{
+	display: flex;
+}
+
+.button-cont{
+
 }
 
 .button--form{
@@ -30,5 +67,19 @@ input[type="submit"] {
 	margin: 0;
 	padding: 0.2em 0.4em;
 	font-size: 1em;
+
+}
+
+@media screen and (min-width: 480px) {
+
+}
+
+
+
+@media screen and (min-width: 768px) {
+
+}
+
+@media screen and (min-width: 1200px) {
 
 }
