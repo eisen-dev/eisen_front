@@ -4,6 +4,7 @@
 					<li><a href="index.php"><i class="fa fa-tachometer"></i><span>ダッシュボード</span></a></li>
 					<li><a href="package_list.php"><i class="fa fa-list-alt"></i><span>パッケージリスト</span></a></li>
 					<li><a href="task_list.php"><i class="fa fa-list-alt"></i><span>タスクリスト</span></a></li>
+					<li><a href="variable_manager.php"><i class="fa fa-list-alt"></i><span>ターゲットホストvariable</span></a></li>
 					<li><a href="host_manager.php"><i class="fa fa-list-alt"></i><span>ターゲットホスト</span></a></li>
 					<li><a href="machine_list.php"><i class="fa fa-server"></i><span>マネージャホスト</span></a></li>
 					<li><a href="profile.php"><i class="fa fa-cog"></i><span>設定</span></a></li>
