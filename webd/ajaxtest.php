@@ -117,7 +117,16 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 										</label>
 									</div>
 									<div class="list-data-option">
-										<i class="fa fa-caret-down"></i>
+										<div class="list-data-option-icon">
+											<i class="fa fa-caret-down"></i>
+										</div>
+										<div class="dropdown-menu">
+											<ul>
+												<li><a>action1</a></li>
+												<li><a>action2</a></li>
+												<li><a>action3</a></li>
+											</ul>
+										</div>
 									</div>
 								</td>
 								<td>1</td>

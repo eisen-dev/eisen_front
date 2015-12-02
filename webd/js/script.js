@@ -82,10 +82,11 @@ $(function () {
 	});
 	//リストのドロップダウンメニューテスト
 	$('.list-data-option-icon').click(function () {
-		if ($('.dropdown-menu').css("display") == "none") {
-			$('.dropdown-menu').css("display", "block");
-		}else if($('.dropdown-menu').css("display") != "none") {
-			$('.dropdown-menu').css("display", "none");
+		var target = $(this).parent().children('.dropdown-menu');
+		if ($(target).css("display") == "none") {
+			$(target).css("display", "block");
+		}else if($(target).css("display") != "none") {
+			$(target).css("display", "none");
 		}
 	});
 });
