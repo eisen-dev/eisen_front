@@ -176,7 +176,7 @@ $dbh = $dba->Connect();
                 width: 500,
                 height: 300,
                 open: function(){
-                    $(this).find("p").html("<a href=includes/PackageAction.php?ip=" + cell_value1+"&port="+cell_value2+">install "+cell_value1+"</a>");
+                    $(this).find("p").html("<a href=host_manager.php?host=" + cell_value1+"\&action="+cell_value2+">install "+cell_value1+"</a>");
                 }
             });
         }
