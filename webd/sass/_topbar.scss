@@ -13,12 +13,20 @@
 }
 
 .topbar-title{
-	//作成中
-	display: none;
+    height: 48px;
+    float: left;
+	padding: 10px 8px;
+
 }
 .eisen-logo{
 	//作成中
-	display: none;
+	height:100%;
+	width: auto;
+}
+
+.eisen-logo-cls-1{
+	fill:$md-grey-700;
+	fill-rule: evenodd;
 }
 
 .navigation-toggle{

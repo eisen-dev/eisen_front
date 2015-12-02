@@ -149,11 +149,19 @@ body {
 }
 
 .topbar-title {
-  display: none;
+  height: 48px;
+  float: left;
+  padding: 10px 8px;
 }
 
 .eisen-logo {
-  display: none;
+  height: 100%;
+  width: auto;
+}
+
+.eisen-logo-cls-1 {
+  fill: #616161;
+  fill-rule: evenodd;
 }
 
 .navigation-toggle {
