@@ -81,7 +81,6 @@ require_once __DIR__ . '/parts/modal.php';
                 data: $(this).serialize(),
                 dataType: 'json',
                 success: function (data) {
-                    console.log(data);
                     $('table#resultTable tbody').html(data.msg);
                 }
             });
@@ -89,21 +88,20 @@ require_once __DIR__ . '/parts/modal.php';
 
         $( document ).ajaxComplete(function (event, xhr, settings)  {
             $(document).on("click", ".cell-which-triggers-popup", function (event) {
-                var cell_value1 = $(event.target).closest('tr').find('.item').text();
-                console.log(cell_value1)
-                if (cell_value1) {
-                    showPopup(cell_value1)
+                var cell_value = $(event.target).closest('tr').find('.item').text();
+                if (cell_value) {
+                    showPopup(cell_value);
                 }
             });
 
-            function showPopup(cell_value1){
+            function showPopup(cell_value) {
                 $("#popup").dialog({
                     width: 500,
                     height: 300,
-                    open: function(){
-                        $(this).find("p.item-1").html("<a href=includes/package_action/package_action.php?package="+cell_value1 + "\&action=install\>Install "+cell_value1+"\</a>");
-                        $(this).find("p.item-2").html("<a href=includes/package_action/package_action.php?package="+cell_value1 + "\&action=update>Update "+cell_value1+"\</a>");
-                        $(this).find("p.item-3").html("<a href=includes/package_action/package_action.php?package="+cell_value1 + "\&action=delete>Delete "+cell_value1+"\</a>");
+                    open: function () {
+                        $(this).find("p.item-1").html("<a href=includes/package_action/package_action.php?package=" + cell_value + "\&action=install\>Install " + cell_value + "\</a>");
+                        $(this).find("p.item-2").html("<a href=includes/package_action/package_action.php?package=" + cell_value + "\&action=update>Update " + cell_value + "\</a>");
+                        $(this).find("p.item-3").html("<a href=includes/package_action/package_action.php?package=" + cell_value + "\&action=delete>Delete " + cell_value + "\</a>");
                     }
                 });
             }

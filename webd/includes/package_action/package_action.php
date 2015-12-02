@@ -43,6 +43,8 @@ $rest = new restclient();
 $task_module="portage";
 $hosts="192.168.233.129";
 
+#TODO we need to filter the variables for security issue
+# like injections
 if ($action=='install') {
     $command = "package==" . $package . "";
 }

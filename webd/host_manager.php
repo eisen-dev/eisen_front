@@ -22,6 +22,14 @@
     </style>
 </head>
 <?php
+if(isset($_GET['host'])){
+    $package = htmlspecialchars($_GET["host"]);
+    var_dump($package);
+}
+if(isset($_GET['action'])){
+    $action = htmlspecialchars($_GET["action"]);
+    var_dump($action);
+}
 $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ . '/parts/modal.php';
@@ -83,7 +91,9 @@ $dbh = $dba->Connect();
                 //$rest->restconnect($ipaddress,$port,$username,$password);
                 $hosts = $rest->host_list($ipaddress,$port,$username,$password);
                 foreach ($hosts as $i=>$row) {
-                    $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
+                    $table = '<tr class="cell-which-triggers-popup"><td class="list-data-ctrl"><div class="list-data-cbox"><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"><div class="select"></div></label></div>';
+                    $table .= '<div class="list-data-option"><div class="list-data-option-icon"><i class="fa fa-caret-down"></i></div>';
+                    $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul><li><a>action1</a></li><li><a>action2</a></li><li><a>action3</a></li></ul></div></td>';
                     $table .= '<td class="ipaddress">' . $row->host . '</td>';
                     $table .= '<td class="groups">' . $row->groups . '</td></tr>';
                     print_r($table);
@@ -139,7 +149,7 @@ $dbh = $dba->Connect();
     </div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
-<script>
+<!--<script>
     $( document ).ready(function() {
         $(document).on("click", ".cell-which-triggers-popup", function(event){
             var cell_value1 = $(event.target).closest('tr').find('.ipaddress').text();
@@ -160,6 +170,6 @@ $dbh = $dba->Connect();
             });
         }
     });
-</script>
+</script>-->
 </body>
 </html>
