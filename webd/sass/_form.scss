@@ -33,6 +33,57 @@
 	}
 }
 
+//form タグをどこに配置するか(flexに影響)
+.n-list-tools{
+	$th: 28px;
+	height: $th;
+
+	background-color: aqua;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	.n-list-action{
+		display: flex;
+		height: $th;
+		.input-list{
+			height: 100%;
+		}
+		.n-list-action-button{
+			display: inline-block;
+			vertical-align: middle;
+			text-align: center;
+			height: $th;
+			line-height: $th;
+			font-size: 14px;
+			padding: 0 6px;
+			border-radius: 3px;
+			width: auto;
+			background-color: blueviolet;
+			//padding: 2px;
+
+		}
+	}
+	.n-searchbox{
+		height: $th;
+		display: flex;
+		float: right;
+		.n-search-box-input{
+			height: $th;
+		}
+		.n-search-button{
+			height: $th;
+			width: 28px;
+			background-color: green;
+		}
+		.n-filter-button{
+			//open filter modal
+			height: $th;
+			width: 28px;
+			background-color: orange;
+		}
+	}
+}
+
 /*inputスタイル*/
 input[type="checkbox"]{
 	display: none;
@@ -79,9 +130,11 @@ input[type="radio"]{
 .input-textarea--r{
 	border-radius: 3px;
 }
+/*
 
 .input-list{
 	font-size: 1em;
 	padding: 0.2em;
 	border-bottom: none;
 }
+*/

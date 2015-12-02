@@ -45,13 +45,22 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 						</div>
 					</div>
 					-->
-					<div class="list-tools">
-						<div class="searchbox">
-							<form>
-								<input type="text">
-							</form>
+					<form>
+					<div class="n-list-tools">
+						<div class="n-list-action">
+							<select name="list-action" class="n-input-list">
+								<option value="0">一括操作</option>
+								<option value="0">更新</option>
+							</select>
+							<div class="n-list-action-button">確認</div>
+						</div>
+						<div class="n-searchbox">
+								<input type="text" class="n-search-box-input">
+								<div class="n-search-button"></div>
+							<div class="n-filter-button"></div>
 						</div>
 					</div>
+					</form>
 
 					<div class="table-wrapper">
 					<table class="table">

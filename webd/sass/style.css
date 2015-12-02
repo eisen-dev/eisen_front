@@ -569,6 +569,51 @@ input[type="submit"] {
   height: 100%;
 }
 
+.n-list-tools {
+  height: 28px;
+  background-color: aqua;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.n-list-tools .n-list-action {
+  display: flex;
+  height: 28px;
+}
+.n-list-tools .n-list-action .input-list {
+  height: 100%;
+}
+.n-list-tools .n-list-action .n-list-action-button {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+  height: 28px;
+  line-height: 28px;
+  font-size: 14px;
+  padding: 0 6px;
+  border-radius: 3px;
+  width: auto;
+  background-color: blueviolet;
+}
+.n-list-tools .n-searchbox {
+  height: 28px;
+  display: flex;
+  float: right;
+}
+.n-list-tools .n-searchbox .n-search-box-input {
+  height: 28px;
+}
+.n-list-tools .n-searchbox .n-search-button {
+  height: 28px;
+  width: 28px;
+  background-color: green;
+}
+.n-list-tools .n-searchbox .n-filter-button {
+  height: 28px;
+  width: 28px;
+  background-color: orange;
+}
+
 /*inputスタイル*/
 input[type="checkbox"] {
   display: none;
@@ -611,12 +656,14 @@ input[type="radio"]:checked + label .select {
   border-radius: 3px;
 }
 
-.input-list {
-  font-size: 1em;
-  padding: 0.2em;
-  border-bottom: none;
-}
+/*
 
+.input-list{
+	font-size: 1em;
+	padding: 0.2em;
+	border-bottom: none;
+}
+*/
 .modal {
   visibility: hidden;
   position: fixed;
