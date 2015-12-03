@@ -6,11 +6,33 @@ class DbAction {
     /**
      * @return PDO
      */
+    public function Check(){
+        #TODO use ini config file instead of php.
+        include dirname(__FILE__) . '/../connect.php';
+        if (!empty($db_host)) {
+            var_dump($db_host);
+        }
+        if (!empty($db_user)) {
+            var_dump($db_user);
+        }
+        if (!empty($db_pass)) {
+            var_dump($db_pass);
+        }
+        if (!empty($db_name)) {
+            var_dump($db_name);
+        }
+        $pdo = new PDO("mysql:host=$db_host");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $dbname = "`".str_replace("`","``",$db_name)."`";
+        $pdo->query("CREATE DATABASE IF NOT EXISTS $dbname");
+        $pdo->query("use $dbname");
+    }
     public function Connect()
     {
         //set static directory
         #TODO use ini config file instead of php.
-        include dirname(__FILE__).'/../connect.php';
+        include dirname(__FILE__) . '/../connect.php';
 
         if (!empty($db_name)) {
             var_dump($db_name);

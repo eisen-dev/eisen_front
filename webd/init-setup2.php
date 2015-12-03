@@ -1,10 +1,18 @@
 <?php
 //issetでpostを全部チェックした方がいい
 if(isset($_POST['submit'])){
-	$db_host = htmlspecialchars($_POST["db_host"]);
-	$db_user = htmlspecialchars($_POST["db_user"]);
-	$db_pass = htmlspecialchars($_POST["db_pass"]);
-	$db_name = htmlspecialchars($_POST["db_name"]);
+	if (!empty($_POST["db_host"])) {
+		$db_host = htmlspecialchars($_POST["db_host"]);
+	}
+	if (!empty($_POST["db_user"])) {
+		$db_user = htmlspecialchars($_POST["db_user"]);
+	}
+	if (!empty($_POST["db_pass"])) {
+		$db_pass = htmlspecialchars($_POST["db_pass"]);
+	}
+	if (!empty($_POST["db_name"])) {
+		$db_name = htmlspecialchars($_POST["db_name"]);
+	}
     //Write file.
 	if(!empty($db_host)) {
         $content = '<?php' . "\n";
@@ -17,9 +25,11 @@ if(isset($_POST['submit'])){
         //ファイルへの書き込み
         $file = 'connect.php';
         file_put_contents($file, $content);
-        //ファイル書き込み後ユーザー設定ページに遷移
-        header('Location:./registration.php') ;
     }
+    require_once __DIR__ . '/connect.php';
+    require_once __DIR__ . '/includes/DbAction.php';
+    $dba = new DbAction();
+    $dbh = $dba->Check();
 }
 ?>
 

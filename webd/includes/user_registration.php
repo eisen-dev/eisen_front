@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ .'/../connect.php';
+require_once __DIR__ . '/../connect.php';
 require_once __DIR__ . '/DbAction.php';
 
 $user_name = trim($_POST['user_name']);
