@@ -160,27 +160,5 @@ $dbh = $dba->Connect();
 		<div class="modal-overlay" data-modal="close"></div>
 	</div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
-<script>
-    $( document ).ready(function() {
-        $(document).on("click", ".cell-which-triggers-popup", function(event){
-            var cell_value1 = $(event.target).closest('tr').find('.ipaddress').text();
-            var cell_value2 = $(event.target).closest('tr').find('.port').text();
-            //console.log(cell_value);
-            if (cell_value1 && cell_value2) {
-                showPopup(cell_value1,cell_value2)
-            }
-        });
-
-        function showPopup(cell_value1,cell_value2){
-            $("#popup").dialog({
-                width: 500,
-                height: 300,
-                open: function(){
-                    $(this).find("p").html("<a href=host_list.php?host=" + cell_value1+"\&action="+cell_value2+">install "+cell_value1+"</a>");
-                }
-            });
-        }
-    });
-</script>
 </body>
 </html>

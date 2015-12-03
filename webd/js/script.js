@@ -101,4 +101,57 @@ $(function () {
             $(target).css("display", "none");
         }
     });
+
+    $(document).on("click", ".cell-which-triggers-popup", function(event){
+        var cellValue1 = $(event.target).closest('tr').find('.ipaddress').text();
+        var cellValue2 = $(event.target).closest('tr').find('.port').text();
+        //console.log(cell_value);
+        if (cellValue1 && cellValue2) {
+            showPopup(cellValue1,cellValue2)
+        }
+    });
+
+    function showPopup(cellValue1,cellValue2){
+        $("#popup").dialog({
+            width: 500,
+            height: 300,
+            open: function(){
+                $(this).find("p").html("<a href=host_list.php?host=" + cellValue1+"\&action="+cellValue2+">install "+cellValue1+"</a>");
+            }
+        });
+    }
+
+    $('#form1').submit(function(event) {
+        event.preventDefault();
+        $.ajax({
+            type: 'POST',
+            url: 'includes/search.php',
+            data: $(this).serialize(),
+            dataType: 'json',
+            success: function (data) {
+                $('table#resultTable tbody').html(data.msg);
+            }
+        });
+    });
+
+    $( document ).ajaxComplete(function (event, xhr, settings)  {
+        $(document).on("click", ".cell-which-triggers-popup", function (event) {
+            var cell_value = $(event.target).closest('tr').find('.item').text();
+            if (cell_value) {
+                showPopup(cell_value);
+            }
+        });
+
+        function showPopup(cell_value) {
+            $("#popup").dialog({
+                width: 500,
+                height: 300,
+                open: function () {
+                    $(this).find("p.item-1").html("<a href=includes/package_action/package_action.php?package=" + cell_value + "\&action=install\>Install " + cell_value + "\</a>");
+                    $(this).find("p.item-2").html("<a href=includes/package_action/package_action.php?package=" + cell_value + "\&action=update>Update " + cell_value + "\</a>");
+                    $(this).find("p.item-3").html("<a href=includes/package_action/package_action.php?package=" + cell_value + "\&action=delete>Delete " + cell_value + "\</a>");
+                }
+            });
+        }
+    });
 });
