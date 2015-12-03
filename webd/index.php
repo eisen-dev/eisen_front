@@ -26,7 +26,7 @@ require_once __DIR__ .'/parts/head.php';
                                 <a href="init-setup1.php">install database</a>
                             </li>
                             <li>
-                                <a href="machine_list.php">add machine</a>
+                                <a href="host_manager.php">add machine</a>
                             </li>
                             <li>
                                 <a href="dbupdate-install.php">update database</a>

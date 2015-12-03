@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>マシン管理</title>
+    <title>マネージャホスト</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="includes/normalize.css">
     <link rel="stylesheet" type="text/css" href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
@@ -22,14 +22,6 @@
     </style>
 </head>
 <?php
-if(isset($_GET['host'])){
-    $package = htmlspecialchars($_GET["host"]);
-    var_dump($package);
-}
-if(isset($_GET['action'])){
-    $action = htmlspecialchars($_GET["action"]);
-    var_dump($action);
-}
 $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ . '/parts/modal.php';
@@ -48,7 +40,7 @@ $dbh = $dba->Connect();
     <div class="contentswrapper">
         <main class="contents menu-set">
             <div class="section">
-                <h2 class="title">ホストリスト</h2>
+                <h2 class="title">マネージャホスト</h2>
 						<div class="list-tools clearfix">
 							<div class="list-action">
 								<select name="list-action" class="input-list">
@@ -64,112 +56,131 @@ $dbh = $dba->Connect();
 								</button>
 							</div>
 						</div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th class="cbox__selectall">
-                        <div class="cbox__wrapper">
-                            <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
-                        </div>
-                    </th>
-                    <th>IPアドレス</th>
-                    <th>グループ</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $dba = new DbAction();
-                $dbh = $dba->Connect();
-                $user_id = $me->get_user_id();
-                $machine = $dba->MachineList($user_id,$dbh);
-                $module=$machine[0];
-                $ipaddress=$machine[1];
-                $port=$machine[2];
-                $username=$machine[3];
-                $password=$machine[4];
-                $rest = new restclient();
-                //$rest->restconnect($ipaddress,$port,$username,$password);
-                $hosts = $rest->host_list($ipaddress,$port,$username,$password);
-                foreach ($hosts as $i=>$row) {
-                    $table = '<tr class="cell-which-triggers-popup"><td class="list-data-ctrl"><div class="list-data-cbox"><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"><div class="select"></div></label></div>';
-                    $table .= '<div class="list-data-option"><div class="list-data-option-icon"><i class="fa fa-caret-down"></i></div>';
-                    $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul><li><a>action1</a></li><li><a>action2</a></li><li><a>action3</a></li></ul></div></td>';
-                    $table .= '<td class="ipaddress">' . $row->host . '</td>';
-                    $table .= '<td class="groups">' . $row->groups . '</td></tr>';
-                    print_r($table);
-                }
-                ?>
-                </tbody>
-            </table>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="cbox__selectall">
+                                <div class="cbox__wrapper">
+                                    <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
+                                </div>
+                            </th>
+                            <th>IPアドレス</th>
+                            <th>ポート</th>
+                            <th>マネージメントツール</th>
+                            <th>ステータス</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $user_id = $me->get_user_id();
+                        $stm = $dbh->prepare("select * from machine_info WHERE user_id=:user_id;");
+                        $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
+                        $stm->execute();
+                        $data = $stm->fetchAll();
+                        $cnt  = count($data); //in case you need to count all rows
+                        //var_dump($data);
+                        foreach ($data as $i => $row) {
+                            $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
+                            $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
+                            $table .= '<td class="port">' . $row['port'] . '</td>';
+                            $table .= '<td class="module">' . $row['module'] . '</td>';
+                            $table .= '<td class="status_id">' . $row['status_id'] . '</td></tr>';
+                            print_r($table);
+                        }
+                        ?>
+                        </tbody>
+                    </table>
             <!--TODO Use modal for this -->
 
             <!--data-modal-targetで開くモーダルのIDを指定する-->
-            <div class="button" data-modal="open" data-modal-target="target_host_list-setting">open setting</div>
+			<div class="button" data-modal="open" data-modal-target="machine_list-setting">open setting</div>
 			</div>
-        </main>
+		</main>
     </div>
 </div>
-<!-- set modal before body tag -->
-<div class="modal" id="target_host_list-setting">
-    <div class="modal-wrapper">
-        <div class="modal-window">
-            <form action="includes/hosts_registration.php" method="post">
-                <div class="modal-header">
-                    <i class="fa fa-times modal-close" data-modal="close"></i>
-                    <span class="modal-title">ホスト設定</span>
-                </div>
-                <div class="modal-contents">
-                    <div class="compact-form">
-                        <div class="compact-form-row">
-                            <div class="compact-form-item-left">
-                                <span>ホスト名</span>
-                            </div>
-                            <div class="compact-form-item-right">
-                                <input type="text" name="host">
-                            </div>
-                        </div>
-                        <div class="compact-form-row">
-                            <div class="compact-form-item-left">
-                                <span>グループリスト</span>
-                            </div>
-                            <div class="compact-form-item-right">
-                                <input type="text" name="groups">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-ctrl">
-                    <input type="submit" name="submit" value="設定して次に進む" class="button">
-                </div>
-            </form>
-        </div>
-    </div>
-    <div class="modal-overlay" data-modal="close"></div>
-</div>
-    </div>
-</div>
+	<!-- set modal before body tag -->
+	<div class="modal" id="machine_list-setting">
+		<div class="modal-wrapper">
+			<div class="modal-window">
+				<form action="includes/machine_registration.php" method="post">
+					<div class="modal-header">
+						<i class="fa fa-times modal-close" data-modal="close"></i>
+						<span class="modal-title">マネージャホスト設定</span>
+					</div>
+					<div class="modal-contents">
+						<div class="compact-form">
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホスト</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_module">
+								</div>
+							</div>
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホスト名</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_host">
+								</div>
+							</div>
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホストポート番号</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_port">
+								</div>
+							</div>
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホストユーザー名</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_user">
+								</div>
+							</div>
+							<div class="compact-form-row">
+								<div class="compact-form-item-left">
+									<span>マネージャホストパスワード</span>
+								</div>
+								<div class="compact-form-item-right">
+									<input type="text" name="rest_pass">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="modal-ctrl">
+						<input type="submit" name="submit" value="設定して次に進む" class="button">
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="modal-overlay" data-modal="close"></div>
+	</div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
-<!--<script>
+<script>
     $( document ).ready(function() {
         $(document).on("click", ".cell-which-triggers-popup", function(event){
             var cell_value1 = $(event.target).closest('tr').find('.ipaddress').text();
-            //var cell_value2 = $(event.target).closest('tr').find('.port').text();
+            var cell_value2 = $(event.target).closest('tr').find('.port').text();
             //console.log(cell_value);
-            if (cell_value1) {
-                showPopup(cell_value1)
+            if (cell_value1 && cell_value2) {
+                showPopup(cell_value1,cell_value2)
             }
         });
 
-        function showPopup(cell_value1){
+        function showPopup(cell_value1,cell_value2){
             $("#popup").dialog({
                 width: 500,
                 height: 300,
                 open: function(){
-                    $(this).find("p").html("<a href=includes/Ping.php?ip=" + cell_value1+">Ping "+cell_value1+"</a>");
+                    $(this).find("p").html("<a href=host_list.php?host=" + cell_value1+"\&action="+cell_value2+">install "+cell_value1+"</a>");
                 }
             });
         }
     });
-</script>-->
+</script>
 </body>
 </html>
