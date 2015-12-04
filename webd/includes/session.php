@@ -24,4 +24,20 @@ class Session {
             return 'logged off';
         }
     }
+
+    # get_out!
+    public function get_out(){
+        if( !isset( $_SESSION['login_user']) ){
+            header('location:login.php');
+        }
+    }
+
+    # logoff
+    public function logoff_user_id(){
+            // remove all session variables
+            session_unset();
+
+            // destroy the session
+            session_destroy();
+    }
 }

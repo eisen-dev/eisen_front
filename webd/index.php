@@ -13,15 +13,12 @@ require_once __DIR__ .'/parts/head.php';
 					<h1>Welcome in Eisen</h1>
                     <!-- TODO グラフを追加 -->
                     <div id="canvas-holder">
-                        <canvas id="chart-area" width="300" height="300"/>
+                        <canvas id="chart-area" width="300" height="300"></canvas>
                     </div>
                 </div>
                     <div class="menu-button">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            <li>
-                                <a href="init-setup1.php">install database</a>
-                            </li>
                             <li>
                                 <a href="host_manager.php">add machine</a>
                             </li>

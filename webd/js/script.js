@@ -128,6 +128,9 @@ $(function () {
             url: 'includes/search.php',
             data: $(this).serialize(),
             dataType: 'json',
+            beforeSend: function (){
+                $('table#resultTable tbody').html("<tr><td></td><td><i class='fa fa-spinner fa-pulse fa-2x'></i></td></tr>");
+            },
             success: function (data) {
                 $('table#resultTable tbody').html(data.msg);
             }

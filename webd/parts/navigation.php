@@ -57,7 +57,14 @@
 							</div>
 							<div class="popup-contents">
 								<div class="menu-list-items">
-									<span>user menu</span>
+									<ul>
+                                        <li>
+                                            <a href="logout.php"><i class="fa fa-cog"></i><span>ログオフ</span></a>
+                                        </li>
+                                        <li>
+											<a href="profile.php"><i class="fa fa-cog"></i><span>設定</span></a>
+										</li>
+									</ul>
 								</div>
 							</div>
 						</div>
