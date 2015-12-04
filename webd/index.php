@@ -20,9 +20,6 @@ require_once __DIR__ .'/parts/head.php';
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a href="dbcreation.php">db create</a>
-                            </li>
-                            <li>
                                 <a href="init-setup1.php">install database</a>
                             </li>
                             <li>

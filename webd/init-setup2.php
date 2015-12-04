@@ -29,7 +29,9 @@ if(isset($_POST['submit'])){
     require_once __DIR__ . '/connect.php';
     require_once __DIR__ . '/includes/DbAction.php';
     $dba = new DbAction();
-    $dbh = $dba->Check();
+    $dba->Check();
+    $dbh = $dba->Connect();
+	$dba->TableCreation($dbh);
 }
 ?>
 
