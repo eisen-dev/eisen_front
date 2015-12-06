@@ -1,4 +1,4 @@
-	<div class="navigation">
+			<div class="navigation">
 			<div class="navigation-menu">
 				<ul>
 					<li><a href="index.php"><i class="fa fa-tachometer"></i><span>ダッシュボード</span></a></li>
@@ -53,11 +53,22 @@
 
 						<div class="menu-popup">
 							<div class="popup-title">
-								<i class="fa fa-user fa-inline"></i>user menu
+								<i class="fa fa-user fa-inline"></i>ユーザー
 							</div>
 							<div class="popup-contents">
 								<div class="menu-list-items">
 									<ul>
+										<li class="menu-user-info">
+											<span class="menu-user-id">
+											<?php
+											print $me->get_user_id();
+											?>
+											</span>
+											<span class="menu-user-id-suffx">でログインしています</span>
+                                        </li>
+									</ul>
+									<div class="separator"></div>
+									<ul class="link-list-fw">
                                         <li>
                                             <a href="logout.php"><i class="fa fa-cog"></i><span>ログオフ</span></a>
                                         </li>

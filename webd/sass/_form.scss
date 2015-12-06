@@ -3,6 +3,7 @@
 //list-toolsは修正予定
 .list-tools{
 	height: 34px;
+	width: 100%;
 	.list-action{
 		float: left;
 		height: 100%;
@@ -33,12 +34,16 @@
 	}
 }
 
+.list-filter{
+	width: 100%;
+	height: 300px;//auto
+}
+
 //form タグをどこに配置するか(flexに影響)
 .n-list-tools{
 	$th: 28px;
 	height: $th;
-
-	background-color: aqua;
+	//background-color: aqua;
 	width: 100%;
 	display: flex;
 	justify-content: space-between;
@@ -56,11 +61,12 @@
 			line-height: $th;
 			font-size: 14px;
 			padding: 0 6px;
+			margin-left: 2px;
 			border-radius: 3px;
 			width: auto;
-			background-color: blueviolet;
+			color: white;
+			background-color: $md-blue-500;
 			//padding: 2px;
-
 		}
 	}
 	.n-searchbox{
@@ -73,13 +79,28 @@
 		.n-search-button{
 			height: $th;
 			width: 28px;
-			background-color: green;
+			background-color: $md-blue-500;
+			border-right: 1px solid $md-blue-600;
+
+			text-align: center;
+			i{
+				color: white;
+				display: inline-block;
+				line-height: $th;
+				font-size: 16px;
+			}
 		}
 		.n-filter-button{
-			//open filter modal
 			height: $th;
 			width: 28px;
-			background-color: orange;
+			background-color: $md-blue-300;
+			text-align: center;
+			i{
+				color: white;
+				display: inline-block;
+				line-height: $th;
+				font-size: 16px;
+			}
 		}
 	}
 }
@@ -131,7 +152,6 @@ input[type="radio"]{
 	border-radius: 3px;
 }
 /*
-
 .input-list{
 	font-size: 1em;
 	padding: 0.2em;

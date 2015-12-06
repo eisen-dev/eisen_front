@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- デザイン開発・テスト用ファイル -->
 <html lang="ja">
 <?php
 //タイトル
@@ -10,7 +11,10 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 
 <body>
 	<div class="wrapper">
+		<!-- navigation here -->
 <?php require_once __DIR__ .'/parts/navigation.php'; ?>
+		<!-- navigation end -->
+
 		<div class="contentswrapper">
 			<main class="contents menu-set">
 				<div class="section">
@@ -45,6 +49,8 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 						</div>
 					</div>
 					-->
+
+					<!-- new list control tools -->
 					<form>
 					<div class="n-list-tools">
 						<div class="n-list-action">
@@ -56,11 +62,23 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 						</div>
 						<div class="n-searchbox">
 								<input type="text" class="n-search-box-input">
-								<div class="n-search-button"></div>
-							<div class="n-filter-button"></div>
+								<button class="n-search-button"><i class="fa fa-search"></i></button>
+								<button class="n-filter-button"><i class="fa fa-filter"></i></button>
 						</div>
 					</div>
+
+					<!-- list filter test
+					<div class="list-filter">
+						<div class="list-filter-separator">
+							<div class="list-filter-item">
+
+							</div>
+						</div>
+					</div>
+					-->
+
 					</form>
+					<!--  new list control tools end-->
 
 					<div class="table-wrapper">
 					<table class="table">
