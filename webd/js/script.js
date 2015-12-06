@@ -1,8 +1,8 @@
 $(function () {
     //topbarのメニューボタン
-    $('.menu-button').click(function () {
+    $('.menu-icon').click(function () {
         var navw = $(".navigation").width();
-        var popup = $(this).children('.menu-popup');
+        var popup = $(this).parent().children('.menu-popup');
         if ($(popup).css("display") == "none") {
             //menu-popupをすべて閉じる,popupの切替
             $('.menu-popup').animate({height: "hide"}, {
