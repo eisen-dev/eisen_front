@@ -31,7 +31,6 @@ class DbAction {
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $dbname = "`".str_replace("`","``",$db_name)."`";
-        var_dump($dbname);
         $pdo->query("CREATE DATABASE IF NOT EXISTS $dbname");
         $pdo->query("use $dbname");
     }
@@ -41,13 +40,6 @@ class DbAction {
         //set static directory
         #TODO use ini config file instead of php.
         include dirname(__FILE__) . '/../connect.php';
-
-        if (!empty($db_name)) {
-            var_dump($db_name);
-        }
-        if (!empty($db_host)) {
-            var_dump($db_host);
-        }
 
         if (!empty($db_name)) {
             if (!empty($db_host)) {
@@ -110,8 +102,8 @@ class DbAction {
             'pack_management_system',
             array(
                 'pack_sys_id' => 'INT AUTO_INCREMENT',
-                'pack_sys_name'=> 'VARCHAR(20)',
-                'pack_sys_version' => 'VARCHAR(20)',
+                'pack_sys_name'=> 'VARCHAR(60)',
+                'pack_sys_version' => 'VARCHAR(60)',
                 'all_sys_pack_hash' => 'VARCHAR(60)',
                 'installed_sys_pack_hash' => 'VARCHAR(60)',
                 'machine_id'=> 'INT NOT NULL'
@@ -121,8 +113,8 @@ class DbAction {
             'installed_package',
             array(
                 'installed_pack_id' => 'INT AUTO_INCREMENT',
-                'installed_pack_category'=> 'VARCHAR(20)',
-                'installed_pack_name' => 'VARCHAR(20)',
+                'installed_pack_category'=> 'VARCHAR(60)',
+                'installed_pack_name' => 'VARCHAR(60)',
                 'installed_pack_version' => 'VARCHAR(60)',
                 'installed_pack_summary' => 'VARCHAR(60)',
                 'pack_sys_id' => 'INT NOT NULL'
@@ -132,8 +124,8 @@ class DbAction {
             'pack_info',
             array(
                 'pack_id' => 'INT AUTO_INCREMENT',
-                'pack_category'=> 'VARCHAR(20)',
-                'pack_name' => 'VARCHAR(20)',
+                'pack_category'=> 'VARCHAR(60)',
+                'pack_name' => 'VARCHAR(60)',
                 'pack_version' => 'VARCHAR(60)',
                 'pack_summary' => 'VARCHAR(60)',
                 'pack_sys_id' => 'INT NOT NULL'
@@ -143,7 +135,7 @@ class DbAction {
             'status',
             array(
                 'status_id' => 'INT AUTO_INCREMENT',
-                'status_info'=> 'VARCHAR(20)',
+                'status_info'=> 'VARCHAR(60)',
             ),$dbh);
     }
 
@@ -153,7 +145,6 @@ class DbAction {
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
-        //var_dump($data);
         $myMachine = array();
         foreach ($data as $i => $row) {
             $myMachine += array($row['module'],
@@ -165,6 +156,25 @@ class DbAction {
                 $row['user_id']);
             }
         return $myMachine;
+    }
+
+    public function installedPackageList($pack_sys_id, $dbh) {
+        $stm = $dbh->prepare("select * from installed_package WHERE pack_sys_id=:pack_sys_id;");
+        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
+        $stm->execute();
+        $data = $stm->fetchAll();
+        $cnt  = count($data); //in case you need to count all rows
+        return $data;
+    }
+
+    public function installedPackageSearch($pack_sys_id, $dbh, $search) {
+        $stm = $dbh->prepare("select * from installed_package WHERE installed_pack_name=:search AND pack_sys_id=:pack_sys_id;");
+        $stm-> bindParam(':search', $search, PDO::PARAM_STR);
+        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
+        $stm->execute();
+        $data = $stm->fetchAll();
+        $cnt  = count($data); //in case you need to count all rows
+        return $data;
     }
 
     public function some_logging_function($log){
@@ -198,40 +208,45 @@ class DbAction {
         }
     }
     public function UpdateInstalledPackageList($data,$dbh){
-        $test= none;
-        foreach ($data as $value){
+        $test2 = 'test';
+        $test3=1;
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        foreach (explode("\n", $data->stdout) as $item) {
             try {
-                $sqlcheck = $dbh->prepare("SELECT COUNT(*) FROM pack_info WHERE pack_category = :pack_cat AND pack_name = :pack_name AND pack_version = :pack_version AND pack_sys_id = :pack_sys_id;");
+                $sqlcheck = $dbh->prepare("SELECT COUNT(*) FROM installed_package WHERE installed_pack_category = :pack_cat AND installed_pack_name = :pack_name AND installed_pack_version = :pack_version AND installed_pack_summary = :pack_sum AND pack_sys_id = :pack_sys_id;");
                 //connect as appropriate as above
-                $sqlcheck-> bindParam(':pack_cat', $value[0], PDO::PARAM_STR);
-                $sqlcheck-> bindParam(':pack_name', $value[1], PDO::PARAM_STR);
-                $sqlcheck-> bindParam(':pack_version', $value[2], PDO::PARAM_STR);
-                $sqlcheck-> bindParam(':pack_sys_id', $test, PDO::PARAM_INT);
+                $sqlcheck-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
+                $sqlcheck-> bindParam(':pack_name', $item, PDO::PARAM_STR);
+                $sqlcheck-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
+                $sqlcheck-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
+                $sqlcheck-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
                 $sqlcheck->execute();
                 $result = $sqlcheck->fetchAll(PDO::FETCH_NUM);
                 if (in_array(0,$result[0]))
                 {
                     try {
-                        $query = $dbh->prepare('INSERT INTO pack_info (pack_category, pack_name, pack_version, pack_summary, pack_sys_id) VALUES (:pack_cat, :pack_name, :pack_version, NULL, :pack_sys_id);');
-                        $query-> bindParam(':pack_cat', $value[0], PDO::PARAM_STR);
-                        $query-> bindParam(':pack_name', $value[1], PDO::PARAM_STR);
-                        $query-> bindParam(':pack_version', $value[2], PDO::PARAM_STR);
-                        $query-> bindParam(':pack_sys_id', $test, PDO::PARAM_INT);
-                        //$query-> bindParam(':pack_expl', NULL, PDO::PARAM_STR);
-                        echo var_dump($query);
+                        $query = $dbh->prepare('INSERT INTO installed_package (installed_pack_category, installed_pack_name, installed_pack_version, installed_pack_summary, pack_sys_id) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id);');
+                        $query-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
+                        $query-> bindParam(':pack_name', $item, PDO::PARAM_STR);
+                        $query-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
+                        $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
+                        $query-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
                         $query->execute(); //invalid query!
                     } catch(PDOException $ex) {
                         echo "An Error occured!"; //user friendly message
-                        this.some_logging_function($ex->getMessage());
+                        $this->some_logging_function($ex->getMessage());
                     }
+                }else{
+                    echo"already present";
                 }
             } catch(PDOException $ex) {
                 echo "An Error occured!"; //user friendly message
-                this.some_logging_function($ex->getMessage());
+                $this->some_logging_function($ex->getMessage());
             }
         }
     }
-    public function UpdateRepositoryPackageList($data,$dbh){
+    public function UpdatePackageList($data,$dbh){
         $test= none;
         foreach ($data as $value) {
             try {
@@ -251,7 +266,6 @@ class DbAction {
                         $query->bindParam(':pack_version', $value[2], PDO::PARAM_STR);
                         $query->bindParam(':pack_sys_id', $test, PDO::PARAM_INT);
                         //$query-> bindParam(':pack_expl', NULL, PDO::PARAM_STR);
-                        echo var_dump($query);
                         $query->execute(); //invalid query!
                     } catch (PDOException $ex) {
                         echo "An Error occured!"; //user friendly message

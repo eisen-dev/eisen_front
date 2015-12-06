@@ -33,10 +33,15 @@ require_once __DIR__ .'/parts/head.php';
                 </div>
 			</main>
 		</div>
+    <?php
+    $something['1']=20;
+    ?>
     <script>
+
+        var jsString = '<?php echo $something['1'] ;?>';
         var doughnutData = [
             {
-                value: 300,
+                value: jsString,
                 color:"#F7464A",
                 highlight: "#FF5A5E",
                 label: "Red"
@@ -67,7 +72,6 @@ require_once __DIR__ .'/parts/head.php';
             }
 
         ];
-
 
         window.onload = function(){
             // pie chart options
@@ -101,13 +105,10 @@ require_once __DIR__ .'/parts/head.php';
 
                 //Function - Will fire on animation completion.
                 onAnimationComplete : null
-            }
+            };
             var ctx = document.getElementById("chart-area").getContext("2d");
             window.myPie = new Chart(ctx).Doughnut(doughnutData,doughnutOptions);
         };
-
-
-
     </script>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
 </body>

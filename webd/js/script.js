@@ -107,7 +107,7 @@ $(function () {
         var cellValue2 = $(event.target).closest('tr').find('.port').text();
         //console.log(cell_value);
         if (cellValue1 && cellValue2) {
-            showPopup(cellValue1,cellValue2)
+            showPopup(cellValue1,cellValue2);
         }
     });
 
@@ -133,6 +133,11 @@ $(function () {
             },
             success: function (data) {
                 $('table#resultTable tbody').html(data.msg);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(xhr.status);
+                alert(thrownError);
+                alert(xhr.responseText);
             }
         });
     });
