@@ -109,7 +109,8 @@ class DbAction {
                 'installed_sys_pack_hash' => 'VARCHAR(60)',
                 'machine_id'=> 'INT NOT NULL'
             ),$dbh);
-
+#TODO  Alter table installed_package ADD CONSTRAINT installed_package_uc    UNIQUE INDEX (pack_sys_id, installed_pack_name);
+# CREATE UNIQUE INDEX installed_package_uc ON installed_package (pack_sys_id ASC, installed_pack_name ASC);
         $this->CreateDbTable(
             'installed_package',
             array(
@@ -120,7 +121,7 @@ class DbAction {
                 'installed_pack_summary' => 'VARCHAR(60)',
                 'pack_sys_id' => 'INT NOT NULL'
             ),$dbh);
-
+#TODO  Alter table pack_info ADD CONSTRAINT pack_info_uc    UNIQUE INDEX (pack_sys_id, pack_name);
         $this->CreateDbTable(
             'pack_info',
             array(
@@ -263,38 +264,90 @@ class DbAction {
             }
         }
     }
-    public function UpdatePackageList($data,$dbh){
+
+    public function UpdateInstalledPackageListFast($data,$dbh){
         $test2 = 'test';
         $test3=1;
+        $query = $dbh->prepare('INSERT INTO installed_package (installed_pack_category, installed_pack_name, installed_pack_version, installed_pack_summary, pack_sys_id) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id);');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
         foreach (explode("\n", $data->stdout) as $item) {
             try {
-                $sqlcheck = $dbh->prepare("SELECT COUNT(*) FROM pack_info WHERE pack_category = :pack_cat AND pack_name = :pack_name AND pack_version = :pack_version AND pack_sys_id = :pack_sys_id;");
-                //connect as appropriate as above
-                $sqlcheck->bindParam(':pack_cat', $test2, PDO::PARAM_STR);
-                $sqlcheck->bindParam(':pack_name', $item, PDO::PARAM_STR);
-                $sqlcheck->bindParam(':pack_version', $test2, PDO::PARAM_STR);
-                $sqlcheck->bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-                //$sqlcheck-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
-                $sqlcheck->execute();
-                $result = $sqlcheck->fetchAll(PDO::FETCH_NUM);
-                if (in_array(0, $result[0])) {
-                    try {
-                        $query = $dbh->prepare('INSERT INTO pack_info (pack_category, pack_name, pack_version, pack_summary, pack_sys_id) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id);');
-                        $query-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
-                        $query-> bindParam(':pack_name', $item, PDO::PARAM_STR);
-                        $query-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
-                        $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-                        $query-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
-                        $query->execute(); //invalid query!
-                    } catch (PDOException $ex) {
-                        echo "An Error occured!2"; //user friendly message
-                        $this->some_logging_function($ex->getMessage());
-                    }
-                }
+                $query-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
+                $query-> bindParam(':pack_name', $item, PDO::PARAM_STR);
+                $query-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
+                $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
+                $query-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
+                $query->execute(); //invalid query!
+            } catch(PDOException $ex) {
+                echo"already present<br>";
+                //echo "An Error occured!"; //user friendly message
+                //$this->some_logging_function($ex->getMessage());
+            }
+        }
+    }
+
+    public function UpdatePackageListFast($data,$dbh){
+        $test2 = 'test';
+        $test3=1;
+        $query = $dbh->prepare('INSERT INTO pack_info (pack_category, pack_name, pack_version, pack_summary, pack_sys_id) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id);');
+        foreach (explode("\n", $data->stdout) as $item) {
+            try {
+                $query-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
+                $query-> bindParam(':pack_name', $item, PDO::PARAM_STR);
+                $query-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
+                $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
+                $query-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
+                $query->execute(); //invalid query!
             } catch (PDOException $ex) {
                 echo "An Error occured!1"; //user friendly message
                 $this->some_logging_function($ex->getMessage());
             }
         }
+    }
+
+    public function md5sumInstallPackage($data,$dbh){
+        $test2 = 'test';
+        $test3=1;
+        $query = $dbh->prepare('INSERT INTO pack_management_system
+            (pack_sys_id, pack_sys_name, pack_sys_version, installed_sys_pack_hash, machine_id)
+            VALUES (:pack_sys_id, :pack_sys_name, :pack_sys_version, :installed_sys_pack_hash, :machine_id)
+            ON DUPLICATE KEY UPDATE installed_sys_pack_hash = VALUES (installed_sys_pack_hash) ;');
+        try {
+            $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
+            $query-> bindParam(':pack_sys_name', $test2, PDO::PARAM_STR);
+            $query-> bindParam(':pack_sys_version', $test2, PDO::PARAM_STR);
+            $query-> bindParam(':installed_sys_pack_hash', $data, PDO::PARAM_STR);
+            $query-> bindParam(':machine_id', $test3, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+            return ($query->rowCount());
+        } catch (PDOException $ex) {
+            echo "An Error occured! (md5sumInstallPackage)"; //user friendly message
+            $this->some_logging_function($ex->getMessage());
+        }
+        return 'error';
+        //}
+    }
+
+    public function md5sumAllPackage($data,$dbh){
+        $test2 = 'test';
+        $test3=1;
+        $query = $dbh->prepare('INSERT INTO pack_management_system
+            (pack_sys_id, pack_sys_name, pack_sys_version, all_sys_pack_hash, machine_id)
+            VALUES (:pack_sys_id, :pack_sys_name, :pack_sys_version, :all_sys_pack_hash, :machine_id)
+            ON DUPLICATE KEY UPDATE all_sys_pack_hash = VALUES (all_sys_pack_hash) ;');
+        try {
+            $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
+            $query-> bindParam(':pack_sys_name', $test2, PDO::PARAM_STR);
+            $query-> bindParam(':pack_sys_version', $test2, PDO::PARAM_STR);
+            $query-> bindParam(':all_sys_pack_hash', $data, PDO::PARAM_STR);
+            $query-> bindParam(':machine_id', $test3, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+            return ($query->rowCount());
+        } catch (PDOException $ex) {
+            echo "An Error occured! (md5sumInstallPackage)"; //user friendly message
+            $this->some_logging_function($ex->getMessage());
+        }
+        //}
     }
 }
