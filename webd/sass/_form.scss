@@ -4,8 +4,12 @@
 .list-tools{
 	height: 34px;
 	width: 100%;
-	.list-action{
+	.list-action-left{
 		float: left;
+		height: 100%;
+	}
+	.list-action-right{
+		float: right;
 		height: 100%;
 	}
 	.search-box{

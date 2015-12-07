@@ -18,59 +18,35 @@ require_once __DIR__ .'/parts/head.php';
                 </div>
                     <div class="menu-button">
                         <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="host_manager.php">add machine</a>
-                            </li>
-                            <li>
-                                <a href="dbupdate-install.php">update database</a>
-                            </li>
-                            <li>
-                                <a href="package_list.php">show list</a>
-                            </li>
-                        </ul>
                     </div>
                 </div>
 			</main>
 		</div>
     <?php
-    $something['1']=20;
+    require_once __DIR__ . '/includes/DbAction.php';
+
+    $dba = new DbAction();
+    $dbh = $dba->Connect();
+    $pack_sys_id=1;
+    $something=$dba->CountPackage($pack_sys_id, $dbh);
     ?>
     <script>
 
-        var jsString = '<?php echo $something['1'] ;?>';
+        var instPack = '<?php echo $something['installed_package'] ;?>';
+        var notInstPack = '<?php echo $something['pack_info'] ;?>';
         var doughnutData = [
             {
-                value: jsString,
+                value: instPack,
                 color:"#F7464A",
                 highlight: "#FF5A5E",
-                label: "Red"
+                label: "Installed Package"
             },
             {
-                value: 50,
+                value: notInstPack,
                 color: "#46BFBD",
                 highlight: "#5AD3D1",
-                label: "Green"
-            },
-            {
-                value: 100,
-                color: "#FDB45C",
-                highlight: "#FFC870",
-                label: "Yellow"
-            },
-            {
-                value: 40,
-                color: "#949FB1",
-                highlight: "#A8B3C5",
-                label: "Grey"
-            },
-            {
-                value: 120,
-                color: "#4D5360",
-                highlight: "#616774",
-                label: "Dark Grey"
+                label: "Not Installed Package"
             }
-
         ];
 
         window.onload = function(){

@@ -10,6 +10,7 @@ include(dirname(__FILE__).'/DbAction.php');
 
 class dbcontroller {
 
+# TODO this two class need to be uptimize with oop
     function updateInstalledPackage()
     {
         /*
@@ -37,6 +38,7 @@ class dbcontroller {
 
         $task_id = $rest->task_register($ipaddress, $port, $username, $password, $hosts, $command, $task_module);
         $package = $rest->tasks_run($ipaddress, $port, $username, $password, $task_id);
+        echo 'Start time: '.date("Y-m-d | h:i:sa").'<br>';
         foreach ($package as $i => $row) {
             //echo($i);
             foreach ($row->contacted as $i => $row) {
@@ -45,5 +47,47 @@ class dbcontroller {
             }
         }
         $rest->tasks_delete($ipaddress,$port,$username,$password,$task_id);
+        echo 'Stop Time: '.date("Y-m-d | h:i:sa").'<br>';
+    }
+
+    function updatePackage()
+    {
+        /*
+        $me = new Session();
+        $me->start_session();
+        $me->is_session_started();
+
+
+        $user_id = $me->get_user_id();
+        */
+
+        $module = "Ansible";
+        $ipaddress = "192.168.233.130";
+        $port = "5000";
+        $username = "ansible";
+        $password = "default";
+        $rest = new restclient();
+
+        $task_module = "shell";
+        $hosts = "192.168.233.129";
+        $command = "equery --no-pipe --quiet list -po '*'";
+
+        $dba = new DbAction();
+        $dbh = $dba->Connect();
+
+        $task_id = $rest->task_register($ipaddress, $port, $username, $password, $hosts, $command, $task_module);
+        $package = $rest->tasks_run($ipaddress, $port, $username, $password, $task_id);
+        echo 'Start time: '.date("Y-m-d | h:i:sa").'<br>';
+        foreach ($package as $i => $row) {
+            foreach ($row->contacted as $i => $row) {
+                $dba->UpdatePackageList($row,$dbh);
+
+            }
+        }
+        $rest->tasks_delete($ipaddress,$port,$username,$password,$task_id);
+        echo 'Stop Time: '.date("Y-m-d | h:i:sa").'<br>';
     }
 }
+
+$test = new dbcontroller();
+$test->updatePackage();

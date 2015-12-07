@@ -144,20 +144,20 @@ $(function () {
 
     $( document ).ajaxComplete(function (event, xhr, settings)  {
         $(document).on("click", ".cell-which-triggers-popup", function (event) {
-            var cell_value = $(event.target).closest('tr').find('.item').text();
-            if (cell_value) {
-                showPopup(cell_value);
+            var cellValue = $(event.target).closest('tr').find('.item').text();
+            if (cellValue) {
+                showPopup(cellValue);
             }
         });
 
-        function showPopup(cell_value) {
+        function showPopup(cellValue) {
             $("#popup").dialog({
                 width: 500,
                 height: 300,
                 open: function () {
-                    $(this).find("p.item-1").html("<a href=includes/package_action/package_action.php?package=" + cell_value + "\&action=install\>Install " + cell_value + "\</a>");
-                    $(this).find("p.item-2").html("<a href=includes/package_action/package_action.php?package=" + cell_value + "\&action=update>Update " + cell_value + "\</a>");
-                    $(this).find("p.item-3").html("<a href=includes/package_action/package_action.php?package=" + cell_value + "\&action=delete>Delete " + cell_value + "\</a>");
+                    $(this).find("p.item-1").html("<a href=includes/package_action/package_action.php?package=" + cellValue + "\&action=install\>Install " + cellValue + "\</a>");
+                    $(this).find("p.item-2").html("<a href=includes/package_action/package_action.php?package=" + cellValue + "\&action=update>Update " + cellValue + "\</a>");
+                    $(this).find("p.item-3").html("<a href=includes/package_action/package_action.php?package=" + cellValue + "\&action=delete>Delete " + cellValue + "\</a>");
                 }
             });
         }
