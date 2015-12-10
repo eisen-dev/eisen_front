@@ -31,6 +31,7 @@ class AjaxValidate
             $package = $dba->installedPackageList($pack_sys_id, $dbh);
             foreach ($package as $i => $row) {
                 $return['msg'] .= '<tr class="cell-which-triggers-popup">';
+                $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td>$i</td>";
                 $return['msg'] .= "<td class=\"item\">" .
                     $row['installed_pack_name'] . "</td>";
@@ -42,6 +43,7 @@ class AjaxValidate
             $package = $dba->installedPackageSearch($pack_sys_id, $dbh, $search);
             foreach ($package as $i => $row) {
                 $return['msg'] .= '<tr class="cell-which-triggers-popup">';
+                $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td>$i</td>";
                 $return['msg'] .= "<td class=\"item\">" .
                     $row['installed_pack_name'] . "</td>";

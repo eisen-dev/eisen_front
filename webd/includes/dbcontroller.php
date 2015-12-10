@@ -5,8 +5,8 @@
  * Date: 2015/12/04
  * Time: 10:49
  */
-include(dirname(__FILE__).'/restclient.php');
-include(dirname(__FILE__).'/DbAction.php');
+include_once(dirname(__FILE__).'/restclient.php');
+include_once(dirname(__FILE__).'/DbAction.php');
 
 class dbcontroller
 {
