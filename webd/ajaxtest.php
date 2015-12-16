@@ -51,33 +51,63 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 					-->
 
 					<!-- new list control tools -->
-					<form>
-					<div class="n-list-tools">
-						<div class="n-list-action">
-							<select name="list-action" class="n-input-list">
-								<option value="0">一括操作</option>
-								<option value="0">更新</option>
-							</select>
-							<div class="n-list-action-button">確認</div>
-						</div>
-						<div class="n-searchbox">
+					<form id="example-form">
+						<div class="n-list-tools">
+							<div class="n-list-action">
+								<select name="list-action" class="n-input-list">
+									<option value="0">一括操作</option>
+									<option value="0">更新</option>
+								</select>
+								<div class="n-list-action-button">確認</div>
+							</div>
+							<div class="n-searchbox">
 								<input type="text" class="n-search-box-input">
-								<button class="n-search-button"><i class="fa fa-search"></i></button>
+								<button type="submit" class="n-search-button"><i class="fa fa-search"></i></button>
 								<button class="n-filter-button"><i class="fa fa-filter"></i></button>
+							</div>
 						</div>
-					</div>
+					</form>
 
-					<!-- list filter test
+
 					<div class="list-filter">
-						<div class="list-filter-separator">
+						<div class="list-filter-group">
 							<div class="list-filter-item">
-
+								<span class="list-filter-title">インストール状況</span>
+								<select name="list-action" class="n-input-list">
+									<option value="0">すべて</option>
+									<option value="0">未インストール</option>
+									<option value="0">インストール済み</option>
+								</select>
+							</div>
+							<div class="list-filter-item">
+								<span class="list-filter-title">インストール状況</span>
+								<input type="checkbox" id="testbooox">
+								<label for="testbooox">
+									<div class="select"></div>
+									チェックボックスにチェックをいれる
+								</label>
+							</div>
+							<div class="list-filter-item">
+								<span class="list-filter-title">インストール状況</span>
+								<input type="checkbox" id="testbooox">
+								<label for="testbooox">
+									<div class="select"></div>
+									チェックボックスにチェックをいれる
+								</label>
+							</div>
+						</div>
+						<div class="list-filter-group">
+							<div class="list-filter-item">
+								<span class="list-filter-title">インストール状況</span>
+								<select name="list-action" class="n-input-list">
+									<option value="0">すべて</option>
+									<option value="0">未インストール</option>
+									<option value="0">インストール済み</option>
+								</select>
 							</div>
 						</div>
 					</div>
-					-->
 
-					</form>
 					<!--  new list control tools end-->
 
 					<div class="table-wrapper">
