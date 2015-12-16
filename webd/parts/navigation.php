@@ -21,7 +21,7 @@
 			</svg>
 		</div>
 		<div class="menu clearfix">
-			<div class="menu-button menu-machines menu-border">
+<!--			<div class="menu-button menu-machines menu-border">
 				<div class="menu-icon">
 					<i class="fa fa-server"></i>
 					<div class="menu-icon-text">
@@ -38,7 +38,7 @@
 						</div>
 					</div>
 				</div>
-			</div>
+			</div>-->
 			<div class="menu-button menu-user menu-border">
 				<div class="menu-icon">
 					<i class="fa fa-user"></i>
