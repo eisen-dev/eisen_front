@@ -1,5 +1,5 @@
-# bayes_website
-Website framework client interacting with the emira server application.
+# Eisen_Frontend
+Website framework client interacting with the eisen agent api.
 
 code style:
 4 space indent
