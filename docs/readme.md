@@ -1,6 +1,7 @@
 This is the Eisen documentation directory.
 
 Index:  
+    - [structure and terminology](structure.md)
     - [Restful api documentation](api.md)
 
 
