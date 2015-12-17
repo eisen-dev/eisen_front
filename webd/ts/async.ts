@@ -3,6 +3,12 @@
 /// <reference path="libs/jqueryui.d.ts"/>
 "use strict";
 
+/* this variable is getted from php in package_list.php */
+declare var target: string;
+
+console.log(target);
+//var userID = <?php echo json_encode($userData); ?>;
+console.log(target);
 jQuery("#form1").submit(function (event) {
     event.preventDefault();
     jQuery.ajax({
@@ -41,21 +47,30 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
                 jQuery(this).find("p.item-1").html(
                     "<a href=includes/package_action/package_action.php?" +
                     "package=" + cellValue +
-                    "\&action=install\>Install "
+                    "\&action=install" +
+                    "\&target="
+                    + target +
+                    ">Install "
                     + cellValue +
                     "\</a>");
                 jQuery(this).find("p.item-2").html(
                     "<a href=includes/package_action/package_action.php?" +
                     "package="
                     + cellValue +
-                    "\&action=update>Update "
+                    "\&action=update" +
+                    "\&target="
+                    + target +
+                    ">Update "
                     + cellValue +
                     "\</a>");
                 jQuery(this).find("p.item-3").html(
                     "<a href=includes/package_action/package_action.php?" +
                     "package="
                     + cellValue +
-                    "\&action=delete>Delete "
+                    "\&action=delete" +
+                    "\&target="
+                    + target +
+                    ">Delete "
                     + cellValue +
                     "\</a>");
             },

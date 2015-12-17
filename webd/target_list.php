@@ -100,8 +100,21 @@ $dbh = $dba->Connect();
                                     <input type="checkbox" id="cbox-' . $i . '">
                                     <label for="cbox-' . $i . '">
                                 <div class="select"></div></label></div>';
-                    $table .= '<div class="list-data-option"><div class="list-data-option-icon"><i class="fa fa-caret-down"></i></div>';
-                    $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul><li><a>action1</a></li><li><a>action2</a></li><li><a>action3</a></li></ul></div></td>';
+                    $table .= '<div class="list-data-option">
+                                <div class="list-data-option-icon">
+                                    <i class="fa fa-caret-down"></i>
+                                </div>';
+                    $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul>
+                    <li>
+                        <a href="package_list.php?target='.$row->host.'">package list</a>
+                    </li>
+                    <li>
+                        <a href="task_list.php?target='.$row->host.'">task list</a>
+                    </li>
+                    <li>
+                        <a href="target_list_settings.php?target='.$row->host.'">settings</a>
+                    </li>
+                    </ul></div></td>';
                     $table .= '<td class="ipaddress">' . $row->host . '</td>';
                     $table .= '<td class="groups">' . $row->groups . '</td></tr>';
                     print_r($table);
@@ -109,8 +122,6 @@ $dbh = $dba->Connect();
                 ?>
                 </tbody>
             </table>
-            <!--TODO Use modal for this -->
-
             <!--data-modal-targetで開くモーダルのIDを指定する-->
             <div class="button" data-modal="open" data-modal-target="target_host_list-setting">open setting</div>
 			</div>

@@ -25,6 +25,9 @@
 $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ . '/parts/modal.php';
+// target host to be used for get package list
+$target = $_GET['target'];
+var_dump($target);
 ?>
 <body>
 <div id="popup" data-name="name" class="dialog">
@@ -53,8 +56,8 @@ require_once __DIR__ . '/parts/modal.php';
                         </select>
                     </div>
                     <div class="search-box">
-                            <input type="text" name="field1" id="field1">
-                            <input type="submit" name="submit" id="submit" value="Submit Form">
+                        <input type="text" name="field1" id="field1">
+                        <input type="submit" name="submit" id="submit" value="Submit Form">
                     </div>
                 </form>
                 </div>
@@ -79,6 +82,7 @@ require_once __DIR__ . '/parts/modal.php';
     </div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
+<script>var target = '<?php echo $target ;?>';</script>
 <script type="text/javascript" src="ts/async.js"></script>
 </body>
 </html>

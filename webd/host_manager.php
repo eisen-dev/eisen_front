@@ -26,15 +26,16 @@ $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ . '/parts/modal.php';
 require_once __DIR__ . '/includes/DbAction.php';
+
 $dba = new DbAction();
 $dbh = $dba->Connect();
 ?>
 <body>
 <!-- TODO better popup menu style -->
-<div id="popup" data-name="name" class="dialog">
-    <!--<a href="">Hello world!</a>-->
+<!--<div id="popup" data-name="name" class="dialog">
+    <a href="">Hello world!</a>
     <p></p>
-</div>
+</div>-->
 <div class="wrapper">
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
     <div class="contentswrapper">
