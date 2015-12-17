@@ -44,8 +44,8 @@ catch (PDOException $e) {
 </div>
 <div class="wrapper">
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
-    <div class="contentswrapper">
-        <main class="contents menu-set">
+    <div class="contentswrapper menu-set">
+        <main class="contents">
             <div class="card">
                 <form action="includes/account.php" method="post">
                     <h2 class="title">アカウント設定</h2>

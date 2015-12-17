@@ -1,6 +1,10 @@
 @charset "UTF-8";
 
-input[type="submit"] {
+input[type="submit"]{
+  -webkit-appearance: none;
+	border: none;
+}
+button{
   -webkit-appearance: none;
 	border: none;
 }

@@ -11,8 +11,8 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 <body>
 	<div class="wrapper">
 <?php require_once __DIR__ .'/parts/navigation.php'; ?>
-		<div class="contentswrapper">
-			<main class="contents menu-set">
+		<div class="contentswrapper menu-set">
+			<main class="contents">
 				<div class="section">
 					<h2>テンプレート</h2>
 				</div>

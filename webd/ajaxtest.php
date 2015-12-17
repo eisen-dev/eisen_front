@@ -15,8 +15,8 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 <?php require_once __DIR__ .'/parts/navigation.php'; ?>
 		<!-- navigation end -->
 
-		<div class="contentswrapper">
-			<main class="contents menu-set">
+		<div class="contentswrapper menu-set">
+			<main class="contents">
 				<div class="section">
 					<h2>テンプレート</h2>
 					<p>---ajaxとモーダルウィンドウのサンプル---</p>
@@ -63,47 +63,45 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 							<div class="n-searchbox">
 								<input type="text" class="n-search-box-input">
 								<button type="submit" class="n-search-button"><i class="fa fa-search"></i></button>
-								<button class="n-filter-button"><i class="fa fa-filter"></i></button>
+								<div class="n-filter-button"><i class="fa fa-filter"></i></div>
 							</div>
 						</div>
 					</form>
 
-
 					<div class="list-filter">
 						<div class="list-filter-group">
+							<div class="list-group-title">フィルター</div>
 							<div class="list-filter-item">
 								<span class="list-filter-title">インストール状況</span>
-								<select name="list-action" class="n-input-list">
+								<select name="install-status" class="n-input-list">
 									<option value="0">すべて</option>
 									<option value="0">未インストール</option>
 									<option value="0">インストール済み</option>
 								</select>
 							</div>
 							<div class="list-filter-item">
-								<span class="list-filter-title">インストール状況</span>
-								<input type="checkbox" id="testbooox">
-								<label for="testbooox">
-									<div class="select"></div>
-									チェックボックスにチェックをいれる
-								</label>
+								<span class="list-filter-title">カテゴリ検索</span>
+								<input type="text">
 							</div>
 							<div class="list-filter-item">
-								<span class="list-filter-title">インストール状況</span>
-								<input type="checkbox" id="testbooox">
-								<label for="testbooox">
+								<span class="list-filter-title">チェックボックス</span>
+								<input type="checkbox" id="list-filter-example-checkbox-1">
+								<label for="list-filter-example-checkbox-1">
 									<div class="select"></div>
-									チェックボックスにチェックをいれる
+									オプション
 								</label>
 							</div>
 						</div>
 						<div class="list-filter-group">
-							<div class="list-filter-item">
-								<span class="list-filter-title">インストール状況</span>
-								<select name="list-action" class="n-input-list">
-									<option value="0">すべて</option>
-									<option value="0">未インストール</option>
-									<option value="0">インストール済み</option>
-								</select>
+							<div class="list-group-title">検索オプション</div>
+						<div class="list-filter-item">
+								<span class="list-filter-title">正規表現</span>
+								<input type="checkbox" id="list-filter-example-checkbox-2">
+								<label for="list-filter-example-checkbox-2">
+									<div class="select"></div>
+									使用する
+								</label>
+								<span class="list-filter-comment">サンプルです</span>
 							</div>
 						</div>
 					</div>

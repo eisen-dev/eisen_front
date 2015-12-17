@@ -133,6 +133,8 @@ body {
   }
 
   /*メニュートグル時に左側にpadding*/
+}
+@media screen and (min-width: 768px) {
   .menu-set {
     padding-left: 200px;
   }
@@ -307,15 +309,6 @@ body {
   /*
   , screen and (min-device-width: 480px)
   */
-  .navigation-toggle {
-    float: left;
-  }
-
-  .navigation-toggle {
-    /*navigationのトグルはモバイルのみ*/
-    display: none;
-  }
-
   .menu-button {
     position: relative;
     width: auto;
@@ -345,6 +338,17 @@ body {
     display: inline;
     font-size: 16px;
     vertical-align: middle;
+  }
+}
+@media screen and (min-width: 768px) {
+  .topbar {
+    padding-left: 200px;
+  }
+
+  .navigation-toggle {
+    /*navigationのトグルはモバイルのみ*/
+    display: none;
+    float: left;
   }
 }
 .navigation {
@@ -393,13 +397,18 @@ body {
   font-size: 0.9em;
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (min-width: 768px) {
   .navigation {
     left: 0px;
   }
 }
 /*汎用パーツ*/
 input[type="submit"] {
+  -webkit-appearance: none;
+  border: none;
+}
+
+button {
   -webkit-appearance: none;
   border: none;
 }
@@ -580,8 +589,12 @@ input[type="submit"] {
   height: 34px;
   width: 100%;
 }
-.list-tools .list-action {
+.list-tools .list-action-left {
   float: left;
+  height: 100%;
+}
+.list-tools .list-action-right {
+  float: right;
   height: 100%;
 }
 .list-tools .search-box {
@@ -607,11 +620,6 @@ input[type="submit"] {
 }
 .list-tools .search-box > * {
   height: 100%;
-}
-
-.list-filter {
-  width: 100%;
-  height: 300px;
 }
 
 .n-list-tools {
@@ -667,12 +675,58 @@ input[type="submit"] {
   width: 28px;
   background-color: #64b5f6;
   text-align: center;
+  cursor: pointer;
 }
 .n-list-tools .n-searchbox .n-filter-button i {
   color: white;
   display: inline-block;
   line-height: 28px;
   font-size: 16px;
+}
+
+.list-filter {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #64b5f6;
+  background-color: #fafafa;
+}
+
+.list-filter-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  justify-content: space-between;
+  border-top: 1px solid #e0e0e0;
+}
+.list-filter-group:first-child {
+  border-top: none;
+}
+
+.list-filter-item {
+  flex-direction: row;
+  flex-basis: 100%;
+  padding: 16px 8px;
+}
+
+.list-filter-title {
+  display: block;
+}
+
+.list-group-title {
+  flex-basis: 100%;
+  display: block;
+  width: 100%;
+  padding: 4px 0 4px 8px;
+  font-size: 0.8em;
+  background-color: #bbdefb;
+}
+
+.list-filter-comment {
+  display: block;
+  font-size: 0.8em;
+  color: #616161;
 }
 
 /*inputスタイル*/
@@ -724,6 +778,16 @@ input[type="radio"]:checked + label .select {
 	border-bottom: none;
 }
 */
+@media screen and (min-width: 480px) {
+  .list-filter-item {
+    flex-basis: 50%;
+  }
+}
+@media screen and (min-width: 768px) {
+  .list-filter-item {
+    flex-basis: 33%;
+  }
+}
 .modal {
   visibility: hidden;
   position: fixed;

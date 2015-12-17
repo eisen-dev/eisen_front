@@ -69,13 +69,13 @@ body{
 	}
 
 	/*メニュートグル時に左側にpadding*/
-	.menu-set{
-		padding-left: 200px;
-	}
+
 }
 
 @media screen and (min-width: 768px) {
-
+	.menu-set{
+		padding-left: 200px;
+	}
 }
 
 @media screen and (min-width: 1200px) {

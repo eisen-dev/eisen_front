@@ -180,14 +180,8 @@
 	/*
 	, screen and (min-device-width: 480px)
 	*/
-	.navigation-toggle{
-		float: left;
-	}
 
-	.navigation-toggle{
-		/*navigationのトグルはモバイルのみ*/
-		display: none;
-	}
+
 
 	.menu{
 
@@ -233,7 +227,16 @@
 }
 
 @media screen and (min-width: 768px) {
+	.topbar{
+		// navigation表示によるpadding調整
+		padding-left: 200px;
+	}
 
+	.navigation-toggle{
+		/*navigationのトグルはモバイルのみ*/
+		display: none;
+		float: left;
+	}
 }
 
 @media screen and (min-width: 1200px) {

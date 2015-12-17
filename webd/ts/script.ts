@@ -111,6 +111,16 @@ jQuery(
                 jQuery(target).css("display", "none");
             }
         });
+		
+		// フィルターの開閉
+		jQuery(".n-filter-button").click(function () {
+			var target = jQuery(".list-filter");
+            if (jQuery(target).css("display") == "none") {
+                jQuery(target).css("display", "block");
+            } else if (jQuery(target).css("display") != "none") {
+                jQuery(target).css("display", "none");
+            }
+		});
 
         jQuery(document).on("click", ".cell-which-triggers-popup", function (event) {
             var cellValue1 = jQuery(event.target).closest("tr").find(".ipaddress").text();

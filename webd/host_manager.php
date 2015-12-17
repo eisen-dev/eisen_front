@@ -38,8 +38,8 @@ $dbh = $dba->Connect();
 </div>-->
 <div class="wrapper">
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
-    <div class="contentswrapper">
-        <main class="contents menu-set">
+    <div class="contentswrapper menu-set">
+        <main class="contents">
             <div class="section">
                 <h2 class="title">マネージャホスト</h2>
 						<div class="list-tools clearfix">
