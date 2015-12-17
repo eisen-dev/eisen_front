@@ -16,33 +16,52 @@ require_once __DIR__ .'/parts/head.php';
                         <canvas id="chart-area" width="300" height="300"></canvas>
                     </div>
                 </div>
-                    <div class="menu-button">
-                        <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
-                    </div>
-                </div>
-			</main>
-		</div>
+                <div id="md5sum"></div>
     <?php
-    require_once __DIR__ . '/includes/DbAction.php';
+/*    include_once __DIR__ . '/includes/DbAction.php';
+    include_once __DIR__ . '/includes/dbcontroller.php';
 
     $dba = new DbAction();
     $dbh = $dba->Connect();
     $pack_sys_id=1;
     $something=$dba->CountPackage($pack_sys_id, $dbh);
+
+    # TODO move to a different script and c
+    $update =array();
+    $test = new dbcontroller();
+    $update['installed'] = $test->md5sumInstalled();
+    $update['all'] = $test->md5sumAll();
+    if ($update['installed'] > 0) {
+        echo 'installed update<br>';
+        echo $update['installed'].'<br>';
+    }
+    else{
+        echo 'Installed package already update<br>';
+
+    }
+    if ($update['all'] > 0) {
+        echo 'all update<br>';
+        echo $update['all'];
+    }else{
+        echo 'repository package already update<br>';
+    }*/
     ?>
+        </main>
+    </div>
+    </div>
     <script>
 
-        var instPack = '<?php echo $something['installed_package'] ;?>';
-        var notInstPack = '<?php echo $something['pack_info'] ;?>';
+/*        var instPack = '<?php echo $something['installed_package'] ;?>';
+        var notInstPack = '<?php echo $something['pack_info'] ;?>';*/
         var doughnutData = [
             {
-                value: instPack,
+                value: 240,
                 color:"#F7464A",
                 highlight: "#FF5A5E",
                 label: "Installed Package"
             },
             {
-                value: notInstPack,
+                value: 10,
                 color: "#46BFBD",
                 highlight: "#5AD3D1",
                 label: "Not Installed Package"
@@ -80,12 +99,12 @@ require_once __DIR__ .'/parts/head.php';
                 animateScale : true,
 
                 //Function - Will fire on animation completion.
-                onAnimationComplete : null
+                //onAnimationComplete : false
             };
             var ctx = document.getElementById("chart-area").getContext("2d");
             window.myPie = new Chart(ctx).Doughnut(doughnutData,doughnutOptions);
         };
     </script>
-<?php require_once __DIR__ .'/parts/scripts.php'; ?>
+    <?php require_once __DIR__ .'/parts/scripts.php'; ?>
 </body>
 </html>

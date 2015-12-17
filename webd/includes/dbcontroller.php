@@ -39,6 +39,8 @@ class dbcontroller
 
         $task_id = $rest->task_register($ipaddress, $port, $username, $password, $hosts, $command, $task_module);
         $package = $rest->tasks_run($ipaddress, $port, $username, $password, $task_id);
+        $rest->tasks_delete($ipaddress, $port, $username, $password, $task_id);
+        $dba->DeleteInstalledPackageListFast($dbh);
         echo 'Start time: ' . date("Y-m-d | h:i:sa") . '<br>';
         foreach ($package as $i => $row) {
             //echo($i);
@@ -46,7 +48,6 @@ class dbcontroller
                 $dba->UpdateInstalledPackageListFast($row, $dbh);
             }
         }
-        $rest->tasks_delete($ipaddress, $port, $username, $password, $task_id);
         echo 'Stop Time: ' . date("Y-m-d | h:i:sa") . '<br>';
     }
 
@@ -77,6 +78,8 @@ class dbcontroller
 
         $task_id = $rest->task_register($ipaddress, $port, $username, $password, $hosts, $command, $task_module);
         $package = $rest->tasks_run($ipaddress, $port, $username, $password, $task_id);
+        $rest->tasks_delete($ipaddress, $port, $username, $password, $task_id);
+        $dba->DeletePackageListFast($dbh);
         echo 'Start time: ' . date("Y-m-d | h:i:sa") . '<br>';
         foreach ($package as $i => $row) {
             foreach ($row->contacted as $i => $row) {
@@ -86,7 +89,6 @@ class dbcontroller
                 }*/
             }
         }
-        $rest->tasks_delete($ipaddress, $port, $username, $password, $task_id);
         echo 'Stop Time: ' . date("Y-m-d | h:i:sa") . '<br>';
     }
 

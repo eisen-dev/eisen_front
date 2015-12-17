@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>マシン管理</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width,
+     initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="includes/normalize.css">
-    <link rel="stylesheet" type="text/css" href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="sass/style.css">
     <link rel="stylesheet" type="text/css" href="includes/jquery-ui.css"/>
     <style>
@@ -69,7 +71,8 @@ $dbh = $dba->Connect();
                 <tr>
                     <th class="cbox__selectall">
                         <div class="cbox__wrapper">
-                            <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
+                            <input type="checkbox" id="cbox-selectall">
+                            <label for="cbox-selectall"></label>
                         </div>
                     </th>
                     <th>IPアドレス</th>
@@ -91,7 +94,12 @@ $dbh = $dba->Connect();
                 //$rest->restconnect($ipaddress,$port,$username,$password);
                 $hosts = $rest->host_list($ipaddress,$port,$username,$password);
                 foreach ($hosts as $i=>$row) {
-                    $table = '<tr class="cell-which-triggers-popup"><td class="list-data-ctrl"><div class="list-data-cbox"><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"><div class="select"></div></label></div>';
+                    $table = '<tr class="cell-which-triggers-popup">
+                                <td class="list-data-ctrl">
+                                <div class="list-data-cbox">
+                                    <input type="checkbox" id="cbox-' . $i . '">
+                                    <label for="cbox-' . $i . '">
+                                <div class="select"></div></label></div>';
                     $table .= '<div class="list-data-option"><div class="list-data-option-icon"><i class="fa fa-caret-down"></i></div>';
                     $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul><li><a>action1</a></li><li><a>action2</a></li><li><a>action3</a></li></ul></div></td>';
                     $table .= '<td class="ipaddress">' . $row->host . '</td>';
@@ -149,27 +157,5 @@ $dbh = $dba->Connect();
     </div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
-<!--<script>
-    $( document ).ready(function() {
-        $(document).on("click", ".cell-which-triggers-popup", function(event){
-            var cell_value1 = $(event.target).closest('tr').find('.ipaddress').text();
-            //var cell_value2 = $(event.target).closest('tr').find('.port').text();
-            //console.log(cell_value);
-            if (cell_value1) {
-                showPopup(cell_value1)
-            }
-        });
-
-        function showPopup(cell_value1){
-            $("#popup").dialog({
-                width: 500,
-                height: 300,
-                open: function(){
-                    $(this).find("p").html("<a href=includes/Ping.php?ip=" + cell_value1+">Ping "+cell_value1+"</a>");
-                }
-            });
-        }
-    });
-</script>-->
 </body>
 </html>

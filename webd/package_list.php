@@ -39,36 +39,35 @@ require_once __DIR__ . '/parts/modal.php';
             <div class="section">
                 <h2 class="title">パッケージリスト</h2>
                 <div class="list-tools clearfix">
+                    <form></form>
+                <form id="form1">
                     <div class="list-action">
-                        <select name="list-action" class="input-list">
+                        <select name="list-action-general" class="input-list">
                             <option value="0">一括操作</option>
-                            <option value="0">更新</option>
+                            <option value="1">更新</option>
                         </select>
-                        <input type="submit" value="適用" class="button button--form">
-                    </div>
-                    <div class="list-action=right">
-                        <input type="radio" name="rad" id="rad3"><label for="rad3">
-                            <div class="select"></div>
-                            する</label>
-                        <input type="radio" name="rad" id="rad4"><label for="rad4">
-                            <div class="select"></div>
-                            しない</label>
+                        <select name="list-action-package" class="input-list">
+                            <option value="0">表示パッケージ</option>
+                            <option value="1">インストール済み</option>
+                            <option value="2">すべてのパッケージ</option>
+                        </select>
                     </div>
                     <div class="search-box">
-                        <form id="form1">
                             <input type="text" name="field1" id="field1">
                             <input type="submit" name="submit" id="submit" value="Submit Form">
-                        </form>
                     </div>
+                </form>
                 </div>
                 <table class="table" name="table" id="resultTable">
                     <thead>
                     <tr>
                         <th class="cbox__selectall">
                             <div class="cbox__wrapper">
-                                <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
+                                <input type="checkbox" id="cbox-selectall">
+                                <label for="cbox-selectall"></label>
                             </div>
                         </th>
+                        <th>ID</th>
                         <th>パッケージ名</th>
                     </tr>
                     </thead>
@@ -80,5 +79,6 @@ require_once __DIR__ . '/parts/modal.php';
     </div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
+<script type="text/javascript" src="ts/async.js"></script>
 </body>
 </html>

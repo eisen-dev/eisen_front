@@ -169,6 +169,15 @@ class DbAction {
         return $data;
     }
 
+    public function PackageList($pack_sys_id, $dbh) {
+        $stm = $dbh->prepare("select * from pack_info WHERE pack_sys_id=:pack_sys_id;");
+        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
+        $stm->execute();
+        $data = $stm->fetchAll();
+        $cnt  = count($data); //in case you need to count all rows
+        return $data;
+    }
+
     public function CountPackage($pack_sys_id, $dbh) {
         $cnt=array();
         $stm = $dbh->prepare("select * from installed_package WHERE pack_sys_id=:pack_sys_id;");
@@ -187,6 +196,17 @@ class DbAction {
     public function installedPackageSearch($pack_sys_id, $dbh, $search) {
         $search = "%$search%";
         $stm = $dbh->prepare("select * from installed_package WHERE pack_sys_id=:pack_sys_id AND installed_pack_name LIKE :search ;");
+        $stm-> bindParam(':search', $search, PDO::PARAM_STR);
+        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
+        $stm->execute();
+        $data = $stm->fetchAll();
+        $cnt  = count($data); //in case you need to count all rows
+        return $data;
+    }
+
+    public function PackageSearch($pack_sys_id, $dbh, $search) {
+        $search = "%$search%";
+        $stm = $dbh->prepare("select * from pack_info WHERE pack_sys_id=:pack_sys_id AND pack_name LIKE :search ;");
         $stm-> bindParam(':search', $search, PDO::PARAM_STR);
         $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
         $stm->execute();
@@ -225,45 +245,6 @@ class DbAction {
             some_logging_function($ex->getMessage());
         }
     }
-    public function UpdateInstalledPackageList($data,$dbh){
-        $test2 = 'test';
-        $test3=1;
-        # TODO: it have problem finding duplicate NULL value
-        # FIX: cutted value if using to short VARCHAR so never matched
-        foreach (explode("\n", $data->stdout) as $item) {
-            try {
-                $sqlcheck = $dbh->prepare("SELECT COUNT(*) FROM installed_package WHERE installed_pack_category = :pack_cat AND installed_pack_name = :pack_name AND installed_pack_version = :pack_version AND installed_pack_summary = :pack_sum AND pack_sys_id = :pack_sys_id;");
-                //connect as appropriate as above
-                $sqlcheck-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
-                $sqlcheck-> bindParam(':pack_name', $item, PDO::PARAM_STR);
-                $sqlcheck-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
-                $sqlcheck-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-                $sqlcheck-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
-                $sqlcheck->execute();
-                $result = $sqlcheck->fetchAll(PDO::FETCH_NUM);
-                if (in_array(0,$result[0]))
-                {
-                    try {
-                        $query = $dbh->prepare('INSERT INTO installed_package (installed_pack_category, installed_pack_name, installed_pack_version, installed_pack_summary, pack_sys_id) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id);');
-                        $query-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
-                        $query-> bindParam(':pack_name', $item, PDO::PARAM_STR);
-                        $query-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
-                        $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-                        $query-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
-                        $query->execute(); //invalid query!
-                    } catch(PDOException $ex) {
-                        echo "An Error occured!"; //user friendly message
-                        $this->some_logging_function($ex->getMessage());
-                    }
-                }else{
-                    echo"already present";
-                }
-            } catch(PDOException $ex) {
-                echo "An Error occured!"; //user friendly message
-                $this->some_logging_function($ex->getMessage());
-            }
-        }
-    }
 
     public function UpdateInstalledPackageListFast($data,$dbh){
         $test2 = 'test';
@@ -287,6 +268,22 @@ class DbAction {
         }
     }
 
+    public function DeleteInstalledPackageListFast($dbh){
+        $test2 = 'test';
+        $test3=1;
+        $query = $dbh->prepare('DELETE FROM installed_package WHERE pack_sys_id = :pack_sys_id ;');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        try {
+            $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+        } catch(PDOException $ex) {
+            echo"already present<br>";
+            //echo "An Error occured!"; //user friendly message
+            //$this->some_logging_function($ex->getMessage());
+        }
+    }
+
     public function UpdatePackageListFast($data,$dbh){
         $test2 = 'test';
         $test3=1;
@@ -303,6 +300,22 @@ class DbAction {
                 echo "An Error occured!1"; //user friendly message
                 $this->some_logging_function($ex->getMessage());
             }
+        }
+    }
+
+    public function DeletePackageListFast($dbh){
+        $test2 = 'test';
+        $test3=1;
+        $query = $dbh->prepare('DELETE FROM pack_info WHERE pack_sys_id = :pack_sys_id ;');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        try {
+            $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+        } catch(PDOException $ex) {
+            echo"already present<br>";
+            //echo "An Error occured!"; //user friendly message
+            //$this->some_logging_function($ex->getMessage());
         }
     }
 

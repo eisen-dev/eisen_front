@@ -8,6 +8,7 @@
 require_once __DIR__ . '/../DbAction.php';
 require_once __DIR__."/../session.php";
 require_once __DIR__."/../restclient.php";
+require_once __DIR__."/../dbcontroller.php";
 
 if(isset($_GET['package'])){
     $package = htmlspecialchars($_GET["package"]);
@@ -58,11 +59,12 @@ elseif ($action == 'delete') {
 ini_set('max_execution_time', 300); //300 seconds = 5 minutes
 $task_id=$rest->task_register($ipaddress,$port,$username,$password,$hosts,$command,$task_module);
 $package=$rest->tasks_run($ipaddress,$port,$username,$password,$task_id);
+$rest->tasks_delete($ipaddress,$port,$username,$password,$task_id);
 
 #better var_dump for httpful
 foreach ($package as $i=>$row) {
     var_dump($i);
     var_dump($row);
 }
-
-$rest->tasks_delete($ipaddress,$port,$username,$password,$task_id);
+$test = new dbcontroller();
+$test->updateInstalledPackage();
