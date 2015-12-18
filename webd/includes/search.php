@@ -27,7 +27,7 @@ class AjaxValidate
         $pack_sys_id = 1;
 
         if ($list == NOT_SELECTED) {
-            var_dump($list);
+            $return = $this->isInstalled($dba, $dbh, $search, $update, $pack_sys_id);
         }
         if ($list == INSTALLED) {
             $return = $this->isInstalled($dba, $dbh, $search, $update, $pack_sys_id);

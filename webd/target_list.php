@@ -106,13 +106,13 @@ $dbh = $dba->Connect();
                                 </div>';
                     $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul>
                     <li>
-                        <a href="package_list.php?target='.$row->host.'">package list</a>
+                        <a href="package_list.php?target='.$row->host.'&os='.$row->port.'">package list</a>
                     </li>
                     <li>
-                        <a href="task_list.php?target='.$row->host.'">task list</a>
+                        <a href="task_list.php?target='.$row->host.'&os='.$row->port.'">task list</a>
                     </li>
                     <li>
-                        <a href="target_list_settings.php?target='.$row->host.'">settings</a>
+                        <a href="target_list_settings.php?target='.$row->host.'&os='.$row->port.'">settings</a>
                     </li>
                     </ul></div></td>';
                     $table .= '<td class="ipaddress">' . $row->host . '</td>';

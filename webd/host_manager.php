@@ -80,14 +80,23 @@ $dbh = $dba->Connect();
                         $data = $stm->fetchAll();
                         $cnt  = count($data); //in case you need to count all rows
                         //var_dump($data);
+                        $_SESSION["manager"] =array();
                         foreach ($data as $i => $row) {
                             $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
                             $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
                             $table .= '<td class="port">' . $row['port'] . '</td>';
                             $table .= '<td class="module">' . $row['module'] . '</td>';
                             $table .= '<td class="status_id">' . $row['status_id'] . '</td></tr>';
+                            var_dump($row);
                             print_r($table);
+                            $_SESSION["manager"]["ipaddress"] = $row["ipaddress"];
+                            $_SESSION["manager"]["port"]=$row["port"];
+                            $_SESSION["manager"]["module"]=$row["module"];
+                            $_SESSION["manager"]["status_id"]=$row["status_id"];
+                            $_SESSION["manager"]["username"]=$row["username"];
+                            $_SESSION["manager"]["password"]=$row["password"];
                         }
+                        var_dump($_SESSION["manager"]);
                         ?>
                         </tbody>
                     </table>

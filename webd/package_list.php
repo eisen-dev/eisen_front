@@ -26,8 +26,15 @@ $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ . '/parts/modal.php';
 // target host to be used for get package list
-$target = $_GET['target'];
-var_dump($target);
+$target = array();
+if(isset($_GET['target'])){
+    $target["ipaddress"] = htmlspecialchars($_GET["target"]);
+}
+// we need the os for decide which package manager to use
+// probably port is not needed as setted from the target host settings
+if(isset($_GET['os'])){
+    $target["os"] = htmlspecialchars($_GET["os"]);
+}
 ?>
 <body>
 <div id="popup" data-name="name" class="dialog">
@@ -82,7 +89,10 @@ var_dump($target);
     </div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
-<script>var target = '<?php echo $target ;?>';</script>
+<script>
+    var target_ipaddress = '<?php echo $target["ipaddress"] ;?>';
+    var target_os = '<?php echo $target["os"] ;?>';
+</script>
 <script type="text/javascript" src="ts/async.js"></script>
 </body>
 </html>

@@ -4,11 +4,12 @@
 "use strict";
 
 /* this variable is getted from php in package_list.php */
-declare var target: string;
+declare var target_ipaddress: string;
+declare var target_os: string;
 
-console.log(target);
+console.log(target_ipaddress);
 //var userID = <?php echo json_encode($userData); ?>;
-console.log(target);
+console.log(target_ipaddress);
 jQuery("#form1").submit(function (event) {
     event.preventDefault();
     jQuery.ajax({
@@ -49,7 +50,7 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
                     "package=" + cellValue +
                     "\&action=install" +
                     "\&target="
-                    + target +
+                    + target_ipaddress +
                     ">Install "
                     + cellValue +
                     "\</a>");
@@ -59,7 +60,7 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
                     + cellValue +
                     "\&action=update" +
                     "\&target="
-                    + target +
+                    + target_ipaddress +
                     ">Update "
                     + cellValue +
                     "\</a>");
@@ -69,7 +70,7 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
                     + cellValue +
                     "\&action=delete" +
                     "\&target="
-                    + target +
+                    + target_ipaddress +
                     ">Delete "
                     + cellValue +
                     "\</a>");
