@@ -1,3 +1,4 @@
+```
 api.add_resource(AgentInfo.AgentAPI, '/todo/api/v1.0/agent', endpoint='agent')
 api.add_resource(GroupsList.GroupsAPI, '/todo/api/v1.0/groups', endpoint='groups')
 api.add_resource(GroupsList.GroupAPI, '/todo/api/v1.0/group/<int:id>', endpoint='group')
@@ -11,3 +12,4 @@ api.add_resource(Tasks.TasksAPI, '/todo/api/v1.0/tasks', endpoint='tasks')
 api.add_resource(Tasks.TaskAPI, '/todo/api/v1.0/task/<int:id>', endpoint='task')
 api.add_resource(Tasks.TaskRunAPI, '/todo/api/v1.0/task/<int:id>/run',
                  endpoint='taskrun')
+```
