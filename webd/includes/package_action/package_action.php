@@ -10,6 +10,15 @@ require_once __DIR__."/../session.php";
 require_once __DIR__."/../restclient.php";
 require_once __DIR__."/../dbcontroller.php";
 
+
+# get needed class
+$test = new dbcontroller();
+$me = new Session();
+$rest = new restclient();
+
+$me->start_session();
+$me->is_session_started();
+
 $target = array();
 if(isset($_GET['package'])){
     $package = htmlspecialchars($_GET["package"]);
@@ -25,21 +34,6 @@ if(isset($_GET['module'])){
 }
 
 
-$me = new Session();
-$me->start_session();
-$me->is_session_started();
-
-
-/*$dba = new DbAction();
-$dbh = $dba->Connect();
-$user_id = $me->get_user_id();
-
-$machine = $dba->MachineList($user_id,$dbh);
-$module=$machine[0];
-$ipaddress=$machine[1];
-$port=$machine[2];
-$username=$machine[3];
-$password=$machine[4];*/
 
 var_dump($package);
 var_dump($action);
@@ -53,7 +47,8 @@ $ipaddress=$_SESSION["manager"]["ipaddress"];
 $port=$_SESSION["manager"]["port"];
 $username=$_SESSION["manager"]["username"];
 $password=$_SESSION["manager"]["password"];
-$rest = new restclient();
+$machine_host=$_SESSION["manager"];
+var_dump($machine_host);
 
 // Get the target host variable
 // is defined in target_list.php
@@ -83,5 +78,8 @@ foreach ($package as $i=>$row) {
     var_dump($i);
     var_dump($row);
 }
-$test = new dbcontroller();
-$test->updateInstalledPackage();
+
+# Excluded target command because now is doing only gentoo package
+# to be added in the future.
+$test->updateInstalledPackage($machine_host,$target_host,$target_module);
+$test->updatePackage($machine_host,$target_host,$target_module);

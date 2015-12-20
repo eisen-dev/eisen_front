@@ -11,33 +11,30 @@ include_once(dirname(__FILE__).'/DbAction.php');
 class dbcontroller
 {
 
-# TODO this two class need to be uptimize with oop
-    function updateInstalledPackage()
+
+# TODO this two class need to be optimize with oop
+    function updateInstalledPackage($machine_host,$target_host)
     {
-        /*
         $me = new Session();
         $me->start_session();
         $me->is_session_started();
 
+        var_dump($machine_host);
 
-        $user_id = $me->get_user_id();
-        */
-
-        $module = "Ansible";
-        $ipaddress = "192.168.233.130";
-        $port = "5000";
-        $username = "ansible";
-        $password = "default";
+        $module=$machine_host["module"];
+        $ipaddress=$machine_host["ipaddress"];
+        $port=$machine_host["port"];
+        $username=$machine_host["username"];
+        $password=$machine_host["password"];
         $rest = new restclient();
 
-        $task_module = "shell";
-        $hosts = "192.168.233.129";
-        $command = "equery --no-pipe --quiet list '*'";
+        $target_module = "shell";
+        $target_command = "equery --no-pipe --quiet list '*'";
 
         $dba = new DbAction();
         $dbh = $dba->Connect();
 
-        $task_id = $rest->task_register($ipaddress, $port, $username, $password, $hosts, $command, $task_module);
+        $task_id = $rest->task_register($ipaddress, $port, $username, $password, $target_host, $target_command, $target_module);
         $package = $rest->tasks_run($ipaddress, $port, $username, $password, $task_id);
         $rest->tasks_delete($ipaddress, $port, $username, $password, $task_id);
         $dba->DeleteInstalledPackageListFast($dbh);
@@ -51,32 +48,26 @@ class dbcontroller
         echo 'Stop Time: ' . date("Y-m-d | h:i:sa") . '<br>';
     }
 
-    function updatePackage()
+    function updatePackage($machine_host,$target_host)
     {
-        /*
         $me = new Session();
         $me->start_session();
         $me->is_session_started();
 
-
-        $user_id = $me->get_user_id();
-        */
-
-        $module = "Ansible";
-        $ipaddress = "192.168.233.130";
-        $port = "5000";
-        $username = "ansible";
-        $password = "default";
+        $module=$machine_host["module"];
+        $ipaddress=$machine_host["ipaddress"];
+        $port=$machine_host["port"];
+        $username=$machine_host["username"];
+        $password=$machine_host["password"];
         $rest = new restclient();
 
-        $task_module = "shell";
-        $hosts = "192.168.233.129";
+        $target_module = "shell";
         $command = "equery --no-pipe --quiet list -po '*'";
 
         $dba = new DbAction();
         $dbh = $dba->Connect();
 
-        $task_id = $rest->task_register($ipaddress, $port, $username, $password, $hosts, $command, $task_module);
+        $task_id = $rest->task_register($ipaddress, $port, $username, $password, $target_host, $command, $target_module);
         $package = $rest->tasks_run($ipaddress, $port, $username, $password, $task_id);
         $rest->tasks_delete($ipaddress, $port, $username, $password, $task_id);
         $dba->DeletePackageListFast($dbh);
@@ -84,9 +75,6 @@ class dbcontroller
         foreach ($package as $i => $row) {
             foreach ($row->contacted as $i => $row) {
                 $dba->UpdatePackageListFast($row,$dbh);
-/*                foreach (explode("\n", $row->stdout) as $item) {
-                    var_dump($item);
-                }*/
             }
         }
         echo 'Stop Time: ' . date("Y-m-d | h:i:sa") . '<br>';
@@ -97,22 +85,19 @@ class dbcontroller
      */
     function md5sumInstalled()
     {
-        /*
+        $data = array();
+        $update = array();
+
         $me = new Session();
         $me->start_session();
         $me->is_session_started();
 
+        $module=$_SESSION["manager"]["module"];
+        $ipaddress=$_SESSION["manager"]["ipaddress"];
+        $port=$_SESSION["manager"]["port"];
+        $username=$_SESSION["manager"]["username"];
+        $password=$_SESSION["manager"]["password"];
 
-        $user_id = $me->get_user_id();
-        */
-
-        $data = array();
-        $update = array();
-        $module = "Ansible";
-        $ipaddress = "192.168.233.130";
-        $port = "5000";
-        $username = "ansible";
-        $password = "default";
         $rest = new restclient();
 
         $task_module = "shell";
@@ -160,22 +145,18 @@ class dbcontroller
      */
     function md5sumAll()
     {
-        /*
+        $data = array();
+        $update = array();
+
         $me = new Session();
         $me->start_session();
         $me->is_session_started();
 
-
-        $user_id = $me->get_user_id();
-        */
-
-        $data = array();
-        $update = array();
-        $module = "Ansible";
-        $ipaddress = "192.168.233.130";
-        $port = "5000";
-        $username = "ansible";
-        $password = "default";
+        $module=$_SESSION["manager"]["module"];
+        $ipaddress=$_SESSION["manager"]["ipaddress"];
+        $port=$_SESSION["manager"]["port"];
+        $username=$_SESSION["manager"]["username"];
+        $password=$_SESSION["manager"]["password"];
         $rest = new restclient();
 
         $task_module = "shell";
@@ -219,8 +200,8 @@ class dbcontroller
         return $update['all'];
     }
 }
-
-/*$update =array();
+/*session_start();
+$update =array();
 $test = new dbcontroller();
 $update['installed'] = $test->md5sumInstalled();
 $update['all'] = $test->md5sumAll();
@@ -230,4 +211,9 @@ if ($update['installed'] > 0) {
 }
 if ($update['all'] > 0) {
     echo 'all update<br>';
-    echo $update['all'];*/
+    echo $update['all'];
+}
+
+
+//$test->updateInstalledPackage();
+//$test->updatePackage();*/

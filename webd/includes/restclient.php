@@ -10,7 +10,7 @@ class restclient
 {
     public function restconnect($rest_host, $rest_port, $username, $password)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/todo/api/v1.0/agent';
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/agent';
         $response = \Httpful\Request::get($uri)
             ->authenticateWith('ansible', 'default')
             ->send();
@@ -26,7 +26,7 @@ class restclient
 
     public function host_list($rest_host, $rest_port, $username, $password)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/todo/api/v1.0/hosts';
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/hosts';
         $response = \Httpful\Request::get($uri)
             ->authenticateWith('ansible', 'default')
             ->send();
@@ -42,7 +42,7 @@ class restclient
 
     public function tasks_list($rest_host, $rest_port, $username, $password)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/todo/api/v1.0/tasks';
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/tasks';
         $response = \Httpful\Request::get($uri)
             ->authenticateWith($username, $password)
             ->send();
@@ -58,7 +58,7 @@ class restclient
 
     public function tasks_run($rest_host, $rest_port, $username, $password, $task_id)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/todo/api/v1.0/task/' . $task_id . '/run';
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id . '/run';
         $response = \Httpful\Request::get($uri)
             ->authenticateWith($username, $password)
             ->send();
@@ -78,7 +78,7 @@ class restclient
         if (empty($groups)) {
             $groups = '';
         }
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/todo/api/v1.0/hosts';
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/hosts';
         $response = \Httpful\Request::post($uri)
             ->sendsJson()// tell it we're sending (Content-Type) JSON...
             ->authenticateWith($username, $password)
@@ -88,7 +88,7 @@ class restclient
 
     public function task_register($rest_host, $rest_port, $username, $password, $hosts, $command, $module)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/todo/api/v1.0/tasks';
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/tasks';
         $response = \Httpful\Request::post($uri)
             ->sendsJson()// tell it we're sending (Content-Type) JSON...
             ->authenticateWith($username, $password)
@@ -101,7 +101,7 @@ class restclient
 
     public function tasks_delete($rest_host, $rest_port, $username, $password, $task_id)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/todo/api/v1.0/task/' . $task_id;
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id;
         $response = \Httpful\Request::delete($uri)
             ->authenticateWith($username, $password)
             ->send();

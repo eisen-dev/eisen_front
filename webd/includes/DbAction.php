@@ -76,7 +76,7 @@ class DbAction {
             ),$dbh);
 
         $this->CreateDbTable(
-            'machine_info',
+            'manager_host',
             array(
                 'machine_id' => 'INT AUTO_INCREMENT',
                 'ipaddress' => 'VARCHAR(20)',
@@ -89,12 +89,13 @@ class DbAction {
             ),$dbh);
 
         $this->CreateDbTable(
-            'host_info',
+            'target_host',
             array(
                 'host_id' => 'INT AUTO_INCREMENT',
                 'ipaddress' => 'VARCHAR(20)',
                 'port' => 'VARCHAR(60)',
                 'group' => 'VARCHAR(60)',
+                'os' => 'VARCHAR(60)',
                 'status_id' => 'VARCHAR(60)',
                 'machine_id' => 'INT'
             ),$dbh);
@@ -142,7 +143,7 @@ class DbAction {
     }
 
     public function MachineList($user_id, $dbh) {
-        $stm = $dbh->prepare("select * from machine_info WHERE user_id=:user_id;");
+        $stm = $dbh->prepare("select * from manager_host WHERE user_id=:user_id;");
         $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();

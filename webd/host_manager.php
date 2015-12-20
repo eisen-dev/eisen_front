@@ -74,7 +74,7 @@ $dbh = $dba->Connect();
                         <tbody>
                         <?php
                         $user_id = $me->get_user_id();
-                        $stm = $dbh->prepare("select * from machine_info WHERE user_id=:user_id;");
+                        $stm = $dbh->prepare("select * from manager_host WHERE user_id=:user_id;");
                         $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
                         $stm->execute();
                         $data = $stm->fetchAll();
