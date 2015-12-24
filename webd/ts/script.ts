@@ -1,6 +1,7 @@
 /// <reference path="libs/Promise.ts"/>
 /// <reference path="libs/jquery.d.ts"/>
 /// <reference path="libs/jqueryui.d.ts"/>
+/// <reference path="async.ts"/>
 "use strict";
 
 /**
@@ -122,7 +123,13 @@ jQuery(
             }
 		});
 
+
         jQuery(document).on("click", ".cell-which-triggers-popup", function (event) {
+            /**
+             * on target_list,php table click event getting item ipaddress and port variable
+             * for starting showPopup
+             * @type {string}
+             */
             var cellValue1 = jQuery(event.target).closest("tr").find(".ipaddress").text();
             var cellValue2 = jQuery(event.target).closest("tr").find(".port").text();
             // console.log(cell_value);
@@ -131,7 +138,12 @@ jQuery(
             }
         });
 
-        function showPopup(cellValue1, cellValue2) {
+        /**
+         * showing popup from click event
+         * @param cellValue1
+         * @param cellValue2
+         */
+        function showPopup(cellValue1: string, cellValue2: string) {
             jQuery("#popup").dialog({
                 width: 500,
                 height: 300,
