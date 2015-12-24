@@ -7,3 +7,4 @@ gen
 /webd/connect.php
 .sass-cache
 /node_modules
+/webd/test
