@@ -12,7 +12,8 @@ body{
 }
 /*ナビゲーション部*/
 .topbar-inner{
-	max-width: 1200px;
+	//最大幅制限無効化
+	//max-width: 1200px;
 	margin: 0 auto;
 }
 
@@ -22,8 +23,6 @@ body{
 	margin-top: 48px;
 	width: 100%;
 	font-size: 1em;
-	/*コンテンツエリアの背景色*/
-	background-color: $md-grey-50;
 	z-index: 1;
 }
 
@@ -34,7 +33,8 @@ body{
 }
 
 .contents{
-	max-width: 1200px;
+	//最大幅制限無効化
+	//max-width: 1200px;
 	margin: 0 auto;
 	z-index: 0;
 }
@@ -62,14 +62,6 @@ body{
 	.contentwrapper-nonav{
 		margin-top: 0;
 	}
-
-	.contents{
-		/*コンテンツエリアに最小幅を設定(検討中)*/
-		//min-width: 768px;
-	}
-
-	/*メニュートグル時に左側にpadding*/
-
 }
 
 @media screen and (min-width: 768px) {

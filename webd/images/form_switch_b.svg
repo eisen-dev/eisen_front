@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" width="120" height="60" viewBox="0 0 120 60">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #90caf9;
+      }
+
+      .cls-2 {
+        fill: #2196f3;
+      }
+    </style>
+  </defs>
+  <g id="artboard-1">
+    <g>
+      <rect x="14" y="12.688" width="92.313" height="34.625" rx="17.308" ry="17.308" class="cls-1"/>
+      <circle cx="89" cy="30" r="25" class="cls-2"/>
+    </g>
+  </g>
+</svg>

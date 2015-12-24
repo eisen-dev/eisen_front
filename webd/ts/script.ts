@@ -55,15 +55,9 @@ jQuery(
         // ウィンドウ幅が切り替わった際のナビゲーション位置リセット
         jQuery(window).resize(function () {
             var navw = jQuery(".navigation").width();
-            var w = jQuery(window).width();
-            // innerwidthもある
-            var mobile = 480;
-            var desktop = 768;
-            var navw = 200;
-            if (w < mobile) {
-                jQuery(".navigation").css("left", "-" + navw + "px");
-            }
-            if (w > mobile) {
+            if (window.matchMedia("(max-width: 769px)").matches) {
+				jQuery(".navigation").css("left", "-" + navw + "px");
+            } else {
                 jQuery(".navigation").css("left", "0px");
             }
         });

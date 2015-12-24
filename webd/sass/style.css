@@ -77,7 +77,6 @@ body {
 
 /*ナビゲーション部*/
 .topbar-inner {
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -87,8 +86,6 @@ body {
   margin-top: 48px;
   width: 100%;
   font-size: 1em;
-  /*コンテンツエリアの背景色*/
-  background-color: #fafafa;
   z-index: 1;
 }
 
@@ -99,7 +96,6 @@ body {
 }
 
 .contents {
-  max-width: 1200px;
   margin: 0 auto;
   z-index: 0;
 }
@@ -127,12 +123,6 @@ body {
   .contentwrapper-nonav {
     margin-top: 0;
   }
-
-  .contents {
-    /*コンテンツエリアに最小幅を設定(検討中)*/
-  }
-
-  /*メニュートグル時に左側にpadding*/
 }
 @media screen and (min-width: 768px) {
   .menu-set {
@@ -145,8 +135,8 @@ body {
   left: 0;
   z-index: 999;
   width: 100%;
-  background-color: #eeeeee;
-  border-bottom: 1px solid #bdbdbd;
+  background-color: #fafafa;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2);
   z-index: 3;
 }
 
@@ -162,7 +152,7 @@ body {
 }
 
 .eisen-logo-cls-1 {
-  fill: #212121;
+  fill: #424242;
   fill-rule: evenodd;
 }
 
@@ -173,6 +163,7 @@ body {
   font-size: 28px;
   line-height: 48px;
   cursor: pointer;
+  color: #424242;
 }
 
 /*メニューボタン*/
@@ -183,19 +174,21 @@ body {
 
 .menu-button {
   float: left;
-  background-color: #eeeeee;
+  background-color: #fafafa;
+  height: 48px;
 }
 .menu-button:hover {
-  background-color: #e0e0e0;
+  background-color: #ededed;
 }
 
 .menu-icon {
   padding: 0 8px;
   font-size: 24px;
-  line-height: 44px;
+  line-height: 48px;
   height: 44px;
   text-align: center;
   cursor: pointer;
+  color: #424242;
 }
 
 .menu-icon-text {
@@ -209,9 +202,9 @@ body {
   width: 250px;
   top: 48px;
   right: 0px;
-  border: 1px solid #bdbdbd;
-  border-radius: 0 0 6px 6px;
-  background-color: #fafafa;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+  border-radius: 0 0 3px 3px;
+  background-color: white;
 }
 
 .popup-title {
@@ -220,7 +213,7 @@ body {
   font-size: 1em;
   line-height: 1em;
   border-bottom: 2px solid #9ccc65;
-  background-color: #fafafa;
+  background-color: white;
 }
 
 .popup-contents {
@@ -293,14 +286,6 @@ body {
   font-size: 0.8em;
 }
 
-/*メニューボタン下のステータス表示*/
-.menu-border {
-  border-bottom: 4px solid #42a5f5;
-}
-.menu-border:hover {
-  border-bottom: 4px solid #1e88e5;
-}
-
 .fa-inline {
   margin-right: 0.2em;
 }
@@ -350,6 +335,12 @@ body {
     display: none;
     float: left;
   }
+
+  .topbar-title {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
 }
 .navigation {
   padding: 48px 0 0 0;
@@ -362,10 +353,11 @@ body {
   z-index: 2;
   overflow: scroll;
   overflow: auto;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.2);
 }
 
 .navigation-menu ul {
-  color: white;
+  color: #eeeeee;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -374,24 +366,26 @@ body {
   display: inline-block;
   padding: 16px 8px;
   width: 100%;
-  color: white;
+  color: #eeeeee;
   text-decoration: none;
 }
 .navigation-menu ul li a:hover {
-  color: white;
+  color: #eeeeee;
   background-color: #616161;
 }
 .navigation-menu ul li a:active {
-  color: white;
+  color: #eeeeee;
 }
 .navigation-menu ul li a:active {
-  color: white;
+  color: #eeeeee;
 }
 .navigation-menu ul li a i {
-  font-size: 1.8em;
-  padding: 0 8px 0 0;
-  width: 1.2em;
+  font-size: 1.4em;
+  width: 1.6em;
+  margin-right: 4px;
+  text-align: center;
   vertical-align: middle;
+  color: #f5f5f5;
 }
 .navigation-menu ul li a span {
   font-size: 0.9em;
@@ -745,6 +739,21 @@ input[type="checkbox"]:checked + label .select {
   background-image: url(../images/form_check_b.svg);
 }
 
+input[type="checkbox"].cbox_switch {
+  display: none;
+}
+input[type="checkbox"].cbox_switch + label .select {
+  display: inline-block;
+  vertical-align: middle;
+  height: 16px;
+  width: 32px;
+  background-image: url(../images/form_switch_a.svg);
+  background-size: 100%;
+}
+input[type="checkbox"].cbox_switch:checked + label .select {
+  background-image: url(../images/form_switch_b.svg);
+}
+
 input[type="radio"] {
   display: none;
 }
@@ -1028,6 +1037,93 @@ input[type="radio"]:checked + label .select {
   display: inline-block;
   width: 100%;
   text-align: center;
+}
+
+.machine-list {
+  display: flex;
+}
+
+.machine-list-left {
+  flex-grow: 3;
+  padding: 16px;
+}
+
+.machine-list-right {
+  flex-grow: 2;
+  height: 100vh;
+  margin-top: -48px;
+  padding-top: 48px;
+}
+
+.manager-list {
+  flex-grow: 3;
+  border-radius: 3px;
+  background-color: white;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.3);
+}
+.manager-list .manager-list-header {
+  height: 48px;
+  background-color: #2196f3;
+  padding: 0 16px;
+}
+.manager-list .manager-list-header .manager-list-title {
+  color: white;
+  line-height: 48px;
+}
+.manager-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.manager-list ul li a {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  line-height: 48px;
+  padding: 0 16px;
+  text-decoration: none;
+  color: #212121;
+}
+.manager-list ul li a:hover {
+  background-color: #f5f5f5;
+}
+.manager-list ul li + li {
+  border-top: 1px solid #eeeeee;
+}
+
+.targethost-list {
+  background-color: white;
+  box-shadow: -2px 0 8px 0 rgba(0, 0, 0, 0.3);
+  height: 100%;
+}
+.targethost-list .targethost-list-header {
+  height: 96px;
+  background-color: #2196f3;
+  padding: 16px;
+}
+.targethost-list .targethost-list-header .targethost-list-title {
+  font-size: 1.5em;
+  color: white;
+}
+.targethost-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.targethost-list ul li a {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  line-height: 48px;
+  padding: 0 16px;
+  text-decoration: none;
+  color: #212121;
+}
+.targethost-list ul li a:hover {
+  background-color: #f5f5f5;
+}
+.targethost-list ul li + li {
+  border-top: 1px solid #eeeeee;
 }
 
 #search {

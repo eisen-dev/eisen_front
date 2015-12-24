@@ -14,7 +14,6 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 		<!-- navigation here -->
 <?php require_once __DIR__ .'/parts/navigation.php'; ?>
 		<!-- navigation end -->
-
 		<div class="contentswrapper menu-set">
 			<main class="contents">
 				<div class="section">
@@ -206,6 +205,19 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 								</label>
 							</div>
 						</div>
+						<div class="setting-row">
+							<div class="setting-left">
+								<span class="setting-title">トグルスイッチ</span>
+							</div>
+							<div class="setting-right">
+								<input type="checkbox" class="cbox_switch" id="switch1">
+								<label for="switch1">
+									<div class="select"></div>
+									スイッチをオンにする
+								</label>
+							</div>
+						</div>
+
 						<div class="setting-row">
 							<div class="setting-left">
 								<span class="setting-title">ラジオボタン</span>

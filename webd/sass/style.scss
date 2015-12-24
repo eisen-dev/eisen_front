@@ -6,7 +6,6 @@
 /* colors
 ------------------------------------------------*/
 @import "colors";
-
 $failed-color: $md-red-500;
 $success-color: $md-light-green-500;
 $infomation-color: $md-light-blue-500;
@@ -69,7 +68,6 @@ h2.title-c{
 h3.title-c{
 	font-size: 1.2em;
 }
-
 /* parts
 ------------------------------------------------*/
 @import "main";
@@ -84,6 +82,7 @@ h3.title-c{
 /*ページスタイル*/
 @import "login";
 @import "initsetup";
+@import "machine";
 
 #search {
   height:32px;

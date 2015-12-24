@@ -171,6 +171,23 @@ input[type="checkbox"]{
 	}
 }
 
+input[type="checkbox"].cbox_switch{
+	display: none;
+	+ label .select{
+		display: inline-block;
+		vertical-align: middle;
+		height: 16px;
+		width: 32px;
+		background-image: url(../images/form_switch_a.svg);
+		background-size:100%;
+	}
+	&:checked{
+		+ label .select{
+		background-image: url(../images/form_switch_b.svg);
+		}
+	}
+}
+
 input[type="radio"]{
 	display: none;
 	+ label .select{

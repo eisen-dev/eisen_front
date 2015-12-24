@@ -1,4 +1,8 @@
 @charset "UTF-8";
+$navigation-background: $md-grey-800;
+$navigation-hover: $md-grey-700;
+$navigation-text: $md-grey-200;
+$navigation-icon: $md-grey-100;
 
 .navigation{
 	padding: 48px 0 0 0;
@@ -7,12 +11,13 @@
 	//モバイルでは左に隠す
 	left: -200px;
 	width: 200px;
-	background-color: $md-grey-800;
+	background-color: $navigation-background;
 	height: 100vh;
 	//topbarの下
 	z-index: 2;
-		overflow: scroll;
+	overflow: scroll;
 	overflow: auto;
+	box-shadow: 0px 2px 8px hsla(0, 0%, 0%, 0.2);
 }
 
 .navigation-container{
@@ -21,7 +26,7 @@
 
 .navigation-menu{
 	ul{
-		color: white;
+		color: $navigation-text;
 		list-style: none;
 		margin: 0;
 		padding: 0;
@@ -30,23 +35,25 @@
 				display: inline-block;
 				padding: 16px 8px;
 				width: 100%;
-				color: white;
+				color: $navigation-text;
 				text-decoration: none;
 				&:hover{
-					color: white;
-					background-color: $md-grey-700;
+					color: $navigation-text;
+					background-color: $navigation-hover;
 				}
 				&:active{
-					color: white;
+					color: $navigation-text;
 				}
 				&:active{
-					color: white;
+					color: $navigation-text;
 				}
 				i{
-					font-size: 1.8em;
-					padding: 0 8px 0 0;
-					width: 1.2em;
+					font-size: 1.4em;
+					width: 1.6em;
+					margin-right: 4px;
+					text-align: center;
 					vertical-align: middle;
+					color: $navigation-icon;
 				}
 				span{
 					font-size: 0.9em;

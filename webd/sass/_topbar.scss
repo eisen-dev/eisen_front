@@ -1,13 +1,16 @@
 @charset "UTF-8";
 
+$topbar-background: $md-grey-50;
+$topbar-icon: $md-grey-800;
+
 .topbar{
 	position: fixed;
 	top: 0;
 	left: 0;
 	z-index: 999;
 	width: 100%;
-	background-color: $md-grey-200;
-	border-bottom: 1px solid $md-grey-400;
+	background-color: $topbar-background;
+	box-shadow: 0 2px 8px 0 hsla(0, 0%, 0%, 0.2);
 	//一番手前
 	z-index: 3;
 }
@@ -16,15 +19,15 @@
     height: 48px;
     float: left;
 	padding: 10px 8px;
-
 }
+
 .eisen-logo{
 	height:100%;
 	width: auto;
 }
 
 .eisen-logo-cls-1{
-	fill:$md-grey-900;
+	fill:$topbar-icon;
 	fill-rule: evenodd;
 }
 
@@ -35,6 +38,7 @@
 	font-size: 28px;
 	line-height: 48px;
 	cursor: pointer;
+	color: $topbar-icon;
 }
 
 /*メニューボタン*/
@@ -45,20 +49,23 @@
 
 .menu-button{
 	float: left;
-	background-color: $md-grey-200;
+	background-color: $topbar-background;
+	// height fix
+	height: 48px;
 
 	&:hover{
-		background-color: $md-grey-300;
+		background-color: darken($topbar-background, 5%);
 	}
 }
 
 .menu-icon{
 	padding: 0 8px;
 	font-size: 24px;
-	line-height: 44px;
+	line-height: 48px;
 	height: 44px;
 	text-align: center;
 	cursor: pointer;
+	color: $topbar-icon;
 }
 
 .menu-icon-text{
@@ -72,9 +79,9 @@
 	width: 250px;
 	top: 48px;
 	right: 0px;
-	border: 1px solid $md-grey-400;
-	border-radius: 0 0 6px 6px;
-	background-color: $md-grey-50;
+	box-shadow: 0px 3px 6px hsla(0, 0%, 0%, 0.3);
+	border-radius: 0 0 3px 3px;
+	background-color: white;
 }
 
 .popup-title{
@@ -83,7 +90,7 @@
 	font-size: 1em;
 	line-height: 1em;
 	border-bottom: 2px solid $md-light-green-400;
-	background-color: $md-grey-50;
+	background-color: white;
 }
 
 .popup-contents{
@@ -162,15 +169,6 @@
 }
 
 
-/*メニューボタン下のステータス表示*/
-
-.menu-border{
-	border-bottom:4px solid $md-blue-400;
-	&:hover{
-		border-bottom: 4px solid $md-blue-600;
-	}
-
-}
 
 .fa-inline{
 	margin-right: 0.2em;
@@ -236,6 +234,13 @@
 		/*navigationのトグルはモバイルのみ*/
 		display: none;
 		float: left;
+	}
+
+
+	.topbar-title{
+		position: absolute;
+		top: 0;
+		left: 0;
 	}
 }
 
