@@ -110,8 +110,7 @@ class DbAction {
                 'installed_sys_pack_hash' => 'VARCHAR(60)',
                 'machine_id'=> 'INT NOT NULL'
             ),$dbh);
-#TODO  Alter table installed_package ADD CONSTRAINT installed_package_uc    UNIQUE INDEX (pack_sys_id, installed_pack_name);
-# CREATE UNIQUE INDEX installed_package_uc ON installed_package (pack_sys_id ASC, installed_pack_name ASC);
+
         $this->CreateDbTable(
             'installed_package',
             array(
@@ -122,7 +121,7 @@ class DbAction {
                 'installed_pack_summary' => 'VARCHAR(60)',
                 'pack_sys_id' => 'INT NOT NULL'
             ),$dbh);
-#TODO  Alter table pack_info ADD CONSTRAINT pack_info_uc    UNIQUE INDEX (pack_sys_id, pack_name);
+
         $this->CreateDbTable(
             'pack_info',
             array(
@@ -140,6 +139,13 @@ class DbAction {
                 'status_id' => 'INT AUTO_INCREMENT',
                 'status_info'=> 'VARCHAR(60)',
             ),$dbh);
+
+        #TODO  Alter table installed_package ADD CONSTRAINT installed_package_uc    UNIQUE INDEX (pack_sys_id, installed_pack_name);
+        $stm = $dbh->prepare("Alter table installed_package ADD CONSTRAINT installed_package_uc    UNIQUE INDEX (pack_sys_id, installed_pack_name);");
+        $stm->execute();
+        #TODO  Alter table pack_info ADD CONSTRAINT pack_info_uc    UNIQUE INDEX (pack_sys_id, pack_name);
+        $stm = $dbh->prepare("Alter table pack_info ADD CONSTRAINT pack_info_uc    UNIQUE INDEX (pack_sys_id, pack_name)");
+        $stm->execute();
     }
 
     public function MachineList($user_id, $dbh) {

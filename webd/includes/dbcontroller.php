@@ -83,7 +83,7 @@ class dbcontroller
     /**
      *
      */
-    function md5sumInstalled()
+    function md5sumInstalled($machine_host,$target_host)
     {
         $data = array();
         $update = array();
@@ -92,16 +92,14 @@ class dbcontroller
         $me->start_session();
         $me->is_session_started();
 
-        $module=$_SESSION["manager"]["module"];
-        $ipaddress=$_SESSION["manager"]["ipaddress"];
-        $port=$_SESSION["manager"]["port"];
-        $username=$_SESSION["manager"]["username"];
-        $password=$_SESSION["manager"]["password"];
-
+        $module=$machine_host["module"];
+        $ipaddress=$machine_host["ipaddress"];
+        $port=$machine_host["port"];
+        $username=$machine_host["username"];
+        $password=$machine_host["password"];
         $rest = new restclient();
 
         $task_module = "shell";
-        $hosts = "192.168.233.129";
         $command = "equery --no-pipe --quiet list '*' | md5sum";
 
         $dba = new DbAction();
@@ -112,7 +110,7 @@ class dbcontroller
             $port,
             $username,
             $password,
-            $hosts,
+            $target_host,
             $command,
             $task_module
         );
@@ -140,10 +138,11 @@ class dbcontroller
         }
         return $update['installed'];
     }
+
     /**
      *
      */
-    function md5sumAll()
+    function md5sumAll($machine_host,$target_host)
     {
         $data = array();
         $update = array();
@@ -152,15 +151,14 @@ class dbcontroller
         $me->start_session();
         $me->is_session_started();
 
-        $module=$_SESSION["manager"]["module"];
-        $ipaddress=$_SESSION["manager"]["ipaddress"];
-        $port=$_SESSION["manager"]["port"];
-        $username=$_SESSION["manager"]["username"];
-        $password=$_SESSION["manager"]["password"];
+        $module=$machine_host["module"];
+        $ipaddress=$machine_host["ipaddress"];
+        $port=$machine_host["port"];
+        $username=$machine_host["username"];
+        $password=$machine_host["password"];
         $rest = new restclient();
 
         $task_module = "shell";
-        $hosts = "192.168.233.129";
         $command = "equery --no-pipe --quiet list -po '*' | md5sum";
 
         $dba = new DbAction();
@@ -171,7 +169,7 @@ class dbcontroller
             $port,
             $username,
             $password,
-            $hosts,
+            $target_host,
             $command,
             $task_module
         );
