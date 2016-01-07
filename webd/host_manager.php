@@ -42,11 +42,12 @@ $dbh = $dba->Connect();
         <main class="contents">
             <div class="section">
                 <h2 class="title">マネージャホスト</h2>
+				<form action="includes/checkbox_controller.php" method="post">
 						<div class="list-tools clearfix">
 							<div class="list-action">
 								<select name="list-action" class="input-list">
 									<option value="0">一括操作</option>
-									<option value="0">更新</option>
+									<option value="1">更新</option>
 								</select>
 								<input type="submit" value="適用" class="button button--form">
 							</div>
@@ -60,11 +61,14 @@ $dbh = $dba->Connect();
                     <table class="table">
                         <thead>
                         <tr>
-                            <th class="cbox__selectall">
-                                <div class="cbox__wrapper">
-                                    <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
-                                </div>
-                            </th>
+							<th class="list-data-ctrl">
+								<div class="list-data-cbox">
+									<input type="checkbox" id="cbox" name="check[]" value="all">
+									<label for="cbox">
+										<div class="select"></div>
+									</label>
+								</div>
+							</th>
                             <th>IPアドレス</th>
                             <th>ポート</th>
                             <th>マネージメントツール</th>
@@ -79,15 +83,27 @@ $dbh = $dba->Connect();
                         $stm->execute();
                         $data = $stm->fetchAll();
                         $cnt  = count($data); //in case you need to count all rows
-                        //var_dump($data);
                         $_SESSION["manager"] =array();
                         foreach ($data as $i => $row) {
-                            $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $i . '"><label for="cbox-' . $i . '"></label></td>';
+							$table = '<tr class="cell-which-triggers-popup">
+                                <td class="list-data-ctrl">
+                                <div class="list-data-cbox">
+                                    <input type="checkbox" id="cbox-' . $i . '" value="' . $i . '" name="check[]">
+                                    <label for="cbox-' . $i . '">
+                                <div class="select"></div></label></div>';
+							$table .= '<div class="list-data-option">
+                                <div class="list-data-option-icon">
+                                    <i class="fa fa-caret-down"></i>
+                                </div>';
+							$table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul>
+                    <li>
+                        <a href="target_list.php?target='.$row['ipaddress'].'&os='.$row['port'].'">settings</a>
+                    </li>
+                    </ul></div></td>';
                             $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
                             $table .= '<td class="port">' . $row['port'] . '</td>';
                             $table .= '<td class="module">' . $row['module'] . '</td>';
                             $table .= '<td class="status_id">' . $row['status_id'] . '</td></tr>';
-                            var_dump($row);
                             print_r($table);
                             $_SESSION["manager"]["ipaddress"] = $row["ipaddress"];
                             $_SESSION["manager"]["port"]=$row["port"];
@@ -96,10 +112,10 @@ $dbh = $dba->Connect();
                             $_SESSION["manager"]["username"]=$row["username"];
                             $_SESSION["manager"]["password"]=$row["password"];
                         }
-                        var_dump($_SESSION["manager"]);
                         ?>
                         </tbody>
                     </table>
+				</form>
             <!--TODO Use modal for this -->
 
             <!--data-modal-targetで開くモーダルのIDを指定する-->

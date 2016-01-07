@@ -36,6 +36,7 @@ $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ . '/parts/modal.php';
 require_once __DIR__ . '/includes/DbAction.php';
+require_once __DIR__ . '/includes/target_host_controller.php';
 $dba = new DbAction();
 $dbh = $dba->Connect();
 ?>
@@ -81,18 +82,9 @@ $dbh = $dba->Connect();
                 </thead>
                 <tbody>
                 <?php
-                $dba = new DbAction();
-                $dbh = $dba->Connect();
                 $user_id = $me->get_user_id();
-                $machine = $dba->MachineList($user_id,$dbh);
-                $module=$machine[0];
-                $ipaddress=$machine[1];
-                $port=$machine[2];
-                $username=$machine[3];
-                $password=$machine[4];
-                $rest = new restclient();
-                //$rest->restconnect($ipaddress,$port,$username,$password);
-                $hosts = $rest->host_list($ipaddress,$port,$username,$password);
+                $hosts = new TargetHostController();
+                $hosts = $hosts->get_TargetHost($user_id);
                 foreach ($hosts as $i=>$row) {
                     $table = '<tr class="cell-which-triggers-popup">
                                 <td class="list-data-ctrl">
@@ -112,7 +104,7 @@ $dbh = $dba->Connect();
                         <a href="task_list.php?target='.$row->host.'&os='.$row->port.'">task list</a>
                     </li>
                     <li>
-                        <a href="target_list_settings.php?target='.$row->host.'&os='.$row->port.'">settings</a>
+                        <a href="variable_list.php?target='.$row->host.'&os='.$row->port.'">settings</a>
                     </li>
                     </ul></div></td>';
                     $table .= '<td class="ipaddress">' . $row->host . '</td>';

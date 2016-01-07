@@ -56,9 +56,43 @@ class restclient
         return $tasks;
     }
 
+    public function variable_list($rest_host, $rest_port, $username, $password)
+    {
+        $host_id=1;
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/host/'.$host_id.'/vars';
+        $response = \Httpful\Request::get($uri)
+            ->authenticateWith($username, $password)
+            ->send();
+        $tasks = array();
+        $max = sizeof($response->body->var);
+        for ($i = 0; $i < $max; $i++) {
+            if (!empty($response->body->var[$i])) {
+                $tasks[] = ($response->body->var[$i]);
+            }
+        }
+        return $tasks;
+    }
+
     public function tasks_run($rest_host, $rest_port, $username, $password, $task_id)
     {
         $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id . '/run';
+        $response = \Httpful\Request::get($uri)
+            ->authenticateWith($username, $password)
+            ->send();
+        $body = array();
+        $max = sizeof($response->body->task);
+        //var_dump($response);
+        for ($i = 0; $i < $max; $i++) {
+            if (!empty($response->body->task)) {
+                $body[] = ($response->body->task);
+            }
+        }
+        return $body;
+    }
+
+    public function tasks_result($rest_host, $rest_port, $username, $password, $task_id)
+    {
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id . '/result';
         $response = \Httpful\Request::get($uri)
             ->authenticateWith($username, $password)
             ->send();
@@ -93,6 +127,20 @@ class restclient
             ->sendsJson()// tell it we're sending (Content-Type) JSON...
             ->authenticateWith($username, $password)
             ->body('{"hosts":"' . $hosts . '","command":"' . $command . '","module":"' . $module . '"}')// attach a body/payload...
+            ->sendIt();
+        $uri = $response->body->task->uri;
+        $uri = explode("/", $uri);
+        return $uri[5];
+    }
+
+    public function variable_register($rest_host, $rest_port, $username, $password, $host, $variable_key, $variable_value)
+    {
+        $host_id = 1;
+        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/host/'.$host_id.'/vars';
+        $response = \Httpful\Request::post($uri)
+            ->sendsJson()// tell it we're sending (Content-Type) JSON...
+            ->authenticateWith($username, $password)
+            ->body('{"host":"' . $host . '","variable_key":"' . $variable_key . '","variable_value":"' . $variable_value . '"}')// attach a body/payload...
             ->sendIt();
         $uri = $response->body->task->uri;
         $uri = explode("/", $uri);

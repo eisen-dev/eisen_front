@@ -33,7 +33,8 @@ $dbh = $dba->Connect();
 <!-- TODO better popup menu style -->
 <div id="popup" data-name="name" class="dialog">
     <!--<a href="">Hello world!</a>-->
-    <p></p>
+    <p class="item-1"></p>
+    <p class="item-2"></p>
 </div>
 <div class="wrapper">
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
@@ -168,7 +169,22 @@ $dbh = $dba->Connect();
                 width: 500,
                 height: 300,
                 open: function(){
-                    $(this).find("p").html("<a href=includes/TasksAction.php?id=" + cell_value1+">"+cell_value2+":"+cell_value1+"</a>");
+                    $(this).find("p.item-1").html("<a href=includes/TasksAction.php?id="
+                        + cell_value1+
+                        "\&action=start>Start"
+                        +cell_value2+
+                        ":"
+                        +cell_value1+
+                        "</a>"
+                    );
+                    $(this).find("p.item-2").html("<a href=includes/TasksAction.php?id="
+                        + cell_value1+
+                        "\&action=result>Result"
+                        +cell_value2+
+                        ":"
+                        +cell_value1+
+                        "</a>"
+                    );
                 }
             });
         }

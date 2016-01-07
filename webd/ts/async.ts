@@ -3,15 +3,19 @@
 /// <reference path="libs/jqueryui.d.ts"/>
 "use strict";
 
-/* this variable is getted from php in package_list.php */
+// this variable are get from php in package_list.php
 declare var target_ipaddress: string;
+// target_os needed for install in different operating system
 declare var target_os: string;
 
-console.log(target_ipaddress);
+
 //var userID = <?php echo json_encode($userData); ?>;
 console.log(target_ipaddress);
+
+
 jQuery("#form1").submit(function (event) {
     event.preventDefault();
+    console.log(event);
     jQuery.ajax({
         type: "POST",
         url: "includes/search.php",
@@ -30,6 +34,7 @@ jQuery("#form1").submit(function (event) {
         }
     });
 });
+
 
 jQuery(document).ajaxComplete(function (event, xhr, settings) {
     jQuery(document).on("click", ".cell-which-triggers-popup", function (event) {

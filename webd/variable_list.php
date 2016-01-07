@@ -3,11 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>マシン管理</title>
-    <meta name="viewport" content="width=device-width,
-     initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="includes/normalize.css">
-    <link rel="stylesheet" type="text/css"
-          href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="sass/style.css">
     <link rel="stylesheet" type="text/css" href="includes/jquery-ui.css"/>
     <style>
@@ -43,14 +41,15 @@ $dbh = $dba->Connect();
 <!-- TODO better popup menu style -->
 <div id="popup" data-name="name" class="dialog">
     <!--<a href="">Hello world!</a>-->
-    <p></p>
+    <p class="item-1"></p>
+    <p class="item-2"></p>
 </div>
 <div class="wrapper">
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
         <main class="contents">
             <div class="section">
-                <h2 class="title">ホストリスト</h2>
+				<h2 class="title">タスクリスト</h2>
 						<div class="list-tools clearfix">
 							<div class="list-action">
 								<select name="list-action" class="input-list">
@@ -66,17 +65,18 @@ $dbh = $dba->Connect();
 								</button>
 							</div>
 						</div>
-            <table class="table">
+			<table class="table">
                 <thead>
                 <tr>
                     <th class="cbox__selectall">
                         <div class="cbox__wrapper">
-                            <input type="checkbox" id="cbox-selectall">
-                            <label for="cbox-selectall"></label>
+                            <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
                         </div>
                     </th>
-                    <th>IPアドレス</th>
-                    <th>グループ</th>
+                    <th>ID</th>
+                    <th>ホスト</th>
+                    <th>variable_key</th>
+                    <th>variable_value</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -92,45 +92,42 @@ $dbh = $dba->Connect();
                 $password=$machine[4];
                 $rest = new restclient();
                 //$rest->restconnect($ipaddress,$port,$username,$password);
-                $hosts = $rest->host_list($ipaddress,$port,$username,$password);
+                $hosts = $rest->variable_list($ipaddress,$port,$username,$password);
+
                 foreach ($hosts as $i=>$row) {
-                    $table = '<tr class="cell-which-triggers-popup">
-                                <td class="list-data-ctrl">
-                                <div class="list-data-cbox">
-                                    <input type="checkbox" id="cbox-' . $i . '">
-                                    <label for="cbox-' . $i . '">
-                                <div class="select"></div></label></div>';
-                    $table .= '<div class="list-data-option"><div class="list-data-option-icon"><i class="fa fa-caret-down"></i></div>';
-                    $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul><li><a>action1</a></li><li><a>action2</a></li><li><a>action3</a></li></ul></div></td>';
-                    $table .= '<td class="ipaddress">' . $row->host . '</td>';
-                    $table .= '<td class="groups">' . $row->groups . '</td></tr>';
+                    # hack for get task_id
+                    $uri = ($row->uri);
+                    $uri=explode("/",$uri);
+                    $task_id = $uri[5];
+                    $table = '<tr class="cell-which-triggers-popup"><td><input type="checkbox" id="cbox-' . $task_id . '"><label for="cbox-' . $task_id . '"></label></td>';
+                    $table .= '<td class="task_id">' . ($task_id) . '</td>';
+                    $table .= '<td class="host">' . $row->host . '</td>';
+                    $table .= '<td class="module">' . $row->variable_key . '</td>';
+                    $table .= '<td class="command">' . $row->variable_value . '</td></tr>';
                     print_r($table);
                 }
                 ?>
                 </tbody>
             </table>
-            <!--TODO Use modal for this -->
-
-            <!--data-modal-targetで開くモーダルのIDを指定する-->
-            <div class="button" data-modal="open" data-modal-target="target_host_list-setting">open setting</div>
+				<div class="button" data-modal="open" data-modal-target="task_list-setting">open setting</div>
 			</div>
-        </main>
-    </div>
+		</main>
+	</div>
 </div>
 <!-- set modal before body tag -->
-<div class="modal" id="target_host_list-setting">
+<div class="modal" id="task_list-setting">
     <div class="modal-wrapper">
         <div class="modal-window">
-            <form action="includes/hosts_registration.php" method="post">
+            <form action="includes/vars_registration.php" method="post">
                 <div class="modal-header">
                     <i class="fa fa-times modal-close" data-modal="close"></i>
-                    <span class="modal-title">ホスト設定</span>
+                    <span class="modal-title">variable settings</span>
                 </div>
                 <div class="modal-contents">
                     <div class="compact-form">
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>ホスト名</span>
+                                <span>host</span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="host">
@@ -138,10 +135,18 @@ $dbh = $dba->Connect();
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>グループリスト</span>
+                                <span>variable_key</span>
                             </div>
                             <div class="compact-form-item-right">
-                                <input type="text" name="groups">
+                                <input type="text" name="variable_key">
+                            </div>
+                        </div>
+                        <div class="compact-form-row">
+                            <div class="compact-form-item-left">
+                                <span>variable_value</span>
+                            </div>
+                            <div class="compact-form-item-right">
+                                <input type="text" name="variable_value">
                             </div>
                         </div>
                     </div>
@@ -154,8 +159,44 @@ $dbh = $dba->Connect();
     </div>
     <div class="modal-overlay" data-modal="close"></div>
 </div>
-    </div>
-</div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
+<script>
+    $( document ).ready(function() {
+        $(document).on("click", ".cell-which-triggers-popup", function(event){
+            var cell_value1 = $(event.target).closest('tr').find('.task_id').text();
+            var cell_value2 = $(event.target).closest('tr').find('.module').text();
+            var cell_value3 = $(event.target).closest('tr').find('.command').text();
+            //console.log(cell_value);
+            if (cell_value1&&cell_value2) {
+                showPopup(cell_value1,cell_value2)
+            }
+        });
+
+        function showPopup(cell_value1,cell_value2){
+            $("#popup").dialog({
+                width: 500,
+                height: 300,
+                open: function(){
+                    $(this).find("p.item-1").html("<a href=includes/VariableAction.php?id="
+                        + cell_value1+
+                        "\&action=start>Start"
+                        +cell_value2+
+                        ":"
+                        +cell_value1+
+                        "</a>"
+                    );
+                    $(this).find("p.item-2").html("<a href=includes/VariableAction.php?id="
+                        + cell_value1+
+                        "\&action=result>Result"
+                        +cell_value2+
+                        ":"
+                        +cell_value1+
+                        "</a>"
+                    );
+                }
+            });
+        }
+    });
+</script>
 </body>
 </html>

@@ -2,7 +2,6 @@
 	<div class="navigation-menu">
 		<ul>
 			<li><a href="index.php"><i class="fa fa-tachometer"></i><span>ダッシュボード</span></a></li>
-			<li><a href="target_list.php"><i class="fa fa-list-alt"></i><span>ターゲットホスト</span></a></li>
 			<li><a href="host_manager.php"><i class="fa fa-server"></i><span>マネージャホスト</span></a></li>
 			<li><a href="profile.php"><i class="fa fa-cog"></i><span>設定</span></a></li>
 		</ul>

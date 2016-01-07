@@ -167,6 +167,28 @@ class DbAction {
         return $myMachine;
     }
 
+    public function TargetHostRegistration($hosts, $dbh, $machine_id, $status_id) {
+        $query = $dbh->prepare('INSERT INTO target_host (ipaddress, port, group, os, status_id, machine_id)
+        VALUES (:ipaddress, :port, :group, :os, :status_id, :machine_id);');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        foreach ($hosts as $i=>$row) {
+            try {
+                $query-> bindParam(':ipaddress', $row->host, PDO::PARAM_STR);
+                $query-> bindParam(':port', $row->port, PDO::PARAM_STR);
+                $query-> bindParam(':group', $row->group, PDO::PARAM_STR);
+                $query-> bindParam(':os', $row->os, PDO::PARAM_INT);
+                $query-> bindParam(':status_id', $status_id, PDO::PARAM_STR);
+                $query-> bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
+                $query->execute(); //invalid query!
+            } catch(PDOException $ex) {
+                echo"already present<br>";
+                //echo "An Error occured!"; //user friendly message
+                //$this->some_logging_function($ex->getMessage());
+            }
+        }
+    }
+
     public function installedPackageList($pack_sys_id, $dbh) {
         $stm = $dbh->prepare("select * from installed_package WHERE pack_sys_id=:pack_sys_id;");
         $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
