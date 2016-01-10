@@ -9,6 +9,7 @@
 $failed-color: $md-red-500;
 $success-color: $md-light-green-500;
 $infomation-color: $md-light-blue-500;
+$cl-text-default: $md-grey-900;
 
 /* universal
 ------------------------------------------------*/
@@ -82,7 +83,7 @@ h3.title-c{
 /*ページスタイル*/
 @import "login";
 @import "initsetup";
-@import "machine";
+@import "dashboard";
 
 #search {
   height:32px;

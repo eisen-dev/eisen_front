@@ -1,0 +1,164 @@
+@charset "UTF-8";
+
+.widgets-wrapper{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 8px;
+}
+.widget{
+    padding: 8px;
+    //background-color: white;
+    border-radius: 3px;
+}
+.widget-small{
+    width: 25%;
+
+}
+
+.widget-medium{
+    width: 100%;
+}
+
+.widget-large{
+    width: 100%;
+}
+
+.widget-base{
+    background-color: white;
+    //height: 100px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
+}
+
+.widget-header{
+    width: 100%;
+    padding: 12px 8px;
+    border-bottom: 1px solid $md-grey-200;
+}
+
+.widget-title{
+    color: $md-grey-700;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+// widgets
+// .wgt-*
+
+.wgt-welcome{
+    padding: 8px;
+}
+.wgt-mstat{
+    //padding: 8px;
+    ul{
+        padding: 0;
+        margin: 0;
+         list-style: none;
+    }
+}
+.wgt-mstat-li-thost{
+    display: block;
+    padding: 4px 8px;
+}
+
+.wgt-mstat-li-mnghost{
+    display: block;
+    padding: 4px 8px;
+}
+
+.wgt-mstat-li-thost + .wgt-mstat-li-thost{
+    border-top: 1px solid $md-grey-200;
+}
+
+.wgt-mstat-li-thost-title{
+    width: 100%;
+    display: inline-block;
+    //vertical-align: middle;
+    span{
+        vertical-align: middle;
+    }
+
+}
+
+.wgt-mstat-mnghosts{
+    display: flex;
+    padding-left: 1.8em;
+}
+
+.wgt-mstat-li-group{
+    width: 50%;
+
+}
+.wgt-mstat-diric{
+    font-size: 1.5em;
+    padding: 0 0.3em;
+    min-width: 1em;
+    vertical-align: middle;
+    color: $md-grey-700;
+}
+
+.wgt-mstat-group-title{
+
+}
+
+.wgt-mstat-group-title-online{
+    color: $md-green-500;
+    border-bottom: 2px solid $md-green-500;
+}
+
+.wgt-mstat-group-title-offline{
+    color: $md-red-500;
+    border-bottom: 2px solid $md-red-500;
+}
+
+.wgt-mstat-group-title-message{
+    margin-left: 0.5em;
+}
+.wgt-mstat-info-alart{
+    color: $md-orange-500;
+}
+
+@media screen and (min-width: 480px) {
+.widget-small{
+    width: 50%;
+
+}
+
+.widget-medium{
+    width: 100%;
+}
+
+.widget-large{
+    width: 100%;
+}
+}
+
+@media screen and (min-width: 768px) {
+.widget-small{
+    width: 25%;
+
+}
+
+.widget-medium{
+    width: 50%;
+}
+
+.widget-large{
+    width: 100%;
+}
+}
+
+@media screen and (min-width: 1200px) {
+.widget-small{
+    width: 25%;
+
+}
+
+.widget-medium{
+    width: 50%;
+}
+
+.widget-large{
+    width: 100%;
+}
+}
