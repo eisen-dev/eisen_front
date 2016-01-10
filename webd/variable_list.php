@@ -109,13 +109,13 @@ $dbh = $dba->Connect();
                 ?>
                 </tbody>
             </table>
-				<div class="button" data-modal="open" data-modal-target="task_list-setting">open setting</div>
+				<div class="button" data-modal="open" data-modal-target="vars_list-setting">open setting</div>
 			</div>
 		</main>
 	</div>
 </div>
 <!-- set modal before body tag -->
-<div class="modal" id="task_list-setting">
+<div class="modal" id="vars_list-setting">
     <div class="modal-wrapper">
         <div class="modal-window">
             <form action="includes/vars_registration.php" method="post">

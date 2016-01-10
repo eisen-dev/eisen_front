@@ -14,22 +14,27 @@ if(isset($_POST['submit'])){
     $v_key = htmlspecialchars($_POST["variable_key"]);
     # module variable already used for machinelist
     $v_value = htmlspecialchars($_POST["variable_value"]);
+
+    printf($command);
+    $me = new Session();
+    $me->start_session();
+    $me->is_session_started();
+
+    $dba = new DbAction();
+    $dbh = $dba->Connect();
+    $user_id = $me->get_user_id();
+
+    $machine = $dba->MachineList($user_id,$dbh);
+    $module=$machine[0];
+    $ipaddress=$machine[1];
+    $port=$machine[2];
+    $username=$machine[3];
+    $password=$machine[4];
+
+    $rest = new restclient();
+    $rest->variable_register($ipaddress,$port,$username,$password,$host,$v_key,$v_value);
+    header('location:../variable_list.php?target='.$host.'&os=');
 }
-printf($command);
-$me = new Session();
-$me->start_session();
-$me->is_session_started();
-
-$dba = new DbAction();
-$dbh = $dba->Connect();
-$user_id = $me->get_user_id();
-
-$machine = $dba->MachineList($user_id,$dbh);
-$module=$machine[0];
-$ipaddress=$machine[1];
-$port=$machine[2];
-$username=$machine[3];
-$password=$machine[4];
-
-$rest = new restclient();
-$rest->variable_register($ipaddress,$port,$username,$password,$host,$v_key,$v_value);
+else{
+    header('location:../index.php');
+}
