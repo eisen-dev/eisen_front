@@ -45,10 +45,12 @@ $dbh = $dba->Connect();
 				<form action="includes/checkbox_controller.php" method="post">
 						<div class="list-tools clearfix">
 							<div class="list-action">
-								<select name="list-action" class="input-list">
-									<option value="0">一括操作</option>
-									<option value="1">更新</option>
-								</select>
+								<label>
+									<select name="list-action" class="input-list">
+										<option value="0">一括操作</option>
+										<option value="1">更新</option>
+									</select>
+								</label>
 								<input type="submit" value="適用" class="button button--form">
 							</div>
 							<div class="search-box">
@@ -85,17 +87,17 @@ $dbh = $dba->Connect();
                         $cnt  = count($data); //in case you need to count all rows
                         $_SESSION["manager"] =array();
                         foreach ($data as $i => $row) {
-							$table = '<tr class="cell-which-triggers-popup">
+                            $table = '<tr class="cell-which-triggers-popup">
                                 <td class="list-data-ctrl">
                                 <div class="list-data-cbox">
                                     <input type="checkbox" id="cbox-' . $i . '" value="' . $i . '" name="check[]">
                                     <label for="cbox-' . $i . '">
                                 <div class="select"></div></label></div>';
-							$table .= '<div class="list-data-option">
+                            $table .= '<div class="list-data-option">
                                 <div class="list-data-option-icon">
                                     <i class="fa fa-caret-down"></i>
                                 </div>';
-							$table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul>
+                            $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul>
                     <li>
                         <a href="target_list.php?target='.$row['ipaddress'].'&os='.$row['port'].'">settings</a>
                     </li>
@@ -104,7 +106,7 @@ $dbh = $dba->Connect();
                             $table .= '<td class="port">' . $row['port'] . '</td>';
                             $table .= '<td class="module">' . $row['module'] . '</td>';
                             $table .= '<td class="status_id">' . $row['status_id'] . '</td></tr>';
-                            print_r($table);
+                            echo($table);
                             $_SESSION["manager"]["ipaddress"] = $row["ipaddress"];
                             $_SESSION["manager"]["port"]=$row["port"];
                             $_SESSION["manager"]["module"]=$row["module"];
@@ -131,13 +133,13 @@ $dbh = $dba->Connect();
 				<form action="includes/machine_registration.php" method="post">
 					<div class="modal-header">
 						<i class="fa fa-times modal-close" data-modal="close"></i>
-						<span class="modal-title">マネージャホスト設定</span>
+						<span class="modal-title">manager host settings</span>
 					</div>
 					<div class="modal-contents">
 						<div class="compact-form">
 							<div class="compact-form-row">
 								<div class="compact-form-item-left">
-									<span>マネージャホスト</span>
+									<span>manager host module</span>
 								</div>
 								<div class="compact-form-item-right">
 									<input type="text" name="rest_module">
@@ -145,7 +147,7 @@ $dbh = $dba->Connect();
 							</div>
 							<div class="compact-form-row">
 								<div class="compact-form-item-left">
-									<span>マネージャホスト名</span>
+									<span>manager host ip address</span>
 								</div>
 								<div class="compact-form-item-right">
 									<input type="text" name="rest_host">
@@ -153,7 +155,7 @@ $dbh = $dba->Connect();
 							</div>
 							<div class="compact-form-row">
 								<div class="compact-form-item-left">
-									<span>マネージャホストポート番号</span>
+									<span>manager host port</span>
 								</div>
 								<div class="compact-form-item-right">
 									<input type="text" name="rest_port">
@@ -161,7 +163,7 @@ $dbh = $dba->Connect();
 							</div>
 							<div class="compact-form-row">
 								<div class="compact-form-item-left">
-									<span>マネージャホストユーザー名</span>
+									<span>manager host username</span>
 								</div>
 								<div class="compact-form-item-right">
 									<input type="text" name="rest_user">
@@ -169,7 +171,7 @@ $dbh = $dba->Connect();
 							</div>
 							<div class="compact-form-row">
 								<div class="compact-form-item-left">
-									<span>マネージャホストパスワード</span>
+									<span>manager host password</span>
 								</div>
 								<div class="compact-form-item-right">
 									<input type="text" name="rest_pass">
