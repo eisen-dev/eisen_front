@@ -1163,6 +1163,21 @@ input[type="radio"]:checked + label .select {
   color: #ff9800;
 }
 
+.wgt-mstat-info-status-lamp-online {
+  color: #4caf50;
+}
+
+.wgt-mstat-info-status-lamp-offline {
+  color: #f44336;
+}
+
+.wgt-compact-table thead tr th {
+  padding: 0 8px;
+}
+.wgt-compact-table tbody tr td {
+  padding: 0 8px;
+}
+
 @media screen and (min-width: 480px) {
   .widget-small {
     width: 50%;

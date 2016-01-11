@@ -51,9 +51,21 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                                                         </span>
                                                     </div>
                                                     <ul>
-                                                        <li class="wgt-mstat-li-mnghost">managerhost01</li>
-                                                        <li class="wgt-mstat-li-mnghost">managerhost02</li>
-                                                        <li class="wgt-mstat-li-mnghost">managerhost03</li>
+                                                        <li class="wgt-mstat-li-mnghost">managerhost01
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                        <li class="wgt-mstat-li-mnghost">managerhost02
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                        <li class="wgt-mstat-li-mnghost">managerhost03
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                                 <div class="wgt-mstat-li-group">
@@ -64,7 +76,11 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                                                         </span>
                                                     </div>
                                                     <ul>
-                                                        <li class="wgt-mstat-li-mnghost">managerhost01</li>
+                                                        <li class="wgt-mstat-li-mnghost">managerhost01
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-offline"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
                                                     </ul>
                                                 </div>
                                             </div>
@@ -88,7 +104,66 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                                  <span class="widget-title">最近のアクティビティ</span>
                             </div>
                             <div class="widget-contents">
-
+                                <div class="wgt-activity">
+                                    <table class="table wgt-compact-table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    時刻
+                                                </th>
+                                                <th>
+                                                    ターゲットホスト
+                                                </th>
+                                                <th>
+                                                    操作
+                                                </th>
+                                                <th>
+                                                    対象
+                                                </th>
+                                                <th>
+                                                    結果
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    201601011:11:11
+                                                </td>
+                                                <td>
+                                                    managerhost01
+                                                </td>
+                                                <td>
+                                                    アップデート
+                                                </td>
+                                                <td>
+                                                    Apache xxx
+                                                </td>
+                                                <td>
+                                                    成功
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    201601011:11:11
+                                                </td>
+                                                <td>
+                                                    managerhost01
+                                                </td>
+                                                <td>
+                                                    アップデート
+                                                </td>
+                                                <td>
+                                                    Apache xxx
+                                                </td>
+                                                <td>
+                                                    成功
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span>直近の5件を表示しています - <a href="#">すべてのログを見る</a></span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -98,7 +173,57 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                                  <span class="widget-title">ログイン履歴</span>
                             </div>
                             <div class="widget-contents">
-
+                                <div class="wgt-activity">
+                                    <table class="table wgt-compact-table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    時刻
+                                                </th>
+                                                <th>
+                                                    ユーザー
+                                                </th>
+                                                <th>
+                                                    状況
+                                                </th>
+                                                <th>
+                                                    アクセス元
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    201601011:11:11
+                                                </td>
+                                                <td>
+                                                    depra95
+                                                </td>
+                                                <td>
+                                                    失敗
+                                                </td>
+                                                <td>
+                                                    192.168.11.2
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    201601011:11:11
+                                                </td>
+                                                <td>
+                                                    alice
+                                                </td>
+                                                <td>
+                                                    成功
+                                                </td>
+                                                <td>
+                                                    192.168.11.3
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span>直近の5件を表示しています - <a href="#">すべてのログを見る</a></span>
+                                </div>
                             </div>
                         </div>
                     </div>

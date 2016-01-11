@@ -118,6 +118,36 @@
     color: $md-orange-500;
 }
 
+.wgt-mstat-info-status-lamp-online{
+    color: $md-green-500;
+}
+
+.wgt-mstat-info-status-lamp-offline{
+    color: $md-red-500;
+}
+
+
+.wgt-activity{
+
+}
+
+.wgt-compact-table{
+    thead{
+        tr{
+            th{
+                padding: 0 8px;
+            }
+        }
+    }
+    tbody{
+        tr{
+            td{
+            padding: 0 8px;
+            }
+        }
+    }
+}
+
 @media screen and (min-width: 480px) {
 .widget-small{
     width: 50%;
