@@ -35,7 +35,7 @@
 			{
 				return document.defaultView.getComputedStyle(element).getPropertyValue(dimension);
 			}
-		}
+		};
 
 		var width = this.width = computeDimension(context.canvas,'Width');
 		var height = this.height = computeDimension(context.canvas,'Height');

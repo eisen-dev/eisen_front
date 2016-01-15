@@ -51,9 +51,9 @@ module P {
 		: Promise<Element[]>
 	{
 		var d = defer<Element[]>();
-		var elements: Element[] = new Array<Element>();
+		var elements: Element[] = [];
 
-		unfoldCore<Seed, Element>(elements, d, unspool, seed)
+		unfoldCore<Seed, Element>(elements, d, unspool, seed);
 
 		return d.promise();
 	}
@@ -338,7 +338,7 @@ module P {
 				return this;
 
 			var prev = this._resolved;
-			this._resolved = v => { prev(v); f(v); }
+			this._resolved = v => { prev(v); f(v); };
 
 			return this;
 		}
@@ -354,7 +354,7 @@ module P {
 				return this;
 
 			var prev = this._rejected;
-			this._rejected = e => { prev(e); f(e); }
+			this._rejected = e => { prev(e); f(e); };
 
 			return this;
 		}
@@ -417,8 +417,7 @@ module P {
 	export function generator<E>(g: () => () => Promise<E>): Generator<E>
 	{
 		return () => iterator<E>(g());
-	};
-
+	}
 	export function iterator<E>(f: () => Promise<E>): Iterator<E>
 	{
 		return new IteratorI<E>(f);
@@ -467,7 +466,7 @@ module P {
 					return;
 				}
 
-				f(it.current)
+				f(it.current);
 				eachCore<E>(fin, it, f);
 			} )
 			.fail(err => fin.reject(err));
