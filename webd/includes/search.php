@@ -11,7 +11,7 @@ class AjaxValidate
      * Test
      * @return string
      */
-    function searchPackage()
+    public function searchPackage()
     {
         define("NOT_SELECTED", 0);
         define("INSTALLED", 1);
@@ -24,7 +24,7 @@ class AjaxValidate
         $search = @$_POST['field1'];
         $list = @$_POST['list-action-package'];
         $update = @$_POST['list-action-general'];
-        $pack_sys_id = 1;
+        $pack_sys_id=1;
 
         if ($list == NOT_SELECTED) {
             $return = $this->isInstalled($dba, $dbh, $search, $update, $pack_sys_id);
@@ -39,7 +39,7 @@ class AjaxValidate
         return json_encode($return);
     }
 
-    function isInstalled($dba,$dbh,$search,$update,$pack_sys_id){
+    public function isInstalled($dba,$dbh,$search,$update,$pack_sys_id){
 
         $return = array();
 
@@ -52,8 +52,12 @@ class AjaxValidate
                 $return['msg'] .= '<tr class="cell-which-triggers-popup">';
                 $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td>$i</td>";
-                $return['msg'] .= "<td class=\"item\">" .
+                $return['msg'] .= "<td class=\"name\">" .
                     $row['installed_pack_name'] . "</td>";
+                $return['msg'] .= "<td class=\"version\">" .
+                    $row['installed_pack_version'] . "</td>";
+                $return['msg'] .= "<td class=\"summary\">" .
+                    $row['installed_pack_summary'] . "</td>";
                 $return['msg'] .= '</tr>';
             }
         }
@@ -72,7 +76,7 @@ class AjaxValidate
         return $return;
     }
 
-    function isRepository($dba,$dbh,$search,$update,$pack_sys_id) {
+    public function isRepository($dba,$dbh,$search,$update,$pack_sys_id) {
         $return = array();
 
         $return['msg'] = '';
