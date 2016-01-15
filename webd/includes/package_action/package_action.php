@@ -8,11 +8,8 @@
 require_once __DIR__ . '/../DbAction.php';
 require_once __DIR__."/../session.php";
 require_once __DIR__."/../restclient.php";
-require_once __DIR__."/../dbcontroller.php";
-
 
 # get needed class
-$test = new dbcontroller();
 $me = new Session();
 $rest = new restclient();
 
@@ -79,8 +76,3 @@ foreach ($package as $i=>$row) {
     var_dump($i);
     var_dump($row);
 }
-
-# Excluded target command because now is doing only gentoo package
-# to be added in the future.
-$test->updateInstalledPackage($machine_host,$target_host,$target_module);
-$test->updatePackage($machine_host,$target_host,$target_module);

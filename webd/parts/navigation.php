@@ -1,7 +1,7 @@
 <div class="navigation">
 	<div class="navigation-menu">
 		<ul>
-			<li><a href="rd_dashboard.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
+			<li><a href="index.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a></li>
 			<li><a href="target_list.php"><i class="fa fa-server"></i><span>Target List</span></a></li>
 			<li><a href="host_manager.php"><i class="fa fa-server"></i><span>Host Manager</span></a></li>
 			<li><a href="logger.php"><i class="fa fa-server"></i><span>Log</span></a></li>

@@ -1,110 +1,257 @@
 <!DOCTYPE html>
 <html lang="ja">
-<?php 
-$title = "index page";
+<?php
+//タイトル
+$title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
+require_once __DIR__ . '/connect.php';
+$dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 ?>
+
 <body>
 	<div class="wrapper">
 <?php require_once __DIR__ .'/parts/navigation.php'; ?>
 		<div class="contentswrapper menu-set">
 			<main class="contents">
-				<div class="section">
-					<h1>Welcome in Eisen</h1>
-                    <!-- TODO グラフを追加 -->
-                    <div id="canvas-holder">
-                        <canvas id="chart-area" width="300" height="300"></canvas>
+                <div class="content-header">
+                    <h2 class="title content-header-title">ダッシュボード</h2>
+                </div>
+                <div class="widgets-wrapper">
+                    <div class="widget widget-large">
+                        <div class="widget-base">
+                            <div class="widget-header">
+                                <span class="widget-title">ようこそ</span>
+                            </div>
+                            <div class="widget-contents">
+                                <div class="wgt-welcome">
+                                    <span>eisenへようこそ！<br>まずは<a href="target_list.php">ターゲットホスト</a>を追加してみましょう。<br>分からないことは<a href="#">ヘルプ</a>をご覧ください。</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="widget widget-medium">
+                        <div class="widget-base">
+                            <div class="widget-header">
+                                <span class="widget-title">マシンステータス</span>
+                            </div>
+                            <div class="widget-contents">
+                                <div class="wgt-mstat">
+                                    <ul>
+                                        <li class="wgt-mstat-li-thost">
+                                            <span class="wgt-mstat-li-thost-title"><i class="fa fa-caret-down wgt-mstat-diric"></i><span>targethost01</span></span>
+                                            <div class="wgt-mstat-mnghosts">
+                                                <div class="wgt-mstat-li-group">
+                                                    <div class="wgt-mstat-group-title-online">
+                                                        <span class="wgt-mstat-group-title">Online</span>
+                                                        <span class="wgt-mstat-group-title-info">
+                                                            <span class="wgt-mstat-info-status"><i class="fa fa-power-off"></i>3</span>
+                                                            <span class="wgt-mstat-info-alart"><i class="fa fa-exclamation-triangle"></i>1</span>
+                                                        </span>
+                                                    </div>
+                                                    <ul>
+                                                        <li class="wgt-mstat-li-mnghost">managerhost01
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                        <li class="wgt-mstat-li-mnghost">managerhost02
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                        <li class="wgt-mstat-li-mnghost">managerhost03
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="wgt-mstat-li-group">
+                                                    <div class="wgt-mstat-group-title-offline">
+                                                        <span class="wgt-mstat-group-title">Offline</span>
+                                                        <span class="wgt-mstat-group-title-info">
+                                                            <span class="wgt-mstat-info-status"><i class="fa fa-power-off"></i>1</span>
+                                                        </span>
+                                                    </div>
+                                                    <ul>
+                                                        <li class="wgt-mstat-li-mnghost">managerhost01
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-offline"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="wgt-mstat-li-thost">
+                                            <span class="wgt-mstat-li-thost-title"><i class="fa fa-caret-right wgt-mstat-diric"></i><span>targethost02</span></span>
+
+                                        </li>
+                                        <li class="wgt-mstat-li-thost">
+                                            <span class="wgt-mstat-li-thost-title"><i class="fa fa-caret-right wgt-mstat-diric"></i><span>targethost03</span></span>
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget widget-medium">
+                        <div class="widget-base">
+                            <div class="widget-header">
+                                 <span class="widget-title">最近のアクティビティ</span>
+                            </div>
+                            <div class="widget-contents">
+                                <div class="wgt-activity">
+                                    <table class="table wgt-compact-table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    時刻
+                                                </th>
+                                                <th>
+                                                    ターゲットホスト
+                                                </th>
+                                                <th>
+                                                    操作
+                                                </th>
+                                                <th>
+                                                    対象
+                                                </th>
+                                                <th>
+                                                    結果
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    201601011:11:11
+                                                </td>
+                                                <td>
+                                                    managerhost01
+                                                </td>
+                                                <td>
+                                                    アップデート
+                                                </td>
+                                                <td>
+                                                    Apache xxx
+                                                </td>
+                                                <td>
+                                                    成功
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    201601011:11:11
+                                                </td>
+                                                <td>
+                                                    managerhost01
+                                                </td>
+                                                <td>
+                                                    アップデート
+                                                </td>
+                                                <td>
+                                                    Apache xxx
+                                                </td>
+                                                <td>
+                                                    成功
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span>直近の5件を表示しています - <a href="#">すべてのログを見る</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget widget-medium">
+                        <div class="widget-base">
+                            <div class="widget-header">
+                                 <span class="widget-title">ログイン履歴</span>
+                            </div>
+                            <div class="widget-contents">
+                                <div class="wgt-activity">
+                                    <table class="table wgt-compact-table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    時刻
+                                                </th>
+                                                <th>
+                                                    ユーザー
+                                                </th>
+                                                <th>
+                                                    状況
+                                                </th>
+                                                <th>
+                                                    アクセス元
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    201601011:11:11
+                                                </td>
+                                                <td>
+                                                    depra95
+                                                </td>
+                                                <td>
+                                                    失敗
+                                                </td>
+                                                <td>
+                                                    192.168.11.2
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    201601011:11:11
+                                                </td>
+                                                <td>
+                                                    alice
+                                                </td>
+                                                <td>
+                                                    成功
+                                                </td>
+                                                <td>
+                                                    192.168.11.3
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <span>直近の5件を表示しています - <a href="#">すべてのログを見る</a></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                   <div class="widget widget-medium">
+                        <div class="widget-base">
+                            <div class="widget-header">
+                                <span class="widget-title">ニュースフィード</span>
+                            </div>
+                            <div class="widget-contents">
+                                <div class="wgt-news">
+                                    <span class="wgt-news-title">eisenのニュース</span>
+                                    <ul>
+                                        <li><span class="wgt-news-date">20160101</span><span class="wgt-news-title">あけましておめでとう</span></li>
+                                        <li><span class="wgt-news-date">20151225</span><span class="wgt-news-title">メリークリスマス</span></li>
+                                    </ul>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div id="md5sum"></div>
-    <?php
-/*    include_once __DIR__ . '/includes/DbAction.php';
-    include_once __DIR__ . '/includes/dbcontroller.php';
 
-    $dba = new DbAction();
-    $dbh = $dba->Connect();
-    $pack_sys_id=1;
-    $something=$dba->CountPackage($pack_sys_id, $dbh);
+				<div class="section">
 
-    # TODO move to a different script and c
-    $update =array();
-    $test = new dbcontroller();
-    $update['installed'] = $test->md5sumInstalled();
-    $update['all'] = $test->md5sumAll();
-    if ($update['installed'] > 0) {
-        echo 'installed update<br>';
-        echo $update['installed'].'<br>';
-    }
-    else{
-        echo 'Installed package already update<br>';
-
-    }
-    if ($update['all'] > 0) {
-        echo 'all update<br>';
-        echo $update['all'];
-    }else{
-        echo 'repository package already update<br>';
-    }*/
-    ?>
-        </main>
-    </div>
-    </div>
-    <script>
-
-/*        var instPack = '<?php echo $something['installed_package'] ;?>';
-        var notInstPack = '<?php echo $something['pack_info'] ;?>';*/
-        var doughnutData = [
-            {
-                value: 240,
-                color:"#F7464A",
-                highlight: "#FF5A5E",
-                label: "Installed Package"
-            },
-            {
-                value: 10,
-                color: "#46BFBD",
-                highlight: "#5AD3D1",
-                label: "Not Installed Package"
-            }
-        ];
-
-        window.onload = function(){
-            // pie chart options
-            var doughnutOptions = {
-                //Boolean - Whether we should show a stroke on each segment
-                segmentShowStroke : true,
-
-                //String - The colour of each segment stroke
-                segmentStrokeColor : "#fff",
-
-                //Number - The width of each segment stroke
-                segmentStrokeWidth : 2,
-
-                //The percentage of the chart that we cut out of the middle.
-                percentageInnerCutout : 50,
-
-                //Boolean - Whether we should animate the chart
-                animation : false,
-
-                //Number - Amount of animation steps
-                animationSteps : 100,
-
-                //String - Animation easing effect
-                animationEasing : "easeOutBounce",
-
-                //Boolean - Whether we animate the rotation of the Doughnut
-                animateRotate : true,
-
-                //Boolean - Whether we animate scaling the Doughnut from the centre
-                animateScale : true,
-
-                //Function - Will fire on animation completion.
-                //onAnimationComplete : false
-            };
-            var ctx = document.getElementById("chart-area").getContext("2d");
-            window.myPie = new Chart(ctx).Doughnut(doughnutData,doughnutOptions);
-        };
-    </script>
-    <?php require_once __DIR__ .'/parts/scripts.php'; ?>
+                </div>
+			</main>
+		</div>
+	</div>
+<?php require_once __DIR__ .'/parts/scripts.php'; ?>
 </body>
 </html>
