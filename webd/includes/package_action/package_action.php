@@ -55,6 +55,7 @@ var_dump($machine_host);
 
 $target_module="portage";
 $target_host=$target["ipaddress"];
+$os = $target['os'];
 
 #TODO we need to filter the variables for security issue
 # like injections

@@ -21,11 +21,12 @@ $dbh = $dba->Connect();
 $user_id = $me->get_user_id();
 
 $machine = $dba->MachineList($user_id,$dbh);
-$module=$machine[0];
-$ipaddress=$machine[1];
-$port=$machine[2];
-$username=$machine[3];
-$password=$machine[4];
+    $machine_id=$machine[0];
+    $module=$machine[1];
+    $ipaddress=$machine[2];
+    $port=$machine[3];
+    $username=$machine[4];
+    $password=$machine[5];
 $rest = new restclient();
 //$rest->restconnect($ipaddress,$port,$username,$password);
 if (strcmp($action, "start") == 0) {
@@ -40,10 +41,10 @@ if (strcmp($action, "start") == 0) {
 
 if (strcmp($action, "result") == 0) {
     $hosts = $rest->tasks_result($ipaddress, $port, $username, $password, $task_id);
-    var_dump($hosts);
+    Kint::dump($hosts);
 
     foreach ($hosts as $i => $row) {
-        var_dump($i);
-        var_dump($row);
+        Kint::dump($i);
+        Kint::dump($row);
     }
 }

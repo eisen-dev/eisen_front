@@ -37,4 +37,4 @@ try {
     //echo "An Error occured!"; //user friendly message
     var_dump($ex->getMessage());
 }
-
+    header('location:../host_manager.php');

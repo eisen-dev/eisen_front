@@ -23,11 +23,11 @@ $dbh = $dba->Connect();
 $user_id = $me->get_user_id();
 
 $machine = $dba->MachineList($user_id,$dbh);
-$module=$machine[0];
-$ipaddress=$machine[1];
-$port=$machine[2];
-$username=$machine[3];
-$password=$machine[4];
+$module=$machine[1];
+$ipaddress=$machine[2];
+$port=$machine[3];
+$username=$machine[4];
+$password=$machine[5];
 
 $rest = new restclient();
 # TODO need to be fixed on the python side because the host

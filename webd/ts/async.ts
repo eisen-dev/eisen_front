@@ -10,7 +10,7 @@ declare var target_os: string;
 
 
 //var userID = <?php echo json_encode($userData); ?>;
-console.log(target_ipaddress);
+//console.log(target_ipaddress);
 
 
 jQuery("#form1").submit(function (event) {
@@ -82,4 +82,26 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
             },
         });
     }
+});
+
+jQuery("#form2").submit(function (event) {
+    event.preventDefault();
+    console.log(event);
+    jQuery.ajax({
+        type: "POST",
+        url: "includes/package_update.php",
+        data: jQuery(this).serialize(),
+        dataType: "json",
+        beforeSend: function () {
+            jQuery("#form2").html("\<button class=\"btn btn-primary\" type=\"submit\">package update\<i class=\"fa fa-refresh fa-spin\"\>\<\/i\>\<\/button\>");
+        },
+        success: function () {
+            jQuery("#form2").html("\<form id=\"form2\"> <input type=\"hidden\" name=\"user_id\" id=\"user_id\" value=<?php echo $user_id ;?>><button class=\"btn btn-primary\" type=\"submit\"> package update <i class=\"fa fa-refresh\"></i> </button> </form>");
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            alert(xhr.status);
+            alert(thrownError);
+            alert(xhr.responseText);
+        }
+    });
 });

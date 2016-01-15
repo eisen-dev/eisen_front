@@ -1,6 +1,6 @@
 <?php
 //issetでpostを全部チェックした方がいい
-if(isset($_POST['submit'])){
+if(isset($_POST['submit'], $_POST["db_user"])){
 	if (!empty($_POST["db_host"])) {
 		$db_host = htmlspecialchars($_POST["db_host"]);
 	}
@@ -34,8 +34,6 @@ if(isset($_POST['submit'])){
 	$dba->TableCreation($dbh);
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -46,7 +44,7 @@ if(isset($_POST['submit'])){
 	<link rel="stylesheet" href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="includes/bootstrap-custom/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="sass/style.css">
-	<script type="text/javascript" src="includes/jquery/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="includes/jquery/jquery-2.1.4.js"></script>
 </head>
 
 <body>

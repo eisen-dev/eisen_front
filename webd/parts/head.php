@@ -7,6 +7,24 @@
 	$me = new Session();
 	$me->start_session();
 	$me->is_session_started();
+    /**
+     * setting website language with gettext
+     */
+    $locale = 'en_US';
+
+    if (!defined('LC_MESSAGES') || !setlocale(LC_ALL, $locale)) {
+        putenv("LC_ALL=$locale");
+    }
+
+    $domain = 'messages';
+    $path = "locales/";
+    $codeset = 'UTF-8';
+
+    bindtextdomain($domain, $path);
+    textdomain($domain);
+    bind_textdomain_codeset($domain, $codeset);
+
+    echo gettext("name");
     ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <link rel="icon" href="images/favicon.png" type="image/png">

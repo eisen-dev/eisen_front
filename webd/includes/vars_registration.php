@@ -25,11 +25,11 @@ if(isset($_POST['submit'])){
     $user_id = $me->get_user_id();
 
     $machine = $dba->MachineList($user_id,$dbh);
-    $module=$machine[0];
-    $ipaddress=$machine[1];
-    $port=$machine[2];
-    $username=$machine[3];
-    $password=$machine[4];
+    $module=$machine[1];
+    $ipaddress=$machine[2];
+    $port=$machine[3];
+    $username=$machine[4];
+    $password=$machine[5];
 
     $rest = new restclient();
     $rest->variable_register($ipaddress,$port,$username,$password,$host,$v_key,$v_value);

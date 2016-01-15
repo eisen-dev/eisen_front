@@ -76,16 +76,19 @@ $dbh = $dba->Connect();
                             <label for="cbox-selectall"></label>
                         </div>
                     </th>
-                    <th>IPアドレス</th>
-                    <th>グループ</th>
+                    <th>ip address</th>
+                    <th>port</th>
+                    <th>groups</th>
+                    <th>os</th>
+                    <th>status id<th>
                 </tr>
                 </thead>
                 <tbody>
                 <?php
                 $user_id = $me->get_user_id();
                 $hosts = new TargetHostController();
-                $hosts = $hosts->get_TargetHost($user_id);
-                foreach ($hosts as $i=>$row) {
+                $data = $hosts->get_TargetHost($user_id);
+                foreach ($data as $i => $row) {
                     $table = '<tr class="cell-which-triggers-popup">
                                 <td class="list-data-ctrl">
                                 <div class="list-data-cbox">
@@ -98,18 +101,21 @@ $dbh = $dba->Connect();
                                 </div>';
                     $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul>
                     <li>
-                        <a href="package_list.php?target='.$row->host.'&os='.$row->port.'">package list</a>
+                        <a href="package_list.php?target='.$row['ipaddress'].'">package list</a>
                     </li>
                     <li>
-                        <a href="task_list.php?target='.$row->host.'&os='.$row->port.'">task list</a>
+                        <a href="task_list.php?target='.$row['ipaddress'].'">task list</a>
                     </li>
                     <li>
-                        <a href="variable_list.php?target='.$row->host.'&os='.$row->port.'">settings</a>
+                        <a href="variable_list.php?target='.$row['ipaddress'].'">settings</a>
                     </li>
                     </ul></div></td>';
-                    $table .= '<td class="ipaddress">' . $row->host . '</td>';
-                    $table .= '<td class="groups">' . $row->groups . '</td></tr>';
-                    print_r($table);
+                    $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
+                    $table .= '<td class="port">' . $row['port'] . '</td>';
+                    $table .= '<td class="groups">' . $row['groups'] . '</td>';
+                    $table .= '<td class="os">' . $row['os'] . '</td>';
+                    $table .= '<td class="status_id">' . $row['status_id'] . '</td>';
+                    echo($table);
                 }
                 ?>
                 </tbody>

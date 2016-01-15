@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>パッケージリスト</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width,
+    initial-scale=1.0, user-scalable=no">
     <link rel="stylesheet" type="text/css" href="includes/normalize.css">
-    <link rel="stylesheet" type="text/css" href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css"
+          href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="sass/style.css">
     <link rel="stylesheet" type="text/css" href="includes/jquery-ui.css"/>
     <style>
@@ -35,6 +37,7 @@ if(isset($_GET['target'])){
 if(isset($_GET['os'])){
     $target["os"] = htmlspecialchars($_GET["os"]);
 }
+    $user_id = $me->get_user_id();
 ?>
 <body>
 <div id="popup" data-name="name" class="dialog">
@@ -49,7 +52,13 @@ if(isset($_GET['os'])){
             <div class="section">
                 <h2 class="title">パッケージリスト</h2>
                 <div class="list-tools clearfix">
-                    <form></form>
+                    <form id="form2">
+                        <input type="hidden" name="user_id" id="user_id" value=<?php echo $user_id ;?>>
+                    <button class="btn btn-primary" type="submit">
+                        package update
+                        <i class="fa fa-refresh"></i>
+                    </button>
+                    </form>
                 <form id="form1">
                     <div class="list-action">
                         <select name="list-action-general" class="input-list">
@@ -64,7 +73,8 @@ if(isset($_GET['os'])){
                     </div>
                     <div class="search-box">
                         <input type="text" name="field1" id="field1">
-                        <input type="submit" name="submit" id="submit" value="Submit Form">
+                        <button type="submit" name="submit" class="search-box__button">
+                        <i class="fa fa-search"></i>
                     </div>
                 </form>
                 </div>
@@ -78,7 +88,9 @@ if(isset($_GET['os'])){
                             </div>
                         </th>
                         <th>ID</th>
-                        <th>パッケージ名</th>
+                        <th>package name</th>
+                        <th>package version</th>
+                        <th>package summary</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -90,8 +102,8 @@ if(isset($_GET['os'])){
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
 <script>
-    var target_ipaddress = '<?php echo $target["ipaddress"] ;?>';
-    var target_os = '<?php echo $target["os"] ;?>';
+var target_ipaddress = '<?php echo $target["ipaddress"] ;?>';
+//    var target_os = '<?php //echo $target["os"] ;?>//';*/
 </script>
 <script type="text/javascript" src="ts/async.js"></script>
 </body>
