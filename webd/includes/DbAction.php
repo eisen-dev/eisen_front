@@ -1,21 +1,26 @@
 <?php
 
+/**
+ * Class DbAction
+ */
+class DbAction
+{
 
-class DbAction {
-    # connect to database
-    /**
+    /** Check DB connection
+     *
      * @return PDO
      */
-    public function Check(){
+    public function Check()
+    {
         #TODO use ini config file instead of php.
         include dirname(__FILE__) . '/../connect.php';
         if (!empty($db_host)) {
         }
         if (!empty($db_user)) {
-            $login = ($db_user);
+            $login = $db_user;
         }
         if (!empty($db_pass)) {
-            $password = ($db_pass);
+            $password = $db_pass;
         }
         if (!empty($db_name)) {
         }
@@ -27,14 +32,21 @@ class DbAction {
         );
 
         $dsn = "mysql:host=$db_host";
-        $pdo = new PDO($dsn, $login, $password,$opt);
+        $pdo = new PDO($dsn, $login, $password, $opt);
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-        $dbname = "`".str_replace("`","``",$db_name)."`";
+        $dbname = "`".str_replace("`", "``", $db_name)."`";
         $pdo->query("CREATE DATABASE IF NOT EXISTS $dbname");
         $pdo->query("use $dbname");
     }
 
+    /** Connect to DataBase
+     *
+     * Simple function for connecting to DB
+     * or testing that DB is working correctly.
+     *
+     * @return PDO
+     */
     public function Connect()
     {
         //set static directory
@@ -51,20 +63,34 @@ class DbAction {
             if (!empty($db_user)) {
                 if (!empty($db_pass)) {
                     if (!empty($dsn)) {
-                        $dbh = new PDO($dsn, $db_user, $db_pass,
-                        array(PDO::ATTR_EMULATE_PREPARES => false,
-                            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+                        $dbh = new PDO(
+                            $dsn,
+                            $db_user,
+                            $db_pass,
+                            array(PDO::ATTR_EMULATE_PREPARES => false,
+                            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+                        );
                         ini_set('max_execution_time', 0); //300 seconds = 5 minutes
                     }
                 }
             }
         } catch (PDOException $e) {
-            exit('データベース接続に失敗しました' . $e->getMessage());
+            // if DB don't exist sending to DB setup page
+            echo('データベース接続に失敗しました' . $e->getMessage());
+            header('location:init-setup1.php');
         }
         return $dbh;
     }
 
-    public function TableCreation($dbh) {
+    /** Create DB Structure
+     *
+     * called by init-setup1 form
+     * Creating DB structure.
+     *
+     * @param $dbh
+     */
+    public function TableCreation($dbh)
+    {
 
         $this->CreateDbTable(
             'user_info',
@@ -73,7 +99,9 @@ class DbAction {
                 'user_id' => 'VARCHAR(75)',
                 'password' => 'VARCHAR(40)',
                 'mail_address' => 'VARCHAR(60)',
-            ),$dbh);
+            ),
+            $dbh
+        );
 
         $this->CreateDbTable(
             'manager_host',
@@ -86,7 +114,9 @@ class DbAction {
                 'password' => 'VARCHAR(60)',
                 'status_id' => 'VARCHAR(60)',
                 'user_id' => 'VARCHAR(75)'
-            ),$dbh);
+            ),
+            $dbh
+        );
 
         $this->CreateDbTable(
             'target_host',
@@ -94,11 +124,15 @@ class DbAction {
                 'host_id' => 'INT AUTO_INCREMENT',
                 'ipaddress' => 'VARCHAR(20)',
                 'port' => 'VARCHAR(60)',
-                'group' => 'VARCHAR(60)',
+                // group is a mysql reserved word.
+                'groups' => 'VARCHAR(60)',
                 'os' => 'VARCHAR(60)',
                 'status_id' => 'VARCHAR(60)',
-                'machine_id' => 'INT'
-            ),$dbh);
+                'machine_id' => 'INT',
+                'user_id' => 'VARCHAR(75)'
+            ),
+            $dbh
+        );
 
         $this->CreateDbTable(
             'pack_management_system',
@@ -108,8 +142,11 @@ class DbAction {
                 'pack_sys_version' => 'VARCHAR(60)',
                 'all_sys_pack_hash' => 'VARCHAR(60)',
                 'installed_sys_pack_hash' => 'VARCHAR(60)',
-                'machine_id'=> 'INT NOT NULL'
-            ),$dbh);
+                'machine_id'=> 'INT NOT NULL',
+                'target_host' => 'VARCHAR(60)'
+            ),
+            $dbh
+        );
 
         $this->CreateDbTable(
             'installed_package',
@@ -119,8 +156,12 @@ class DbAction {
                 'installed_pack_name' => 'VARCHAR(120)',
                 'installed_pack_version' => 'VARCHAR(60)',
                 'installed_pack_summary' => 'VARCHAR(60)',
-                'pack_sys_id' => 'INT NOT NULL'
-            ),$dbh);
+                'pack_sys_id' => 'INT NOT NULL',
+                'target_host' => 'VARCHAR(60)',
+                'manager_host' => 'VARCHAR(60)'
+            ),
+            $dbh
+        );
 
         $this->CreateDbTable(
             'pack_info',
@@ -130,66 +171,131 @@ class DbAction {
                 'pack_name' => 'VARCHAR(120)',
                 'pack_version' => 'VARCHAR(60)',
                 'pack_summary' => 'VARCHAR(60)',
-                'pack_sys_id' => 'INT NOT NULL'
-            ),$dbh);
+                'pack_sys_id' => 'INT NOT NULL',
+                'target_host' => 'VARCHAR(60)',
+                'manager_host' => 'VARCHAR(60)'            ),
+            $dbh
+        );
 
         $this->CreateDbTable(
             'status',
             array(
                 'status_id' => 'INT AUTO_INCREMENT',
                 'status_info'=> 'VARCHAR(60)',
-            ),$dbh);
+            ),
+            $dbh
+        );
 
-        #TODO  Alter table installed_package ADD CONSTRAINT installed_package_uc    UNIQUE INDEX (pack_sys_id, installed_pack_name);
+        // Making constraint for have unique installed package linked to package system id only
         $stm = $dbh->prepare("Alter table installed_package ADD CONSTRAINT installed_package_uc    UNIQUE INDEX (pack_sys_id, installed_pack_name);");
         $stm->execute();
-        #TODO  Alter table pack_info ADD CONSTRAINT pack_info_uc    UNIQUE INDEX (pack_sys_id, pack_name);
+        // same for all the rest of package
         $stm = $dbh->prepare("Alter table pack_info ADD CONSTRAINT pack_info_uc    UNIQUE INDEX (pack_sys_id, pack_name)");
+        $stm->execute();
+        // also for target host table update checking for duplicates
+        $stm = $dbh->prepare("Alter table target_host ADD CONSTRAINT target_host_uc    UNIQUE INDEX (ipaddress, machine_id)");
         $stm->execute();
     }
 
     public function MachineList($user_id, $dbh) {
-        $stm = $dbh->prepare("select * from manager_host WHERE user_id=:user_id;");
+        $stm = $dbh->prepare('select * from manager_host WHERE user_id=:user_id;');
         $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
         $myMachine = array();
         foreach ($data as $i => $row) {
-            $myMachine += array($row['module'],
+            $myMachine += [
+                $row['machine_id'],
+                $row['module'],
                 $row['ipaddress'],
                 $row['port'],
                 $row['username'],
                 $row['password'],
                 $row['status_id'],
-                $row['user_id']);
-            }
+                $row['user_id']
+            ];
+        }
         return $myMachine;
     }
 
-    public function TargetHostRegistration($hosts, $dbh, $machine_id, $status_id) {
-        $query = $dbh->prepare('INSERT INTO target_host (ipaddress, port, group, os, status_id, machine_id)
-        VALUES (:ipaddress, :port, :group, :os, :status_id, :machine_id);');
+    public function TargetList($user_id, $dbh) {
+        $stm = $dbh->prepare("select * from target_host WHERE user_id=:user_id;");
+        $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
+        $stm->execute();
+        $data = $stm->fetchAll();
+        $cnt  = count($data); //in case you need to count all rows
+        return $data;
+    }
+
+    /**
+     * @param $hosts
+     * @param $dbh
+     * @param $machine_id Associated manager host id Int
+     * @param $status_id
+     */
+    public function TargetHostRegistration($hosts, $dbh, $machine_id, $user_id) {
+        $status_id = 'unknown';
+        $os = 'unknown';
+        $query = $dbh->prepare('INSERT INTO target_host (ipaddress, port, groups, os, status_id, machine_id, user_id)
+        VALUES (:ipaddress, :port, :groups, :os, :status_id, :machine_id, :user_id);');
         # TODO: it have problem finding duplicate NULL value
         # FIX: cutted value if using to short VARCHAR so never matched
         foreach ($hosts as $i=>$row) {
             try {
                 $query-> bindParam(':ipaddress', $row->host, PDO::PARAM_STR);
                 $query-> bindParam(':port', $row->port, PDO::PARAM_STR);
-                $query-> bindParam(':group', $row->group, PDO::PARAM_STR);
-                $query-> bindParam(':os', $row->os, PDO::PARAM_INT);
+                $query-> bindParam(':groups', $row->groups, PDO::PARAM_STR);
+                $query-> bindParam(':os', $os, PDO::PARAM_STR);
                 $query-> bindParam(':status_id', $status_id, PDO::PARAM_STR);
                 $query-> bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
+                $query-> bindParam(':user_id', $user_id, PDO::PARAM_INT);
                 $query->execute(); //invalid query!
             } catch(PDOException $ex) {
-                echo"already present<br>";
                 //echo "An Error occured!"; //user friendly message
                 //$this->some_logging_function($ex->getMessage());
             }
         }
     }
 
-    public function installedPackageList($pack_sys_id, $dbh) {
+    /**Update Target Host os
+     *
+     * Checking with witch Operating System system we are dealing
+     *
+     * Ubuntu
+     * Gentoo
+     * Debian
+     * Arch
+     *
+     * @param $host to be updated as String
+     * @param $dbh DB connection object
+     * @param $os os string name
+     */
+    public function TargetHostUpdateOS($host, $dbh, $os) {
+        $query = $dbh->prepare('UPDATE target_host SET os=:os WHERE ipaddress = :ipaddress ;');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+            try {
+                $query-> bindParam(':ipaddress', $host, PDO::PARAM_STR);
+                $query-> bindParam(':os', $os, PDO::PARAM_INT);
+                $query->execute(); //invalid query!
+            } catch(PDOException $ex) {
+                echo"already present<br>";
+                //echo "An Error occured!"; //user friendly message
+                //$this->some_logging_function($ex->getMessage());
+            }
+    }
+
+    /**
+     *
+     *
+     * @param $pack_sys_id
+     * @param $dbh
+     *
+     * @return mixed
+     */
+    public function installedPackageList($pack_sys_id, $dbh)
+    {
         $stm = $dbh->prepare("select * from installed_package WHERE pack_sys_id=:pack_sys_id;");
         $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
         $stm->execute();
@@ -222,11 +328,11 @@ class DbAction {
         return $cnt;
     }
 
-    public function installedPackageSearch($pack_sys_id, $dbh, $search) {
+    public function installedPackageSearch($target_host, $dbh, $search) {
         $search = "%$search%";
-        $stm = $dbh->prepare("select * from installed_package WHERE pack_sys_id=:pack_sys_id AND installed_pack_name LIKE :search ;");
+        $stm = $dbh->prepare("select * from installed_package WHERE target_host=:target_host AND installed_pack_name LIKE :search ;");
         $stm-> bindParam(':search', $search, PDO::PARAM_STR);
-        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
+        $stm-> bindParam(':pack_sys_id', $target_host, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
@@ -275,19 +381,30 @@ class DbAction {
         }
     }
 
-    public function UpdateInstalledPackageListFast($data,$dbh){
+    /** Updating package list
+     *
+     * @param $data very long string
+     * @param $dbh
+     * @param $action install or all
+     */
+    public function UpdatePackageListFast($data, $dbh, $action, $target_host){
         $test2 = 'test';
         $test3=1;
-        $query = $dbh->prepare('INSERT INTO installed_package (installed_pack_category, installed_pack_name, installed_pack_version, installed_pack_summary, pack_sys_id) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id);');
+        if (strcmp($action, 'install')===0) {
+            $query = $dbh->prepare('INSERT INTO installed_package (installed_pack_category, installed_pack_name, installed_pack_version, installed_pack_summary, pack_sys_id, target_host) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id, :target_host);');
+        } else {
+            $query = $dbh->prepare('INSERT INTO pack_info (pack_category, pack_name, pack_version, pack_summary, pack_sys_id, target_host) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id, :target_host);');
+        }
         # TODO: it have problem finding duplicate NULL value
         # FIX: cutted value if using to short VARCHAR so never matched
-        foreach (explode("\n", $data->stdout) as $item) {
+        foreach (explode("\n", $data['stdout']) as $item) {
             try {
                 $query-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
                 $query-> bindParam(':pack_name', $item, PDO::PARAM_STR);
                 $query-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
                 $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
                 $query-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
+                $query-> bindParam(':target_host', $target_host, PDO::PARAM_STR);
                 $query->execute(); //invalid query!
             } catch(PDOException $ex) {
                 echo"already present<br>";
@@ -310,25 +427,6 @@ class DbAction {
             echo"already present<br>";
             //echo "An Error occured!"; //user friendly message
             //$this->some_logging_function($ex->getMessage());
-        }
-    }
-
-    public function UpdatePackageListFast($data,$dbh){
-        $test2 = 'test';
-        $test3=1;
-        $query = $dbh->prepare('INSERT INTO pack_info (pack_category, pack_name, pack_version, pack_summary, pack_sys_id) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id);');
-        foreach (explode("\n", $data->stdout) as $item) {
-            try {
-                $query-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
-                $query-> bindParam(':pack_name', $item, PDO::PARAM_STR);
-                $query-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
-                $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-                $query-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
-                $query->execute(); //invalid query!
-            } catch (PDOException $ex) {
-                echo "An Error occured!1"; //user friendly message
-                $this->some_logging_function($ex->getMessage());
-            }
         }
     }
 
