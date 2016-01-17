@@ -45,8 +45,8 @@
                         <div class="list-action">
                             <label>
                                 <select name="list-action" class="input-list">
-                                    <option value="0"><?php echo _('activate'); ?></option>
-                                    <option value="1"><?php echo _('deactivate'); ?></option>
+                                    <option value="1"><?php echo _('activate'); ?></option>
+                                    <option value="0"><?php echo _('deactivate'); ?></option>
                                 </select>
                             </label>
                             <input type="submit" value="適用" class="button button--form">
@@ -70,6 +70,7 @@
                                     </label>
                                 </div>
                             </th>
+                            <th><?php echo _('machine id'); ?></th>
                             <th><?php echo _('ip address'); ?></th>
                             <th><?php echo _('port'); ?></th>
                             <th><?php echo _('module'); ?></th>
@@ -79,27 +80,24 @@
                         </thead>
                         <tbody>
                         <?php
-                            $user_id = $me->get_user_id();
-                            $stm = $dbh->prepare("SELECT * FROM manager_host WHERE user_id=:user_id;");
-                            $stm->bindParam(':user_id', $user_id, PDO::PARAM_STR);
-                            $stm->execute();
-                            $data = $stm->fetchAll();
-                            $cnt = count($data); //in case you need to count all rows
-                            $_SESSION["manager"] = [];
-                            foreach ($data as $i => $row) {
-                                $table = '<tr class="cell-which-triggers-popup">
-                                <td class="list-data-ctrl">
-                                <div class="list-data-cbox">
-                                    <input type="checkbox" id="cbox-' . $i . '" value="' . $i . '" name="check[]">
-                                    <label for="cbox-' . $i . '">
-                                <div class="select"></div></label></div></td>';
-                                $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
-                                $table .= '<td class="port">' . $row['port'] . '</td>';
-                                $table .= '<td class="module">' . $row['module'] . '</td>';
-                                $table .= '<td class="active">' . $row['active'] . '</td>';
-                                $table .= '<td class="status_id">' . $row['status_id'] . '</td></tr>';
-                                echo($table);
-                            }
+                        $user_id = $me->get_user_id();
+                        $data = $dba->hostManagerList($dbh, $user_id);
+                        foreach ($data as $i => $row) {
+                            $table = '<tr class="cell-which-triggers-popup">
+                            <td class="list-data-ctrl">
+                            <div class="list-data-cbox">
+                                <input type="checkbox" id="cbox-' . $row['machine_id'] .
+                                '" value="' . $row['machine_id'] . '" name="check[]">
+                                <label for="cbox-' . $row['machine_id'] . '">
+                            <div class="select"></div></label></div></td>';
+                            $table .= '<td class="ipaddress">' . $row['machine_id'] . '</td>';
+                            $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
+                            $table .= '<td class="port">' . $row['port'] . '</td>';
+                            $table .= '<td class="module">' . $row['module'] . '</td>';
+                            $table .= '<td class="active">' . $row['active'] . '</td>';
+                            $table .= '<td class="status_id">' . $row['status_id'] . '</td></tr>';
+                            echo($table);
+                        }
                         ?>
                         </tbody>
                     </table>

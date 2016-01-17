@@ -20,9 +20,8 @@ class restclient
         for ($i = 0; $i < $max; $i++) {
             if (!empty($response)) {
                 return 'online';
-            } else {
-                return "offline";
             }
+            return 'offline';
         }
     }
 

@@ -34,11 +34,11 @@
 <?php
 if(isset($_GET['host'])){
     $package = htmlspecialchars($_GET["host"]);
-    var_dump($package);
+    echo($package);
 }
 if(isset($_GET['action'])){
     $action = htmlspecialchars($_GET["action"]);
-    var_dump($action);
+    echo($action);
 }
 $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
@@ -131,7 +131,7 @@ $dbh = $dba->Connect();
             </table>
             <!--data-modal-targetで開くモーダルのIDを指定する-->
             <div class="button" data-modal="open" data-modal-target="target_host_list-setting">open setting</div>
-			</div>
+            </div>
         </main>
     </div>
 </div>

@@ -285,7 +285,8 @@ UNIQUE INDEX (ipaddress, machine_id)');
      * @param $dbh DB connection object
      * @param $os os string name
      */
-    public function TargetHostUpdateOS($host, $dbh, $os) {
+    public function TargetHostUpdateOS($host, $dbh, $os)
+    {
         $query = $dbh->prepare('UPDATE target_host SET os=:os WHERE ipaddress = :ipaddress ;');
         # TODO: it have problem finding duplicate NULL value
         # FIX: cutted value if using to short VARCHAR so never matched
@@ -293,11 +294,83 @@ UNIQUE INDEX (ipaddress, machine_id)');
                 $query-> bindParam(':ipaddress', $host, PDO::PARAM_STR);
                 $query-> bindParam(':os', $os, PDO::PARAM_INT);
                 $query->execute(); //invalid query!
-            } catch(PDOException $ex) {
+            } catch (PDOException $ex) {
                 echo"already present<br>";
                 //echo "An Error occured!"; //user friendly message
                 //$this->some_logging_function($ex->getMessage());
             }
+    }
+
+    /**
+     * @param $dbh
+     * @param $active set to 1 if activated 0 if deactivated
+     * @param $machine_id
+     */
+    public function hostManagerActive($dbh, $active, $machine_id)
+    {
+        $query = $dbh->prepare('UPDATE manager_host SET active=:active WHERE machine_id = :machine_id ;');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        try {
+            $query-> bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
+            $query-> bindParam(':active', $active, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+        } catch (PDOException $ex) {
+            echo"already present<br>";
+            //echo "An Error occured!"; //user friendly message
+            //$this->some_logging_function($ex->getMessage());
+        }
+    }
+
+    public function hostActiveList($dbh)
+    {
+        $query = $dbh->prepare('SELECT * FROM manager_host WHERE active = 1 ;');
+        try {
+            $query->execute(); //invalid query!
+        } catch (PDOException $ex) {
+            echo 'error<br>';
+        }
+    }
+
+    /**
+     * @param $dbh
+     * @param $user_id
+     *
+     * @return mixed
+     */
+    public function hostManagerList($dbh, $user_id)
+    {
+        $query = $dbh->prepare('SELECT * FROM manager_host WHERE user_id = :user_id ;');
+        try {
+            $query-> bindParam(':user_id', $user_id, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+            $data = $query->fetchAll();
+            $cnt  = count($data); //in case you need to count all rows
+            return $data;
+        } catch (PDOException $ex) {
+            echo 'error<br>';
+        }
+    }
+
+    /**
+     * @param $dbh
+     * @param $active set to 1 if activated 0 if deactivated
+     * @param $machine_id
+     */
+    public function targetHostActive($dbh, $active, $machine_id)
+    {
+        $query = $dbh->prepare('UPDATE manager_host SET active=:active WHERE machine_id = :machine_id ;');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        try {
+            $query-> bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
+            $query-> bindParam(':active', $active, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+        } catch (PDOException $ex) {
+            echo"already present<br>";
+            //echo "An Error occured!"; //user friendly message
+            //$this->some_logging_function($ex->getMessage());
+        }
     }
 
     /**
