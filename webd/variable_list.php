@@ -53,7 +53,7 @@
     <div class="contentswrapper menu-set">
         <main class="contents">
             <div class="section">
-                <h2 class="title">タスクリスト</h2>
+                <h2 class="title"><?php echo _('Variable List'); ?></h2>
                 <div class="list-tools clearfix">
                     <div class="list-action">
                         <select name="list-action" class="input-list">
@@ -78,10 +78,10 @@
                                     for="cbox-selectall"></label>
                             </div>
                         </th>
-                        <th>ID</th>
-                        <th>ホスト</th>
-                        <th>variable_key</th>
-                        <th>variable_value</th>
+                        <th><?php echo _('ID'); ?></th>
+                        <th><?php echo _('host'); ?></th>
+                        <th><?php echo _('variable key'); ?></th>
+                        <th><?php echo _('variable value'); ?></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -111,7 +111,7 @@
                             $table .= '<td class="host">' . $row->host . '</td>';
                             $table .= '<td class="module">' . $row->variable_key . '</td>';
                             $table .= '<td class="command">' . $row->variable_value . '</td></tr>';
-                            print_r($table);
+                            echo($table);
                         }
                     ?>
                     </tbody>

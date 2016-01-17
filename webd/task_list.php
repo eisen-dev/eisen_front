@@ -119,13 +119,13 @@
             <form action="includes/task_registration.php" method="post">
                 <div class="modal-header">
                     <i class="fa fa-times modal-close" data-modal="close"></i>
-                    <span class="modal-title">タスク設定</span>
+                    <span class="modal-title"><?php echo _('task settings'); ?></span>
                 </div>
                 <div class="modal-contents">
                     <div class="compact-form">
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>ホストやグループ</span>
+                                <span><?php echo _('host or group'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="hosts">
@@ -133,7 +133,7 @@
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>モジュール</span>
+                                <span><?php echo _('Module'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="module">
@@ -141,7 +141,7 @@
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>コマンド</span>
+                                <span><?php echo _('command'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="command">

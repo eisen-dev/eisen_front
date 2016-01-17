@@ -30,7 +30,6 @@
     require_once __DIR__ . '/parts/modal.php';
     require_once __DIR__ . '/includes/DbAction.php';
     require_once __DIR__ . '/locale.php';
-
     $dba = new DbAction();
     $dbh = $dba->Connect();
 ?>
@@ -45,7 +44,7 @@
     <div class="contentswrapper menu-set">
         <main class="contents">
             <div class="section">
-                <h2 class="title">Host Manager</h2>
+                <h2 class="title"><?php echo _('Host Manager'); ?></h2>
                 <form action="includes/manager_host_checkbox.php" method="post">
                     <div class="list-tools clearfix">
                         <div class="list-action">
@@ -76,7 +75,7 @@
                                     </label>
                                 </div>
                             </th>
-                            <th>ip address</th>
+                            <th><?php echo _('ip address'); ?></th>
                             <th>port</th>
                             <th>module</th>
                             <th>active</th>
