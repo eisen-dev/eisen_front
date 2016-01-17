@@ -1,5 +1,5 @@
 # Eisen_Frontend
-Website framework client interacting with the eisen agent api.
+Frontend interacting with the Eisen agent.
 
 code style:  
 4 space indent  
