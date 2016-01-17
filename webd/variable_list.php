@@ -37,6 +37,7 @@
     require_once __DIR__ . '/parts/head.php';
     require_once __DIR__ . '/parts/modal.php';
     require_once __DIR__ . '/includes/DbAction.php';
+    require_once __DIR__ . '/locale.php';
     $dba = new DbAction();
     $dbh = $dba->Connect();
 ?>

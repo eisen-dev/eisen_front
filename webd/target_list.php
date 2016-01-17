@@ -1,5 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+<?php
+    $lang = "ja_JP";
+    $domain = "messages";
+    setlocale(LC_ALL, $lang);
+    bindtextdomain($domain, "./Locale/");
+    textdomain($domain);
+    echo _("hello world");
+?>
 <head>
     <meta charset="UTF-8">
     <title>マシン管理</title>
@@ -51,22 +59,23 @@ $dbh = $dba->Connect();
     <div class="contentswrapper menu-set">
         <main class="contents">
             <div class="section">
-                <h2 class="title">ホストリスト</h2>
-						<div class="list-tools clearfix">
-							<div class="list-action">
-								<select name="list-action" class="input-list">
-									<option value="0">一括操作</option>
-									<option value="0">更新</option>
-								</select>
-								<input type="submit" value="適用" class="button button--form">
-							</div>
-							<div class="search-box">
-								<input type="text" placeholder="全てのパッケージを検索">
-								<button type="submit" name="submit" class="search-box__button">
-									<i class="fa fa-search"></i>
-								</button>
-							</div>
-						</div>
+                <h2 class="title">host list</h2>
+                <div class="list-tools clearfix">
+                    <div class="list-action">
+                        <select name="list-action" class="input-list">
+                            <option value="0">packages list</option>
+                            <option value="1">settings</option>
+                            <option value="2">task list</option>
+                        </select>
+                        <input type="submit" value="適用" class="button button--form">
+                    </div>
+                    <div class="search-box">
+                        <input type="text" placeholder="全てのパッケージを検索">
+                        <button type="submit" name="submit" class="search-box__button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                </div>
             <table class="table">
                 <thead>
                 <tr>

@@ -27,6 +27,7 @@
 $title = "Untitled Document";
 require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ . '/parts/modal.php';
+require_once __DIR__ . '/locale.php';
 // target host to be used for get package list
 $target = array();
 if(isset($_GET['target'])){
