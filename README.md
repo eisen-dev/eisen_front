@@ -15,4 +15,4 @@ we are following this code style:
 - Icon/Font
   - Font Awesome https://fortawesome.github.io/Font-Awesome/
 - Editor
-  - pycharm, phpstorm, webstorm
+  - phpstorm
