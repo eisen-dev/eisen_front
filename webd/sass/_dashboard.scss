@@ -83,13 +83,17 @@
 .wgt-mstat-mnghosts{
     display: flex;
     padding-left: 1.8em;
+    flex-wrap:wrap;
+    display: none;
+
 }
 
 .wgt-mstat-li-group{
-    width: 50%;
+    min-width: 50%;
+    flex-grow: 1;
 
 }
-.wgt-mstat-diric{
+.wgt-mstat-open-mnghosts{
     font-size: 1.5em;
     padding: 0 0.3em;
     min-width: 1em;
@@ -128,7 +132,8 @@
 
 
 .wgt-activity{
-
+    overflow: scroll;
+    overflow: auto;
 }
 
 .wgt-compact-table{

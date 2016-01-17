@@ -30,7 +30,6 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                             </div>
                         </div>
                     </div>
-
                     <div class="widget widget-medium">
                         <div class="widget-base">
                             <div class="widget-header">
@@ -40,7 +39,7 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                                 <div class="wgt-mstat">
                                     <ul>
                                         <li class="wgt-mstat-li-thost">
-                                            <span class="wgt-mstat-li-thost-title"><i class="fa fa-caret-down wgt-mstat-diric"></i><span>targethost01</span></span>
+                                            <span class="wgt-mstat-li-thost-title"><i class="fa fa-caret-right wgt-mstat-open-mnghosts"></i><span>targethost01</span></span>
                                             <div class="wgt-mstat-mnghosts">
                                                 <div class="wgt-mstat-li-group">
                                                     <div class="wgt-mstat-group-title-online">
@@ -51,17 +50,20 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                                                         </span>
                                                     </div>
                                                     <ul>
-                                                        <li class="wgt-mstat-li-mnghost">managerhost01
+                                                        <li class="wgt-mstat-li-mnghost">
+                                                            <span class="wgt-mstat-li-mnghost-title">managerhost01</span>
                                                             <span class="wgt-mstat-group-title-info">
                                                                 <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
                                                             </span>
                                                         </li>
-                                                        <li class="wgt-mstat-li-mnghost">managerhost02
+                                                        <li class="wgt-mstat-li-mnghost">
+                                                            <span class="wgt-mstat-li-mnghost-title">managerhost02</span>
                                                             <span class="wgt-mstat-group-title-info">
                                                                 <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
                                                             </span>
                                                         </li>
-                                                        <li class="wgt-mstat-li-mnghost">managerhost03
+                                                        <li class="wgt-mstat-li-mnghost">
+                                                            <span class="wgt-mstat-li-mnghost-title">managerhost03</span>
                                                             <span class="wgt-mstat-group-title-info">
                                                                 <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
                                                             </span>
@@ -76,7 +78,8 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                                                         </span>
                                                     </div>
                                                     <ul>
-                                                        <li class="wgt-mstat-li-mnghost">managerhost01
+                                                        <li class="wgt-mstat-li-mnghost">
+                                                            <span class="wgt-mstat-li-mnghost-title">managerhost04</span>
                                                             <span class="wgt-mstat-group-title-info">
                                                                 <span class="wgt-mstat-info-status-lamp-offline"><i class="fa fa-circle"></i></span>
                                                             </span>
@@ -86,12 +89,57 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                                             </div>
                                         </li>
                                         <li class="wgt-mstat-li-thost">
-                                            <span class="wgt-mstat-li-thost-title"><i class="fa fa-caret-right wgt-mstat-diric"></i><span>targethost02</span></span>
-
+                                            <span class="wgt-mstat-li-thost-title"><i class="fa fa-caret-right wgt-mstat-open-mnghosts"></i><span>targethost02</span></span>
+                                            <div class="wgt-mstat-mnghosts">
+                                                <div class="wgt-mstat-li-group">
+                                                    <div class="wgt-mstat-group-title-online">
+                                                        <span class="wgt-mstat-group-title">Online</span>
+                                                        <span class="wgt-mstat-group-title-info">
+                                                            <span class="wgt-mstat-info-status"><i class="fa fa-power-off"></i>3</span>
+                                                            <span class="wgt-mstat-info-alart"><i class="fa fa-exclamation-triangle"></i>1</span>
+                                                        </span>
+                                                    </div>
+                                                    <ul>
+                                                        <li class="wgt-mstat-li-mnghost">
+                                                            <span class="wgt-mstat-li-mnghost-title">managerhost01</span>
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                        <li class="wgt-mstat-li-mnghost">
+                                                            <span class="wgt-mstat-li-mnghost-title">managerhost02</span>
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                        <li class="wgt-mstat-li-mnghost">
+                                                            <span class="wgt-mstat-li-mnghost-title">managerhost03</span>
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-online"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="wgt-mstat-li-group">
+                                                    <div class="wgt-mstat-group-title-offline">
+                                                        <span class="wgt-mstat-group-title">Offline</span>
+                                                        <span class="wgt-mstat-group-title-info">
+                                                            <span class="wgt-mstat-info-status"><i class="fa fa-power-off"></i>1</span>
+                                                        </span>
+                                                    </div>
+                                                    <ul>
+                                                        <li class="wgt-mstat-li-mnghost">
+                                                            <span class="wgt-mstat-li-mnghost-title">managerhost04</span>
+                                                            <span class="wgt-mstat-group-title-info">
+                                                                <span class="wgt-mstat-info-status-lamp-offline"><i class="fa fa-circle"></i></span>
+                                                            </span>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
                                         </li>
                                         <li class="wgt-mstat-li-thost">
-                                            <span class="wgt-mstat-li-thost-title"><i class="fa fa-caret-right wgt-mstat-diric"></i><span>targethost03</span></span>
-
+                                            <span class="wgt-mstat-li-thost-title"><i class="fa fa-caret-right wgt-mstat-open-mnghosts"></i><span>targethost03</span></span>
                                         </li>
                                     </ul>
                                 </div>
@@ -240,14 +288,9 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                                         <li><span class="wgt-news-date">20151225</span><span class="wgt-news-title">メリークリスマス</span></li>
                                     </ul>
                                 </div>
-
                             </div>
                         </div>
                     </div>
-                </div>
-
-				<div class="section">
-
                 </div>
 			</main>
 		</div>

@@ -1,7 +1,17 @@
+@charset "UTF-8";
+
+
+
+//list-toolsは修正予定
 .list-tools{
 	height: 34px;
-	.list-action{
+	width: 100%;
+	.list-action-left{
 		float: left;
+		height: 100%;
+	}
+	.list-action-right{
+		float: right;
 		height: 100%;
 	}
 	.search-box{
@@ -30,14 +40,170 @@
 	}
 }
 
-.table-wrapper{
-	//overflow: scroll;
-	//overflow: auto;
+
+//form タグをどこに配置するか(flexに影響)
+$list-tools-background: $md-white;
+$list-tools-btn-color: $md-blue-500;
+$list-tools-searchbtn-color: $md-blue-500;
+$list-tools-filterbtn-color: $md-blue-200;
+$list-tools-filterbtn-color-active: $md-orange-500;
+
+
+.n-list-tools{
+    background-color: $list-tools-background;
+    border-bottom: 1px solid $md-grey-300;
 }
+
+.n-list-tools-fixed{
+    position: fixed;
+    top: 48px;
+    right: 0px;
+    // jqueryで幅や位置を設定
+}
+
+.n-list-toolbar{
+	$th: 28px;
+	//background-color: aqua;
+	width: 100%;
+    padding: 8px;
+	display: flex;
+	justify-content: space-between;
+    flex-wrap: wrap;
+	.n-list-action{
+		display: flex;
+		height: $th;
+		.input-list{
+			height: 100%;
+		}
+		.n-list-action-button{
+			display: inline-block;
+			vertical-align: middle;
+			text-align: center;
+			height: $th;
+			line-height: $th;
+			font-size: 14px;
+			padding: 0 6px;
+			margin-left: 2px;
+			border-radius: 3px;
+			width: auto;
+			color: white;
+			background-color: $list-tools-btn-color;
+			//padding: 2px;
+		}
+	}
+	.n-searchbox{
+		height: $th;
+		display: flex;
+		float: right;
+		.n-search-box-input{
+			height: $th;
+		}
+		.n-search-button{
+			height: $th;
+			width: 28px;
+			background-color: $list-tools-searchbtn-color;
+			border-right: 1px solid darken($list-tools-searchbtn-color, 10%);
+			text-align: center;
+			i{
+				color: white;
+				display: inline-block;
+				font-size: 16px;
+			}
+		}
+		.n-filter-button{
+			height: $th;
+			width: 28px;
+			background-color: $list-tools-filterbtn-color;
+			text-align: center;
+			cursor: pointer;
+
+			i{
+                color: $md-white;
+				display: inline-block;
+
+				font-size: 16px;
+			}
+		}
+        .n-filter-button-active{
+            background-color: $list-tools-filterbtn-color-active;
+        }
+	}
+}
+
+$list-filter-background: $md-white;
+$list-filter-border: $md-grey-300;
+$list-filter-group-header-background:$md-grey-50;
+$list-filter-group-header-border:$md-grey-400;
+
+.list-filter{
+	width: 100%;
+	display: flex;
+    display: none;
+	flex-direction: column;
+	border-top: 1px solid $list-filter-border;
+	background-color: $list-filter-background;
+}
+
+.list-filter-group{
+	//flex-grow: 1;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: stretch;
+	justify-content: space-between;
+	border-top: 1px solid $list-filter-border;
+	&:first-child{
+		border-top: none;
+	}
+}
+
+.list-filter-item{
+	flex-direction: row;
+	//flex-grow: 1;
+	flex-basis: 100%;
+	padding: 16px 8px;
+}
+
+.list-filter-title{
+	display: block;
+
+}
+
+.list-group-title{
+	flex-basis: 100%;
+	display: block;
+	width: 100%;
+	padding: 4px 0 4px 8px;
+	font-size: 0.8em;
+	border-bottom: 1px solid $list-filter-group-header-border;
+    background-color: $list-filter-group-header-background;
+
+}
+
+.list-filter-comment{
+	display: block;
+	font-size: 0.8em;
+	color: $md-grey-700;
+}
+
+$table-background: $md-white;
+$table-border: $md-grey-300;
+
+$table-header-background: $md-grey-50;
+$table-header-border: $md-grey-400;
+$table-row-hover: $md-grey-50;
+
+
+.table-wrapper{
+	overflow: scroll;
+	overflow: auto;
+    border-radius: inherit;
+}
+
 .table{
 	width: 100%;
 	border-collapse: collapse;
-	border: 1px solid $md-grey-300;
+	//border: 1px solid $md-grey-300;
 	//border-radius: 6px;
 	//overflow: hidden;
 	//overflow: scroll;
@@ -47,8 +213,8 @@
 		tr{
 			th{
 				text-align: left;
-				background-color: $md-grey-100;
-				border-bottom: 1px solid $md-grey-400;
+				background-color: $table-header-background;
+				border-bottom: 1px solid $table-header-border;
 				height: 32px;
 				font-weight: normal;
 				font-size: 0.9em;
@@ -61,13 +227,14 @@
 		}
 	}
 	tbody{
+        background-color: $table-background;
 		tr{
-			border-bottom: 1px solid $md-grey-300;
+			border-bottom: 1px solid $table-border;
 			&:last-child{
 				border-bottom: none;
 			}
 			&:hover{
-				background-color: white;
+				background-color: $table-row-hover;
 			}
 
 			td{

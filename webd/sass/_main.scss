@@ -39,9 +39,6 @@ body{
 	z-index: 0;
 }
 
-.section{
-	padding: 16px 16px;
-}
 
 .inner-login{
 	padding: 0 16px;
@@ -58,19 +55,30 @@ body{
 		padding-left: 0;
 	}
 
+/*section*/
+
+.section{
+    background-color: $md-white;
+	padding: 8px;
+}
+
+.section-card-wrapper{
+    padding: 8px;
+}
+
 .section-card{
-    background-color: $md-grey-50;
+    background-color: $md-white;
     border-radius: 3px;
     //padding: 8px 0;
     margin-bottom: 8px;
     //overflow: hidden;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
 
 }
 .content-header{
     width: 100%;
     background-color: $md-blue-500;
     padding: 8px 8px;
-
 }
 
 .content-header-title{

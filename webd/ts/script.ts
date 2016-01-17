@@ -106,7 +106,6 @@ jQuery(
                 jQuery(target).css("display", "none");
             }
         });
-		
 		// フィルターの開閉
 		jQuery(".n-filter-button").click(function () {
 			var target = jQuery(".list-filter");
@@ -116,8 +115,20 @@ jQuery(
                 jQuery(target).css("display", "none");
             }
 		});
-
-
+        // マシンステータスウィジェットのリスト開閉
+        jQuery(".wgt-mstat-open-mnghosts").click(function () {
+            // 開閉対象のターゲットホストリスト
+            var target = jQuery(this).parents('.wgt-mstat-li-thost').children('.wgt-mstat-mnghosts');
+            if (jQuery(target).css("display") == "none"){
+                // 矢印の向き変更
+                jQuery(this).removeClass('fa-caret-right').addClass('fa-caret-down');
+                jQuery(target).css("display", "flex");
+            } else {
+                // 矢印の向き変更
+                jQuery(this).removeClass('fa-caret-down').addClass('fa-caret-right');
+                jQuery(target).css("display", "none");
+            }
+        });
         jQuery(document).on("click", ".cell-which-triggers-popup", function (event) {
             /**
              * on target_list,php table click event getting item ipaddress and port variable
