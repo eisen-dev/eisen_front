@@ -34,11 +34,6 @@
     $dbh = $dba->Connect();
 ?>
 <body>
-<!-- TODO better popup menu style -->
-<!--<div id="popup" data-name="name" class="dialog">
-    <a href="">Hello world!</a>
-    <p></p>
-</div>-->
 <div class="wrapper">
     <?php require_once __DIR__ . '/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
@@ -50,8 +45,8 @@
                         <div class="list-action">
                             <label>
                                 <select name="list-action" class="input-list">
-                                    <option value="0">activate</option>
-                                    <option value="1">deactivate</option>
+                                    <option value="0"><?php echo _('activate'); ?></option>
+                                    <option value="1"><?php echo _('deactivate'); ?></option>
                                 </select>
                             </label>
                             <input type="submit" value="適用" class="button button--form">
@@ -76,10 +71,10 @@
                                 </div>
                             </th>
                             <th><?php echo _('ip address'); ?></th>
-                            <th>port</th>
-                            <th>module</th>
-                            <th>active</th>
-                            <th>status</th>
+                            <th><?php echo _('port'); ?></th>
+                            <th><?php echo _('module'); ?></th>
+                            <th><?php echo _('active'); ?></th>
+                            <th><?php echo _('status'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -126,13 +121,13 @@
             <form action="includes/machine_registration.php" method="post">
                 <div class="modal-header">
                     <i class="fa fa-times modal-close" data-modal="close"></i>
-                    <span class="modal-title">manager host settings</span>
+                    <span class="modal-title"><?php echo _('Manager Host settings'); ?></span>
                 </div>
                 <div class="modal-contents">
                     <div class="compact-form">
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>manager host module</span>
+                                <span><?php echo _('module'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="rest_module">
@@ -140,7 +135,7 @@
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>manager host ip address</span>
+                                <span><?php echo _('ipaddress'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="rest_host">
@@ -148,7 +143,7 @@
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>manager host port</span>
+                                <span><?php echo _('port'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="rest_port">
@@ -156,7 +151,7 @@
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>manager host username</span>
+                                <span><?php echo _('username'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="rest_user">
@@ -164,7 +159,7 @@
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>manager host password</span>
+                                <span><?php echo _('password'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="rest_pass">
@@ -173,7 +168,7 @@
                     </div>
                 </div>
                 <div class="modal-ctrl">
-                    <input type="submit" name="submit" value="設定して次に進む" class="button">
+                    <input type="submit" name="submit" value=<?php echo _('submit'); ?> class="button">
                 </div>
             </form>
         </div>
