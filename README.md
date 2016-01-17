@@ -2,7 +2,8 @@
 Website framework client interacting with the eisen agent api.
 
 code style:
-4 space indent
+4 space indent  
+[psr-1](http://www.php-fig.org/psr/psr-1/), [psr-2](http://www.php-fig.org/psr/psr-1/)
 
 we are following this code style:  
 - PHP  
