@@ -15,7 +15,4 @@ we are following this code style:
 - Icon/Font
   - Font Awesome https://fortawesome.github.io/Font-Awesome/
 - Editor
-  - brackets http://brackets.io/
   - pycharm, phpstorm, webstorm
-  - eclipse
-  - bootstrap studio http://bootstrapstudio.io/
