@@ -24,12 +24,12 @@ class DbAction
         }
         if (!empty($db_name)) {
         }
-        $opt = array(
+        $opt = [
             // any occurring errors wil be thrown as PDOException
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             // an SQL command to execute when connecting
             PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"
-        );
+        ];
 
         $dsn = "mysql:host=$db_host";
         $pdo = new PDO($dsn, $login, $password, $opt);
@@ -67,8 +67,10 @@ class DbAction
                             $dsn,
                             $db_user,
                             $db_pass,
-                            array(PDO::ATTR_EMULATE_PREPARES => false,
-                            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION)
+                            [
+                            PDO::ATTR_EMULATE_PREPARES => false,
+                            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+                            ]
                         );
                         ini_set('max_execution_time', 0); //300 seconds = 5 minutes
                     }
@@ -94,49 +96,56 @@ class DbAction
 
         $this->CreateDbTable(
             'user_info',
-            array(
+            [
                 'unique_id' => 'INT AUTO_INCREMENT',
                 'user_id' => 'VARCHAR(75)',
                 'password' => 'VARCHAR(40)',
                 'mail_address' => 'VARCHAR(60)',
-            ),
+            ],
             $dbh
         );
 
         $this->CreateDbTable(
             'manager_host',
-            array(
+            [
                 'machine_id' => 'INT AUTO_INCREMENT',
                 'ipaddress' => 'VARCHAR(20)',
                 'port' => 'VARCHAR(60)',
+                // module activated in the manager host
                 'module' => 'VARCHAR(60)',
                 'username' => 'VARCHAR(60)',
                 'password' => 'VARCHAR(60)',
+                // status of the manager host [online, offline]
                 'status_id' => 'VARCHAR(60)',
-                'user_id' => 'VARCHAR(75)'
-            ),
+                // user associated with the manager host
+                'user_id' => 'VARCHAR(75)',
+                // if we are currently using this manager host [0 = not used, 1 = used]
+                'active' => 'INT'
+            ],
             $dbh
         );
 
         $this->CreateDbTable(
             'target_host',
-            array(
+            [
                 'host_id' => 'INT AUTO_INCREMENT',
                 'ipaddress' => 'VARCHAR(20)',
                 'port' => 'VARCHAR(60)',
-                // group is a mysql reserved word.
+                // REMEMBER: group is a mysql reserved word.
                 'groups' => 'VARCHAR(60)',
                 'os' => 'VARCHAR(60)',
                 'status_id' => 'VARCHAR(60)',
                 'machine_id' => 'INT',
-                'user_id' => 'VARCHAR(75)'
-            ),
+                'user_id' => 'VARCHAR(75)',
+                // if we are currently using this target host [0 = not used, 1 = used]
+                'active' => 'INT'
+            ],
             $dbh
         );
 
         $this->CreateDbTable(
             'pack_management_system',
-            array(
+            [
                 'pack_sys_id' => 'INT AUTO_INCREMENT',
                 'pack_sys_name'=> 'VARCHAR(60)',
                 'pack_sys_version' => 'VARCHAR(60)',
@@ -144,13 +153,13 @@ class DbAction
                 'installed_sys_pack_hash' => 'VARCHAR(60)',
                 'machine_id'=> 'INT NOT NULL',
                 'target_host' => 'VARCHAR(60)'
-            ),
+            ],
             $dbh
         );
 
         $this->CreateDbTable(
             'installed_package',
-            array(
+            [
                 'installed_pack_id' => 'INT AUTO_INCREMENT',
                 'installed_pack_category'=> 'VARCHAR(60)',
                 'installed_pack_name' => 'VARCHAR(120)',
@@ -159,13 +168,13 @@ class DbAction
                 'pack_sys_id' => 'INT NOT NULL',
                 'target_host' => 'VARCHAR(60)',
                 'manager_host' => 'VARCHAR(60)'
-            ),
+            ],
             $dbh
         );
 
         $this->CreateDbTable(
             'pack_info',
-            array(
+            [
                 'pack_id' => 'INT AUTO_INCREMENT',
                 'pack_category'=> 'VARCHAR(60)',
                 'pack_name' => 'VARCHAR(120)',
@@ -173,27 +182,31 @@ class DbAction
                 'pack_summary' => 'VARCHAR(60)',
                 'pack_sys_id' => 'INT NOT NULL',
                 'target_host' => 'VARCHAR(60)',
-                'manager_host' => 'VARCHAR(60)'            ),
+                'manager_host' => 'VARCHAR(60)'
+            ],
             $dbh
         );
 
         $this->CreateDbTable(
             'status',
-            array(
+            [
                 'status_id' => 'INT AUTO_INCREMENT',
                 'status_info'=> 'VARCHAR(60)',
-            ),
+            ],
             $dbh
         );
 
         // Making constraint for have unique installed package linked to package system id only
-        $stm = $dbh->prepare("Alter table installed_package ADD CONSTRAINT installed_package_uc    UNIQUE INDEX (pack_sys_id, installed_pack_name);");
+        $stm = $dbh->prepare('Alter table installed_package ADD CONSTRAINT installed_package_uc
+UNIQUE INDEX (pack_sys_id, installed_pack_name);');
         $stm->execute();
         // same for all the rest of package
-        $stm = $dbh->prepare("Alter table pack_info ADD CONSTRAINT pack_info_uc    UNIQUE INDEX (pack_sys_id, pack_name)");
+        $stm = $dbh->prepare('Alter table pack_info ADD CONSTRAINT pack_info_uc
+UNIQUE INDEX (pack_sys_id, pack_name)');
         $stm->execute();
         // also for target host table update checking for duplicates
-        $stm = $dbh->prepare("Alter table target_host ADD CONSTRAINT target_host_uc    UNIQUE INDEX (ipaddress, machine_id)");
+        $stm = $dbh->prepare('Alter table target_host ADD CONSTRAINT target_host_uc
+UNIQUE INDEX (ipaddress, machine_id)');
         $stm->execute();
     }
 
@@ -212,6 +225,7 @@ class DbAction
                 $row['port'],
                 $row['username'],
                 $row['password'],
+                $row['active'],
                 $row['status_id'],
                 $row['user_id']
             ];
@@ -304,7 +318,8 @@ class DbAction
         return $data;
     }
 
-    public function PackageList($pack_sys_id, $dbh) {
+    public function PackageList($pack_sys_id, $dbh)
+    {
         $stm = $dbh->prepare("select * from pack_info WHERE pack_sys_id=:pack_sys_id;");
         $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
         $stm->execute();
@@ -313,7 +328,8 @@ class DbAction
         return $data;
     }
 
-    public function CountPackage($pack_sys_id, $dbh) {
+    public function CountPackage($pack_sys_id, $dbh)
+    {
         $cnt=array();
         $stm = $dbh->prepare("select * from installed_package WHERE pack_sys_id=:pack_sys_id;");
         $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
@@ -328,9 +344,21 @@ class DbAction
         return $cnt;
     }
 
-    public function installedPackageSearch($target_host, $dbh, $search) {
+    /**
+     * @param $target_host
+     * @param $dbh
+     * @param $search
+     *
+     * @return mixed
+     */
+    public function installedPackageSearch($target_host, $dbh, $search)
+    {
         $search = "%$search%";
-        $stm = $dbh->prepare("select * from installed_package WHERE target_host=:target_host AND installed_pack_name LIKE :search ;");
+        $stm = $dbh->prepare('
+select * from installed_package
+WHERE target_host=:target_host
+AND installed_pack_name
+LIKE :search ;');
         $stm-> bindParam(':search', $search, PDO::PARAM_STR);
         $stm-> bindParam(':pack_sys_id', $target_host, PDO::PARAM_STR);
         $stm->execute();
@@ -339,7 +367,8 @@ class DbAction
         return $data;
     }
 
-    public function PackageSearch($pack_sys_id, $dbh, $search) {
+    public function PackageSearch($pack_sys_id, $dbh, $search)
+    {
         $search = "%$search%";
         $stm = $dbh->prepare("select * from pack_info WHERE pack_sys_id=:pack_sys_id AND pack_name LIKE :search ;");
         $stm-> bindParam(':search', $search, PDO::PARAM_STR);
@@ -350,7 +379,8 @@ class DbAction
         return $data;
     }
 
-    public function some_logging_function($log){
+    public function some_logging_function($log)
+    {
         echo 'LOG : ' . $log . '<br />';
     }
 
@@ -375,119 +405,9 @@ class DbAction
         $sql .= ") CHARACTER SET utf8 COLLATE utf8_general_ci";
         try {
             $dbh->query($sql); //invalid query!
-        } catch(PDOException $ex) {
+        } catch (PDOException $ex) {
             echo "An Error occured!"; //user friendly message
             some_logging_function($ex->getMessage());
         }
-    }
-
-    /** Updating package list
-     *
-     * @param $data very long string
-     * @param $dbh
-     * @param $action install or all
-     */
-    public function UpdatePackageListFast($data, $dbh, $action, $target_host){
-        $test2 = 'test';
-        $test3=1;
-        if (strcmp($action, 'install')===0) {
-            $query = $dbh->prepare('INSERT INTO installed_package (installed_pack_category, installed_pack_name, installed_pack_version, installed_pack_summary, pack_sys_id, target_host) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id, :target_host);');
-        } else {
-            $query = $dbh->prepare('INSERT INTO pack_info (pack_category, pack_name, pack_version, pack_summary, pack_sys_id, target_host) VALUES (:pack_cat, :pack_name, :pack_version, :pack_sum, :pack_sys_id, :target_host);');
-        }
-        # TODO: it have problem finding duplicate NULL value
-        # FIX: cutted value if using to short VARCHAR so never matched
-        foreach (explode("\n", $data['stdout']) as $item) {
-            try {
-                $query-> bindParam(':pack_cat', $test2, PDO::PARAM_STR);
-                $query-> bindParam(':pack_name', $item, PDO::PARAM_STR);
-                $query-> bindParam(':pack_version', $test2, PDO::PARAM_STR);
-                $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-                $query-> bindParam(':pack_sum', $test2, PDO::PARAM_STR);
-                $query-> bindParam(':target_host', $target_host, PDO::PARAM_STR);
-                $query->execute(); //invalid query!
-            } catch(PDOException $ex) {
-                echo"already present<br>";
-                //echo "An Error occured!"; //user friendly message
-                //$this->some_logging_function($ex->getMessage());
-            }
-        }
-    }
-
-    public function DeleteInstalledPackageListFast($dbh){
-        $test2 = 'test';
-        $test3=1;
-        $query = $dbh->prepare('DELETE FROM installed_package WHERE pack_sys_id = :pack_sys_id ;');
-        # TODO: it have problem finding duplicate NULL value
-        # FIX: cutted value if using to short VARCHAR so never matched
-        try {
-            $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-            $query->execute(); //invalid query!
-        } catch(PDOException $ex) {
-            echo"already present<br>";
-            //echo "An Error occured!"; //user friendly message
-            //$this->some_logging_function($ex->getMessage());
-        }
-    }
-
-    public function DeletePackageListFast($dbh){
-        $test2 = 'test';
-        $test3=1;
-        $query = $dbh->prepare('DELETE FROM pack_info WHERE pack_sys_id = :pack_sys_id ;');
-        # TODO: it have problem finding duplicate NULL value
-        # FIX: cutted value if using to short VARCHAR so never matched
-        try {
-            $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-            $query->execute(); //invalid query!
-        } catch(PDOException $ex) {
-            echo"already present<br>";
-            //echo "An Error occured!"; //user friendly message
-            //$this->some_logging_function($ex->getMessage());
-        }
-    }
-
-    public function md5sumInstallPackage($data,$dbh){
-        $test2 = 'test';
-        $test3=1;
-        $query = $dbh->prepare('INSERT INTO pack_management_system
-            (pack_sys_id, pack_sys_name, pack_sys_version, installed_sys_pack_hash, machine_id)
-            VALUES (:pack_sys_id, :pack_sys_name, :pack_sys_version, :installed_sys_pack_hash, :machine_id)
-            ON DUPLICATE KEY UPDATE installed_sys_pack_hash = VALUES (installed_sys_pack_hash) ;');
-        try {
-            $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-            $query-> bindParam(':pack_sys_name', $test2, PDO::PARAM_STR);
-            $query-> bindParam(':pack_sys_version', $test2, PDO::PARAM_STR);
-            $query-> bindParam(':installed_sys_pack_hash', $data, PDO::PARAM_STR);
-            $query-> bindParam(':machine_id', $test3, PDO::PARAM_INT);
-            $query->execute(); //invalid query!
-            return ($query->rowCount());
-        } catch (PDOException $ex) {
-            echo "An Error occured! (md5sumInstallPackage)"; //user friendly message
-            $this->some_logging_function($ex->getMessage());
-        }
-        return 'error';
-        //}
-    }
-
-    public function md5sumAllPackage($data,$dbh){
-        $test2 = 'test';
-        $test3=1;
-        $query = $dbh->prepare('INSERT INTO pack_management_system
-            (pack_sys_id, pack_sys_name, pack_sys_version, all_sys_pack_hash, machine_id)
-            VALUES (:pack_sys_id, :pack_sys_name, :pack_sys_version, :all_sys_pack_hash, :machine_id)
-            ON DUPLICATE KEY UPDATE all_sys_pack_hash = VALUES (all_sys_pack_hash) ;');
-        try {
-            $query-> bindParam(':pack_sys_id', $test3, PDO::PARAM_INT);
-            $query-> bindParam(':pack_sys_name', $test2, PDO::PARAM_STR);
-            $query-> bindParam(':pack_sys_version', $test2, PDO::PARAM_STR);
-            $query-> bindParam(':all_sys_pack_hash', $data, PDO::PARAM_STR);
-            $query-> bindParam(':machine_id', $test3, PDO::PARAM_INT);
-            $query->execute(); //invalid query!
-            return ($query->rowCount());
-        } catch (PDOException $ex) {
-            echo "An Error occured! (md5sumInstallPackage)"; //user friendly message
-            $this->some_logging_function($ex->getMessage());
-        }
-        //}
     }
 }
