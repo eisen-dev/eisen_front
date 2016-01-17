@@ -1,8 +1,9 @@
 # Eisen_Frontend
-Website framework client interacting with the eisen agent api.
+Frontend interacting with the Eisen agent.
 
-code style:
-4 space indent
+code style:  
+4 space indent  
+[psr-1](http://www.php-fig.org/psr/psr-1/), [psr-2](http://www.php-fig.org/psr/psr-1/)
 
 we are following this code style:  
 - PHP  
@@ -15,7 +16,4 @@ we are following this code style:
 - Icon/Font
   - Font Awesome https://fortawesome.github.io/Font-Awesome/
 - Editor
-  - brackets http://brackets.io/
-  - pycharm, phpstorm, webstorm
-  - eclipse
-  - bootstrap studio http://bootstrapstudio.io/
+  - phpstorm
