@@ -6,5 +6,6 @@ out
 gen
 /webd/connect.php
 .sass-cache
-/node_modules
-/webd/test
+/node_modules/
+/webd/test/
+/webd/logs/

@@ -7,7 +7,19 @@
  */
 require __DIR__ . '/../../vendor/autoload.php';
 require __DIR__ . '/monolog.php';
+require_once __DIR__ . '/DbAction.php';
 
+use Monolog\Logger;
+$dba = new DbAction();
+$dbh = $dba->Connect();
+
+$log = new Logger('name');
+// create a log channel
+$log->pushHandler(new PDOHandler($dbh));
+
+// add records to the log
+$log->addWarning('Foo');
+$log->addError('Bar');
 
 /**
  * Class restclient

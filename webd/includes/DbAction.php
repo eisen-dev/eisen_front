@@ -359,6 +359,19 @@ UNIQUE INDEX (ipaddress, machine_id)');
         }
     }
 
+    public function monologList($dbh)
+    {
+        $query = $dbh->prepare('SELECT * FROM monolog ;');
+        try {
+            $query->execute(); //invalid query!
+            $data = $query->fetchAll();
+            $cnt  = count($data); //in case you need to count all rows
+            return $data;
+        } catch (PDOException $ex) {
+            echo 'error<br>';
+        }
+    }
+
     /**
      * @param $dbh
      * @param $user_id
