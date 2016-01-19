@@ -6,6 +6,9 @@
     "phpunit/dbunit": "2.0.2",
     "raveren/kint": "1.0.10",
     "squizlabs/php_codesniffer": "2.5.0",
-    "gettext/gettext": "v3.5.7"
+    "gettext/gettext": "v3.5.7",
+    "phpmd/phpmd" : "2.3.2",
+    "monolog/monolog": "1.17.2",
+    "nategood/httpful": "0.2.20"
   }
 }

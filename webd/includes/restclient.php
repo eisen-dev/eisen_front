@@ -5,9 +5,11 @@
  * Date: 2015/11/18
  * Time: 10:08
  */
-include(dirname(__FILE__).'/rest_client/httpful.phar');
-require __DIR__.'/../../vendor/raveren/kint/kint.class.php';
+require __DIR__ . '/../../vendor/autoload.php';
 
+/**
+ * Class restclient
+ */
 class restclient
 {
     public function restconnect($rest_host, $rest_port, $username, $password)
@@ -16,7 +18,7 @@ class restclient
         $response = \Httpful\Request::get($uri)
             ->authenticateWith('ansible', 'default')
             ->send();
-        $max = sizeof($response);
+        $max = count($response);
         for ($i = 0; $i < $max; $i++) {
             if (!empty($response)) {
                 return 'online';
@@ -31,8 +33,8 @@ class restclient
         $response = \Httpful\Request::get($uri)
             ->authenticateWith('ansible', 'default')
             ->send();
-        $hosts = array();
-        $max = sizeof($response->body->host);
+        $hosts = [];
+        $max = count($response->body->host);
         for ($i = 0; $i < $max; $i++) {
             if (!empty($response->body->host[$i])) {
                 $hosts[] = ($response->body->host[$i]);
@@ -48,7 +50,7 @@ class restclient
             ->authenticateWith($username, $password)
             ->send();
         $tasks = array();
-        $max = sizeof($response->body->tasks);
+        $max = count($response->body->tasks);
         for ($i = 0; $i < $max; $i++) {
             if (!empty($response->body->tasks[$i])) {
                 $tasks[] = ($response->body->tasks[$i]);
