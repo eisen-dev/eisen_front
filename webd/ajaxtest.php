@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <!-- デザイン開発・テスト用ファイル -->
 <html lang="ja">
+<head>
 <?php
-//タイトル
+// タイトル
 $title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
+?>
+</head>
+<?php
 require_once __DIR__ . '/connect.php';
 $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 ?>

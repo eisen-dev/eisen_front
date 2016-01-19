@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
+<head>
 <?php
-$title = "Untitled Document";
+// タイトル
+$title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
+?>
+</head>
+<?php
 require_once __DIR__ . '/locale.php';
 ?>
 <body>

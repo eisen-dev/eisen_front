@@ -9,15 +9,11 @@
     echo _("hello world");
 ?>
 <head>
-    <meta charset="UTF-8">
-    <title>マシン管理</title>
-    <meta name="viewport" content="width=device-width,
-     initial-scale=1.0, user-scalable=no">
-    <link rel="stylesheet" type="text/css" href="includes/normalize.css">
-    <link rel="stylesheet" type="text/css"
-          href="includes/font-awesome-4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" type="text/css" href="sass/style.css">
-    <link rel="stylesheet" type="text/css" href="includes/jquery-ui.css"/>
+<?php
+// タイトル
+$title = "テンプレート";
+require_once __DIR__ .'/parts/head.php';
+?>
     <style>
         #popup{
             display: none;
@@ -40,8 +36,6 @@ if(isset($_GET['action'])){
     $action = htmlspecialchars($_GET["action"]);
     echo($action);
 }
-$title = "Untitled Document";
-require_once __DIR__ .'/parts/head.php';
 require_once __DIR__ . '/parts/modal.php';
 require_once __DIR__ . '/includes/DbAction.php';
 require_once __DIR__ . '/includes/target_host_controller.php';
