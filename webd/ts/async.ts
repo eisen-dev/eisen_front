@@ -38,7 +38,7 @@ jQuery("#form1").submit(function (event) {
 
 jQuery(document).ajaxComplete(function (event, xhr, settings) {
     jQuery(document).on("click", ".cell-which-triggers-popup", function (event) {
-        var cellValue = jQuery(event.target).closest("tr").find(".item").text();
+        var cellValue = jQuery(event.target).closest("tr").find(".name").text();
         if (cellValue) {
             showPopup(cellValue);
         }
@@ -95,8 +95,8 @@ jQuery("#form2").submit(function (event) {
         beforeSend: function () {
             jQuery("#form2").html("\<button class=\"btn btn-primary\" type=\"submit\">package update\<i class=\"fa fa-refresh fa-spin\"\>\<\/i\>\<\/button\>");
         },
-        success: function () {
-            jQuery("#form2").html("\<form id=\"form2\"> <input type=\"hidden\" name=\"user_id\" id=\"user_id\" value=<?php echo $user_id ;?>><button class=\"btn btn-primary\" type=\"submit\"> package update <i class=\"fa fa-refresh\"></i> </button> </form>");
+        success: function (user_id) {
+            jQuery("#form2").html("\<form id=\"form2\"> <input type=\"hidden\" name=\"user_id\" id=\"user_id\" value= "+user_id+" \><button class=\"btn btn-primary\" type=\"submit\"> package update <i class=\"fa fa-refresh\"></i> </button> </form>");
         },
         error: function (xhr, ajaxOptions, thrownError) {
             alert(xhr.status);

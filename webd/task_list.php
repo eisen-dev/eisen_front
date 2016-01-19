@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/locale.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -62,44 +63,46 @@ require_once __DIR__ .'/parts/head.php';
                                 <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
                             </div>
                         </th>
-                        <th>ID</th>
-                        <th>ホスト</th>
+                        <th><?php echo _('ID'); ?></th>
+                        <th><?php echo _('manger host'); ?></th>
+                        <th><?php echo _('host'); ?></th>
                         <th>モジュール</th>
                         <th>コマンド</th>
                     </tr>
                     </thead>
                     <tbody>
                     <?php
-                        $dba = new DbAction();
-                        $dbh = $dba->Connect();
-                        // get the manager host information
-                        // TODO(alice): make it process more manager host
-                        $user_id = $me->get_user_id();
-                        $machine = $dba->MachineList($user_id, $dbh);
-                        $machine_id=$machine[0];
-                        $module=$machine[1];
-                        $ipaddress=$machine[2];
-                        $port=$machine[3];
-                        $username=$machine[4];
-                        $password=$machine[5];
-
-                        // getting task list information from rest
-                        $rest = new restclient();
-                        $hosts = $rest->tasks_list($ipaddress, $port, $username, $password);
-                        foreach ($hosts as $i => $row) {
-                            # hack for get the id of task
-                            $uri = $row->uri;
-                            $uri=explode('/', $uri);
+                    $dba = new DbAction();
+                    $dbh = $dba->Connect();
+                    $user_id = $me->get_user_id();
+                    $machine = $dba->hostManagerActiveList($user_id, $dbh);
+                    $rest = new restclient();
+                    foreach ($machine as $i => $row) {
+                        $tasks[] = $rest->tasks_list(
+                            $row['ipaddress'],
+                            $row['port'],
+                            $row['username'],
+                            $row['password']
+                        );
+                        $tasks[$i][0]->manager_host = $row['ipaddress'];
+                    }
+                    foreach ($tasks as $i => $row) {
+                        foreach ($row as $x => $task) {
+                            # hack for get task_id
+                            $uri = $task->uri;
+                            $uri = explode('/', $uri);
                             $task_id = $uri[5];
                             $table = '<tr class="cell-which-triggers-popup"><td>
-                                      <input type="checkbox" id="cbox-' . $task_id . '">
-                                      <label for="cbox-' . $task_id . '"></label></td>';
+                                  <input type="checkbox" id="cbox-' . $task_id . '">
+                                  <label for="cbox-' . $task_id . '"></label></td>';
                             $table .= '<td class="task_id">' . ($task_id) . '</td>';
-                            $table .= '<td class="host">' . $row->hosts . '</td>';
-                            $table .= '<td class="module">' . $row->module . '</td>';
-                            $table .= '<td class="command">' . $row->command . '</td></tr>';
+                            $table .= '<td class="manager_host">' . $task->manager_host . '</td>';
+                            $table .= '<td class="host">' . $task->hosts . '</td>';
+                            $table .= '<td class="module">' . $task->module . '</td>';
+                            $table .= '<td class="command">' . $task->command . '</td></tr>';
                             echo($table);
                         }
+                    }
                     ?>
                     </tbody>
                 </table>

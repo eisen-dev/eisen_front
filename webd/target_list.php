@@ -1,13 +1,6 @@
+<?php require_once __DIR__ . '/locale.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
-<?php
-    $lang = "ja_JP";
-    $domain = "messages";
-    setlocale(LC_ALL, $lang);
-    bindtextdomain($domain, "./Locale/");
-    textdomain($domain);
-    echo _("hello world");
-?>
 <head>
 <?php
 // タイトル
@@ -15,14 +8,16 @@ $title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
 ?>
     <style>
-        #popup{
+        #popup {
             display: none;
             border: 1px solid black;
         }
-        .cell-which-triggers-popup{
+
+        .cell-which-triggers-popup {
             cursor: pointer;
         }
-        .cell-which-triggers-popup:hover{
+
+        .cell-which-triggers-popup:hover {
             background-color: yellow;
         }
     </style>
@@ -49,82 +44,78 @@ $dbh = $dba->Connect();
     <p></p>
 </div>
 <div class="wrapper">
-    <?php require_once __DIR__ .'/parts/navigation.php'; ?>
+    <?php require_once __DIR__ . '/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
         <main class="contents">
             <div class="section">
-                <h2 class="title">host list</h2>
-                <div class="list-tools clearfix">
-                    <div class="list-action">
-                        <select name="list-action" class="input-list">
-                            <option value="0">packages list</option>
-                            <option value="1">settings</option>
-                            <option value="2">task list</option>
-                        </select>
-                        <input type="submit" value="適用" class="button button--form">
-                    </div>
-                    <div class="search-box">
-                        <input type="text" placeholder="全てのパッケージを検索">
-                        <button type="submit" name="submit" class="search-box__button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th class="cbox__selectall">
-                        <div class="cbox__wrapper">
-                            <input type="checkbox" id="cbox-selectall">
-                            <label for="cbox-selectall"></label>
+                <h2 class="title"><?php echo _('target host list'); ?></h2>
+                <form action="includes/target_host_checkbox.php" method="post">
+                    <div class="list-tools clearfix">
+                        <div class="list-action">
+                            <select name="list-action" class="input-list">
+                                <option value="0"><?php echo _('package list'); ?></option>
+                                <option value="1"><?php echo _('task list'); ?></option>
+                                <option value="2"><?php echo _('settings'); ?></option>
+                            </select>
+                            <input type="submit" value="適用" class="button button--form">
                         </div>
-                    </th>
-                    <th>ip address</th>
-                    <th>port</th>
-                    <th>groups</th>
-                    <th>os</th>
-                    <th>status id<th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $user_id = $me->get_user_id();
-                $hosts = new TargetHostController();
-                $data = $hosts->get_TargetHost($user_id);
-                foreach ($data as $i => $row) {
-                    $table = '<tr class="cell-which-triggers-popup">
-                                <td class="list-data-ctrl">
-                                <div class="list-data-cbox">
-                                    <input type="checkbox" id="cbox-' . $i . '">
-                                    <label for="cbox-' . $i . '">
-                                <div class="select"></div></label></div>';
-                    $table .= '<div class="list-data-option">
-                                <div class="list-data-option-icon">
-                                    <i class="fa fa-caret-down"></i>
-                                </div>';
-                    $table .= '<div class="dropdown-menu" id="dropdown-' . $i . '"><ul>
-                    <li>
-                        <a href="package_list.php?target='.$row['ipaddress'].'">package list</a>
-                    </li>
-                    <li>
-                        <a href="task_list.php?target='.$row['ipaddress'].'">task list</a>
-                    </li>
-                    <li>
-                        <a href="variable_list.php?target='.$row['ipaddress'].'">settings</a>
-                    </li>
-                    </ul></div></td>';
-                    $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
-                    $table .= '<td class="port">' . $row['port'] . '</td>';
-                    $table .= '<td class="groups">' . $row['groups'] . '</td>';
-                    $table .= '<td class="os">' . $row['os'] . '</td>';
-                    $table .= '<td class="status_id">' . $row['status_id'] . '</td>';
-                    echo($table);
-                }
-                ?>
-                </tbody>
-            </table>
-            <!--data-modal-targetで開くモーダルのIDを指定する-->
-            <div class="button" data-modal="open" data-modal-target="target_host_list-setting">open setting</div>
+                        <div class="search-box">
+                            <input type="text" placeholder="全てのパッケージを検索">
+                            <button type="submit" name="submit" class="search-box__button">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th class="cbox__selectall">
+                                <div class="cbox__wrapper">
+                                    <input type="checkbox" id="cbox-selectall">
+                                    <label for="cbox-selectall"></label>
+                                </div>
+                            </th>
+                            <th><?php echo _('ip address'); ?></th>
+                            <th>port</th>
+                            <th>groups</th>
+                            <th>os</th>
+                            <th>machine id</th>
+                            <th>status id
+                            <th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                        $user_id = $me->get_user_id();
+                        $hosts = new TargetHostController();
+                        $data = $hosts->get_TargetHost($user_id);
+                        foreach ($data as $i => $manager) {
+                            foreach ($manager as $x => $row) {
+                                $table = '<tr class="cell-which-triggers-popup">
+                            <td class="list-data-ctrl">
+                            <div class="list-data-cbox">
+                                <input type="checkbox" id="cbox-' . $row['host_id'] .
+                                    '" value="' . $row['host_id'] . '" name="check[]">
+                                <label for="cbox-' . $row['host_id'] . '">
+                            <div class="select"></div></label></div>';
+                                $table .= '</td>';
+                                $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
+                                $table .= '<td class="port">' . $row['port'] . '</td>';
+                                $table .= '<td class="groups">' . $row['groups'] . '</td>';
+                                $table .= '<td class="os">' . $row['os'] . '</td>';
+                                $table .= '<td class="machine_id">' . $row['machine_id'] . '</td>';
+                                $table .= '<td class="status_id">' . $row['status_id'] . '</td>';
+                                echo($table);
+                            }
+                        }
+                        ?>
+                        </tbody>
+                    </table>
+                </form>
+                <!--data-modal-targetで開くモーダルのIDを指定する-->
+                <div class="button" data-modal="open"
+                     data-modal-target="target_host_list-setting">open setting
+                </div>
             </div>
         </main>
     </div>
@@ -166,8 +157,8 @@ $dbh = $dba->Connect();
     </div>
     <div class="modal-overlay" data-modal="close"></div>
 </div>
-    </div>
 </div>
-<?php require_once __DIR__ .'/parts/scripts.php'; ?>
+</div>
+<?php require_once __DIR__ . '/parts/scripts.php'; ?>
 </body>
 </html>

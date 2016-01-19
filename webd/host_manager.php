@@ -1,3 +1,4 @@
+<?php require_once __DIR__ . '/locale.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -24,7 +25,6 @@ require_once __DIR__ .'/parts/head.php';
 <?php
     require_once __DIR__ . '/parts/modal.php';
     require_once __DIR__ . '/includes/DbAction.php';
-    require_once __DIR__ . '/locale.php';
     $dba = new DbAction();
     $dbh = $dba->Connect();
 ?>
@@ -98,7 +98,6 @@ require_once __DIR__ .'/parts/head.php';
                     </table>
                 </form>
                 <!--TODO Use modal for this -->
-
                 <!--data-modal-targetで開くモーダルのIDを指定する-->
                 <div class="button" data-modal="open" data-modal-target="machine_list-setting">
                     open setting

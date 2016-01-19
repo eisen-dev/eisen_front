@@ -22,19 +22,21 @@ class TargetHostController
     {
         $dba = new DbAction();
         $dbh = $dba->Connect();
-        $machine = $dba->MachineList($user_id,$dbh);
-        $machine_id=$machine[0];
-        $module=$machine[1];
-        $ipaddress=$machine[2];
-        $port=$machine[3];
-        $username=$machine[4];
-        $password=$machine[5];
-        $status_id=$machine[6];
-        $user_id=$machine[7];
+        $machine = $dba->hostManagerActiveList($user_id,$dbh);
         $rest = new restclient();
-        $hosts = $rest->host_list($ipaddress, $port, $username, $password);
-        $dba->TargetHostRegistration($hosts, $dbh, $machine_id, $user_id);
-        $data=$dba->TargetList($user_id, $dbh);
+        foreach ($machine as $i => $row){
+            try {
+                $hosts = $rest->host_list($row['ipaddress'], $row['port'], $row['username'],
+                    $row['password']);
+                $dba->TargetHostRegistration($hosts, $dbh, $row['machine_id'], $user_id);
+                $rest->check_os($row['ipaddress'], $row['port'], $row['username'],
+                    $row['password']);
+                $data[] = $dba->TargetList($user_id, $row['machine_id'], $dbh);
+            } catch (PDOException $ex) {
+                echo 'failed';
+            }
+        }
+
         return $data;
     }
 }

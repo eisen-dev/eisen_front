@@ -25,11 +25,11 @@ require_once __DIR__ .'/parts/head.php';
 <?php
     if (isset($_GET['host'])) {
         $package = htmlspecialchars($_GET["host"]);
-        var_dump($package);
+        echo($package);
     }
     if (isset($_GET['action'])) {
         $action = htmlspecialchars($_GET["action"]);
-        var_dump($action);
+        echo($action);
     }
     $title = "Untitled Document";
     require_once __DIR__ . '/parts/head.php';
@@ -84,33 +84,36 @@ require_once __DIR__ .'/parts/head.php';
                     </thead>
                     <tbody>
                     <?php
-                        $dba = new DbAction();
-                        $dbh = $dba->Connect();
-                        $user_id = $me->get_user_id();
-                        $machine = $dba->MachineList($user_id, $dbh);
-                        $machine_id = $machine[0];
-                        $module = $machine[1];
-                        $ipaddress = $machine[2];
-                        $port = $machine[3];
-                        $username = $machine[4];
-                        $password = $machine[5];
-                        $rest = new restclient();
-                        $hosts = $rest->variable_list($ipaddress, $port, $username, $password);
-
-                        foreach ($hosts as $i => $row) {
+                    $dba = new DbAction();
+                    $dbh = $dba->Connect();
+                    $user_id = $me->get_user_id();
+                    $machine = $dba->hostManagerActiveList($user_id, $dbh);
+                    $rest = new restclient();
+                    foreach ($machine as $i => $row) {
+                        $variables[] = $rest->variable_list(
+                            $row['ipaddress'],
+                            $row['port'],
+                            $row['username'],
+                            $row['password']
+                        );
+                    }
+                    foreach ($variables as $i => $row) {
+                        foreach ($row as $x => $var) {
                             # hack for get task_id
-                            $uri = ($row->uri);
-                            $uri = explode("/", $uri);
+                            $uri = $var->uri;
+                            $uri = explode('/', $uri);
                             $task_id = $uri[5];
                             $table = '<tr class="cell-which-triggers-popup">
                                     <td><input type="checkbox" id="cbox-' . $task_id . '">
                                     <label for="cbox-' . $task_id . '"></label></td>';
                             $table .= '<td class="task_id">' . ($task_id) . '</td>';
-                            $table .= '<td class="host">' . $row->host . '</td>';
-                            $table .= '<td class="module">' . $row->variable_key . '</td>';
-                            $table .= '<td class="command">' . $row->variable_value . '</td></tr>';
+                            $table .= '<td class="manager_host">' . $var->manager_host . '</td>';
+                            $table .= '<td class="host">' . $var->host . '</td>';
+                            $table .= '<td class="module">' . $var->variable_key . '</td>';
+                            $table .= '<td class="command">' . $var->variable_value . '</td></tr>';
                             echo($table);
                         }
+                    }
                     ?>
                     </tbody>
                 </table>
@@ -134,10 +137,18 @@ require_once __DIR__ .'/parts/head.php';
                     <div class="compact-form">
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>host</span>
+                                <span>manager host</span>
                             </div>
                             <div class="compact-form-item-right">
-                                <input type="text" name="host">
+                                <input type="text" name="manager_host">
+                            </div>
+                        </div>
+                        <div class="compact-form-row">
+                            <div class="compact-form-item-left">
+                                <span>target host</span>
+                            </div>
+                            <div class="compact-form-item-right">
+                                <input type="text" name="target_host">
                             </div>
                         </div>
                         <div class="compact-form-row">

@@ -1,5 +1,7 @@
 <?php
 
+require_once __DIR__ . '/../kintlog.php';
+
 /**
  * Class DbAction
  */
@@ -210,35 +212,60 @@ UNIQUE INDEX (ipaddress, machine_id)');
         $stm->execute();
     }
 
-    public function MachineList($user_id, $dbh) {
-        $stm = $dbh->prepare('select * from manager_host WHERE user_id=:user_id;');
+    public function hostManagerActiveList($user_id, $dbh) {
+        $stm = $dbh->prepare('select * from manager_host WHERE user_id=:user_id AND active= 1;');
         $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
         $myMachine = array();
         foreach ($data as $i => $row) {
-            $myMachine += [
-                $row['machine_id'],
-                $row['module'],
-                $row['ipaddress'],
-                $row['port'],
-                $row['username'],
-                $row['password'],
-                $row['active'],
-                $row['status_id'],
-                $row['user_id']
+            $myMachine[$i] = [
+                'machine_id' => $row['machine_id'],
+                'module' => $row['module'],
+                'ipaddress' => $row['ipaddress'],
+                'port' => $row['port'],
+                'username' => $row['username'],
+                'password' => $row['password'],
+                'active' => $row['active'],
+                'status_id' => $row['status_id'],
+                'user_id' => $row['user_id']
             ];
         }
         return $myMachine;
     }
 
-    public function TargetList($user_id, $dbh) {
-        $stm = $dbh->prepare("select * from target_host WHERE user_id=:user_id;");
+    public function hostManagerActiveListFind($user_id, $dbh, $host_manager) {
+        $stm = $dbh->prepare('select * from manager_host WHERE user_id=:user_id AND active= 1 AND ipaddress=:host_manager;');
         $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
+        $stm-> bindParam(':host_manager', $host_manager, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
+        $myMachine = array();
+        foreach ($data as $i => $row) {
+            $myMachine[$i] = [
+                'machine_id' => $row['machine_id'],
+                'module' => $row['module'],
+                'ipaddress' => $row['ipaddress'],
+                'port' => $row['port'],
+                'username' => $row['username'],
+                'password' => $row['password'],
+                'active' => $row['active'],
+                'status_id' => $row['status_id'],
+                'user_id' => $row['user_id']
+            ];
+        }
+        kint::dump($myMachine);
+        return $myMachine;
+    }
+
+    public function TargetList($user_id, $machine_id, $dbh) {
+        $stm = $dbh->prepare("select * from target_host WHERE user_id=:user_id AND machine_id=:machine_id;");
+        $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
+        $stm-> bindParam(':machine_id', $machine_id, PDO::PARAM_INT);
+        $stm->execute();
+        $data = $stm->fetchAll();
         return $data;
     }
 
