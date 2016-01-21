@@ -1,6 +1,9 @@
 # Created by .ignore support plugin (hsz.mobi)
 
 # IntelliJ project files
+*.mo
+*.log
+*.lock
 .idea
 out
 gen

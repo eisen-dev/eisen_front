@@ -1,31 +1,9 @@
-<?php
-/**
- * (c) $.year. , Eisen Team <alice.ferrazzi@gmail.com>
- *
- * This file is part of Eisen
- *
- * Eisen is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Eisen is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Eisen.  If not, see <http://www.gnu.org/licenses/>.
- *
- */
-
-require_once __DIR__ . '/locale.php'; ?>
+<?php require_once __DIR__ . '/locale.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<title><?php echo _('Logger'); ?></title>
 <?php
-// タイトル
-$title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
 ?>
     <style>
@@ -44,7 +22,6 @@ require_once __DIR__ .'/parts/head.php';
     </style>
 </head>
 <?php
-    require_once __DIR__ . '/parts/modal.php';
     require_once __DIR__ . '/includes/DbAction.php';
     $dba = new DbAction();
     $dbh = $dba->Connect();
