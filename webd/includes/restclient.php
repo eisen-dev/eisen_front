@@ -1,12 +1,11 @@
 <?php
 
-require __DIR__ . '/../../vendor/autoload.php';
-require __DIR__ . '/monologDB.php';
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/monologLogger.php';
 require_once __DIR__ . '/DbAction.php';
 
 use Httpful\Exception\ConnectionErrorException;
 use Monolog\Logger;
-use Monolog\Handler\SlackHandler;
 
 
 /**
@@ -19,20 +18,9 @@ class restclient
      */
     public function logger()
     {
-        $dba = new DbAction();
-        $dbh = $dba->Connect();
+        $log = new LoggerAtOnce();
+        $log = $log->loggerInject();
 
-        $log = new Logger('name');
-        // create a log channel
-        $log->pushHandler(new PDOHandler($dbh));
-        $log->pushHandler(new SlackHandler(
-            '',
-            '#logger',
-            'Monolog',
-            true,
-            null,
-            Logger::INFO
-        ));
         return $log;
     }
 

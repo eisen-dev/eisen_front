@@ -31,8 +31,6 @@ require_once __DIR__ .'/parts/head.php';
         $action = htmlspecialchars($_GET["action"]);
         echo($action);
     }
-    $title = "Untitled Document";
-    require_once __DIR__ . '/parts/head.php';
     require_once __DIR__ . '/includes/DbAction.php';
     require_once __DIR__ . '/locale.php';
     $dba = new DbAction();

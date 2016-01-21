@@ -20,22 +20,23 @@ $dba = new DbAction();
 $dbh = $dba->Connect();
 $user_id = $me->get_user_id();
 
-$machine = $dba->MachineList($user_id,$dbh);
-    $machine_id=$machine[0];
-    $module=$machine[1];
-    $ipaddress=$machine[2];
-    $port=$machine[3];
-    $username=$machine[4];
-    $password=$machine[5];
+$machine = $dba->hostManagerActiveList($user_id, $dbh);
+kint::dump($machine);
 $rest = new restclient();
 //$rest->restconnect($ipaddress,$port,$username,$password);
 if (strcmp($action, "start") == 0) {
-    $hosts = $rest->tasks_run($ipaddress, $port, $username, $password, $task_id);
-    var_dump($hosts);
+    $rest->tasks_run(
+        $manager_host,
+        $machine[0]['port'],
+        $machine[0]['username'],
+        $machine[0]['password'],
+        $task_id
+    );
+    echo($hosts);
 
     foreach ($hosts as $i => $row) {
-        var_dump($i);
-        var_dump($row);
+        echo($i);
+        echo($row);
     }
 }
 

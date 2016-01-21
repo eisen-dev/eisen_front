@@ -1,12 +1,35 @@
 <?php
 
+require_once __DIR__ . '/../../vendor/autoload.php';
+require_once __DIR__ . '/monologLogger.php';
 require_once __DIR__ . '/../kintlog.php';
+use Monolog\Logger;
+
 
 /**
  * Class DbAction
  */
 class DbAction
 {
+    /**
+     * @return Logger
+     */
+    public function logger()
+    {
+        $log = new LoggerAtOnce();
+        $log = $log->loggerInject();
+
+        return $log;
+    }
+
+    /**
+     * @param $error
+     */
+    public function errorHandler($error)
+    {
+        $log = $this->logger();
+        $log->addError($error);
+    }
 
     /** Check DB connection
      *
@@ -80,7 +103,7 @@ class DbAction
             }
         } catch (PDOException $e) {
             // if DB don't exist sending to DB setup page
-            echo('データベース接続に失敗しました' . $e->getMessage());
+            $this->errorHandler($e->getMessage());
             header('location:init-setup1.php');
         }
         return $dbh;
@@ -293,8 +316,7 @@ UNIQUE INDEX (ipaddress, machine_id)');
                 $query-> bindParam(':user_id', $user_id, PDO::PARAM_INT);
                 $query->execute(); //invalid query!
             } catch(PDOException $ex) {
-                //echo "An Error occured!"; //user friendly message
-                //$this->some_logging_function($ex->getMessage());
+                $this->errorHandler($ex->getMessage());
             }
         }
     }
@@ -322,9 +344,7 @@ UNIQUE INDEX (ipaddress, machine_id)');
                 $query-> bindParam(':os', $os, PDO::PARAM_INT);
                 $query->execute(); //invalid query!
             } catch (PDOException $ex) {
-                echo"already present<br>";
-                //echo "An Error occured!"; //user friendly message
-                //$this->some_logging_function($ex->getMessage());
+                $this->errorHandler($ex->getMessage());
             }
     }
 
@@ -343,9 +363,7 @@ UNIQUE INDEX (ipaddress, machine_id)');
             $query-> bindParam(':active', $active, PDO::PARAM_INT);
             $query->execute(); //invalid query!
         } catch (PDOException $ex) {
-            echo"already present<br>";
-            //echo "An Error occured!"; //user friendly message
-            //$this->some_logging_function($ex->getMessage());
+            $this->errorHandler($ex->getMessage());
         }
     }
 
@@ -355,7 +373,8 @@ UNIQUE INDEX (ipaddress, machine_id)');
         try {
             $query->execute(); //invalid query!
         } catch (PDOException $ex) {
-            echo 'error<br>';
+            $this->errorHandler($ex->getMessage());
+
         }
     }
 
@@ -368,7 +387,8 @@ UNIQUE INDEX (ipaddress, machine_id)');
             $cnt  = count($data); //in case you need to count all rows
             return $data;
         } catch (PDOException $ex) {
-            echo 'error<br>';
+            $this->errorHandler($ex->getMessage());
+
         }
     }
 
@@ -388,7 +408,7 @@ UNIQUE INDEX (ipaddress, machine_id)');
             $cnt  = count($data); //in case you need to count all rows
             return $data;
         } catch (PDOException $ex) {
-            echo 'error<br>';
+            $this->errorHandler($ex->getMessage());
         }
     }
 
@@ -407,9 +427,7 @@ UNIQUE INDEX (ipaddress, machine_id)');
             $query-> bindParam(':active', $active, PDO::PARAM_INT);
             $query->execute(); //invalid query!
         } catch (PDOException $ex) {
-            echo"already present<br>";
-            //echo "An Error occured!"; //user friendly message
-            //$this->some_logging_function($ex->getMessage());
+            $this->errorHandler($ex->getMessage());
         }
     }
 
@@ -519,8 +537,7 @@ LIKE :search ;');
         try {
             $dbh->query($sql); //invalid query!
         } catch (PDOException $ex) {
-            echo "An Error occured!"; //user friendly message
-            some_logging_function($ex->getMessage());
+            $this->errorHandler($ex->getMessage());
         }
     }
 }
