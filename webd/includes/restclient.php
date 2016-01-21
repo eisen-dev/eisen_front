@@ -1,31 +1,40 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: IT College
- * Date: 2015/11/18
- * Time: 10:08
- */
+
 require __DIR__ . '/../../vendor/autoload.php';
-require __DIR__ . '/monolog.php';
+require __DIR__ . '/monologDB.php';
 require_once __DIR__ . '/DbAction.php';
 
+use Httpful\Exception\ConnectionErrorException;
 use Monolog\Logger;
-$dba = new DbAction();
-$dbh = $dba->Connect();
+use Monolog\Handler\SlackHandler;
 
-$log = new Logger('name');
-// create a log channel
-$log->pushHandler(new PDOHandler($dbh));
-
-// add records to the log
-$log->addWarning('Foo');
-$log->addError('Bar');
 
 /**
  * Class restclient
  */
 class restclient
 {
+    /**
+     * @return Logger
+     */
+    public function logger()
+    {
+        $dba = new DbAction();
+        $dbh = $dba->Connect();
+
+        $log = new Logger('name');
+        // create a log channel
+        $log->pushHandler(new PDOHandler($dbh));
+        $log->pushHandler(new SlackHandler(
+            '',
+            '#logger',
+            'Monolog',
+            true,
+            null,
+            Logger::INFO
+        ));
+        return $log;
+    }
 
     /**
      * @param $rest_host
@@ -37,84 +46,129 @@ class restclient
      */
     public function restconnect($rest_host, $rest_port, $username, $password)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/agent';
-        $response = \Httpful\Request::get($uri)
-            ->authenticateWith($username, $password)
-            ->send();
-        $max = count($response);
-        for ($i = 0; $i < $max; $i++) {
-            if (!empty($response)) {
-                return 'online';
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/agent';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            $max = count($response);
+            for ($i = 0; $i < $max; $i++) {
+                if (!empty($response)) {
+                    return 'online';
+                }
             }
-            return 'offline';
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
         }
+        return 'offline';
     }
 
     public function host_list($rest_host, $rest_port, $username, $password)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/hosts';
-        $response = \Httpful\Request::get($uri)
-            ->authenticateWith($username, $password)
-            ->send();
         $hosts = [];
-        $max = count($response->body->host);
-        for ($i = 0; $i < $max; $i++) {
-            if (!empty($response->body->host[$i])) {
-                $hosts[] = ($response->body->host[$i]);
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/hosts';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            $max = count($response->body->host);
+            for ($i = 0; $i < $max; $i++) {
+                if (!empty($response->body->host[$i])) {
+                    $hosts[] = ($response->body->host[$i]);
+                }
             }
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
         }
         return $hosts;
     }
 
     public function tasks_list($rest_host, $rest_port, $username, $password)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/tasks';
-        $response = \Httpful\Request::get($uri)
-            ->authenticateWith($username, $password)
-            ->send();
-        $tasks = array();
-        $max = count($response->body->tasks);
-        for ($i = 0; $i < $max; $i++) {
-            if (!empty($response->body->tasks[$i])) {
-                $tasks[] = ($response->body->tasks[$i]);
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/tasks';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            $tasks = array();
+            $max = count($response->body->tasks);
+            for ($i = 0; $i < $max; $i++) {
+                if (!empty($response->body->tasks[$i])) {
+                    $tasks[] = ($response->body->tasks[$i]);
+                }
             }
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
         }
         return $tasks;
     }
 
     public function variable_list($rest_host, $rest_port, $username, $password)
     {
-        $host_id=1;
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/host/'.$host_id.'/vars';
-        $response = \Httpful\Request::get($uri)
-            ->authenticateWith($username, $password)
-            ->send();
-        $tasks = array();
-        $max = count($response->body->var);
-        for ($i = 0; $i < $max; $i++) {
-            if (!empty($response->body->var[$i])) {
-                $tasks[] = ($response->body->var[$i]);
-                foreach ($tasks as $x => $row) {
-                    $tasks[$x]->manager_host = $rest_host;
+        try {
+            $host_id=1;
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/host/'.$host_id.'/vars';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            $tasks = array();
+            $max = count($response->body->var);
+            for ($i = 0; $i < $max; $i++) {
+                if (!empty($response->body->var[$i])) {
+                    $tasks[] = ($response->body->var[$i]);
+                    foreach ($tasks as $x => $row) {
+                        $tasks[$x]->manager_host = $rest_host;
+                    }
                 }
             }
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
         }
         return $tasks;
     }
 
     public function tasks_run($rest_host, $rest_port, $username, $password, $task_id)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id . '/run';
-        $response = \Httpful\Request::get($uri)
-            ->authenticateWith($username, $password)
-            ->send();
-        $body = array();
-        $max = count($response->body->task);
-        //var_dump($response);
-        for ($i = 0; $i < $max; $i++) {
-            if (!empty($response->body->task)) {
-                $body[] = ($response->body->task);
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id . '/run';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            $body = array();
+            $max = count($response->body->task);
+            //var_dump($response);
+            for ($i = 0; $i < $max; $i++) {
+                if (!empty($response->body->task)) {
+                    $body[] = ($response->body->task);
+                }
             }
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
         }
         return $body;
     }
@@ -130,12 +184,21 @@ class restclient
      */
     public function tasks_result($rest_host, $rest_port, $username, $password, $task_id)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id . '/result';
-        $response = \Httpful\Request::get($uri)
-            ->authenticateWith($username, $password)
-            ->send();
-        # convert json from stdobject to array
-        $response = json_decode($response->raw_body, true);
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id . '/result';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            # convert json from stdobject to array
+            $response = json_decode($response->raw_body, true);
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
         return $response;
     }
 
@@ -154,17 +217,25 @@ class restclient
         $password,
         $host,
         $groups
-    )
-    {
-        if (empty($groups)) {
-            $groups = '';
+    ) {
+        try {
+            if (empty($groups)) {
+                $groups = '';
+            }
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/hosts';
+            $response = \Httpful\Request::post($uri)
+                ->sendsJson()// tell it we're sending (Content-Type) JSON...
+                ->authenticateWith($username, $password)
+                ->body('{"host":"' . $host . '","groups":"' . $groups . '"}')// attach a body/payload...
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->sendIt();
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
         }
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/hosts';
-        $response = \Httpful\Request::post($uri)
-            ->sendsJson()// tell it we're sending (Content-Type) JSON...
-            ->authenticateWith($username, $password)
-            ->body('{"host":"' . $host . '","groups":"' . $groups . '"}')// attach a body/payload...
-            ->sendIt();
     }
 
     /**
@@ -186,24 +257,32 @@ class restclient
         $hosts,
         $command,
         $module
-    )
-    {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/tasks';
-        $response = \Httpful\Request::post($uri)
-            ->sendsJson()// tell it we're sending (Content-Type) JSON...
-            ->authenticateWith($username, $password)
-            ->body(
-                '{"hosts":"' .
-                $hosts .
-                '","command":"' .
-                $command .
-                '","module":"' .
-                $module .
-                '"}'
-            )// attach a body/payload...
-            ->sendIt();
-        $uri = $response->body->task->uri;
-        $uri = explode("/", $uri);
+    ) {
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/tasks';
+            $response = \Httpful\Request::post($uri)
+                ->sendsJson()// tell it we're sending (Content-Type) JSON...
+                ->authenticateWith($username, $password)
+                ->body(
+                    '{"hosts":"' .
+                    $hosts .
+                    '","command":"' .
+                    $command .
+                    '","module":"' .
+                    $module .
+                    '"}'
+                )// attach a body/payload...
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->sendIt();
+            $uri = $response->body->task->uri;
+            $uri = explode("/", $uri);
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
         return $uri[5];
     }
 
@@ -226,50 +305,93 @@ class restclient
         $variable_value
     ) {
         $host_id = 1;
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/host/'.$host_id.'/vars';
-        $response = \Httpful\Request::post($uri)
-            ->sendsJson()// tell it we're sending (Content-Type) JSON...
-            ->authenticateWith($username, $password)
-            ->body(
-                '{"host":"' . $target_host .
-                '","variable_key":"' .
-                $variable_key .
-                '","variable_value":"' .
-                $variable_value .
-                '"}'
-            )// attach a body/payload...
-            ->sendIt();
+        try {
+
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/host/'.$host_id.'/vars';
+            $response = \Httpful\Request::post($uri)
+                ->sendsJson()// tell it we're sending (Content-Type) JSON...
+                ->authenticateWith($username, $password)
+                ->body(
+                    '{"host":"' . $target_host .
+                    '","variable_key":"' .
+                    $variable_key .
+                    '","variable_value":"' .
+                    $variable_value .
+                    '"}'
+                )// attach a body/payload...
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->sendIt();
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
     }
 
     public function tasks_delete($rest_host, $rest_port, $username, $password, $task_id)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id;
-        $response = \Httpful\Request::delete($uri)
-            ->authenticateWith($username, $password)
-            ->send();
-        //var_dump($response);
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/task/' . $task_id;
+            $response = \Httpful\Request::delete($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            //var_dump($response);
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
     }
 
     public function check_os($rest_host, $rest_port, $username, $password)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/os_check';
-        $response = \Httpful\Request::get($uri)
-            ->authenticateWith($username, $password)
-            ->send();
-        # convert json from stdobject to array
-        $response = json_decode($response->raw_body, true);
+        $response = null;
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/os_check';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            # convert json from stdobject to array
+            $response = json_decode($response->raw_body, true);
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
         return $response;
     }
 
     public function updatePackage($rest_host, $rest_port, $username, $password)
     {
-        $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/package_retrieve';
-        $response = \Httpful\Request::get($uri)
-            ->authenticateWith($username, $password)
-            ->send();
-        # convert json from stdobject to array
-        $response = json_decode($response->raw_body, true);
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/package_retrieve';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            # convert json from stdobject to array
+            $response = json_decode($response->raw_body, true);
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
         return $response;
     }
-}
 
+    public function errorHandler($error)
+    {
+        $log = $this->logger();
+        $log->addError($error);
+    }
+}
