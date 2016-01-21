@@ -10,9 +10,10 @@
         $language  = $_SESSION["lang"];
     }
     else {
-        $language = "en_US";
+        $language = "ja_JP.UTF8";
     }
 
+    //$language = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
 // save language preference for future page requests
     $_SESSION["Language"]  = $language;
 

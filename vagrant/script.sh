@@ -84,6 +84,9 @@ cat > /etc/apache2/sites-enabled/000-default.conf <<EOF
 </VirtualHost>
 EOF
 
+echo -e "\n--- generate japanese locale ---\n"
+locale-gen ja_JP.UTF-8
+
 echo -e "\n--- Restarting Apache ---\n"
 service apache2 restart > /dev/null 2>&1
 
@@ -119,4 +122,5 @@ export DB_HOST=$DBHOST
 export DB_NAME=$DBNAME
 export DB_USER=$DBUSER
 export DB_PASS=$DBPASSWD
+
 EOF
