@@ -1,9 +1,9 @@
+<?php require_once __DIR__ . '/locale.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<title><?php echo _('Settings'); ?></title>
 <?php
-// タイトル
-$title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
 ?>
 </head>

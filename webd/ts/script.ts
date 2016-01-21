@@ -4,9 +4,6 @@
 /// <reference path="async.ts"/>
 "use strict";
 
-/**
- * Created by IT College on 2015/12/07.
- */
 jQuery(
     function (): any
     {
@@ -129,41 +126,5 @@ jQuery(
                 jQuery(target).css("display", "none");
             }
         });
-        jQuery(document).on("click", ".cell-which-triggers-popup", function (event) {
-            /**
-             * on target_list,php table click event getting item ipaddress and port variable
-             * for starting showPopup
-             * @type {string}
-             */
-            var cellValue1 = jQuery(event.target).closest("tr").find(".ipaddress").text();
-            var cellValue2 = jQuery(event.target).closest("tr").find(".port").text();
-            // console.log(cell_value);
-            if (cellValue1 && cellValue2) {
-                showPopup(cellValue1, cellValue2);
-            }
-        });
-
-        /**
-         * showing popup from click event
-         * @param cellValue1
-         * @param cellValue2
-         */
-        function showPopup(cellValue1: string, cellValue2: string) {
-            jQuery("#popup").dialog({
-                width: 500,
-                height: 300,
-                open: function (): any
-                {
-                jQuery(this).find("p").html(
-                    "<a href=target_list.php?host="
-                    + cellValue1 +
-                    "\&action="
-                    + cellValue2 +
-                    ">install "
-                    + cellValue1 +
-                    "</a>");
-                },
-            });
-        }
     });
 

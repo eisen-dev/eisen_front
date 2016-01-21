@@ -23,9 +23,27 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 				<div class="section">
 					<h2>テンプレート</h2>
 					<p>---ajaxとモーダルウィンドウのサンプル---</p>
-					<div class="button" id="apache" data-modal="open" data-modal-target="test-modal"　data-modal-type="test">apache</div>
-					<div class="button" id="mysql" data-modal="open" data-modal-target="test-modal"　data-modal-type="test">mysql</div>
-					<div class="button" id="mysql" data-modal="open" data-modal-target="alert"　data-modal-type="test">mysql</div>
+					<div class="button"
+                         id="apache"
+                         data-modal="open"
+                         data-modal-target="test-modal"
+                         data-modal-type="test">
+                        apache
+                    </div>
+					<div class="button"
+                         id="mysql"
+                         data-modal="open"
+                         data-modal-target="test-modal"
+                         data-modal-type="test">
+                        mysql
+                    </div>
+					<div class="button"
+                         id="mysql"
+                         data-modal="open"
+                         data-modal-target="alert"
+                         data-modal-type="test">
+                        mysql
+                    </div>
 					<p>tesu</p>
 
 					<p>ぼたんです<span class="button button-il">園あAq</span></p>
@@ -241,6 +259,7 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 		</div>
 	</div>
 
+<-- modal start -->
 	<div class="modal" id="test-modal">
 		<div class="modal-wrapper">
 			<div class="modal-window">
@@ -256,6 +275,8 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
 		</div>
 		<div class="modal-overlay"  data-modal="close"></div>
 	</div>
+<-- modal end -->
+
 	<div class="modal" id="alert">
 		<div class="modal-wrapper">
 			<div class="modal-window">

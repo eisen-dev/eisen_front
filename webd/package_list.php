@@ -20,7 +20,6 @@ require_once __DIR__ .'/parts/head.php';
     </style>
 </head>
 <?php
-require_once __DIR__ . '/parts/modal.php';
 require_once __DIR__ . '/locale.php';
 // target host to be used for get package list
 $target = array();
@@ -35,11 +34,6 @@ if(isset($_GET['os'])){
     $user_id = $me->get_user_id();
 ?>
 <body>
-<div id="popup" data-name="name" class="dialog">
-    <p class="item-1"></p>
-    <p class="item-2"></p>
-    <p class="item-3"></p>
-</div>
 <div class="wrapper">
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
@@ -95,9 +89,26 @@ if(isset($_GET['os'])){
         </main>
     </div>
 </div>
+<div class="modal" id="test-modal">
+    <div class="modal-wrapper">
+        <div class="modal-window">
+            <div class="modal-header">
+                <i class="fa fa-times modal-close" data-modal="close"></i>
+                <span class="modal-title">ここに処理結果を表示</span>
+            </div>
+            <div class="modal-contents" id="modal-contents">
+                <p class="item-1"></p>
+                <p class="item-2"></p>
+                <p class="item-3"></p>
+            </div>
+            <div class="modal-ctrl"></div>
+        </div>
+    </div>
+    <div class="modal-overlay"  data-modal="close"></div>
+</div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
 <script>
-var target_ipaddress = '<?php echo $target["ipaddress"] ;?>';
+/*var target_ipaddress = '<?php echo $target["ipaddress"] ;?>';
 //    var target_os = '<?php //echo $target["os"] ;?>//';*/
 </script>
 <script type="text/javascript" src="ts/async.js"></script>

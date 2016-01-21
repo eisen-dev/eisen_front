@@ -1,5 +1,4 @@
 <meta charset="UTF-8">
-<title><?php echo $title; ?></title>
 <?php
     require_once "includes/session.php";
     require_once "includes/restclient.php";

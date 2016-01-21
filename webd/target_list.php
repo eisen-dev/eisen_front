@@ -31,7 +31,6 @@ if(isset($_GET['action'])){
     $action = htmlspecialchars($_GET["action"]);
     echo($action);
 }
-require_once __DIR__ . '/parts/modal.php';
 require_once __DIR__ . '/includes/DbAction.php';
 require_once __DIR__ . '/includes/target_host_controller.php';
 $dba = new DbAction();

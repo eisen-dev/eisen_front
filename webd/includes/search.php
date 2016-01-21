@@ -49,7 +49,11 @@ class AjaxValidate
             $return['error'] = true;
             $package = $dba->installedPackageList($pack_sys_id, $dbh);
             foreach ($package as $i => $row) {
-                $return['msg'] .= '<tr class="cell-which-triggers-popup">';
+                $return['msg'] .= '<tr class="cell-which-triggers-popup"
+                         data-modal="open"
+                         data-modal-target="test-modal"
+                         data-modal-type="test"
+                         >';
                 $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td>$i</td>";
                 $return['msg'] .= "<td class=\"name\">" .

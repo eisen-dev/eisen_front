@@ -2,9 +2,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<title><?php echo _('Host Manager'); ?></title>
 <?php
-// タイトル
-$title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
 ?>
     <style>
@@ -23,7 +22,6 @@ require_once __DIR__ .'/parts/head.php';
     </style>
 </head>
 <?php
-    require_once __DIR__ . '/parts/modal.php';
     require_once __DIR__ . '/includes/DbAction.php';
     $dba = new DbAction();
     $dbh = $dba->Connect();
@@ -85,7 +83,7 @@ require_once __DIR__ .'/parts/head.php';
                                 '" value="' . $row['machine_id'] . '" name="check[]">
                                 <label for="cbox-' . $row['machine_id'] . '">
                             <div class="select"></div></label></div></td>';
-                            $table .= '<td class="ipaddress">' . $row['machine_id'] . '</td>';
+                            $table .= '<td class="machine_id">' . $row['machine_id'] . '</td>';
                             $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
                             $table .= '<td class="port">' . $row['port'] . '</td>';
                             $table .= '<td class="module">' . $row['module'] . '</td>';

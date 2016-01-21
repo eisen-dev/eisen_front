@@ -2,9 +2,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<title><?php echo _('Dashboard'); ?></title>
 <?php
-// タイトル
-$title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
 ?>
 </head>

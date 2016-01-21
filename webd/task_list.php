@@ -2,9 +2,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<title><?php echo _('Task list'); ?></title>
 <?php
-// タイトル
-$title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
 ?>
     <style>
@@ -21,7 +20,6 @@ require_once __DIR__ .'/parts/head.php';
     </style>
 </head>
 <?php
-    require_once __DIR__ . '/parts/modal.php';
     require_once __DIR__ . '/includes/DbAction.php';
     require_once __DIR__ . '/locale.php';
     $dba = new DbAction();

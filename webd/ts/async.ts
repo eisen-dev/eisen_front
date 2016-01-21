@@ -37,50 +37,76 @@ jQuery("#form1").submit(function (event) {
 
 
 jQuery(document).ajaxComplete(function (event, xhr, settings) {
-    jQuery(document).on("click", ".cell-which-triggers-popup", function (event) {
-        var cellValue = jQuery(event.target).closest("tr").find(".name").text();
-        if (cellValue) {
-            showPopup(cellValue);
+    // モーダルウィンドウ関連
+    // リサイズ時のモーダル位置を設定
+    jQuery(window).resize(function () {
+        // リサイズ対象の現在開かれているモーダル
+        var resizetarget = "[data-modal-active='true']";
+        // モーダルの幅を取得
+        var modalw = jQuery(resizetarget + ">" + ".modal-wrapper").outerWidth();
+        // 描画エリアの幅を取得(この要素を基準に中央寄せ)
+        var areaw = jQuery(resizetarget).width();
+        // positionの位置を計算
+        var modalcenter = (areaw / 2) - (modalw / 2);
+        jQuery(resizetarget + ">" + ".modal-wrapper").css("left", modalcenter + "px");
+    });
+    // モーダルの開閉
+    jQuery("[data-modal='open']").click(function () {
+        // 開きたいモーダルのID
+        var target = "#" + jQuery(this).attr("data-modal-target");
+        // 開きたいモーダルに属性追加
+        jQuery(target).attr({"data-modal-active": "true"});
+        // モーダルの初期位置を設定
+        var modalw = jQuery(target + ">" + ".modal-wrapper").outerWidth();
+        var areaw = jQuery(target).width();
+        var modalcenter = (areaw / 2) - (modalw / 2);
+        jQuery(target + ">" + ".modal-wrapper").css("left", modalcenter + "px");
+        // モーダルを開く
+        jQuery(target).css("visibility", "visible").hide().fadeIn("0", "easeOutCubic");
+    });
+    jQuery("[data-modal='close']").click(function () {
+        // 開かれているモーダルを閉じる
+        jQuery("[data-modal-active='true']").fadeOut("0", "easeOutCubic", function () {
+            jQuery("[data-modal-active='true']").css("visibility", "hidden").css("display", "block");
+            jQuery("[data-modal-active='true']" + ">" + ".modal-wrapper").css("left", "0px");
+            jQuery("[data-modal-active='true']").attr({"data-modal-active": "false"});
+        });
+    });
+    jQuery(document).on("click", '[data-modal-type="test"]', function (event)  {
+        var packageName = jQuery(event.target).closest("tr").find(".name").text();
+        var packageVersion = jQuery(event.target).closest("tr").find(".version").text();
+        if (packageName && packageVersion) {
+            var targetHost='localhost';
+            showPopup(packageName, packageVersion, targetHost);
         }
     });
 
-    function showPopup(cellValue) {
-        jQuery("#popup").dialog({
-            width: 500,
-            height: 300,
-            open: function (): any
-            {
-                jQuery(this).find("p.item-1").html(
-                    "<a href=includes/package_action/package_action.php?" +
-                    "package=" + cellValue +
-                    "\&action=install" +
-                    "\&target="
-                    + target_ipaddress +
-                    ">Install "
-                    + cellValue +
-                    "\</a>");
-                jQuery(this).find("p.item-2").html(
-                    "<a href=includes/package_action/package_action.php?" +
-                    "package="
-                    + cellValue +
-                    "\&action=update" +
-                    "\&target="
-                    + target_ipaddress +
-                    ">Update "
-                    + cellValue +
-                    "\</a>");
-                jQuery(this).find("p.item-3").html(
-                    "<a href=includes/package_action/package_action.php?" +
-                    "package="
-                    + cellValue +
-                    "\&action=delete" +
-                    "\&target="
-                    + target_ipaddress +
-                    ">Delete "
-                    + cellValue +
-                    "\</a>");
-            },
-        });
+    function showPopup(packageName, packageVersion, targetHost)
+    {
+        jQuery("#modal-contents").find("p.item-1").html(generateLink(packageName, packageVersion, targetHost,'install'));
+        jQuery("#modal-contents").find("p.item-2").html(generateLink(packageName, packageVersion, targetHost,'update'));
+        jQuery("#modal-contents").find("p.item-3").html(generateLink(packageName, packageVersion, targetHost,'delete'));
+    }
+
+    function generateLink(packageName: String, packageVersion: String, targetHost: String, packageAction: String)
+    {
+        var htmlLink = "<a href=includes/package_action/package_action.php?" +
+            "package="
+            + packageName +
+            "/"
+            + packageVersion +
+            "\&action="
+            + packageAction +
+            "\&target="
+            + targetHost +
+            ">"
+            + packageAction +
+            ": "
+            + packageName +
+            "-"
+            + packageVersion +
+            "\</a>";
+        return htmlLink;
     }
 });
 
