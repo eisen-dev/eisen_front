@@ -1,33 +1,31 @@
 <?php
-    require_once "includes/session.php";
+require_once 'includes/session.php';
 
-    $me = new Session();
-    $me->start_session();
-    $me->is_session_started();
+$me = new Session();
+$me->start_session();
+$me->is_session_started();
 
-    // get language preference
-    if (isset($_GET["lang"])) {
-        $language = $_GET["lang"];
-    }
-    else if (isset($_SESSION["lang"])) {
-        $language  = $_SESSION["lang"];
-    }
-    else {
-        $language = "ja_JP.UTF8";
-    }
+// get language preference
+if (isset($_GET['lang'])) {
+    $language = $_GET['lang'];
+} elseif (isset($_SESSION['lang'])) {
+    $language  = $_SESSION['lang'];
+} else {
+    $language = 'ja_JP.UTF8';
+}
 
-    //$language = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+//$language = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
 // save language preference for future page requests
-    $_SESSION["Language"]  = $language;
+$_SESSION['Language']  = $language;
 
-    $folder = "locale";
-    $domain = "messages";
-    $encoding = "UTF-8";
+$folder = 'locale';
+$domain = 'messages';
+$encoding = 'UTF-8';
 
-    putenv("LANG=" . $language);
-    setlocale(LC_ALL, $language);
+putenv('LANG=' . $language);
+setlocale(LC_ALL, $language);
 
-    bindtextdomain($domain, $folder);
-    bind_textdomain_codeset($domain, $encoding);
+bindtextdomain($domain, $folder);
+bind_textdomain_codeset($domain, $encoding);
 
-    textdomain($domain);
+textdomain($domain);
