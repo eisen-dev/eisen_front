@@ -35,7 +35,7 @@ apt-get -y install mysql-server-5.5 phpmyadmin > /dev/null 2>&1
 echo -e "\n--- Setting up our MySQL user and db ---\n"
 mysql -uroot -p$DBPASSWD -e "CREATE DATABASE $DBNAME"
 mysql -uroot -p$DBPASSWD -e "grant all privileges on *.* to '$DBUSER'@'%' identified by '$DBPASSWD' WITH GRANT OPTION; FLUSH PRIVILEGES;"
-sed -i "s/^bind-address.*/bind-address = 0.0.0.0/" /etc/mysql/my.cnf
+cp -f /vagrant/vagrant/my.cnf /etc/mysql/my.cnf
 
 echo -e "\n--- Installing PHP-specific packages ---\n"
 apt-get -y install php5 apache2 libapache2-mod-php5 php5-curl php5-gd php5-mcrypt php5-mysql php-apc > /dev/null 2>&1
