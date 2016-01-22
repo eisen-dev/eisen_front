@@ -316,7 +316,9 @@ UNIQUE INDEX (ipaddress, machine_id)');
                 $query-> bindParam(':user_id', $user_id, PDO::PARAM_INT);
                 $query->execute(); //invalid query!
             } catch(PDOException $ex) {
-                $this->errorHandler($ex->getMessage());
+            // this error just say that the item is already present.
+            //SQLSTATE[23000]: Integrity constraint violation:
+            //non blocking error, do nothing.
             }
         }
     }

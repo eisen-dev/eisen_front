@@ -52,9 +52,10 @@ $dbh = $dba->Connect();
                     <div class="list-tools clearfix">
                         <div class="list-action">
                             <select name="list-action" class="input-list">
-                                <option value="0"><?php echo _('package list'); ?></option>
-                                <option value="1"><?php echo _('task list'); ?></option>
-                                <option value="2"><?php echo _('settings'); ?></option>
+                                <option value="0"><?php echo _('select action'); ?></option>
+                                <option value="1"><?php echo _('package list'); ?></option>
+                                <option value="2"><?php echo _('task list'); ?></option>
+                                <option value="3"><?php echo _('settings'); ?></option>
                             </select>
                             <input type="submit" value="適用" class="button button--form">
                         </div>
@@ -79,8 +80,7 @@ $dbh = $dba->Connect();
                             <th>groups</th>
                             <th>os</th>
                             <th>machine id</th>
-                            <th>status id
-                            <th>
+                            <th>status id<th>
                         </tr>
                         </thead>
                         <tbody>
@@ -98,11 +98,15 @@ $dbh = $dba->Connect();
                                 <label for="cbox-' . $row['host_id'] . '">
                             <div class="select"></div></label></div>';
                                 $table .= '</td>';
-                                $table .= '<td class="ipaddress">' . $row['ipaddress'] . '</td>';
+                                $table .= '<td class="ipaddress"><input type="hidden" id="test"' .
+                                   ' value="' . $row['ipaddress'] . '" name="managerHostAddress[]">' .
+                                    $row['ipaddress'] . '</td>';
                                 $table .= '<td class="port">' . $row['port'] . '</td>';
                                 $table .= '<td class="groups">' . $row['groups'] . '</td>';
                                 $table .= '<td class="os">' . $row['os'] . '</td>';
-                                $table .= '<td class="machine_id">' . $row['machine_id'] . '</td>';
+                                $table .= '<td class="ipaddress"><input type="hidden" id="test"' .
+                                    ' value="' . $row['machine_id'] . '" name="managerHostId[]">' .
+                                    $row['machine_id'] . '</td>';
                                 $table .= '<td class="status_id">' . $row['status_id'] . '</td>';
                                 echo($table);
                             }
@@ -155,8 +159,6 @@ $dbh = $dba->Connect();
         </div>
     </div>
     <div class="modal-overlay" data-modal="close"></div>
-</div>
-</div>
 </div>
 <?php require_once __DIR__ . '/parts/scripts.php'; ?>
 </body>

@@ -26,23 +26,18 @@ require_once __DIR__ .'/parts/head.php';
     $dbh = $dba->Connect();
 ?>
 <body>
-<!-- TODO better popup menu style -->
-<div id="popup" data-name="name" class="dialog">
-    <!--<a href="">Hello world!</a>-->
-    <p class="item-1"></p>
-    <p class="item-2"></p>
-</div>
 <div class="wrapper">
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
         <main class="contents">
             <div class="section">
-                <h2 class="title">タスクリスト</h2>
+                <h2 class="title"><?php echo _('Task list'); ?></h2>
+                <form action="includes/task_checkbox.php" method="post">
                 <div class="list-tools clearfix">
                     <div class="list-action">
                         <select name="list-action" class="input-list">
-                            <option value="0">一括操作</option>
-                            <option value="0">更新</option>
+                            <option value="0"><?php echo _('select action'); ?></option>
+                            <option value="1"><?php echo _('run'); ?></option>
                         </select>
                         <input type="submit" value="適用" class="button button--form">
                     </div>
@@ -58,14 +53,16 @@ require_once __DIR__ .'/parts/head.php';
                     <tr>
                         <th class="cbox__selectall">
                             <div class="cbox__wrapper">
-                                <input type="checkbox" id="cbox-selectall"><label for="cbox-selectall"></label>
+                                <input type="checkbox" id="cbox-selectall">
+                                <label for="cbox-selectall"></label>
                             </div>
                         </th>
-                        <th><?php echo _('ID'); ?></th>
-                        <th><?php echo _('manger host'); ?></th>
+                        <th><?php echo _('task id'); ?></th>
+                        <th><?php echo _('target host'); ?></th>
                         <th><?php echo _('host'); ?></th>
-                        <th>モジュール</th>
-                        <th>コマンド</th>
+                        <th><?php echo _('module'); ?></th>
+                        <th><?php echo _('command'); ?></th>
+                        <th><?php echo _('manger host'); ?></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -90,13 +87,24 @@ require_once __DIR__ .'/parts/head.php';
                             $uri = $task->uri;
                             $uri = explode('/', $uri);
                             $task_id = $uri[5];
-                            $table = '<tr class="cell-which-triggers-popup"
-                            data-modal="open"
-                            data-modal-target="test-modal"
-                            data-modal-type="test">';
-                            $table .= '<td class="task_id">' . ($task_id) . '</td>';
-                            $table .= '<td class="manager_host">' . $task->manager_host . '</td>';
+                            $table = '<tr
+                                class="cell-which-triggers-popup"
+                                data-modal-target="test-modal"
+                                data-modal="open"
+                                data-modal-type="test"
+                            >';
+                            $table .= '<td class="list-data-ctrl">
+                            <div class="list-data-cbox">
+                                <input type="checkbox" id="cbox-' . $task_id .
+                                '" value="' . $task_id . '" name="managerHostId[]">
+                                <label for="cbox-' . $task_id . '">
+                            <div class="select"></div></label></div>';
+                            $table .= '</td>';
+                            $table .= '<td class="task_id">' . $task_id . '</td>';
                             $table .= '<td class="host">' . $task->hosts . '</td>';
+                            $table .= '<td class="manager_host"><input type="hidden" id="managerHost"'.
+                                ' value="' . $task->manager_host . '" name="managerHostAddress[]">'.
+                                $task->manager_host . '</td>';
                             $table .= '<td class="module">' . $task->module . '</td>';
                             $table .= '<td class="command">' . $task->command . '</td></tr>';
                             echo($table);
@@ -105,6 +113,7 @@ require_once __DIR__ .'/parts/head.php';
                     ?>
                     </tbody>
                 </table>
+                </form>
                 <div class="button" data-modal="open" data-modal-target="task_list-setting">open setting</div>
             </div>
         </main>
@@ -182,6 +191,9 @@ require_once __DIR__ .'/parts/head.php';
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
 <script>
 jQuery(document).ready(function () {
+    jQuery('.list-data-cbox').bind('click',function(e){
+        e.stopPropagation();
+    });
     // モーダルウィンドウ関連
     // リサイズ時のモーダル位置を設定
     jQuery(window).resize(function () {

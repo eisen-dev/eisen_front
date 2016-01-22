@@ -40,6 +40,9 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
     // モーダルウィンドウ関連
     // リサイズ時のモーダル位置を設定
     jQuery(window).resize(function () {
+        jQuery('.list-data-cbox').bind('click',function(e){
+            e.stopPropagation();
+        });
         // リサイズ対象の現在開かれているモーダル
         var resizetarget = "[data-modal-active='true']";
         // モーダルの幅を取得
