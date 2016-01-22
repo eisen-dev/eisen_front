@@ -30,7 +30,16 @@ $dbh = $dba->Connect();
                             </div>
                             <div class="widget-contents">
                                 <div class="wgt-welcome">
-                                    <span>eisenへようこそ！<br>まずは<a href="target_list.php">ターゲットホスト</a>を追加してみましょう。<br>分からないことは<a href="#">ヘルプ</a>をご覧ください。</span>
+                                    <span>
+                                    eisenへようこそ！<br>
+                                    まずは
+                                    <a href="target_list.php">ターゲットホスト</a>
+                                    を追加してみましょう。
+                                    <br>
+                                    分からないことは
+                                    <a href="#">ヘルプ</a>
+                                    をご覧ください。
+                                    </span>
                                 </div>
 
                             </div>

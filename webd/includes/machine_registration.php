@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
     $rest_user = htmlspecialchars($_POST["rest_user"]);
     $rest_pass = htmlspecialchars($_POST["rest_pass"]);
 }
-var_dump($rest_host.$rest_port.$rest_user.$rest_pass);
+echo($rest_host.$rest_port.$rest_user.$rest_pass);
 $me = new Session();
 $me->start_session();
 $me->is_session_started();
@@ -31,10 +31,10 @@ try {
     $query-> bindParam(':module', $rest_module, PDO::PARAM_STR);
     $query-> bindParam(':status_id', $status_id, PDO::PARAM_INT);
     $query-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
-    var_dump($dbh);
+    echo($dbh);
     $query->execute(); //invalid query!
 } catch(PDOException $ex) {
     //echo "An Error occured!"; //user friendly message
-    var_dump($ex->getMessage());
+    echo($ex->getMessage());
 }
     header('location:../host_manager.php');
