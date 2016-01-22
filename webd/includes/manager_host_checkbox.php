@@ -27,8 +27,13 @@ else
     echo('You selected $N check(s): ');
     for($i=0; $i < $N; $i++)
     {
-        echo($check[$i] . ' ');
-        $dba->hostManagerActive($dbh, $action, $check[$i]);
+        if ($action == 0 || $action == 1) {
+            echo($check[$i] . ' ');
+            $dba->hostManagerActive($dbh, $action, $check[$i]);
+        } elseif ($action == 2) {
+            echo'削除';
+            $dba->hostManagerDelete($dbh, $check[$i]);
+        }
     }
 }
 header('location:../host_manager.php');

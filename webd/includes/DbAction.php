@@ -367,6 +367,24 @@ UNIQUE INDEX (ipaddress, machine_id)');
         }
     }
 
+    /**
+     * @param $dbh
+     * @param $active set to 1 if activated 0 if deactivated
+     * @param $machine_id
+     */
+    public function hostManagerDelete($dbh, $machine_id)
+    {
+        $query = $dbh->prepare('DELETE FROM manager_host WHERE machine_id = :machine_id ;');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        try {
+            $query-> bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
+            $query->execute(); //invalid query!
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+        }
+    }
+
     public function hostActiveList($dbh)
     {
         $query = $dbh->prepare('SELECT * FROM manager_host WHERE active = 1 ;');

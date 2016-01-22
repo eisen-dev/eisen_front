@@ -40,6 +40,7 @@ require_once __DIR__ .'/parts/head.php';
                                 <select name="list-action" class="input-list">
                                     <option value="1"><?php echo _('activate'); ?></option>
                                     <option value="0"><?php echo _('deactivate'); ?></option>
+                                    <option value="2"><?php echo _('delete'); ?></option>
                                 </select>
                             </label>
                             <input type="submit" value="適用" class="button button--form">
