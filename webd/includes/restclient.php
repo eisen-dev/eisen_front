@@ -58,7 +58,6 @@ class restclient
 
     public function host_list($rest_host, $rest_port, $username, $password)
     {
-        $hosts = [];
         try {
             $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/hosts';
             $response = \Httpful\Request::get($uri)
@@ -83,6 +82,7 @@ class restclient
 
     public function tasks_list($rest_host, $rest_port, $username, $password)
     {
+        $tasks = false;
         try {
             $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/tasks';
             $response = \Httpful\Request::get($uri)

@@ -79,35 +79,39 @@ require_once __DIR__ .'/parts/head.php';
                             $row['username'],
                             $row['password']
                         );
-                        $tasks[$i][0]->manager_host = $row['ipaddress'];
+                        if (is_array($tasks[$i])) {
+                            $tasks[$i][0]->manager_host = $row['ipaddress'];
+                        }
                     }
-                    foreach ($tasks as $i => $row) {
-                        foreach ($row as $x => $task) {
-                            # hack for get task_id
-                            $uri = $task->uri;
-                            $uri = explode('/', $uri);
-                            $task_id = $uri[5];
-                            $table = '<tr
-                                class="cell-which-triggers-popup"
-                                data-modal-target="test-modal"
-                                data-modal="open"
-                                data-modal-type="test"
-                            >';
-                            $table .= '<td class="list-data-ctrl">
-                            <div class="list-data-cbox">
-                                <input type="checkbox" id="cbox-' . $task_id .
-                                '" value="' . $task_id . '" name="managerHostId[]">
-                                <label for="cbox-' . $task_id . '">
-                            <div class="select"></div></label></div>';
-                            $table .= '</td>';
-                            $table .= '<td class="task_id">' . $task_id . '</td>';
-                            $table .= '<td class="host">' . $task->hosts . '</td>';
-                            $table .= '<td class="manager_host"><input type="hidden" id="managerHost"'.
-                                ' value="' . $task->manager_host . '" name="managerHostAddress[]">'.
-                                $task->manager_host . '</td>';
-                            $table .= '<td class="module">' . $task->module . '</td>';
-                            $table .= '<td class="command">' . $task->command . '</td></tr>';
-                            echo($table);
+                    if (is_array($tasks[$i])) {
+                        foreach ($tasks as $i => $row) {
+                            foreach ($row as $x => $task) {
+                                # hack for get task_id
+                                $uri = $task->uri;
+                                $uri = explode('/', $uri);
+                                $task_id = $uri[5];
+                                $table = '<tr
+                                    class="cell-which-triggers-popup"
+                                    data-modal-target="test-modal"
+                                    data-modal="open"
+                                    data-modal-type="test"
+                                >';
+                                $table .= '<td class="list-data-ctrl">
+                                <div class="list-data-cbox">
+                                    <input type="checkbox" id="cbox-' . $task_id .
+                                    '" value="' . $task_id . '" name="managerHostId[]">
+                                    <label for="cbox-' . $task_id . '">
+                                <div class="select"></div></label></div>';
+                                $table .= '</td>';
+                                $table .= '<td class="task_id">' . $task_id . '</td>';
+                                $table .= '<td class="host">' . $task->hosts . '</td>';
+                                $table .= '<td class="manager_host"><input type="hidden" id="managerHost"' .
+                                    ' value="' . $task->manager_host . '" name="managerHostAddress[]">' .
+                                    $task->manager_host . '</td>';
+                                $table .= '<td class="module">' . $task->module . '</td>';
+                                $table .= '<td class="command">' . $task->command . '</td></tr>';
+                                echo($table);
+                            }
                         }
                     }
                     ?>
@@ -239,22 +243,21 @@ jQuery(document).ready(function () {
     });
 
     function showPopup(task_id, module, command) {
-        jQuery("#modal-contents").find("p.item-1").html(generateLink(task_id, module, command, 'start'));
-        jQuery("#modal-contents").find("p.item-2").html(generateLink(task_id, module, command, 'result'));
-    }
-
-    function generateLink(task_id, module, command, taskAction)
-    {
-        var htmlLink = "<a href=includes/TasksAction.php?id="
-            + task_id +
-            "\&action="
-            + taskAction +
-            "\>"
-            + taskAction +
-            ":"
-            + command +
-            "</a>";
-        return htmlLink;
+        $.ajax({
+                url: 'taskResultModal.php',
+                dataType: "text json",
+                type: "POST",
+                data: {task_id: task_id, module: module, command: command},
+                dataType: 'json'
+            })
+            .done(function (response) {
+                $('.modal-header > .modal-title').text(response.return[0]);
+                $('p.item-1').text(response.return[1]);
+                $('p.item-2').text(response.return[2]);
+            })
+            .fail(function () {
+                alert("失敗しました");
+            });
     }
 });
 </script>

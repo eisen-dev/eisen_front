@@ -15,6 +15,16 @@ if (isset($_POST['list-action']) )
     $action = ($_POST['list-action']);
     echo $action;
 }
+if (isset($_POST['managerHostAddress']) )
+{
+    $test = ($_POST['managerHostAddress']);
+    l($test);
+}
+if (isset($_POST['managerHostId']) )
+{
+    $test = ($_POST['managerHostId']);
+    l($test);
+}
 
 $check = $_POST['check'];
 if (empty($check))
@@ -33,10 +43,10 @@ else
         //$dba->hostManagerActive($dbh, $action, $check[$i]);
     }
 }
-if (strcmp($action,0) === 0) {
+if (strcmp($action,0) === 1) {
     header('location:../package_list.php');
-} elseif (strcmp($action,1) === 0) {
+} elseif (strcmp($action,2) === 0) {
     header('location:../task_list.php');
-} else {
+} elseif (strcmp($action,3) === 0) {
     header('location:../variable_list.php');
 }
