@@ -76,7 +76,7 @@ class restclient
                 }
             }
         } catch (ConnectionErrorException $ex) {
-            $this->errorHandler($ex);
+            //$this->errorHandler($ex);
         }
         return $hosts;
     }
@@ -336,6 +336,14 @@ class restclient
         }
     }
 
+    /**
+     * @param $rest_host
+     * @param $rest_port
+     * @param $username
+     * @param $password
+     *
+     * @return \Httpful\Response|mixed|null
+     */
     public function check_os($rest_host, $rest_port, $username, $password)
     {
         $response = null;
@@ -343,16 +351,14 @@ class restclient
             $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/os_check';
             $response = \Httpful\Request::get($uri)
                 ->authenticateWith($username, $password)
-                ->whenError(
-                    function ($error) {
-                        $this->errorHandler($error);
-                    }
-                )
                 ->send();
             # convert json from stdobject to array
             $response = json_decode($response->raw_body, true);
         } catch (ConnectionErrorException $ex) {
-            $this->errorHandler($ex);
+            // set host manager offline
+            $dba = new DbAction();
+            $dbh = $dba->Connect();
+            $dba->hostManagerStatus($dbh, $rest_host, 'offline');
         }
         return $response;
     }

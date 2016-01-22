@@ -90,9 +90,10 @@ require_once __DIR__ .'/parts/head.php';
                             $uri = $task->uri;
                             $uri = explode('/', $uri);
                             $task_id = $uri[5];
-                            $table = '<tr class="cell-which-triggers-popup"><td>
-                                  <input type="checkbox" id="cbox-' . $task_id . '">
-                                  <label for="cbox-' . $task_id . '"></label></td>';
+                            $table = '<tr class="cell-which-triggers-popup"
+                            data-modal="open"
+                            data-modal-target="test-modal"
+                            data-modal-type="test">';
                             $table .= '<td class="task_id">' . ($task_id) . '</td>';
                             $table .= '<td class="manager_host">' . $task->manager_host . '</td>';
                             $table .= '<td class="host">' . $task->hosts . '</td>';
@@ -162,44 +163,88 @@ require_once __DIR__ .'/parts/head.php';
     </div>
     <div class="modal-overlay" data-modal="close"></div>
 </div>
+<div class="modal" id="test-modal">
+    <div class="modal-wrapper">
+        <div class="modal-window">
+            <div class="modal-header">
+                <i class="fa fa-times modal-close" data-modal="close"></i>
+                <span class="modal-title">ここに処理結果を表示</span>
+            </div>
+            <div class="modal-contents" id="modal-contents">
+                <p class="item-1"></p>
+                <p class="item-2"></p>
+            </div>
+            <div class="modal-ctrl"></div>
+        </div>
+    </div>
+    <div class="modal-overlay"  data-modal="close"></div>
+</div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
 <script>
-    $( document ).ready(function() {
-        $(document).on("click", ".cell-which-triggers-popup", function(event){
-            var cell_value1 = $(event.target).closest('tr').find('.task_id').text();
-            var cell_value2 = $(event.target).closest('tr').find('.module').text();
-            var cell_value3 = $(event.target).closest('tr').find('.command').text();
-            //console.log(cell_value);
-            if (cell_value1&&cell_value2) {
-                showPopup(cell_value1,cell_value2)
-            }
+jQuery(document).ready(function () {
+    // モーダルウィンドウ関連
+    // リサイズ時のモーダル位置を設定
+    jQuery(window).resize(function () {
+        // リサイズ対象の現在開かれているモーダル
+        var resizetarget = "[data-modal-active='true']";
+        // モーダルの幅を取得
+        var modalw = jQuery(resizetarget + ">" + ".modal-wrapper").outerWidth();
+        // 描画エリアの幅を取得(この要素を基準に中央寄せ)
+        var areaw = jQuery(resizetarget).width();
+        // positionの位置を計算
+        var modalcenter = (areaw / 2) - (modalw / 2);
+        jQuery(resizetarget + ">" + ".modal-wrapper").css("left", modalcenter + "px");
+    });
+    // モーダルの開閉
+    jQuery("[data-modal='open']").click(function () {
+        // 開きたいモーダルのID
+        var target = "#" + jQuery(this).attr("data-modal-target");
+        // 開きたいモーダルに属性追加
+        jQuery(target).attr({"data-modal-active": "true"});
+        // モーダルの初期位置を設定
+        var modalw = jQuery(target + ">" + ".modal-wrapper").outerWidth();
+        var areaw = jQuery(target).width();
+        var modalcenter = (areaw / 2) - (modalw / 2);
+        jQuery(target + ">" + ".modal-wrapper").css("left", modalcenter + "px");
+        // モーダルを開く
+        jQuery(target).css("visibility", "visible").hide().fadeIn("0", "easeOutCubic");
+    });
+    jQuery("[data-modal='close']").click(function () {
+        // 開かれているモーダルを閉じる
+        jQuery("[data-modal-active='true']").fadeOut("0", "easeOutCubic", function () {
+            jQuery("[data-modal-active='true']").css("visibility", "hidden").css("display", "block");
+            jQuery("[data-modal-active='true']" + ">" + ".modal-wrapper").css("left", "0px");
+            jQuery("[data-modal-active='true']").attr({"data-modal-active": "false"});
         });
-
-        function showPopup(cell_value1,cell_value2){
-            $("#popup").dialog({
-                width: 500,
-                height: 300,
-                open: function(){
-                    $(this).find("p.item-1").html("<a href=includes/TasksAction.php?id="
-                        + cell_value1+
-                        "\&action=start>Start"
-                        +cell_value2+
-                        ":"
-                        +cell_value1+
-                        "</a>"
-                    );
-                    $(this).find("p.item-2").html("<a href=includes/TasksAction.php?id="
-                        + cell_value1+
-                        "\&action=result>Result"
-                        +cell_value2+
-                        ":"
-                        +cell_value1+
-                        "</a>"
-                    );
-                }
-            });
+    });
+    jQuery(document).on("click", '[data-modal-type="test"]', function (event) {
+        var task_id = $(event.target).closest('tr').find('.task_id').text();
+        var module = $(event.target).closest('tr').find('.module').text();
+        var command = $(event.target).closest('tr').find('.command').text();
+        if (task_id && module) {
+            showPopup(task_id, module, command);
         }
     });
+
+    function showPopup(task_id, module, command) {
+        jQuery("#modal-contents").find("p.item-1").html(generateLink(task_id, module, command, 'start'));
+        jQuery("#modal-contents").find("p.item-2").html(generateLink(task_id, module, command, 'result'));
+    }
+
+    function generateLink(task_id, module, command, taskAction)
+    {
+        var htmlLink = "<a href=includes/TasksAction.php?id="
+            + task_id +
+            "\&action="
+            + taskAction +
+            "\>"
+            + taskAction +
+            ":"
+            + command +
+            "</a>";
+        return htmlLink;
+    }
+});
 </script>
 </body>
 </html>

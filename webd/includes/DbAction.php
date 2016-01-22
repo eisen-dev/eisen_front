@@ -414,6 +414,25 @@ UNIQUE INDEX (ipaddress, machine_id)');
 
     /**
      * @param $dbh
+     * @param $machine_id
+     * @param $status
+     */
+    public function hostManagerStatus($dbh, $manager_host_ipaddress, $status)
+    {
+        $query = $dbh->prepare('UPDATE manager_host SET status_id=:status_id WHERE ipaddress = :ipaddress ;');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        try {
+            $query-> bindParam(':ipaddress', $manager_host_ipaddress, PDO::PARAM_STR);
+            $query-> bindParam(':status_id', $status, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+        }
+    }
+
+    /**
+     * @param $dbh
      * @param $active set to 1 if activated 0 if deactivated
      * @param $machine_id
      */
