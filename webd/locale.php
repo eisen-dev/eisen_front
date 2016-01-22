@@ -1,8 +1,11 @@
 <?php
-// use sessions
-    session_start();
+    require_once "includes/session.php";
 
-// get language preference
+    $me = new Session();
+    $me->start_session();
+    $me->is_session_started();
+
+    // get language preference
     if (isset($_GET["lang"])) {
         $language = $_GET["lang"];
     }

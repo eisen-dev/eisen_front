@@ -122,10 +122,18 @@ require_once __DIR__ .'/parts/head.php';
                     <div class="compact-form">
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span><?php echo _('host or group'); ?></span>
+                                <span><?php echo _('manager host'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
-                                <input type="text" name="hosts">
+                                <input type="text" name="manager_host">
+                            </div>
+                        </div>
+                        <div class="compact-form-row">
+                            <div class="compact-form-item-left">
+                                <span><?php echo _('target host or target group'); ?></span>
+                            </div>
+                            <div class="compact-form-item-right">
+                                <input type="text" name="target_hosts">
                             </div>
                         </div>
                         <div class="compact-form-row">
