@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<title><?php echo _('Package List'); ?></title>
 <?php
-// タイトル
-$title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
 ?>
     <style>
@@ -22,7 +21,7 @@ require_once __DIR__ .'/parts/head.php';
 <?php
 require_once __DIR__ . '/locale.php';
 // target host to be used for get package list
-$target = array();
+$target = [];
 if(isset($_GET['target'])){
     $target["ipaddress"] = htmlspecialchars($_GET["target"]);
 }
@@ -39,7 +38,13 @@ if(isset($_GET['os'])){
     <div class="contentswrapper menu-set">
         <main class="contents">
             <div class="section">
-                <h2 class="title">パッケージリスト</h2>
+                <h2 class="title">
+                <?php
+                echo _('Package List');
+                echo('<br>');
+                echo ($_SESSION['target_host'][0].' '.$_SESSION['managerHostId'][0]);
+                ?>
+                </h2>
                 <div class="list-tools clearfix">
                     <form id="form2">
                         <input type="hidden" name="user_id" id="user_id" value=<?php echo $user_id ;?>>
@@ -50,14 +55,10 @@ if(isset($_GET['os'])){
                     </form>
                 <form id="form1">
                     <div class="list-action">
-                        <select name="list-action-general" class="input-list">
-                            <option value="0">一括操作</option>
-                            <option value="1">更新</option>
-                        </select>
                         <select name="list-action-package" class="input-list">
-                            <option value="0">表示パッケージ</option>
-                            <option value="1">インストール済み</option>
-                            <option value="2">すべてのパッケージ</option>
+                            <option value="0"><?php echo _('Installed package'); ?></option>
+                            <option value="1"><?php echo _('Installed package'); ?></option>
+                            <option value="2"><?php echo _('Repository package'); ?></option>
                         </select>
                     </div>
                     <div class="search-box">
@@ -76,10 +77,10 @@ if(isset($_GET['os'])){
                                 <label for="cbox-selectall"></label>
                             </div>
                         </th>
-                        <th>ID</th>
-                        <th>package name</th>
-                        <th>package version</th>
-                        <th>package summary</th>
+                        <th><?php echo _('ID'); ?></th>
+                        <th><?php echo _('package name'); ?></th>
+                        <th><?php echo _('package version'); ?></th>
+                        <th><?php echo _('package summary'); ?></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -94,7 +95,7 @@ if(isset($_GET['os'])){
         <div class="modal-window">
             <div class="modal-header">
                 <i class="fa fa-times modal-close" data-modal="close"></i>
-                <span class="modal-title">ここに処理結果を表示</span>
+                <span class="modal-title"><?php echo _('Title'); ?></span>
             </div>
             <div class="modal-contents" id="modal-contents">
                 <p class="item-1"></p>
@@ -107,10 +108,6 @@ if(isset($_GET['os'])){
     <div class="modal-overlay"  data-modal="close"></div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
-<script>
-/*var target_ipaddress = '<?php echo $target["ipaddress"] ;?>';
-//    var target_os = '<?php //echo $target["os"] ;?>//';*/
-</script>
 <script type="text/javascript" src="ts/async.js"></script>
 </body>
 </html>

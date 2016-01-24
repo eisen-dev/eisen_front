@@ -2,9 +2,8 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<title><?php echo _('Target list'); ?></title>
 <?php
-// タイトル
-$title = "テンプレート";
 require_once __DIR__ .'/parts/head.php';
 ?>
     <style>
