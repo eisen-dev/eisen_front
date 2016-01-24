@@ -77,12 +77,13 @@ class restclient
         } catch (ConnectionErrorException $ex) {
             //$this->errorHandler($ex);
         }
-        return $hosts;
+        if (isset($hosts)) {
+            return $hosts;
+        }
     }
 
     public function tasks_list($rest_host, $rest_port, $username, $password)
     {
-        $tasks = false;
         try {
             $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/tasks';
             $response = \Httpful\Request::get($uri)
@@ -103,7 +104,9 @@ class restclient
         } catch (ConnectionErrorException $ex) {
             $this->errorHandler($ex);
         }
-        return $tasks;
+        if (isset($tasks)) {
+            return $tasks;
+        }
     }
 
     public function variable_list($rest_host, $rest_port, $username, $password)
