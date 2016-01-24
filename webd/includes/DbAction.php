@@ -305,21 +305,44 @@ UNIQUE INDEX (ipaddress, machine_id)');
         VALUES (:ipaddress, :port, :groups, :os, :status_id, :machine_id, :user_id);');
         # TODO: it have problem finding duplicate NULL value
         # FIX: cutted value if using to short VARCHAR so never matched
-        foreach ($hosts as $i=>$row) {
-            try {
-                $query-> bindParam(':ipaddress', $row->host, PDO::PARAM_STR);
-                $query-> bindParam(':port', $row->port, PDO::PARAM_STR);
-                $query-> bindParam(':groups', $row->groups, PDO::PARAM_STR);
-                $query-> bindParam(':os', $os, PDO::PARAM_STR);
-                $query-> bindParam(':status_id', $status_id, PDO::PARAM_STR);
-                $query-> bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
-                $query-> bindParam(':user_id', $user_id, PDO::PARAM_INT);
-                $query->execute(); //invalid query!
-            } catch(PDOException $ex) {
-            // this error just say that the item is already present.
-            //SQLSTATE[23000]: Integrity constraint violation:
-            //non blocking error, do nothing.
+        if (is_array($hosts) || is_object($hosts)) {
+            foreach ($hosts as $i => $row) {
+                try {
+                    $query->bindParam(':ipaddress', $row->host, PDO::PARAM_STR);
+                    $query->bindParam(':port', $row->port, PDO::PARAM_STR);
+                    $query->bindParam(':groups', $row->groups, PDO::PARAM_STR);
+                    $query->bindParam(':os', $os, PDO::PARAM_STR);
+                    $query->bindParam(':status_id', $status_id, PDO::PARAM_STR);
+                    $query->bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
+                    $query->bindParam(':user_id', $user_id, PDO::PARAM_INT);
+                    $query->execute(); //invalid query!
+                } catch (PDOException $ex) {
+                    // this error just say that the item is already present.
+                    //SQLSTATE[23000]: Integrity constraint violation:
+                    //non blocking error, do nothing.
+                }
             }
+        }
+    }
+
+    public function taskList($dbh, $task_id)
+    {
+        $query = $dbh->prepare('SELECT * FROM task_result WHERE task_id = :task_id ;');
+        try {
+            $query->bindParam(':task_id', $task_id, PDO::PARAM_STR);
+            $query->execute();
+            $data = $query->fetchAll();
+            foreach ($data as $i => $row) {
+                $myMachine[$i] = [
+                    'task_id' => $row['task_id'],
+                    'task_result' => $row['task_result'],
+                    'target_host' => $row['target_host'],
+                ];
+            }
+            return $data;
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+
         }
     }
 
