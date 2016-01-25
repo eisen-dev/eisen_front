@@ -13,9 +13,8 @@ class AjaxValidate
      */
     public function searchPackage()
     {
-        define("NOT_SELECTED", 0);
-        define("INSTALLED", 1);
-        define("REPOSITORY", 2);
+        define("INSTALLED", 0);
+        define("REPOSITORY", 1);
         $return =null;
         $dba = new DbAction();
         $dbh = $dba->Connect();
@@ -26,9 +25,6 @@ class AjaxValidate
         $update = @$_POST['list-action-general'];
         $pack_sys_id=1;
 
-        if ($list == NOT_SELECTED) {
-            $return = $this->isInstalled($dba, $dbh, $search, $update, $pack_sys_id);
-        }
         if ($list == INSTALLED) {
             $return = $this->isInstalled($dba, $dbh, $search, $update, $pack_sys_id);
         }
@@ -69,11 +65,19 @@ class AjaxValidate
         if ($return['error'] === false) {
             $package = $dba->installedPackageSearch($pack_sys_id, $dbh, $search);
             foreach ($package as $i => $row) {
-                $return['msg'] .= '<tr class="cell-which-triggers-popup">';
+                $return['msg'] .= '<tr class="cell-which-triggers-popup"
+                   data-modal="open"
+                   data-modal-target="test-modal"
+                   data-modal-type="test"
+                   >';
                 $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td>$i</td>";
-                $return['msg'] .= "<td class=\"item\">" .
+                $return['msg'] .= "<td class=\"name\">" .
                     $row['installed_pack_name'] . "</td>";
+                $return['msg'] .= "<td class=\"version\">" .
+                    $row['installed_pack_version'] . "</td>";
+                $return['msg'] .= "<td class=\"summary\">" .
+                    $row['installed_pack_summary'] . "</td>";
                 $return['msg'] .= '</tr>';
             }
         }
@@ -89,10 +93,14 @@ class AjaxValidate
             $return['error'] = true;
             $package = $dba->PackageList($pack_sys_id, $dbh);
             foreach ($package as $i => $row) {
-                $return['msg'] .= '<tr class="cell-which-triggers-popup">';
+                $return['msg'] .= '<tr class="cell-which-triggers-popup"
+                   data-modal="open"
+                   data-modal-target="test-modal"
+                   data-modal-type="test"
+                   >';
                 $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td>$i</td>";
-                $return['msg'] .= "<td class=\"item\">" .
+                $return['msg'] .= "<td class=\"name\">" .
                     $row['pack_name'] . "</td>";
                 $return['msg'] .= '</tr>';
             }
@@ -101,10 +109,14 @@ class AjaxValidate
         if ($return['error'] === false) {
             $package = $dba->PackageSearch($pack_sys_id, $dbh, $search);
             foreach ($package as $i => $row) {
-                $return['msg'] .= '<tr class="cell-which-triggers-popup">';
+                $return['msg'] .= '<tr class="cell-which-triggers-popup"
+                   data-modal="open"
+                   data-modal-target="test-modal"
+                   data-modal-type="test"
+                   >';
                 $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td>$i</td>";
-                $return['msg'] .= "<td class=\"item\">" .
+                $return['msg'] .= "<td class=\"name\">" .
                     $row['pack_name'] . "</td>";
                 $return['msg'] .= '</tr>';
             }

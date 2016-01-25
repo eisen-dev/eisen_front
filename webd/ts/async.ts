@@ -78,30 +78,34 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
     jQuery(document).on("click", '[data-modal-type="test"]', function (event)  {
         var packageName = jQuery(event.target).closest("tr").find(".name").text();
         var packageVersion = jQuery(event.target).closest("tr").find(".version").text();
-        if (packageName && packageVersion) {
+        if (packageName) {
             var targetHost='localhost';
-            showPopup(packageName, packageVersion, targetHost);
+            var managerHost='192.168.33.10';
+            showPopup(packageName, packageVersion, targetHost, managerHost);
         }
     });
 
-    function showPopup(packageName, packageVersion, targetHost)
+    function showPopup(packageName, packageVersion, targetHost, managerHost)
     {
-        jQuery("#modal-contents").find("p.item-1").html(generateLink(packageName, packageVersion, targetHost,'install'));
-        jQuery("#modal-contents").find("p.item-2").html(generateLink(packageName, packageVersion, targetHost,'update'));
-        jQuery("#modal-contents").find("p.item-3").html(generateLink(packageName, packageVersion, targetHost,'delete'));
+        if (typeof(packageVersion)==='undefined') packageVersion = null;
+        jQuery("#modal-contents").find("p.item-1").html(generateLink(packageName, packageVersion, targetHost, managerHost,'install'));
+        jQuery("#modal-contents").find("p.item-2").html(generateLink(packageName, packageVersion, targetHost, managerHost,'update'));
+        jQuery("#modal-contents").find("p.item-3").html(generateLink(packageName, packageVersion, targetHost, managerHost,'delete'));
     }
 
-    function generateLink(packageName: String, packageVersion: String, targetHost: String, packageAction: String)
+    function generateLink(packageName: String, packageVersion: String, targetHost: String, managerHost: String, packageAction: String)
     {
         var htmlLink = "<a href=includes/package_action/package_action.php?" +
-            "package="
+            "packageName="
             + packageName +
-            "/"
+            "\&packageVersion="
             + packageVersion +
             "\&action="
             + packageAction +
             "\&target="
             + targetHost +
+            "\&manager="
+            + managerHost +
             ">"
             + packageAction +
             ": "

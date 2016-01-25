@@ -131,6 +131,33 @@ class DbAction
         );
 
         $this->CreateDbTable(
+            'task_result',
+            [
+                'unique_id' => 'INT AUTO_INCREMENT',
+                'task_id' => 'VARCHAR(75)',
+                'task_result' => 'VARCHAR(200)',
+                'target_host' => 'VARCHAR(20)',
+            ],
+            $dbh
+        );
+
+        $this->CreateDbTable(
+            'package_result',
+            [
+                'unique_id' => 'INT AUTO_INCREMENT',
+                'result_string' => 'VARCHAR(75)',
+                'packageName' => 'VARCHAR(200)',
+                'packageVersion' => 'VARCHAR(20)',
+                'targetOS' => 'VARCHAR(516)',
+                'targetHost' => 'VARCHAR(516)',
+                'task_id' => 'VARCHAR(516)',
+                'packageAction' => 'VARCHAR(256)',
+                'result_short' => 'VARCHAR(256)',
+            ],
+            $dbh
+        );
+
+        $this->CreateDbTable(
             'manager_host',
             [
                 'machine_id' => 'INT AUTO_INCREMENT',
@@ -476,6 +503,25 @@ UNIQUE INDEX (ipaddress, machine_id)');
 
     /**
      * @param $dbh
+     * @param $machine_id
+     * @param $status
+     */
+    public function hostManagerip2id($dbh, $manager_host_ipaddress)
+    {
+        $query = $dbh->prepare('SELECT * FROM manager_host WHERE ipaddress = :ipaddress ;');
+        try {
+            $query-> bindParam(':ipaddress', $manager_host_ipaddress, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+            $data = $query->fetchAll();
+            $cnt  = count($data); //in case you need to count all rows
+            return $data;
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+        }
+    }
+
+    /**
+     * @param $dbh
      * @param $active set to 1 if activated 0 if deactivated
      * @param $machine_id
      */
@@ -488,6 +534,31 @@ UNIQUE INDEX (ipaddress, machine_id)');
             $query-> bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
             $query-> bindParam(':active', $active, PDO::PARAM_INT);
             $query->execute(); //invalid query!
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+        }
+    }
+
+    /**
+     * @param $dbh
+     * @param $target_host
+     * @param $machine_id
+     */
+    public function targetHostInf($dbh, $target_host, $machine_id)
+    {
+        $query = $dbh->prepare('
+SELECT * FROM target_host
+WHERE ipaddress = :target_host
+AND machine_id = :machine_id;');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        try {
+            $query-> bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
+            $query-> bindParam(':target_host', $target_host, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+            $data = $query->fetchAll();
+            $cnt  = count($data); //in case you need to count all rows
+            return $data;
         } catch (PDOException $ex) {
             $this->errorHandler($ex->getMessage());
         }
@@ -544,16 +615,16 @@ UNIQUE INDEX (ipaddress, machine_id)');
      *
      * @return mixed
      */
-    public function installedPackageSearch($target_host, $dbh, $search)
+    public function installedPackageSearch($pack_sys_id, $dbh, $search)
     {
         $search = "%$search%";
         $stm = $dbh->prepare('
 select * from installed_package
-WHERE target_host=:target_host
+WHERE pack_sys_id=:pack_sys_id
 AND installed_pack_name
 LIKE :search ;');
         $stm-> bindParam(':search', $search, PDO::PARAM_STR);
-        $stm-> bindParam(':pack_sys_id', $target_host, PDO::PARAM_STR);
+        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows

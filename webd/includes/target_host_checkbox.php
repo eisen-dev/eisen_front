@@ -7,23 +7,29 @@
  */
 
 require_once __DIR__ . '/DbAction.php';
+require_once __DIR__."/session.php";
+
 $dba = new DbAction();
 $dbh = $dba->Connect();
+
+$me = new Session();
+$me->start_session();
+$me->is_session_started();
 
 if (isset($_POST['list-action']) )
 {
     $action = ($_POST['list-action']);
-    echo $action;
+    $_SESSION['$action'];
 }
 if (isset($_POST['managerHostAddress']) )
 {
-    $test = ($_POST['managerHostAddress']);
-    l($test);
+    $_SESSION['target_host'] = ($_POST['managerHostAddress']);
+    l($_SESSION['target_host']);
 }
 if (isset($_POST['managerHostId']) )
 {
-    $test = ($_POST['managerHostId']);
-    l($test);
+    $_SESSION['managerHostId']= ($_POST['managerHostId']);
+    l($_SESSION['managerHostId']);
 }
 
 $check = $_POST['check'];
@@ -40,7 +46,7 @@ else
     for($i=0; $i < $N; $i++)
     {
         echo($check[$i] . ' ');
-        //$dba->hostManagerActive($dbh, $action, $check[$i]);
+
     }
 }
 if (strcmp($action,0) === 1) {

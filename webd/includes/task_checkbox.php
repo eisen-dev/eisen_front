@@ -41,10 +41,11 @@ $user_id = $me->get_user_id();
 if (isset($_POST['list-action']) )
 {
     $action = ($_POST['list-action']);
-    echo $action;
+    kint::dump($action);
 }
 if (isset($_POST['managerHostAddress'])) {
     $managerHostAddress = ($_POST['managerHostAddress']);
+    Kint::dump($managerHostAddress);
 }
 
 $check = $_POST['managerHostId'];
@@ -55,25 +56,31 @@ if (empty($check)) {
 else
 {
     $N = count($check);
+    kint::dump($check);
 
     echo('You selected $N check(s): ');
     for ($i=0; $i < $N; $i++) {
         echo($check[$i] . ' ');
-        foreach ($managerHostAddress as $host) {
-            $machine = $dba->hostManagerActiveListFind(
-                $user_id,
-                $dbh,
-                $host
-            );
-            $rest->tasks_run(
-                $machine[0]['ipaddress'],
-                $machine[0]['port'],
-                $machine[0]['username'],
-                $machine[0]['password'],
-                $check[$i]
-            );
-            echo $host;
+        if ($action == 1) {
+                $machine = $dba->hostManagerActiveListFind(
+                    $user_id,
+                    $dbh,
+                    $managerHostAddress[$check[$i]]
+                );
+                try {
+                    $rest->tasks_run(
+                        $machine[0]['ipaddress'],
+                        $machine[0]['port'],
+                        $machine[0]['username'],
+                        $machine[0]['password'],
+                        $check[$i]
+                    );
+                } catch (HttpException $ex) {
+                    echo $ex;
+                }
+        } elseif ($action ==2) {
+            $dba->hostTaskRemove($dbh, $action, $check[$i]);
         }
-        //$dba->hostManagerActive($dbh, $action, $check[$i]);
     }
 }
+    //

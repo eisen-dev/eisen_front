@@ -31,7 +31,6 @@ try {
     $query-> bindParam(':module', $rest_module, PDO::PARAM_STR);
     $query-> bindParam(':status_id', $status_id, PDO::PARAM_INT);
     $query-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
-    echo($dbh);
     $query->execute(); //invalid query!
 } catch(PDOException $ex) {
     //echo "An Error occured!"; //user friendly message

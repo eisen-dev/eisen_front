@@ -72,23 +72,26 @@ require_once __DIR__ .'/parts/head.php';
                     $machine = $dba->hostManagerActiveList($user_id, $dbh);
                     $rest = new restclient();
                     foreach ($machine as $i => $row) {
-                        $tasks[] = $rest->tasks_list(
+                        $data[] = $rest->tasks_list(
                             $row['ipaddress'],
                             $row['port'],
                             $row['username'],
                             $row['password']
                         );
-                        if (is_array($tasks[$i])) {
-                            $tasks[$i][0]->manager_host = $row['ipaddress'];
+                        if (is_array($data[$i])) {
+                            $data[$i][0]->manager_host = $row['ipaddress'];
                         }
                     }
-                    if (is_array($tasks[$i])) {
-                        foreach ($tasks as $i => $row) {
-                            foreach ($row as $x => $task) {
+                    if (is_array($data[$i])) {
+                        foreach ($data as $i => $array) {
+                            foreach ($array as $x => $task) {
                                 # hack for get task_id
                                 $uri = $task->uri;
                                 $uri = explode('/', $uri);
                                 $task_id = $uri[5];
+                                if (!isset($task->manager_host)) {
+                                    $task->manager_host = $row['ipaddress'];
+                                }
                                 $table = '<tr
                                     class="cell-which-triggers-popup"
                                     data-modal-target="test-modal"
@@ -105,7 +108,7 @@ require_once __DIR__ .'/parts/head.php';
                                 $table .= '<td class="task_id">' . $task_id . '</td>';
                                 $table .= '<td class="host">' . $task->hosts . '</td>';
                                 $table .= '<td class="managerHost"><input type="hidden" id="managerHost"' .
-                                    ' value="' . $task->manager_host . '" name="managerHostAddress[]">' .
+                                    ' value="' . $task->manager_host . '" name="managerHostAddress['.$task_id.']">' .
                                     $task->manager_host . '</td>';
                                 $table .= '<td class="module">' . $task->module . '</td>';
                                 $table .= '<td class="command">' . $task->command . '</td></tr>';

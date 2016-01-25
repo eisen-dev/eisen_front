@@ -57,8 +57,7 @@ if(isset($_GET['os'])){
                     <div class="list-action">
                         <select name="list-action-package" class="input-list">
                             <option value="0"><?php echo _('Installed package'); ?></option>
-                            <option value="1"><?php echo _('Installed package'); ?></option>
-                            <option value="2"><?php echo _('Repository package'); ?></option>
+                            <option value="1"><?php echo _('Repository package'); ?></option>
                         </select>
                     </div>
                     <div class="search-box">

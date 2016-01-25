@@ -307,7 +307,7 @@ class restclient
                 ->body(
                     '{"targetHost":"' .
                     $targetHost .
-                    '","targetOs":"' .
+                    '","targetOS":"' .
                     $targetOs .
                     '","packageName":"' .
                     $packageName .
@@ -323,8 +323,9 @@ class restclient
                     }
                 )
                 ->sendIt();
-            $uri = $response->body->task->uri;
-            $uri = explode("/", $uri);
+                Kint::dump($response);
+            //$uri = $response->body->task->uri;
+            //$uri = explode("/", $uri);
         } catch (ConnectionErrorException $ex) {
             $this->errorHandler($ex);
         }
