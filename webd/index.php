@@ -299,8 +299,7 @@ $dbh = $dba->Connect();
                                 <div class="wgt-news">
                                     <span class="wgt-news-title">eisenのニュース</span>
                                     <ul>
-                                        <li><span class="wgt-news-date">20160101</span><span class="wgt-news-title">あけましておめでとう</span></li>
-                                        <li><span class="wgt-news-date">20151225</span><span class="wgt-news-title">メリークリスマス</span></li>
+                                        <div id="divRss"></div>
                                     </ul>
                                 </div>
                             </div>
@@ -311,5 +310,38 @@ $dbh = $dba->Connect();
 		</div>
 	</div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
+<script type="text/javascript" src="includes/feedEK/FeedEk.js"></script>
+<script>
+    $(document).ready(function(){
+
+        $('#divRss').FeedEk({
+            FeedUrl : 'http://eisen-dev.github.io/feed.xml'
+        });
+
+        var r = Math.floor(Math.random()*256);
+        var g = Math.floor(Math.random()*256);
+        var b = Math.floor(Math.random()*256);
+
+        $('#example, .itemTitle a').css("color", getHex(r,g,b));
+
+        $('#example').click(function() {
+
+            $('.itemTitle a').css("color", getHex(r,g,b));
+
+        });
+
+        function intToHex(n){
+            n = n.toString(16);
+            if( n.length < 2)
+                n = "0"+n;
+            return n;
+        }
+
+        function getHex(r, g, b){
+            return '#'+intToHex(r)+intToHex(g)+intToHex(b);
+        }
+
+    });
+</script>
 </body>
 </html>
