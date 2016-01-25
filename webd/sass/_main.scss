@@ -75,16 +75,45 @@ body{
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.15);
 
 }
+$header-background: $col-main;
 .content-header{
     width: 100%;
-    background-color: $md-blue-500;
+    background-color: $header-background;
     padding: 8px 8px;
+    display: flex;
+	align-items: center;
 }
 
 .content-header-title{
     margin: 0;
     color: white;
+    flex-grow: 1;
+    vertical-align: middle;
 }
+
+.content-header-buttons{
+    display: flex;
+    vertical-align: middle;
+    .content-header-button{
+        display: flex;
+        vertical-align: middle;
+        button + button{
+            margin-left: 8px;
+        }
+    }
+
+    .content-header-setting{
+        margin-left: 8px;
+        color: lighten($header-background, 30%);
+        height: 1.5em;
+        font-size: 1.5em;
+        background-color: transparent;
+        &:hover{
+            color: lighten($header-background, 40%);
+        }
+}
+}
+
 
 @media screen and (min-width: 480px) {
 	.contentwrapper-nonav{

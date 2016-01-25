@@ -1,7 +1,11 @@
 @charset "UTF-8";
 
 
+#fullheight{
+    overflow: scroll;
 
+
+}
 //list-toolsは修正予定
 .list-tools{
 	height: 34px;
@@ -54,11 +58,8 @@ $list-tools-filterbtn-color-active: $md-orange-500;
     border-bottom: 1px solid $md-grey-300;
 }
 
-.n-list-tools-fixed{
-    position: fixed;
-    top: 48px;
-    right: 0px;
-    // jqueryで幅や位置を設定
+.list-header-fix{
+
 }
 
 .n-list-toolbar{
@@ -72,23 +73,11 @@ $list-tools-filterbtn-color-active: $md-orange-500;
 	.n-list-action{
 		display: flex;
 		height: $th;
+        button + button{
+        margin-left: 8px;
+        }
 		.input-list{
 			height: 100%;
-		}
-		.n-list-action-button{
-			display: inline-block;
-			vertical-align: middle;
-			text-align: center;
-			height: $th;
-			line-height: $th;
-			font-size: 14px;
-			padding: 0 6px;
-			margin-left: 2px;
-			border-radius: 3px;
-			width: auto;
-			color: white;
-			background-color: $list-tools-btn-color;
-			//padding: 2px;
 		}
 	}
 	.n-searchbox{
@@ -246,6 +235,29 @@ $table-row-hover: $md-grey-50;
 			}
 		}
 	}
+}
+
+.table-fullwindow{
+
+    .table{
+        thead{
+
+            tr{
+                th{
+
+                }
+            }
+        }
+        .thead-dummy{
+            height: 0px;
+            tr{
+                td{
+                    height: 0px;
+                    padding: 0px;
+                }
+            }
+        }
+    }
 }
 
 .list-data-ctrl{

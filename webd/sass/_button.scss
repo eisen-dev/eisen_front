@@ -4,10 +4,98 @@ input[type="submit"]{
   -webkit-appearance: none;
 	border: none;
 }
+
 button{
   -webkit-appearance: none;
 	border: none;
+    background-color: transparent;
 }
+
+.btn{
+    $color: $col-green;
+	display: inline-block;
+	padding: 8px 12px;
+	width: auto;
+	border-radius: 3px;
+	background-color: $color;
+	color: #FAFAFA;
+	text-align: center;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 1em;
+    line-height: inherit;
+    	&:hover{
+		color: #FAFAFA;
+		background-color: darken($color, 10%);
+	}
+}
+
+a.btn{
+    padding: 0 0.5em;
+    margin: 0 0.2em;
+}
+
+button.btn{
+
+}
+.btn.btn-blc{
+    display: block;
+    width: 100%;
+}
+
+.btn.btn-yellow{
+    $color: $col-yellow;
+	background-color: $color;
+    color: #FAFAFA;
+    &:hover{
+		color: #FAFAFA;
+		background-color: darken($color, 10%);
+	}
+}
+.btn.btn-red{
+    $color: $col-red;
+	background-color: $color;
+    color: #FAFAFA;
+    &:hover{
+		color: #FAFAFA;
+		background-color: darken($color, 10%);
+	}
+}
+.btn.btn-blue{
+    $color: $col-main;
+	background-color: $color;
+    color: #FAFAFA;
+    &:hover{
+		color: #FAFAFA;
+		background-color: darken($color, 10%);
+	}
+}
+
+.btn.btn-gray{
+    $color: lighten($col-black, 30%);
+	background-color: $color;
+    color: #FAFAFA;
+    &:hover{
+		color: #FAFAFA;
+		background-color: darken($color, 10%);
+	}
+}
+
+.btn.btn-sm{
+    padding: 4px 8px;
+}
+
+.btn.btn-lg{
+    padding: 12px 24px;
+}
+
+.button-il{
+    display: inline-block;
+    height: 1.2em;
+    padding: 0;
+    font-size: 1em;
+}
+
 
 .button{
 	$color: #68CC68;
@@ -51,17 +139,6 @@ button{
 
 }
 .button-inline{
-
-}
-.button-fw{
-	width: 100%;
-	margin: auto 0;
-}
-.button-row{
-	display: flex;
-}
-
-.button-cont{
 
 }
 

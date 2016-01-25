@@ -153,6 +153,30 @@
     }
 }
 
+.wgt-news{
+    padding: 8px;
+    ul{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        li{
+
+        }
+    }
+}
+
+.wgt-news-li-title{
+    display: inline-block;
+}
+
+.wgt-news-li-date{
+    display: inline-block;
+}
+
+wgt-news-li-headline{
+    display: inline-block;
+}
+
 @media screen and (min-width: 480px) {
 .widget-small{
     width: 50%;
