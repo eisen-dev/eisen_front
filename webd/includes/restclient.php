@@ -282,6 +282,60 @@ class restclient
      * @param $rest_port
      * @param $username
      * @param $password
+     * @param $hosts
+     * @param $command
+     * @param $module
+     *
+     * @return mixed
+     */
+    public function package_Action(
+        $rest_host,
+        $rest_port,
+        $username,
+        $password,
+        $targetHost,
+        $targetOs,
+        $packageName,
+        $packageVersion,
+        $packageAction
+    ) {
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/packages';
+            $response = \Httpful\Request::post($uri)
+                ->sendsJson()// tell it we're sending (Content-Type) JSON...
+                ->authenticateWith($username, $password)
+                ->body(
+                    '{"targetHost":"' .
+                    $targetHost .
+                    '","targetOs":"' .
+                    $targetOs .
+                    '","packageName":"' .
+                    $packageName .
+                    '","packageVersion":"' .
+                    $packageVersion .
+                    '","packageAction":"' .
+                    $packageAction .
+                    '"}'
+                )// attach a body/payload...
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->sendIt();
+            $uri = $response->body->task->uri;
+            $uri = explode("/", $uri);
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
+        return $uri[5];
+    }
+
+    /**
+     * @param $rest_host
+     * @param $rest_port
+     * @param $username
+     * @param $password
      * @param $target_host
      * @param $variable_key
      * @param $variable_value

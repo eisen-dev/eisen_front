@@ -62,7 +62,6 @@ require_once __DIR__ .'/parts/head.php';
                         <th><?php echo _('host'); ?></th>
                         <th><?php echo _('module'); ?></th>
                         <th><?php echo _('command'); ?></th>
-                        <th><?php echo _('manger host'); ?></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -105,7 +104,7 @@ require_once __DIR__ .'/parts/head.php';
                                 $table .= '</td>';
                                 $table .= '<td class="task_id">' . $task_id . '</td>';
                                 $table .= '<td class="host">' . $task->hosts . '</td>';
-                                $table .= '<td class="manager_host"><input type="hidden" id="managerHost"' .
+                                $table .= '<td class="managerHost"><input type="hidden" id="managerHost"' .
                                     ' value="' . $task->manager_host . '" name="managerHostAddress[]">' .
                                     $task->manager_host . '</td>';
                                 $table .= '<td class="module">' . $task->module . '</td>';
@@ -181,11 +180,10 @@ require_once __DIR__ .'/parts/head.php';
         <div class="modal-window">
             <div class="modal-header">
                 <i class="fa fa-times modal-close" data-modal="close"></i>
-                <span class="modal-title">ここに処理結果を表示</span>
+                <span class="modal-title"><?php echo _('Title'); ?></span>
             </div>
             <div class="modal-contents" id="modal-contents">
                 <p class="item-1"></p>
-                <p class="item-2"></p>
             </div>
             <div class="modal-ctrl"></div>
         </div>
@@ -235,28 +233,25 @@ jQuery(document).ready(function () {
     });
     jQuery(document).on("click", '[data-modal-type="test"]', function (event) {
         var task_id = $(event.target).closest('tr').find('.task_id').text();
-        var module = $(event.target).closest('tr').find('.module').text();
-        var command = $(event.target).closest('tr').find('.command').text();
-        if (task_id && module) {
-            showPopup(task_id, module, command);
+        if (task_id) {
+            showPopup(task_id);
         }
     });
 
-    function showPopup(task_id, module, command) {
+    function showPopup(task_id) {
         $.ajax({
                 url: 'taskResultModal.php',
-                dataType: "text json",
-                type: "POST",
-                data: {task_id: task_id, module: module, command: command},
+                dataType: 'text json',
+                type: 'POST',
+                data: {task_id: task_id},
                 dataType: 'json'
             })
             .done(function (response) {
                 $('.modal-header > .modal-title').text(response.return[0]);
                 $('p.item-1').text(response.return[1]);
-                $('p.item-2').text(response.return[2]);
             })
             .fail(function () {
-                alert("失敗しました");
+                alert('失敗しました');
             });
     }
 });
