@@ -44,22 +44,31 @@ catch (PDOException $e) {
         <main class="contents">
             <div class="card">
                 <form action="includes/account.php" method="post">
-                    <h2 class="title">アカウント設定</h2>
+                    <h2 class="title"><?php echo _('account settings') ?></h2>
                     <div class="section">
-                    <?php
-                    $user_id=$_SESSION['login_user'];
-                    print '<div class="compact-form-row"><div class="compact-form-item-left"><span>ユーザー名:</span></div><div class="compact-form-item-right"><span>'.$user_id.'</span></div>';
-                    $stm = $dbh->prepare("select * from user_info WHERE user_id = :user_id ;");
-                    $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
-                    $stm->execute();
-                    $data = $stm->fetchAll();
-                    $cnt  = count($data); //in case you need to count all rows
-                    foreach ($data as $i => $row)
-                        print_r('</div><div class="compact-form-row"><div class="compact-form-item-left"><span>メール:</span></div><div class="compact-form-item-right"><span>'.$row['mail_address'].'</span></div></div>');
-                    ?>
+                        <?php $user_id=$_SESSION['login_user']; ?>
+                        <div class="compact-form-row">
+                            <span><?php echo _('Username:') ?></span>
+                            <span><?php echo $user_id ?></span>
+                        </div>
+                            <?php
+                                $stm = $dbh->prepare("select * from user_info WHERE user_id = :user_id ;");
+                                $stm-> bindParam(':user_id', $user_id, PDO::PARAM_STR);
+                                $stm->execute();
+                                $data = $stm->fetchAll();
+                                $cnt  = count($data); //in case you need to count all rows
+                            ?>
+                        <div class="compact-form-row">
+                                <span><?php echo _('Email:') ?></span>
+                                <span><?php echo $data[0]['mail_address'] ?></span>
+                        </div>
+                        <div class="compact-form-row">
+                            <span><?php echo _('Language settings:') ?></span>
+                            <span><?php echo $_SESSION['Language'] ?></span>
+                        </div>
                     <div class="compact-form-row">
                         <div class="compact-form-item-left">
-                            <span>先パスワード</span>
+                            <span><?php echo _('previous password:') ?></span>
                         </div>
                         <div class="compact-form-item-right">
                             <input type="password" name="old_pass" required='required'>
@@ -67,7 +76,7 @@ catch (PDOException $e) {
                     </div>
                     <div class="compact-form-row">
                         <div class="compact-form-item-left">
-                            <span>メール[任意]</span>
+                            <span><?php echo _('new email:') ?></span>
                         </div>
                         <div class="compact-form-item-right">
                             <input type="text" name="mail">
@@ -75,7 +84,7 @@ catch (PDOException $e) {
                     </div>
                     <div class="compact-form-row">
                         <div class="compact-form-item-left">
-                            <span>新パスワード[任意]</span>
+                            <span><?php echo _('new password:') ?></span>
                         </div>
                         <div class="compact-form-item-right">
                             <input type="password" name="new_pass">
@@ -83,13 +92,13 @@ catch (PDOException $e) {
                     </div>
                     <div class="compact-form-row">
                         <div class="compact-form-item-left">
-                            <span>パスワード確認[任意]</span>
+                            <span><?php echo _('new password:') ?></span>
                         </div>
                         <div class="compact-form-item-right">
                             <input type="password" name="confirm_pass">
                         </div>
                     </div>
-                    <input type="submit" name="submit" value="設定して" class="button">
+                    <input type="submit" name="submit" value="<?php echo _('confirm settings') ?>" class="button">
                 </form>
             </div>
 		</main>
