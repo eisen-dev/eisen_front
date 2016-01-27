@@ -31,27 +31,52 @@ require_once __DIR__ .'/parts/head.php';
     <?php require_once __DIR__ . '/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
         <main class="contents">
-            <div class="section">
-                <h2 class="title"><?php echo _('Host Manager'); ?></h2>
+                <div class="content-header">
+                    <!-- page title -->
+                    <h2 class="title content-header-title"><?php echo _('Host Manager'); ?></h2>
+                    <!-- page general setting button and useful buttons area -->
+                    <div class="content-header-buttons">
+                        <div class="content-header-button">
+                            <!-- header button area, example for add new machine button. -->
+                            <button class="btn btn-sm"><i class="fa fa-plus"></i><?php echo _('add new machine'); ?></button>
+                        </div>
+                         <!-- setting button, open setting modal. this is optional button. -->
+                        <button class="content-header-setting"  data-modal="open" data-modal-target="machine_list-setting"><i class="fa fa-cog"></i></button>
+                    </div>
+                </div>
+
+
+
                 <form action="includes/manager_host_checkbox.php" method="post">
-                    <div class="list-tools clearfix">
-                        <div class="list-action">
-                            <label>
-                                <select name="list-action" class="input-list">
+
+                    <div class="n-list-tools">
+                    <!-- new list control tools -->
+						<div class="n-list-toolbar">
+							<div class="n-list-action">
+                                <!-- dropdown list and submit button.-->
+                                <select name="list-action" class="n-input-list">
                                     <option value="1"><?php echo _('activate'); ?></option>
                                     <option value="0"><?php echo _('deactivate'); ?></option>
                                     <option value="2"><?php echo _('delete'); ?></option>
                                 </select>
-                            </label>
-                            <input type="submit" value="適用" class="button button--form">
-                        </div>
-                        <div class="search-box">
-                            <input type="text" placeholder="全てのパッケージを検索">
-                            <button type="submit" name="submit" class="search-box__button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
+								<button type="submit" value="適用" class="btn btn-sm"><?php echo _('execute'); ?></button>
+                                <!-- additional control button is here,use button tag -->
+                                <button class="btn btn-sm"><i class="fa fa-refresh"></i><?php echo _('reflesh list'); ?></button>
+							</div>
+							<div class="n-searchbox">
+								<input type="text" placeholder="<?php echo _('search all packages'); ?>" class="n-search-box-input">
+                                <!-- search button -->
+								<button type="submit" name="submit" class="n-search-button"><i class="fa fa-search"></i></button>
+                                <!-- optional filter button -->
+							</div>
+						</div>
+                        <!-- optional filter area -->
+                        <!-- optional filter area end -->
+					<!--  new list control tools end-->
+                </div>
+
+
+                <div class="table-wrapper">
                     <table class="table">
                         <thead>
                         <tr>
@@ -95,13 +120,11 @@ require_once __DIR__ .'/parts/head.php';
                         ?>
                         </tbody>
                     </table>
+                </div>
+
                 </form>
                 <!--TODO Use modal for this -->
                 <!--data-modal-targetで開くモーダルのIDを指定する-->
-                <div class="button" data-modal="open" data-modal-target="machine_list-setting">
-                    open setting
-                </div>
-            </div>
         </main>
     </div>
 </div>
