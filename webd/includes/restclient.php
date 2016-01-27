@@ -421,24 +421,50 @@ class restclient
         return $response;
     }
 
-    public function updatePackage($rest_host, $rest_port, $username, $password)
-    {
+    /**
+     * @param $rest_host
+     * @param $rest_port
+     * @param $username
+     * @param $password
+     * @param $target_host
+     * @param $variable_key
+     * @param $variable_value
+     */
+    public function updatePackage(
+        $rest_host,
+        $rest_port,
+        $username,
+        $password,
+        $target_host,
+        $target_os,
+        $command
+    ) {
+        $host_id = 1;
         try {
+
             $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/package_retrieve';
-            $response = \Httpful\Request::get($uri)
+            $response = \Httpful\Request::post($uri)
+                ->sendsJson()// tell it we're sending (Content-Type) JSON...
                 ->authenticateWith($username, $password)
+                ->body(
+                    '{
+                 "target_host":"' .
+                    $target_host .
+                    '","target_os":"' .
+                    $target_os .
+                    '","command":"' .
+                    $command .
+                    '"}'
+                )// attach a body/payload...
                 ->whenError(
                     function ($error) {
                         $this->errorHandler($error);
                     }
                 )
-                ->send();
-            # convert json from stdobject to array
-            $response = json_decode($response->raw_body, true);
+                ->sendIt();
         } catch (ConnectionErrorException $ex) {
             $this->errorHandler($ex);
         }
-        return $response;
     }
 
     public function errorHandler($error)

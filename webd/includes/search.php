@@ -15,7 +15,6 @@ class AjaxValidate
     {
         define("INSTALLED", 0);
         define("REPOSITORY", 1);
-        $return =null;
         $dba = new DbAction();
         $dbh = $dba->Connect();
         //Put form elements into post variables
@@ -23,19 +22,20 @@ class AjaxValidate
         $search = @$_POST['field1'];
         $list = @$_POST['list-action-package'];
         $update = @$_POST['list-action-general'];
-        $pack_sys_id=1;
+        $target_host = @$_POST['target_ipaddress'];
 
         if ($list == INSTALLED) {
-            $return = $this->isInstalled($dba, $dbh, $search, $update, $pack_sys_id);
-        }
-        if ($list == REPOSITORY) {
-            $return = $this->isRepository($dba, $dbh, $search, $update, $pack_sys_id);
+            $return = $this->isInstalled($dba, $dbh, $search, $update, $target_host);
+        } elseif ($list == REPOSITORY) {
+            $return = $this->isRepository($dba, $dbh, $search, $update, $target_host);
+        } else {
+            $return = '$list: '.$list.' not recognized';
         }
 
         return json_encode($return);
     }
 
-    public function isInstalled($dba,$dbh,$search,$update,$pack_sys_id){
+    public function isInstalled($dba,$dbh,$search,$update,$target_host){
 
         $return = [];
 
@@ -43,7 +43,7 @@ class AjaxValidate
         $return['error'] = false;
         if (!isset($search) || empty($search)) {
             $return['error'] = true;
-            $package = $dba->installedPackageList($pack_sys_id, $dbh);
+            $package = $dba->installedPackageList($target_host, $dbh);
             foreach ($package as $i => $row) {
                 $return['msg'] .= '<tr class="cell-which-triggers-popup"
                    data-modal="open"
@@ -63,7 +63,7 @@ class AjaxValidate
         }
         //Begin form success functionality
         if ($return['error'] === false) {
-            $package = $dba->installedPackageSearch($pack_sys_id, $dbh, $search);
+            $package = $dba->installedPackageSearch($target_host, $dbh, $search);
             foreach ($package as $i => $row) {
                 $return['msg'] .= '<tr class="cell-which-triggers-popup"
                    data-modal="open"
@@ -84,14 +84,14 @@ class AjaxValidate
         return $return;
     }
 
-    public function isRepository($dba,$dbh,$search,$update,$pack_sys_id) {
+    public function isRepository($dba,$dbh,$search,$update,$target_host) {
         $return = array();
 
         $return['msg'] = '';
         $return['error'] = false;
         if (!isset($search) || empty($search)) {
             $return['error'] = true;
-            $package = $dba->PackageList($pack_sys_id, $dbh);
+            $package = $dba->PackageList($target_host, $dbh);
             foreach ($package as $i => $row) {
                 $return['msg'] .= '<tr class="cell-which-triggers-popup"
                    data-modal="open"
@@ -107,7 +107,7 @@ class AjaxValidate
         }
         //Begin form success functionality
         if ($return['error'] === false) {
-            $package = $dba->PackageSearch($pack_sys_id, $dbh, $search);
+            $package = $dba->PackageSearch($target_host, $dbh, $search);
             foreach ($package as $i => $row) {
                 $return['msg'] .= '<tr class="cell-which-triggers-popup"
                    data-modal="open"

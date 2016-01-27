@@ -7,6 +7,8 @@
 declare var target_ipaddress: string;
 // target_os needed for install in different operating system
 declare var target_os: string;
+// target_os needed for install in different operating system
+declare var machine_id: string;
 
 
 //var userID = <?php echo json_encode($userData); ?>;
@@ -14,13 +16,17 @@ declare var target_os: string;
 
 
 jQuery("#form1").submit(function (event) {
+    var data = $(this).serializeArray();
+    data.push({name: 'target_ipaddress',value: target_ipaddress})
+    data.push({name: 'target_os',value: target_os})
+    data.push({name:'machine_id',value: machine_id})
     event.preventDefault();
     console.log(event);
     jQuery.ajax({
         type: "POST",
         url: "includes/search.php",
-        data: jQuery(this).serialize(),
-        dataType: "json",
+        data: data,
+        dataType: "text json",
         beforeSend: function () {
             jQuery("table#resultTable tbody").html("<tr><td></td><td><i class='fa fa-spinner fa-pulse fa-2x'></i></td></tr>");
         },
@@ -79,9 +85,8 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
         var packageName = jQuery(event.target).closest("tr").find(".name").text();
         var packageVersion = jQuery(event.target).closest("tr").find(".version").text();
         if (packageName) {
-            var targetHost='localhost';
-            var managerHost='192.168.33.10';
-            showPopup(packageName, packageVersion, targetHost, managerHost);
+
+            showPopup(packageName, packageVersion, target_ipaddress, machine_id);
         }
     });
 
@@ -120,11 +125,14 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
 jQuery("#form2").submit(function (event) {
     event.preventDefault();
     console.log(event);
+    //console.log(target_ipaddress);
+    //console.log(target_os);
+    //console.log(machine_id);
     jQuery.ajax({
         type: "POST",
         url: "includes/package_update.php",
-        data: jQuery(this).serialize(),
-        dataType: "json",
+        data: {target_ipaddress: target_ipaddress, target_os: target_os, machine_id: machine_id},
+        dataType: "text json",
         beforeSend: function () {
             jQuery("#form2").html("\<button class=\"btn btn-primary\" type=\"submit\">package update\<i class=\"fa fa-refresh fa-spin\"\>\<\/i\>\<\/button\>");
         },

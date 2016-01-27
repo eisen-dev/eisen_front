@@ -16,19 +16,24 @@ class PackageUpdate
     public function updatePackage()
     {
         $user_id = @$_POST['user_id'];
+        $target_ipaddress = @$_POST['target_ipaddress'];
+        $target_os = @$_POST['target_os'];
+        $manager_id = @$_POST['machine_id'];
+        $command = 'all';
         $dba = new DbAction();
         $dbh = $dba->Connect();
-        $machine = $dba->hostManagerActiveList($user_id, $dbh);
-        foreach ($machine as $i => $manager_host) {
-                l($manager_host);
-                $rest = new restclient();
-                $hosts = $rest->updatePackage(
-                    $manager_host['ipaddress'],
-                    $manager_host['port'],
-                    $manager_host['username'],
-                    $manager_host['password']
-                );
-        }
+        //ld($user_id);
+        $manager = $dba->hostManagerid2ip($dbh, $manager_id);
+        $rest = new restclient();
+        $rest->updatePackage(
+            $manager[0]['ipaddress'],
+            $manager[0]['port'],
+            $manager[0]['username'],
+            $manager[0]['password'],
+            $target_ipaddress,
+            $target_os,
+            $command
+        );
         return json_encode($user_id);
     }
 }
