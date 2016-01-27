@@ -522,6 +522,25 @@ UNIQUE INDEX (ipaddress, machine_id)');
 
     /**
      * @param $dbh
+     * @param $machine_id
+     * @param $status
+     */
+    public function hostManagerid2ip($dbh, $manager_host_id)
+    {
+        $query = $dbh->prepare('SELECT * FROM manager_host WHERE machine_id = :machine_id ;');
+        try {
+            $query-> bindParam(':machine_id', $manager_host_id, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+            $data = $query->fetchAll();
+            $cnt  = count($data); //in case you need to count all rows
+            return $data;
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+        }
+    }
+
+    /**
+     * @param $dbh
      * @param $active set to 1 if activated 0 if deactivated
      * @param $machine_id
      */
@@ -555,6 +574,29 @@ AND machine_id = :machine_id;');
         try {
             $query-> bindParam(':machine_id', $machine_id, PDO::PARAM_STR);
             $query-> bindParam(':target_host', $target_host, PDO::PARAM_INT);
+            $query->execute(); //invalid query!
+            $data = $query->fetchAll();
+            $cnt  = count($data); //in case you need to count all rows
+            return $data;
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+        }
+    }
+
+    /**
+     * @param $dbh
+     * @param $target_host
+     * @param $machine_id
+     */
+    public function targetHostIdInf($dbh, $targetHostId)
+    {
+        $query = $dbh->prepare('
+SELECT * FROM target_host
+WHERE host_id = :host_id');
+        # TODO: it have problem finding duplicate NULL value
+        # FIX: cutted value if using to short VARCHAR so never matched
+        try {
+            $query-> bindParam(':host_id', $targetHostId, PDO::PARAM_INT);
             $query->execute(); //invalid query!
             $data = $query->fetchAll();
             $cnt  = count($data); //in case you need to count all rows
