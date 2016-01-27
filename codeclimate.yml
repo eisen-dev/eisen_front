@@ -1,6 +1,9 @@
+engines:
+  scss-lint:
+    enabled: true
 languages:
   PHP: true
 exclude_paths:
-- "webd/includes/bootstrap-3.3.5-dist/"
-- "webd/includes/jquery/"
-- "webd/includes/charts/"
+- "webd/includes/bootstrap-3.3.5-dist/*"
+- "webd/includes/jquery/*"
+- "webd/includes/charts/*"
