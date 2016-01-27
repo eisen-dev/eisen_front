@@ -19,7 +19,7 @@
         var id = $(this).attr("id"), i, s = "", dt;
         $("#" + id).empty();
         if (def.FeedUrl == undefined) return;       
-        $("#" + id).append('<img src="loader.gif" />');
+        $("#" + id).append('<i class="fa fa-refresh fa-2x fa-spin"></i>');
 
         var YQLstr = 'SELECT channel.item FROM feednormalizer WHERE output="rss_2.0" AND url ="' + def.FeedUrl + '" LIMIT ' + def.MaxCount;
 
