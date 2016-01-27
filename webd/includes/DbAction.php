@@ -614,20 +614,20 @@ WHERE host_id = :host_id');
      *
      * @return mixed
      */
-    public function installedPackageList($pack_sys_id, $dbh)
+    public function installedPackageList($target_host, $dbh)
     {
-        $stm = $dbh->prepare("select * from installed_package WHERE pack_sys_id=:pack_sys_id;");
-        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
+        $stm = $dbh->prepare("select * from installed_package WHERE target_host=:target_host;");
+        $stm-> bindParam(':target_host', $target_host, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
         return $data;
     }
 
-    public function PackageList($pack_sys_id, $dbh)
+    public function PackageList($target_host, $dbh)
     {
-        $stm = $dbh->prepare("select * from pack_info WHERE pack_sys_id=:pack_sys_id;");
-        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
+        $stm = $dbh->prepare("select * from pack_info WHERE target_host=:target_host;");
+        $stm-> bindParam(':target_host', $target_host, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
@@ -657,28 +657,28 @@ WHERE host_id = :host_id');
      *
      * @return mixed
      */
-    public function installedPackageSearch($pack_sys_id, $dbh, $search)
+    public function installedPackageSearch($target_host, $dbh, $search)
     {
         $search = "%$search%";
         $stm = $dbh->prepare('
 select * from installed_package
-WHERE pack_sys_id=:pack_sys_id
+WHERE target_host=:target_host
 AND installed_pack_name
 LIKE :search ;');
         $stm-> bindParam(':search', $search, PDO::PARAM_STR);
-        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
+        $stm-> bindParam(':target_host', $target_host, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
         return $data;
     }
 
-    public function PackageSearch($pack_sys_id, $dbh, $search)
+    public function PackageSearch($target_host, $dbh, $search)
     {
         $search = "%$search%";
-        $stm = $dbh->prepare("select * from pack_info WHERE pack_sys_id=:pack_sys_id AND pack_name LIKE :search ;");
+        $stm = $dbh->prepare("select * from pack_info WHERE target_host=:target_host AND pack_name LIKE :search ;");
         $stm-> bindParam(':search', $search, PDO::PARAM_STR);
-        $stm-> bindParam(':pack_sys_id', $pack_sys_id, PDO::PARAM_STR);
+        $stm-> bindParam(':target_host', $target_host, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
