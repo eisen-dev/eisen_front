@@ -1,8 +1,8 @@
-engines:
-  scss-lint:
-    enabled: true
 languages:
+  scss: true
   PHP: true
+  css: true
+  Javascript: true
 exclude_paths:
 - "webd/includes/bootstrap-3.3.5-dist/*"
 - "webd/includes/jquery/*"
