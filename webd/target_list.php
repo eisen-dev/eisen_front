@@ -45,26 +45,56 @@ $dbh = $dba->Connect();
     <?php require_once __DIR__ . '/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
         <main class="contents">
-            <div class="section">
-                <h2 class="title"><?php echo _('target host list'); ?></h2>
+                <div class="content-header">
+                    <!-- page title -->
+                    <h2 class="title content-header-title"><?php echo _('target host list'); ?></h2>
+                    <!-- page general setting button and useful buttons area -->
+                    <div class="content-header-buttons">
+                        <div class="content-header-button">
+                            <!-- header button area, example for add new machine button. -->
+                            <button class="btn btn-sm"><i class="fa fa-plus"></i>新規マシン追加</button>
+                        </div>
+                         <!-- setting button, open setting modal. this is optional button. -->
+                        <button class="content-header-setting" data-modal="open"
+                     data-modal-target="target_host_list-setting"><i class="fa fa-cog"></i></button>
+                    </div>
+                </div>
+
+
                 <form action="includes/target_host_checkbox.php" method="post">
-                    <div class="list-tools clearfix">
-                        <div class="list-action">
-                            <select name="list-action" class="input-list">
+
+                    <div class="n-list-tools">
+                    <!-- new list control tools -->
+					<form id="example-form">
+						<div class="n-list-toolbar">
+							<div class="n-list-action">
+                                <!-- dropdown list and submit button.-->
+                          <select name="list-action" class="input-list">
                                 <option value="0"><?php echo _('select action'); ?></option>
                                 <option value="1"><?php echo _('package list'); ?></option>
                                 <option value="2"><?php echo _('task list'); ?></option>
                                 <option value="3"><?php echo _('settings'); ?></option>
                             </select>
-                            <input type="submit" value="適用" class="button button--form">
-                        </div>
-                        <div class="search-box">
-                            <input type="text" placeholder="全てのパッケージを検索">
-                            <button type="submit" name="submit" class="search-box__button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
+								<button type="submit" value="適用" class="btn btn-sm">実行</button>
+                                <!-- additional control button is here,use button tag -->
+                                <button class="btn btn-sm"><i class="fa fa-refresh"></i>リストを更新</button>
+							</div>
+							<div class="n-searchbox">
+								<input type="text" class="n-search-box-input" placeholder="全てのパッケージを検索">
+                                <!-- search button -->
+								<button type="submit" name="submit" class="n-search-button"><i class="fa fa-search"></i></button>
+                                <!-- optional filter button -->
+								<button type="button" class="n-filter-button"><i class="fa fa-filter"></i></button>
+							</div>
+						</div>
+                        <!-- optional filter area -->
+                        <!-- optional filter area end -->
+                    </form>
+					<!--  new list control tools end-->
+                </div>
+
+
+                <div class="table-wrapper">
                     <table class="table">
                         <thead>
                         <tr>
@@ -113,12 +143,8 @@ $dbh = $dba->Connect();
                         ?>
                         </tbody>
                     </table>
+                    </div>
                 </form>
-                <!--data-modal-targetで開くモーダルのIDを指定する-->
-                <div class="button" data-modal="open"
-                     data-modal-target="target_host_list-setting">open setting
-                </div>
-            </div>
         </main>
     </div>
 </div>
