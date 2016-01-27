@@ -74,7 +74,8 @@ require_once __DIR__ .'/parts/head.php';
                             </div>
                         </th>
                         <th><?php echo _('ID'); ?></th>
-                        <th><?php echo _('host'); ?></th>
+                        <th><?php echo _('target host'); ?></th>
+                        <th><?php echo _('manager host'); ?></th>
                         <th><?php echo _('variable key'); ?></th>
                         <th><?php echo _('variable value'); ?></th>
                     </tr>
