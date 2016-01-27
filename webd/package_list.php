@@ -20,17 +20,7 @@ require_once __DIR__ .'/parts/head.php';
 </head>
 <?php
 require_once __DIR__ . '/locale.php';
-// target host to be used for get package list
-$target = [];
-if(isset($_GET['target'])){
-    $target["ipaddress"] = htmlspecialchars($_GET["target"]);
-}
-// we need the os for decide which package manager to use
-// probably port is not needed as setted from the target host settings
-if(isset($_GET['os'])){
-    $target["os"] = htmlspecialchars($_GET["os"]);
-}
-    $user_id = $me->get_user_id();
+$user_id = $me->get_user_id();
 ?>
 <body>
 <div class="wrapper">
@@ -40,9 +30,10 @@ if(isset($_GET['os'])){
             <div class="section">
                 <h2 class="title">
                 <?php
-                echo _('Package List');
-                echo('<br>');
-                echo ($_SESSION['target_host'][0].' '.$_SESSION['managerHostId'][0]);
+                echo _('Package List for host: ');
+                echo ($_SESSION['target_host'][0]['ipaddress']);
+                echo ' using manager id: ';
+                echo ($_SESSION['target_host'][0]['machine_id']);
                 ?>
                 </h2>
                 <div class="list-tools clearfix">
@@ -107,6 +98,12 @@ if(isset($_GET['os'])){
     <div class="modal-overlay"  data-modal="close"></div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
+<script>
+var target_ipaddress = '<?php echo $_SESSION['target_host'][0]['ipaddress'];?>';
+var target_os = '<?php echo $_SESSION['target_host'][0]['os'] ;?>';
+var machine_id = '<?php echo $_SESSION['target_host'][0]['machine_id'] ;?>';
+
+</script>
 <script type="text/javascript" src="ts/async.js"></script>
 </body>
 </html>
