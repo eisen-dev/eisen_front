@@ -105,7 +105,7 @@ $dbh = $dba->Connect();
                             <th><?php echo _('groups'); ?></th>
                             <th><?php echo _('os'); ?></th>
                             <th><?php echo _('machine id'); ?></th>
-                            <th><?php echo _('status id'); ?><th>
+                            <th><?php echo _('status id'); ?></th>
                         </tr>
                         </thead>
                         <tbody>
