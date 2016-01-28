@@ -74,11 +74,12 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
         jQuery(target).css("visibility", "visible").hide().fadeIn("0", "easeOutCubic");
     });
     jQuery("[data-modal='close']").click(function () {
+        var modalActiveTrue = jQuery("[data-modal-active='true']");
         // 開かれているモーダルを閉じる
-        jQuery("[data-modal-active='true']").fadeOut("0", "easeOutCubic", function () {
-            jQuery("[data-modal-active='true']").css("visibility", "hidden").css("display", "block");
+        modalActiveTrue.fadeOut("0", "easeOutCubic", function () {
+            modalActiveTrue.css("visibility", "hidden").css("display", "block");
             jQuery("[data-modal-active='true']" + ">" + ".modal-wrapper").css("left", "0px");
-            jQuery("[data-modal-active='true']").attr({"data-modal-active": "false"});
+            modalActiveTrue.attr({"data-modal-active": "false"});
         });
     });
     jQuery(document).on("click", '[data-modal-type="test"]', function (event)  {
@@ -92,10 +93,13 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
 
     function showPopup(packageName, packageVersion, targetHost, managerHost)
     {
+        var Actions: String[] = ['install','update','delete'];
+        var number = 1;
         if (typeof(packageVersion)==='undefined') packageVersion = null;
-        jQuery("#modal-contents").find("p.item-1").html(generateLink(packageName, packageVersion, targetHost, managerHost,'install'));
-        jQuery("#modal-contents").find("p.item-2").html(generateLink(packageName, packageVersion, targetHost, managerHost,'update'));
-        jQuery("#modal-contents").find("p.item-3").html(generateLink(packageName, packageVersion, targetHost, managerHost,'delete'));
+        for (var Action of Actions) {
+            jQuery("#modal-contents").find("p.item-"+number).html(generateLink(packageName, packageVersion, targetHost, managerHost, Action));
+                number += 1;
+        }
     }
 
     function generateLink(packageName: String, packageVersion: String, targetHost: String, managerHost: String, packageAction: String)
