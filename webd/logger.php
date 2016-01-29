@@ -31,56 +31,66 @@ require_once __DIR__ .'/parts/head.php';
     <?php require_once __DIR__ . '/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
         <main class="contents">
-            <div class="section">
-                <h2 class="title"><?php echo _('Host Manager'); ?></h2>
-                <form action="includes/manager_host_checkbox.php" method="post">
-                    <div class="list-tools clearfix">
-                        <div class="list-action">
-                            <label>
-                                <select name="list-action" class="input-list">
-                                    <option value="1"><?php echo _('activate'); ?></option>
-                                    <option value="0"><?php echo _('deactivate'); ?></option>
-                                </select>
-                            </label>
-                            <input type="submit" value="適用" class="button button--form">
-                        </div>
-                        <div class="search-box">
-                            <input type="text" placeholder="全てのパッケージを検索">
-                            <button type="submit" name="submit" class="search-box__button">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th><?php echo _('channel'); ?></th>
-                            <th><?php echo _('level'); ?></th>
-                            <th><?php echo _('message'); ?></th>
-                            <th><?php echo _('time'); ?></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-                        $user_id = $me->get_user_id();
-                        $data = $dba->monologList($dbh);
-                        foreach ($data as $i => $row) {
-                            $table = '<td class="ipaddress">' . $row['channel'] . '</td>';
-                            $table .= '<td class="ipaddress">' . $row['level'] . '</td>';
-                            $table .= '<td class="port">' . $row['message'] . '</td>';
-                            $table .= '<td class="module">' . $row['time'] . '</td></tr>';
-                            echo($table);
-                        }
-                        ?>
-                        </tbody>
-                    </table>
-                </form>
-                <!--TODO Use modal for this -->
-                <!--data-modal-targetで開くモーダルのIDを指定する-->
-                <div class="button" data-modal="open" data-modal-target="machine_list-setting">
-                    open setting
+            <div class="content-header">
+                <!-- page title -->
+                <h2 class="title content-header-title"><?php echo _('Logger'); ?></h2>
+                <!-- page general setting button and useful buttons area -->
+                <div class="content-header-buttons">
+                    <!-- setting button, open setting modal. this is optional button. -->
+                    <button class="content-header-setting" data-modal="open" data-modal-target="machine_list-setting"><i class="fa fa-cog"></i></button>
                 </div>
             </div>
+            <form action="includes/manager_host_checkbox.php" method="post">
+                <div class="n-list-tools">
+                    <!-- new list control tools -->
+                    <div class="n-list-toolbar">
+                        <div class="n-list-action">
+                            <!-- dropdown list and submit button.-->
+                            <select name="list-action" class="n-input-list">
+                                <option value="1"><?php echo _('activate'); ?></option>
+                                <option value="0"><?php echo _('deactivate'); ?></option>
+                            </select>
+                            <button class="btn btn-sm">実行</button>
+                            <!-- additional control button is here,use button tag -->
+                            <button class="btn btn-sm"><i class="fa fa-refresh"></i>リストを更新</button>
+                        </div>
+                        <div class="n-searchbox">
+                            <input type="text" placeholder="<?php echo _('search all log'); ?>" class="n-search-box-input">
+                            <!-- search button -->
+                            <button type="submit" name="submit" class="n-search-button"><i class="fa fa-search"></i></button>
+                            <!-- optional filter button -->
+                        </div>
+                    </div>
+                    <!-- optional filter area -->
+                    <!-- optional filter area end -->
+                    <!--  new list control tools end-->
+                </div>
+
+
+               <table class="table">
+                   <thead>
+                   <tr>
+                       <th><?php echo _('channel'); ?></th>
+                       <th><?php echo _('level'); ?></th>
+                       <th><?php echo _('message'); ?></th>
+                       <th><?php echo _('time'); ?></th>
+                   </tr>
+                   </thead>
+                   <tbody>
+                   <?php
+                   $user_id = $me->get_user_id();
+                   $data = $dba->monologList($dbh);
+                   foreach ($data as $i => $row) {
+                       $table = '<td class="ipaddress">' . $row['channel'] . '</td>';
+                       $table .= '<td class="ipaddress">' . $row['level'] . '</td>';
+                       $table .= '<td class="port">' . $row['message'] . '</td>';
+                       $table .= '<td class="module">' . $row['time'] . '</td></tr>';
+                       echo($table);
+                   }
+                   ?>
+                   </tbody>
+                </table>
+            </form>
         </main>
     </div>
 </div>
