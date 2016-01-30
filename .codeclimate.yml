@@ -9,7 +9,16 @@ engines:
     enabled: true
   scss-lint:
     enabled: true
+ratings:
+  paths:
+  - "**.html"
+  - "**.css"
+  - "**.scss"
+  - "**.ts"
+  - "**.js"
+  - "**.php"
 exclude_paths:
 - "webd/includes/bootstrap-3.3.5-dist/**/*"
 - "webd/includes/jquery/**/*"
 - "webd/includes/charts/**/*"
+- "webd/includes/font-awesome-4.3.0/**/*"
