@@ -30,98 +30,118 @@ require_once __DIR__ .'/parts/head.php';
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
         <main class="contents">
-            <div class="section">
-                <h2 class="title"><?php echo _('Task list'); ?></h2>
-                <form action="includes/task_checkbox.php" method="post">
-                <div class="list-tools clearfix">
-                    <div class="list-action">
-                        <select name="list-action" class="input-list">
-                            <option value="0"><?php echo _('select action'); ?></option>
-                            <option value="1"><?php echo _('run'); ?></option>
-                        </select>
-                        <input type="submit" value="適用" class="button button--form">
+            <div class="content-header">
+                <!-- page title -->
+                <h2 class="title content-header-title"><?php echo _('Task list'); ?></h2>
+                    <!-- page general setting button and useful buttons area -->
+                <div class="content-header-buttons">
+                    <div class="content-header-button">
+                        <!-- header button area, example for add new machine button. -->
+                        <button class="btn btn-sm"><i class="fa fa-plus"></i><?php echo _('add new task'); ?></button>
                     </div>
-                    <div class="search-box">
-                        <input type="text" placeholder="全てのパッケージを検索">
-                        <button type="submit" name="submit" class="search-box__button">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
+                    <!-- setting button, open setting modal. this is optional button. -->
+                    <button data-modal="open" data-modal-target="task_list-setting" class="content-header-setting"><i class="fa fa-cog"></i></button>
                 </div>
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th class="cbox__selectall">
-                            <div class="cbox__wrapper">
-                                <input type="checkbox" id="cbox-selectall">
-                                <label for="cbox-selectall"></label>
-                            </div>
-                        </th>
-                        <th><?php echo _('task id'); ?></th>
-                        <th><?php echo _('target host'); ?></th>
-                        <th><?php echo _('host'); ?></th>
-                        <th><?php echo _('module'); ?></th>
-                        <th><?php echo _('command'); ?></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php
-                    $dba = new DbAction();
-                    $dbh = $dba->Connect();
-                    $user_id = $me->get_user_id();
-                    $machine = $dba->hostManagerActiveList($user_id, $dbh);
-                    $rest = new restclient();
-                    foreach ($machine as $i => $row) {
-                        $data[] = $rest->tasks_list(
-                            $row['ipaddress'],
-                            $row['port'],
-                            $row['username'],
-                            $row['password']
-                        );
-                        if (is_array($data[$i])) {
-                            $data[$i][0]->manager_host = $row['ipaddress'];
-                        }
-                    }
-                    if (is_array($data[$i])) {
-                        foreach ($data as $i => $array) {
-                            foreach ($array as $x => $task) {
-                                # hack for get task_id
-                                $uri = $task->uri;
-                                $uri = explode('/', $uri);
-                                $task_id = $uri[5];
-                                if (!isset($task->manager_host)) {
-                                    $task->manager_host = $row['ipaddress'];
-                                }
-                                $table = '<tr
-                                    class="cell-which-triggers-popup"
-                                    data-modal-target="test-modal"
-                                    data-modal="open"
-                                    data-modal-type="test"
-                                >';
-                                $table .= '<td class="list-data-ctrl">
-                                <div class="list-data-cbox">
-                                    <input type="checkbox" id="cbox-' . $task_id .
-                                    '" value="' . $task_id . '" name="managerHostId[]">
-                                    <label for="cbox-' . $task_id . '">
-                                <div class="select"></div></label></div>';
-                                $table .= '</td>';
-                                $table .= '<td class="task_id">' . $task_id . '</td>';
-                                $table .= '<td class="host">' . $task->hosts . '</td>';
-                                $table .= '<td class="managerHost"><input type="hidden" id="managerHost"' .
-                                    ' value="' . $task->manager_host . '" name="managerHostAddress['.$task_id.']">' .
-                                    $task->manager_host . '</td>';
-                                $table .= '<td class="module">' . $task->module . '</td>';
-                                $table .= '<td class="command">' . $task->command . '</td></tr>';
-                                echo($table);
-                            }
-                        }
-                    }
-                    ?>
-                    </tbody>
-                </table>
-                </form>
-                <div class="button" data-modal="open" data-modal-target="task_list-setting">open setting</div>
             </div>
+            <form action="includes/task_checkbox.php" method="post">
+                <div class="n-list-tools">
+                    <!-- new list control tools -->
+                    <div class="n-list-toolbar">
+                        <div class="n-list-action">
+                            <!-- dropdown list and submit button.-->
+                    <select name="list-action" class="input-list">
+                        <option value="0"><?php echo _('select action'); ?></option>
+                        <option value="1"><?php echo _('run'); ?></option>
+                    </select>
+                            <button type="submit" value="適用" class="btn btn-sm"><?php echo _('execute'); ?></button>
+                            <!-- additional control button is here,use button tag -->
+                            <button class="btn btn-sm"><i class="fa fa-refresh"></i><?php echo _('reflesh list'); ?></button>
+                        </div>
+                        <div class="n-searchbox">
+                            <input type="text" class="n-search-box-input" placeholder="<?php echo _('search all log'); ?>">
+                            <!-- search button -->
+                            <button type="submit" name="submit" class="n-search-button"><i class="fa fa-search"></i></button>
+                            <!-- optional filter button -->
+                        </div>
+                    </div>
+                    <!-- optional filter area -->
+                    <!-- optional filter area end -->
+                    <!--  new list control tools end-->
+                </div>
+                <div class="table-wrapper">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="cbox__selectall">
+                                    <div class="cbox__wrapper">
+                                        <input type="checkbox" id="cbox-selectall">
+                                        <label for="cbox-selectall"></label>
+                                    </div>
+                                </th>
+                                <th><?php echo _('task id'); ?></th>
+                                <th><?php echo _('target host'); ?></th>
+                                <th><?php echo _('host'); ?></th>
+                                <th><?php echo _('module'); ?></th>
+                                <th><?php echo _('command'); ?></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $dba = new DbAction();
+                            $dbh = $dba->Connect();
+                            $user_id = $me->get_user_id();
+                            $machine = $dba->hostManagerActiveList($user_id, $dbh);
+                            $rest = new restclient();
+                            foreach ($machine as $i => $row) {
+                                $data[] = $rest->tasks_list(
+                                    $row['ipaddress'],
+                                    $row['port'],
+                                    $row['username'],
+                                    $row['password']
+                                );
+                                if (is_array($data[$i])) {
+                                    $data[$i][0]->manager_host = $row['ipaddress'];
+                                }
+                            }
+                            if (is_array($data[$i])) {
+                                foreach ($data as $i => $array) {
+                                    foreach ($array as $x => $task) {
+                                        # hack for get task_id
+                                        $uri = $task->uri;
+                                        $uri = explode('/', $uri);
+                                        $task_id = $uri[5];
+                                        if (!isset($task->manager_host)) {
+                                            $task->manager_host = $row['ipaddress'];
+                                        }
+                                        $table = '<tr
+                                        class="cell-which-triggers-popup"
+                                        data-modal-target="test-modal"
+                                        data-modal="open"
+                                        data-modal-type="test"
+                                        >';
+                                        $table .= '<td class="list-data-ctrl">
+                                        <div class="list-data-cbox">
+                                        <input type="checkbox" id="cbox-' . $task_id .
+                                            '" value="' . $task_id . '" name="managerHostId[]">
+                                            <label for="cbox-' . $task_id . '">
+                                            <div class="select"></div></label></div>';
+                                        $table .= '</td>';
+                                        $table .= '<td class="task_id">' . $task_id . '</td>';
+                                        $table .= '<td class="host">' . $task->hosts . '</td>';
+                                        $table .= '<td class="managerHost"><input type="hidden" id="managerHost"' .
+                                            ' value="' . $task->manager_host . '" name="managerHostAddress['.$task_id.']">' .
+                                            $task->manager_host . '</td>';
+                                        $table .= '<td class="module">' . $task->module . '</td>';
+                                        $table .= '<td class="command">' . $task->command . '</td></tr>';
+                                        echo($table);
+                                    }
+                                }
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
+            </form>
         </main>
     </div>
 </div>
