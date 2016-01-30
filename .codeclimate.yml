@@ -5,6 +5,10 @@ engines:
     enabled: true
   duplication:
     enabled: true
+      config:
+        languages:
+        - PHP
+        - javascript
   csslint:
     enabled: true
   fixme:
