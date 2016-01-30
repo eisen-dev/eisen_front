@@ -27,37 +27,59 @@ $user_id = $me->get_user_id();
     <?php require_once __DIR__ .'/parts/navigation.php'; ?>
     <div class="contentswrapper menu-set">
         <main class="contents">
-            <div class="section">
-                <h2 class="title">
-                <?php
-                echo _('Package List for host: ');
-                echo ($_SESSION['target_host'][0]['ipaddress']);
-                echo ' using manager id: ';
-                echo ($_SESSION['target_host'][0]['machine_id']);
-                ?>
-                </h2>
-                <div class="list-tools clearfix">
-                    <form id="form2">
-                        <input type="hidden" name="user_id" id="user_id" value=<?php echo $user_id ;?>>
-                    <button class="btn btn-primary" type="submit">
-                        package update
-                        <i class="fa fa-refresh"></i>
-                    </button>
+                    <!-- content header start-->
+            <div class="content-header">
+                        <!-- page title -->
+                        <h2 class="title content-header-title">
+                            <?php
+                            echo _('Package List for host: ');
+                            echo ($_SESSION['target_host'][0]['ipaddress']);
+                            echo ' using manager id: ';
+                            echo ($_SESSION['target_host'][0]['machine_id']);
+                            ?>
+                        </h2>
+                        <!-- page general setting button and useful buttons area -->
+                        <div class="content-header-buttons">
+                            <div class="content-header-button">
+                                <!-- header button area, example for add new machine button. -->
+                            </div>
+                            <!-- setting button, open setting modal. this is optional button. -->
+                            <button class="content-header-setting"><i class="fa fa-cog"></i></button>
+                        </div>
+                    </div>
+            <!-- content header end-->
+            <!-- new list control tools -->
+            <div class="n-list-tools">
+                <div class="n-list-toolbar">
+                    <div class="n-list-action">
+                        <!-- dropdown list and submit button.-->
+
+                        <form id="form1">
+                            <select name="list-action-package" class="input-list">
+                                <option value="0"><?php echo _('Installed package'); ?></option>
+                                <option value="1"><?php echo _('Repository package'); ?></option>
+                            </select>
+                        </form>
+                        <!-- additional control button is here,use button tag -->
+                        <form id="form2">
+                            <input type="hidden" name="user_id" id="user_id" value=<?php echo $user_id ;?>>
+                            <button class="btn btn-sm" type="submit"><i class="fa fa-refresh"></i><?php echo _('update package List'); ?></button>
+                        </form>
+                    </div>
+                    <form id="form3">
+                       <div class="n-searchbox">
+                           <input type="text" name="field1" id="field1" class="n-search-box-input">
+                           <!-- search button -->
+                           <button type="submit" name="submit" class="n-search-button"><i class="fa fa-search"></i></button>
+                           <!-- optional filter button -->
+                       </div>
                     </form>
-                <form id="form1">
-                    <div class="list-action">
-                        <select name="list-action-package" class="input-list">
-                            <option value="0"><?php echo _('Installed package'); ?></option>
-                            <option value="1"><?php echo _('Repository package'); ?></option>
-                        </select>
-                    </div>
-                    <div class="search-box">
-                        <input type="text" name="field1" id="field1">
-                        <button type="submit" name="submit" class="search-box__button">
-                        <i class="fa fa-search"></i>
-                    </div>
-                </form>
                 </div>
+                <!-- optional filter area -->
+                <!-- optional filter area end -->
+            </div>
+            <!--  new list control tools end-->
+            <div class="form-wrapper">
                 <table class="table" name="table" id="resultTable">
                     <thead>
                     <tr>
@@ -80,6 +102,7 @@ $user_id = $me->get_user_id();
         </main>
     </div>
 </div>
+
 <div class="modal" id="test-modal">
     <div class="modal-wrapper">
         <div class="modal-window">
