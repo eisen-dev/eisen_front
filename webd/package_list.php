@@ -53,21 +53,18 @@ $user_id = $me->get_user_id();
                 <div class="n-list-toolbar">
                     <div class="n-list-action">
                         <!-- dropdown list and submit button.-->
-
-                        <form id="form1">
-                            <select name="list-action-package" class="input-list">
-                                <option value="0"><?php echo _('Installed package'); ?></option>
-                                <option value="1"><?php echo _('Repository package'); ?></option>
-                            </select>
-                        </form>
                         <!-- additional control button is here,use button tag -->
                         <form id="form2">
                             <input type="hidden" name="user_id" id="user_id" value=<?php echo $user_id ;?>>
                             <button class="btn btn-sm" type="submit"><i class="fa fa-refresh"></i><?php echo _('update package List'); ?></button>
                         </form>
                     </div>
-                    <form id="form3">
+                    <form id="form1">
                        <div class="n-searchbox">
+                           <select name="list-action-package" class="input-list">
+                                <option value="0"><?php echo _('Installed package'); ?></option>
+                                <option value="1"><?php echo _('Repository package'); ?></option>
+                            </select>
                            <input type="text" name="field1" id="field1" class="n-search-box-input">
                            <!-- search button -->
                            <button type="submit" name="submit" class="n-search-button"><i class="fa fa-search"></i></button>
