@@ -19,6 +19,8 @@ ratings:
   - "**.php"
 exclude_paths:
 - "webd/includes/bootstrap-3.3.5-dist/**/*"
+- "webd/includes/bootstrap-custom/**/*"
 - "webd/includes/jquery/**/*"
 - "webd/includes/charts/**/*"
 - "webd/includes/font-awesome-4.3.0/**/*"
+- "webd/includes/jquery-ui.css"
