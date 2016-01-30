@@ -1,15 +1,11 @@
 engines:
-  brakeman:
-    enabled: true
-  bundler-audit:
-    enabled: true
   phpcodesniffer:
+    enabled: true
+  phpmd:
     enabled: true
   duplication:
     enabled: true
   csslint:
-    enabled: true
-  phpmd:
     enabled: true
   fixme:
     enabled: true
