@@ -35,16 +35,13 @@ if(isset($_GET['target'])){
     echo ( '<br>'.$target_host);
 }
 if(isset($_GET['manager'])){
-    $manager_ipaddress = htmlspecialchars($_GET["manager"]);
-    echo '<br>'.$manager_ipaddress;
+    $manager_id = htmlspecialchars($_GET["manager"]);
+    echo '<br>'.$manager_id;
 }
 echo '<br>------------------------<br>';
 
-$manager_data = $dba->hostManagerip2id($dbh, $manager_ipaddress);
-$manager_id = $manager_data[0]['machine_id'];
-Kint::dump($manager_data);
+$manager_data = $dba->hostManagerid2ip($dbh, $manager_id);
 $target_data = $dba->targetHostInf($dbh, $target_host, $manager_id);
-Kint::dump($target_data);
 
 $task_id = $rest->package_Action(
 $manager_data[0]['ipaddress'],
@@ -57,3 +54,5 @@ $packageName,
 $packageVersion,
 $packageAction
 );
+
+echo $task_id;
