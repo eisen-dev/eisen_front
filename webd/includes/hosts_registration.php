@@ -10,7 +10,8 @@ require_once __DIR__."/session.php";
 require_once __DIR__."/restclient.php";
 
 if(isset($_POST['submit'])){
-    $host = htmlspecialchars($_POST["host"]);
+    $targetHost = htmlspecialchars($_POST["targetHost"]);
+    $managerHost = htmlspecialchars($_POST["managerHost"]);
     $groups = htmlspecialchars($_POST["groups"]);
 }
 
@@ -22,7 +23,7 @@ $dba = new DbAction();
 $dbh = $dba->Connect();
 $user_id = $me->get_user_id();
 
-$machine = $dba->MachineList($user_id,$dbh);
+$machine = $dba->hostManagerip2id($dbh,$managerHost);
 $module=$machine[1];
 $ipaddress=$machine[2];
 $port=$machine[3];
