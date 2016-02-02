@@ -323,13 +323,12 @@ class restclient
                     }
                 )
                 ->sendIt();
-                Kint::dump($response);
             //$uri = $response->body->task->uri;
             //$uri = explode("/", $uri);
         } catch (ConnectionErrorException $ex) {
             $this->errorHandler($ex);
         }
-        return $uri[5];
+        return $response;
     }
 
     /**
