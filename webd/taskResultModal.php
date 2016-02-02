@@ -26,7 +26,6 @@ $dba = new DbAction();
 $dbh = $dba->Connect();
 
 $task_id = $_POST['task_id'];
-
 $result = $dba->taskList($dbh, $task_id);
 
 foreach ($result as $i => $column)
