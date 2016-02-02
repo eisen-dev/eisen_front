@@ -102,6 +102,8 @@ class AjaxValidate
                 $return['msg'] .= "<td>$i</td>";
                 $return['msg'] .= "<td class=\"name\">" .
                     $row['pack_name'] . "</td>";
+                $return['msg'] .= "<td></td>";
+                $return['msg'] .= "<td></td>";
                 $return['msg'] .= '</tr>';
             }
         }
@@ -118,6 +120,8 @@ class AjaxValidate
                 $return['msg'] .= "<td>$i</td>";
                 $return['msg'] .= "<td class=\"name\">" .
                     $row['pack_name'] . "</td>";
+                $return['msg'] .= "<td></td>";
+                $return['msg'] .= "<td></td>";
                 $return['msg'] .= '</tr>';
             }
         }
