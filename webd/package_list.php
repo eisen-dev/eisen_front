@@ -111,6 +111,9 @@ $user_id = $me->get_user_id();
                 <p class="item-1"></p>
                 <p class="item-2"></p>
                 <p class="item-3"></p>
+                <p class="item-4"></p>
+                <p class="item-5"></p>
+                <p class="item-6"></p>
             </div>
             <div class="modal-ctrl"></div>
         </div>
