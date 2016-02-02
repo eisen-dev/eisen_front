@@ -16,6 +16,7 @@
     <div class="topbar-inner clearfix">
         <i class="fa fa-bars navigation-toggle"></i>
         <div class="topbar-title">
+            <img src="../images/eisen.png" style="height:28px; width:auto;">
             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                  preserveAspectRatio="xMidYMid" viewBox="0 0 172.594 54.969"
                  class="eisen-logo">
