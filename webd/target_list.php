@@ -31,7 +31,6 @@ if(isset($_GET['action'])){
     echo($action);
 }
 require_once __DIR__ . '/includes/DbAction.php';
-require_once __DIR__ . '/includes/target_host_controller.php';
 $dba = new DbAction();
 $dbh = $dba->Connect();
 ?>
@@ -75,7 +74,8 @@ $dbh = $dba->Connect();
                                 </select>
                                 <button type="submit" value="適用" class="btn btn-sm">実行</button>
                                 <!-- additional control button is here,use button tag -->
-                                <button class="btn btn-sm"><i class="fa fa-refresh"></i>リストを更新</button>
+                                <button class="btn btn-sm" onclick="refresh()">
+                                <i class="fa fa-refresh"></i>リストを更新</button>
                             </div>
                             <div class="n-searchbox">
                                 <input type="text" class="n-search-box-input" placeholder="全てのパッケージを検索">
@@ -111,8 +111,14 @@ $dbh = $dba->Connect();
                         <tbody>
                         <?php
                         $user_id = $me->get_user_id();
-                        $hosts = new TargetHostController();
-                        $data = $hosts->get_TargetHost($user_id);
+                        $machine = $dba->hostManagerActiveList($user_id, $dbh);
+                        foreach ($machine as $i => $row) {
+                            try {
+                                $data[] = $dba->TargetList($user_id, $row['machine_id'], $dbh);
+                            } catch (PDOException $ex) {
+                                echo 'failed';
+                            }
+                        }
                         foreach ($data as $i => $manager) {
                             foreach ($manager as $x => $targetHost) {
                                 $table = '<tr class="cell-which-triggers-popup">
@@ -157,15 +163,23 @@ $dbh = $dba->Connect();
                     <div class="compact-form">
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>ホスト名</span>
+                                <span><?php echo _('manager host address'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
-                                <input type="text" name="host">
+                                <input type="text" name=managerHost">
                             </div>
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span>グループリスト</span>
+                                <span><?php echo _('target host address'); ?></span>
+                            </div>
+                            <div class="compact-form-item-right">
+                                <input type="text" name="targetHost">
+                            </div>
+                        </div>
+                        <div class="compact-form-row">
+                            <div class="compact-form-item-left">
+                                <span><?php echo _('group list'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
                                 <input type="text" name="groups">
@@ -182,5 +196,23 @@ $dbh = $dba->Connect();
     <div class="modal-overlay" data-modal="close"></div>
 </div>
 <?php require_once __DIR__ . '/parts/scripts.php'; ?>
+<script>
+    function refresh(event){
+        jQuery.ajax({
+            type: "POST",
+            url: "includes/target_host_controller.php",
+            data: $(this).serialize(),
+            dataType: "text json",
+            success: function (data) {
+                console.log(data);
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+                console.log(xhr.responseText);
+            }
+        });
+    }
+</script>
 </body>
 </html>
