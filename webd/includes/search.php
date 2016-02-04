@@ -51,7 +51,8 @@ class AjaxValidate
                    data-modal-type="test"
                    >';
                 $return['msg'] .= "<td></td>";
-                $return['msg'] .= "<td>$i</td>";
+                $return['msg'] .= "<td class=\"id\">" .
+                    $row['installed_pack_id']. "</td>";
                 $return['msg'] .= "<td class=\"name\">" .
                     $row['installed_pack_name'] . "</td>";
                 $return['msg'] .= "<td class=\"version\">" .
@@ -71,7 +72,8 @@ class AjaxValidate
                    data-modal-type="test"
                    >';
                 $return['msg'] .= "<td></td>";
-                $return['msg'] .= "<td>$i</td>";
+                $return['msg'] .= "<td class=\"id\">".
+                    $row['installed_pack_id']."</td>";
                 $return['msg'] .= "<td class=\"name\">" .
                     $row['installed_pack_name'] . "</td>";
                 $return['msg'] .= "<td class=\"version\">" .
@@ -99,7 +101,8 @@ class AjaxValidate
                    data-modal-type="test"
                    >';
                 $return['msg'] .= "<td></td>";
-                $return['msg'] .= "<td>$i</td>";
+                $return['msg'] .= "<td class=\"id\">" .
+                    $row['pack_id']."</td>";
                 $return['msg'] .= "<td class=\"name\">" .
                     $row['pack_name'] . "</td>";
                 $return['msg'] .= "<td></td>";
@@ -117,7 +120,8 @@ class AjaxValidate
                    data-modal-type="test"
                    >';
                 $return['msg'] .= "<td></td>";
-                $return['msg'] .= "<td>$i</td>";
+                $return['msg'] .= "<td class=\"id\">" .
+                    $row['pack_id'] . "</td>";
                 $return['msg'] .= "<td class=\"name\">" .
                     $row['pack_name'] . "</td>";
                 $return['msg'] .= "<td></td>";
