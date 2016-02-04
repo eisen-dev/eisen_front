@@ -81,7 +81,7 @@ require_once __DIR__ .'/parts/head.php';
                    $user_id = $me->get_user_id();
                    $data = $dba->monologList($dbh);
                    foreach ($data as $i => $row) {
-                       $table = '<td class="ipaddress">' . $row['channel'] . '</td>';
+                       $table = '<tr><td class="ipaddress">' . $row['channel'] . '</td>';
                        $table .= '<td class="ipaddress">' . $row['level'] . '</td>';
                        $table .= '<td class="port">' . $row['message'] . '</td>';
                        $table .= '<td class="module">' . $row['time'] . '</td></tr>';
