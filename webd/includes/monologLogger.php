@@ -17,16 +17,16 @@ use Monolog\Logger;
      */
     public function loggerInject()
     {
-
         $dba = new DbAction();
         $dbh = $dba->Connect();
+        $config = (parse_ini_file("../config.ini"));
         $log = new Logger('name');
         // create a log channel
         $log->pushHandler(new PDOHandler($dbh));
         $log->pushHandler(new SlackHandler(
-            '',
-            '#logger',
-            'Monolog',
+            $config['token'],
+            $config['channel'],
+            $config['botname'],
             true,
             null,
             Logger::INFO
