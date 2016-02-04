@@ -462,6 +462,20 @@ UNIQUE INDEX (ipaddress, machine_id)');
         }
     }
 
+    public function packageActionResult($dbh)
+    {
+        $query = $dbh->prepare('SELECT * FROM package_result ;');
+        try {
+            $query->execute(); //invalid query!
+            $data = $query->fetchAll();
+            $cnt  = count($data); //in case you need to count all rows
+            return $data;
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+
+        }
+    }
+
     /**
      * @param $dbh
      * @param $user_id

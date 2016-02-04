@@ -160,21 +160,20 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
                     managerHost: managerHost,
                     Action: Action
                 },
-                dataType: "text json",
+                dataType: "text",
                 beforeSend: function () {
                     jQuery("p.item-5").html("\<i class=\"fa fa-refresh fa-spin fa-4x\"\>\<\/i\>");
                 },
                 success: function (data) {
+                    console.log('data: ');
                     console.log(data);
                     jQuery("p.item-5").html("<pre><code>"+ data +"</code></pre>");
-                    //JSONObject jsonObj = new JSONObject(data);
-                    //$.each($.parseJSON(jsonObj), function(idx, obj) {
-                    //   console.log(obj.tagName);
-                    //});
-                    jQuery("p.item-6").html("<p>Success</p>");
+                    jQuery("p.item-6").html("<p>実行コマンドが成功です。</p>");
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     jQuery("p.item-5").html("<p>"+ xhr.status + "<br>"+xhr.responseText+"<br>"+thrownError+"</p>");
+                    jQuery("p.item-6").html("<p>実行コマンドが失敗です。</p>");
+
                     //alert(xhr.status);
                     //alert(thrownError);
                     //alert(xhr.responseText);

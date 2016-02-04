@@ -7,7 +7,8 @@
             </li>
             <li><a href="host_manager.php"><i
                         class="fa fa-server"></i><span>Host Manager</span></a></li>
-            <li><a href="logger.php"><i class="fa fa-server"></i><span>Log</span></a></li>
+            <li><a href="packageResult.php"><i class="fa fa-server"></i><span>Package Log</span></a></li>
+            <li><a href="logger.php"><i class="fa fa-server"></i><span>Error Log</span></a></li>
             <li><a href="profile.php"><i class="fa fa-cog"></i><span>Settings</span></a></li>
         </ul>
     </div>
