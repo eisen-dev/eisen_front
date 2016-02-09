@@ -124,7 +124,7 @@ $dbh = $dba->Connect();
                                 $table = '<tr class="cell-which-triggers-popup">
                         <td class="list-data-ctrl">
                         <div class="list-data-cbox">
-                            <input type="checkbox" id="cbox-' . $targetHost['host_id'] .
+                            <input type="radio" id="cbox-' . $targetHost['host_id'] .
                                     '" value="' . $targetHost['host_id'] . '" name="check[]">
                             <label for="cbox-' . $targetHost['host_id'] . '">
                         <div class="select"></div></label></div>';
