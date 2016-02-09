@@ -23,7 +23,7 @@ $(document).ready( function (event) {
         type: "POST",
         url: "includes/search.php",
         data: data,
-        dataType: "text json",
+        dataType: "json",
         beforeSend: function () {
             jQuery("table#resultTable tbody").html("<tr><td></td><td><i class='fa fa-spinner fa-pulse fa-2x'></i></td></tr>");
         },
@@ -48,7 +48,7 @@ jQuery("#form1").submit(function (event) {
         type: "POST",
         url: "includes/search.php",
         data: data,
-        dataType: "text json",
+        dataType: "json",
         beforeSend: function () {
             jQuery("table#resultTable tbody").html("<tr><td></td><td><i class='fa fa-spinner fa-pulse fa-2x'></i></td></tr>");
         },
@@ -116,8 +116,8 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
     function showPopup(packageName, packageVersion, targetHost, managerHost)
     {
         var Actions: String[] = ['install','update','delete'];
-        jQuery("#modal-contents").find("p.item-1").html("<pre>"+ packageName +"-"+ packageVersion + "</pre>")
-        var number = 2;
+        jQuery(".modal-header").find("span.modal-title").html("<pre>"+ packageName +": "+ packageVersion + "</pre>")
+        var number = 1;
         if (typeof(packageVersion)==='undefined') packageVersion = null;
         for (var Action of Actions) {
             jQuery("#modal-contents").find("p.item-"+number).html(generateLink(packageName, packageVersion, targetHost, managerHost, Action));
@@ -151,7 +151,7 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
             event.preventDefault();
             jQuery.ajax({
             type: "POST",
-                url: "test/test.php",
+                url: "includes/packageAction.php",
                 data: {
                     item: item,
                     packageName: packageName,
