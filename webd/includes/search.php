@@ -101,12 +101,14 @@ class AjaxValidate
                    data-modal-type="test"
                    >';
                 $return['msg'] .= "<td></td>";
-                $return['msg'] .= "<td class=\"id\">" .
+                $return['msg'] .= "<td class='id'>" .
                     $row['pack_id']."</td>";
-                $return['msg'] .= "<td class=\"name\">" .
+                $return['msg'] .= "<td class='name'>" .
                     $row['pack_name'] . "</td>";
-                $return['msg'] .= "<td></td>";
-                $return['msg'] .= "<td></td>";
+                $return['msg'] .= "<td class='version'>" .
+                    $row['pack_version'] . "</td>";
+                $return['msg'] .= "<td class='summary'>" .
+                    $row['pack_summary'] . "</td>";
                 $return['msg'] .= '</tr>';
             }
         }
@@ -120,12 +122,14 @@ class AjaxValidate
                    data-modal-type="test"
                    >';
                 $return['msg'] .= "<td></td>";
-                $return['msg'] .= "<td class=\"id\">" .
+                $return['msg'] .= "<td class='id'>" .
                     $row['pack_id'] . "</td>";
-                $return['msg'] .= "<td class=\"name\">" .
+                $return['msg'] .= "<td class='name'>" .
                     $row['pack_name'] . "</td>";
-                $return['msg'] .= "<td></td>";
-                $return['msg'] .= "<td></td>";
+                $return['msg'] .= "<td class='version'>" .
+                    $row['pack_version'] . "</td>";
+                $return['msg'] .= "<td class='summary'>" .
+                    $row['pack_summary'] . "</td>";
                 $return['msg'] .= '</tr>';
             }
         }
