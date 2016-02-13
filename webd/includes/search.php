@@ -50,7 +50,6 @@ class AjaxValidate
                    data-modal-target="test-modal"
                    data-modal-type="test"
                    >';
-                $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td class=\"id\">" .
                     $row['installed_pack_id']. "</td>";
                 $return['msg'] .= "<td class=\"name\">" .
@@ -71,7 +70,6 @@ class AjaxValidate
                    data-modal-target="test-modal"
                    data-modal-type="test"
                    >';
-                $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td class=\"id\">".
                     $row['installed_pack_id']."</td>";
                 $return['msg'] .= "<td class=\"name\">" .
@@ -100,7 +98,6 @@ class AjaxValidate
                    data-modal-target="test-modal"
                    data-modal-type="test"
                    >';
-                $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td class='id'>" .
                     $row['pack_id']."</td>";
                 $return['msg'] .= "<td class='name'>" .
@@ -121,7 +118,6 @@ class AjaxValidate
                    data-modal-target="test-modal"
                    data-modal-type="test"
                    >';
-                $return['msg'] .= "<td></td>";
                 $return['msg'] .= "<td class='id'>" .
                     $row['pack_id'] . "</td>";
                 $return['msg'] .= "<td class='name'>" .
