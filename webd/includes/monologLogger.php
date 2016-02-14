@@ -19,18 +19,20 @@ use Monolog\Logger;
     {
         $dba = new DbAction();
         $dbh = $dba->Connect();
-        $config = (parse_ini_file("../config.ini"));
+        $config = (parse_ini_file(realpath("../config.ini")));
         $log = new Logger('name');
         // create a log channel
         $log->pushHandler(new PDOHandler($dbh));
-        $log->pushHandler(new SlackHandler(
-            $config['token'],
-            $config['channel'],
-            $config['botname'],
-            true,
-            null,
-            Logger::INFO
-        ));
+        if (isset($config['token'])) {
+            $log->pushHandler(new SlackHandler(
+                $config['token'],
+                $config['channel'],
+                $config['botname'],
+                true,
+                null,
+                Logger::INFO
+            ));
+        }
         $log->pushHandler(new BrowserConsoleHandler(\Monolog\Logger::INFO));
         $log->pushHandler(new StreamHandler('php://stderr', \Monolog\Logger::ERROR));
         return $log;
