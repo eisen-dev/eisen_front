@@ -61,7 +61,7 @@ class DbAction
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
         $dbname = "`".str_replace("`", "``", $db_name)."`";
-        $pdo->query("CREATE DATABASE IF NOT EXISTS $dbname");
+        $pdo->query("CREATE DATABASE IF NOT EXISTS $dbname CHARACTER SET utf8;");
         $pdo->query("use $dbname");
     }
 
