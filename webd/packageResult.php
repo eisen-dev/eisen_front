@@ -23,6 +23,7 @@ require_once __DIR__ . '/locale.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<link rel="stylesheet" type="text/css" href="includes/tablesorter/theme.blue.css">
 <title><?php echo _('Logger'); ?></title>
 <?php
 require_once __DIR__ .'/parts/head.php';
@@ -88,12 +89,13 @@ require_once __DIR__ .'/parts/head.php';
                 </div>
 
 
-               <table class="table">
+               <table class="table tablesorter">
                    <thead>
                    <tr>
                        <th><?php echo _('channel'); ?></th>
                        <th><?php echo _('level'); ?></th>
                        <th><?php echo _('message'); ?></th>
+                       <th><?php echo _('created_at'); ?></th>
                    </tr>
                    </thead>
                    <tbody>
@@ -105,6 +107,7 @@ require_once __DIR__ .'/parts/head.php';
                        $table .= '<td class="result_string">' . $row['result_string'] . '</td>';
                        $table .= '<td class="packageName">' . $row['packageName'] . '</td>';
                        $table .= '<td class="packageVersion">' . $row['packageVersion'] . '</td>';
+                       $table .= '<td class="created_at">' . $row['created_at'] . '</td>';
                        $table .= '</tr>';
                        echo($table);
                    }
@@ -176,6 +179,57 @@ require_once __DIR__ .'/parts/head.php';
     </div>
     <div class="modal-overlay" data-modal="close"></div>
 </div>
+<script type="text/javascript" src="includes/tablesorter/jquery.tablesorter.js"></script>
+<script>
+var ts = $.tablesorter,
+    sorting = false,
+    searching = false;
+
+ts.getFilters = function (table) {
+    var c = table.config;
+    return c.$table.find('thead')
+        .find('.tablesorter-filter').map(function (i, el) {
+            return $(el).val();
+        }).get();
+};
+ts.setFilters = function (table, filter) {
+    var c = table.config;
+    return c.$table.find('thead')
+        .find('.tablesorter-filter').each(function (i, el) {
+            $(el).val(filter[i] || '');
+        });
+};
+
+$('table')
+    .on('sortBegin filterEnd', function (e, filters) {
+        if (!(sorting || searching)) {
+            var table = this,
+                c = table.config,
+                $sibs = c.$table.siblings('.tablesorter');
+            if (!sorting) {
+                sorting = true;
+                $sibs.trigger('sorton', [c.sortList, function () {
+                    sorting = false;
+                }]);
+            }
+            if (!searching) {
+                $sibs
+                    .each(function () {
+                        ts.setFilters(this, ts.getFilters(table));
+                    })
+                    .trigger('search');
+                setTimeout(function () {
+                    searching = false;
+                }, 500);
+            }
+        }
+    })
+    .tablesorter({
+        theme: 'blue',
+        widthFixed: true,
+        widgets: ['filter']
+    });
+</script>
 <?php require_once __DIR__ . '/parts/scripts.php'; ?>
 </body>
 </html>
