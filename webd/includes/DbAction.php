@@ -450,7 +450,7 @@ UNIQUE INDEX (ipaddress, machine_id)');
 
     public function monologList($dbh)
     {
-        $query = $dbh->prepare('SELECT * FROM monolog ;');
+        $query = $dbh->prepare('SELECT * FROM monolog ORDER BY time DESC ;');
         try {
             $query->execute(); //invalid query!
             $data = $query->fetchAll();
@@ -464,7 +464,7 @@ UNIQUE INDEX (ipaddress, machine_id)');
 
     public function packageActionResult($dbh)
     {
-        $query = $dbh->prepare('SELECT * FROM package_result ;');
+        $query = $dbh->prepare('SELECT * FROM package_result ORDER BY created_at DESC;');
         try {
             $query->execute(); //invalid query!
             $data = $query->fetchAll();
@@ -638,10 +638,12 @@ WHERE host_id = :host_id');
         return $data;
     }
 
-    public function PackageList($target_host, $dbh)
+    public function PackageList($target_host, $dbh, $start_row, $row_in_table)
     {
-        $stm = $dbh->prepare("select * from pack_info WHERE target_host=:target_host;");
+        $stm = $dbh->prepare("select * from pack_info WHERE target_host=:target_host LIMIT :start_row, :row_in_table;");
         $stm-> bindParam(':target_host', $target_host, PDO::PARAM_STR);
+        $stm-> bindParam(':start_row', $start_row, PDO::PARAM_STR);
+        $stm-> bindParam(':row_in_table', $row_in_table, PDO::PARAM_STR);
         $stm->execute();
         $data = $stm->fetchAll();
         $cnt  = count($data); //in case you need to count all rows
