@@ -70,6 +70,7 @@ $dbh = $dba->Connect();
                                     <option value="0"><?php echo _('select action'); ?></option>
                                     <option value="1"><?php echo _('package list'); ?></option>
                                     <option value="2"><?php echo _('task list'); ?></option>
+                                    <option value="4"><?php echo _('recipe list'); ?></option>
                                     <option value="3"><?php echo _('settings'); ?></option>
                                 </select>
                                 <button type="submit" value="適用" class="btn btn-sm">実行</button>

@@ -55,4 +55,6 @@ if (strcmp($_SESSION['action'],0) === 1) {
     header('location:../task_list.php');
 } elseif (strcmp($_SESSION['action'],3) === 0) {
     header('location:../variable_list.php');
+} elseif (strcmp($_SESSION['action'],4) === 0) {
+    header('location:../recipe_list.php');
 }

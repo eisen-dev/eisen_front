@@ -109,6 +109,33 @@ class restclient
         }
     }
 
+    public function recipe_list($rest_host, $rest_port, $username, $password)
+    {
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/recipes';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            $tasks = array();
+            $max = count($response->body->recipes);
+            for ($i = 0; $i < $max; $i++) {
+                if (!empty($response->body->recipes[$i])) {
+                    $recipes[] = ($response->body->recipes[$i]);
+                }
+            }
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
+        if (isset($recipes)) {
+            return $recipes;
+        }
+    }
+
     public function variable_list($rest_host, $rest_port, $username, $password)
     {
         try {
@@ -164,6 +191,31 @@ class restclient
         return $body;
     }
 
+    public function recipe_run($rest_host, $rest_port, $username, $password, $task_id)
+    {
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/recipe/' . $task_id . '/run';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            $body = array();
+            $max = count($response->body->recipe);
+            //var_dump($response);
+            for ($i = 0; $i < $max; $i++) {
+                if (!empty($response->body->recipe)) {
+                    $body[] = ($response->body->recipe);
+                }
+            }
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
+        return $body;
+    }
     /**
      * @param $rest_host
      * @param $rest_port
