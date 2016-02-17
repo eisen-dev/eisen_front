@@ -1,4 +1,14 @@
 <?php
+/**
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
+
 //issetでpostを全部チェックした方がいい
 if(isset($_POST['submit'])){
     $old_pass = htmlspecialchars(sha1($_POST["old_pass"]));

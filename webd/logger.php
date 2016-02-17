@@ -1,4 +1,15 @@
-<?php require_once __DIR__ . '/locale.php'; ?>
+<?php
+/**
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
+
+require_once __DIR__ . '/locale.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -157,57 +168,6 @@ require_once __DIR__ .'/parts/head.php';
     <div class="modal-overlay" data-modal="close"></div>
 </div>
 <script type="text/javascript" src="includes/tablesorter/jquery.tablesorter.js"></script>
-<script>
-    var ts = $.tablesorter,
-        sorting = false,
-        searching = false;
-
-    ts.getFilters = function (table) {
-        var c = table.config;
-        return c.$table.find('thead')
-            .find('.tablesorter-filter').map(function (i, el) {
-                return $(el).val();
-            }).get();
-    };
-    ts.setFilters = function (table, filter) {
-        var c = table.config;
-        return c.$table.find('thead')
-            .find('.tablesorter-filter').each(function (i, el) {
-                $(el).val(filter[i] || '');
-            });
-    };
-
-    $('table')
-        .on('sortBegin filterEnd', function (e, filters) {
-            if (!(sorting || searching)) {
-                var table = this,
-                    c = table.config,
-                    $sibs = c.$table.siblings('.tablesorter');
-                if (!sorting) {
-                    sorting = true;
-                    $sibs.trigger('sorton', [c.sortList, function () {
-                        sorting = false;
-                    }]);
-                }
-                if (!searching) {
-                    $sibs
-                        .each(function () {
-                            ts.setFilters(this, ts.getFilters(table));
-                        })
-                        .trigger('search');
-                    setTimeout(function () {
-                        searching = false;
-                    }, 500);
-                }
-            }
-        })
-        .tablesorter({
-            theme: 'blue',
-            widthFixed: true,
-            widgets: ['filter'],
-            sortForce: [[3,0]]
-        });
-</script>
 <?php require_once __DIR__ . '/parts/scripts.php'; ?>
 </body>
 </html>

@@ -1,10 +1,14 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: IT College
- * Date: 2016/01/07
- * Time: 10:22
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
  */
+
 require_once __DIR__ . '/DbAction.php';
 require_once __DIR__."/session.php";
 require_once __DIR__."/restclient.php";

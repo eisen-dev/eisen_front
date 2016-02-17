@@ -1,21 +1,11 @@
 <?php
 /**
- * (c) 2016 , Eisen Team <alice.ferrazzi@gmail.com>
+ * Eisen Frontend
+ * http://eisen-dev.github.io
  *
- * This file is part of Eisen
- *
- * Eisen is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Eisen is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with Eisen.  If not, see <http://www.gnu.org/licenses/>.
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
  *
  */
 
@@ -180,56 +170,6 @@ require_once __DIR__ .'/parts/head.php';
     <div class="modal-overlay" data-modal="close"></div>
 </div>
 <script type="text/javascript" src="includes/tablesorter/jquery.tablesorter.js"></script>
-<script>
-var ts = $.tablesorter,
-    sorting = false,
-    searching = false;
-
-ts.getFilters = function (table) {
-    var c = table.config;
-    return c.$table.find('thead')
-        .find('.tablesorter-filter').map(function (i, el) {
-            return $(el).val();
-        }).get();
-};
-ts.setFilters = function (table, filter) {
-    var c = table.config;
-    return c.$table.find('thead')
-        .find('.tablesorter-filter').each(function (i, el) {
-            $(el).val(filter[i] || '');
-        });
-};
-
-$('table')
-    .on('sortBegin filterEnd', function (e, filters) {
-        if (!(sorting || searching)) {
-            var table = this,
-                c = table.config,
-                $sibs = c.$table.siblings('.tablesorter');
-            if (!sorting) {
-                sorting = true;
-                $sibs.trigger('sorton', [c.sortList, function () {
-                    sorting = false;
-                }]);
-            }
-            if (!searching) {
-                $sibs
-                    .each(function () {
-                        ts.setFilters(this, ts.getFilters(table));
-                    })
-                    .trigger('search');
-                setTimeout(function () {
-                    searching = false;
-                }, 500);
-            }
-        }
-    })
-    .tablesorter({
-        theme: 'blue',
-        widthFixed: true,
-        widgets: ['filter']
-    });
-</script>
 <?php require_once __DIR__ . '/parts/scripts.php'; ?>
 </body>
 </html>

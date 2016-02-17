@@ -1,10 +1,12 @@
 <?php
-
 /**
- * Created by PhpStorm.
- * User: IT College
- * Date: 2016/01/07
- * Time: 3:28
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
  */
 include dirname(__FILE__) . '/../webd/includes/DbAction.php';
 class DbActionTest extends PHPUnit_Framework_TestCase
