@@ -43,7 +43,7 @@ $dbc = mysqli_connect($db_host, $db_user, $db_pass, $db_name);
                         <button class="btn">button要素+btnクラス</button>
                     </p>
 
-                    <h4 class="title">その他のオプション</h3>
+                    <h4 class="title">その他のオプション</h4>
                     <p>
                         ・幅いっぱいのボタン<br>
                         ボタンを要素幅いっぱいに表示したい場合はbtn-blcクラスを指定してください
