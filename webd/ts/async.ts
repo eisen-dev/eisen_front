@@ -13,6 +13,9 @@
 /// <reference path="libs/jqueryui.d.ts"/>
 "use strict";
 
+interface JQueryStatic { tablesorter: any; }
+interface JQuery { tablesorter: any; }
+
 // this variable are get from php in package_list.php
 declare var target_ipaddress: string;
 // target_os needed for install in different operating system
@@ -75,6 +78,17 @@ jQuery("#form1").submit(function (event) {
 
 
 jQuery(document).ajaxComplete(function (event, xhr, settings) {
+    var ts = $.tablesorter,
+        sorting = false,
+        searching = false;
+
+    $('table')
+        .ready( function (e) {})
+        .tablesorter({
+            theme: 'blue',
+            widthFixed: true,
+            widgets: ['filter']
+        });
     // モーダルウィンドウ関連
     // リサイズ時のモーダル位置を設定
     jQuery(window).resize(function () {
@@ -178,15 +192,11 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
                     console.log('data: ');
                     console.log(data);
                     jQuery("p.item-5").html("<pre><code>"+ data +"</code></pre>");
-                    jQuery("p.item-6").html("<p>実行コマンドが成功です。</p>");
+                    jQuery("p.item-6").html("<p>" + Action + "ドが成功です。</p>");
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     jQuery("p.item-5").html("<p>"+ xhr.status + "<br>"+xhr.responseText+"<br>"+thrownError+"</p>");
-                    jQuery("p.item-6").html("<p>実行コマンドが失敗です。</p>");
-
-                    //alert(xhr.status);
-                    //alert(thrownError);
-                    //alert(xhr.responseText);
+                    jQuery("p.item-6").html("<p>" + Action + "が失敗です。</p>");
                 }
 
             });
