@@ -20,3 +20,13 @@ we are following this code style:
   - Font Awesome https://fortawesome.github.io/Font-Awesome/
 - Editor
   - phpstorm
+
+Open Source used:
+[monolog/monolog](https://github.com/Seldaek/monolog)
+[nategood/httpful](https://github.com/nategood/httpful)
+[mottie/tablesorter](https://github.com/Mottie/tablesorter)
+[raveren/kint](https://github.com/raveren/kint)
+[bootstrap](getbootstrap.com/)
+[font Awesome](https://fortawesome.github.io/Font-Awesome/)
+[chartjs](http://chartjs.org/)
+[FeedEk](https://github.com/enginkizil/FeedEk)
