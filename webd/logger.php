@@ -168,6 +168,19 @@ require_once __DIR__ .'/parts/head.php';
     <div class="modal-overlay" data-modal="close"></div>
 </div>
 <script type="text/javascript" src="includes/tablesorter/jquery.tablesorter.js"></script>
+<script>
+    var ts = $.tablesorter,
+        sorting = false,
+        searching = false;
+
+    $('table')
+        .ready( function (e, filters) {})
+        .tablesorter({
+            theme: 'blue',
+            widthFixed: true,
+            widgets: ['zebra','filter']
+        });
+</script>
 <?php require_once __DIR__ . '/parts/scripts.php'; ?>
 </body>
 </html>

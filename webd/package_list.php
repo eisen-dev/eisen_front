@@ -26,6 +26,7 @@ require_once __DIR__ .'/parts/head.php';
         }
     </style>
 </head>
+<link rel="stylesheet" type="text/css" href="includes/tablesorter/theme.blue.css">
 <?php
 require_once __DIR__ . '/locale.php';
 $user_id = $me->get_user_id();
@@ -85,15 +86,9 @@ $user_id = $me->get_user_id();
             </div>
             <!--  new list control tools end-->
             <div class="form-wrapper">
-                <table class="table" name="table" id="resultTable">
+                <table class="table tablesorter" name="table" id="resultTable">
                     <thead>
                     <tr>
-                        <th class="cbox__selectall">
-                            <div class="cbox__wrapper">
-                                <input type="checkbox" id="cbox-selectall">
-                                <label for="cbox-selectall"></label>
-                            </div>
-                        </th>
                         <th><?php echo _('ID'); ?></th>
                         <th><?php echo _('package name'); ?></th>
                         <th><?php echo _('package version'); ?></th>
@@ -133,8 +128,8 @@ $user_id = $me->get_user_id();
 var target_ipaddress = '<?php echo $_SESSION['target_host'][0]['ipaddress'];?>';
 var target_os = '<?php echo $_SESSION['target_host'][0]['os'] ;?>';
 var machine_id = '<?php echo $_SESSION['target_host'][0]['machine_id'] ;?>';
-
 </script>
+<script type="text/javascript" src="includes/tablesorter/jquery.tablesorter.js"></script>
 <script type="text/javascript" src="ts/async.js"></script>
 </body>
 </html>

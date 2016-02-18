@@ -12,6 +12,7 @@
 require_once __DIR__ . '/locale.php'; ?>
 <!DOCTYPE html>
 <html lang="ja">
+<meta charset="utf-8" />
 <head>
 <link rel="stylesheet" type="text/css" href="includes/tablesorter/theme.blue.css">
 <title><?php echo _('Logger'); ?></title>
@@ -90,11 +91,13 @@ require_once __DIR__ .'/parts/head.php';
                    </thead>
                    <tbody>
                    <?php
+                   mb_regex_encoding('UTF-8');
+                   mb_internal_encoding('UTF-8');
                    $user_id = $me->get_user_id();
                    $data = $dba->packageActionResult($dbh);
                    foreach ($data as $i => $row) {
                        $table = '<tr>';
-                       $table .= '<td class="result_string">' . $row['result_string'] . '</td>';
+                       $table .= '<td class="result_string"><pre>' . htmlentities($row['result_string'], ENT_COMPAT, "UTF-8") . '</pre></td>';
                        $table .= '<td class="packageName">' . $row['packageName'] . '</td>';
                        $table .= '<td class="packageVersion">' . $row['packageVersion'] . '</td>';
                        $table .= '<td class="created_at">' . $row['created_at'] . '</td>';
@@ -170,6 +173,19 @@ require_once __DIR__ .'/parts/head.php';
     <div class="modal-overlay" data-modal="close"></div>
 </div>
 <script type="text/javascript" src="includes/tablesorter/jquery.tablesorter.js"></script>
+<script>
+    var ts = $.tablesorter,
+        sorting = false,
+        searching = false;
+
+    $('table')
+        .ready( function (e, filters) {})
+        .tablesorter({
+            theme: 'blue',
+            widthFixed: true,
+            widgets: ['zebra','filter']
+        });
+</script>
 <?php require_once __DIR__ . '/parts/scripts.php'; ?>
 </body>
 </html>
