@@ -326,7 +326,7 @@ require_once __DIR__ . '/locale.php'; ?>
     $(document).ready(function(){
 
         $('#divRss').FeedEk({
-            FeedUrl : 'http://eisen-dev.github.io/feed.xml'
+            FeedUrl : 'http://eisen-dev.github.io/update/feed.xml'
         });
 
         var r = Math.floor(Math.random()*256);
