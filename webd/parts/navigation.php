@@ -1,15 +1,16 @@
+<?php require_once __DIR__ . '/../locale.php'; ?>
 <div class="navigation">
     <div class="navigation-menu">
         <ul>
-            <li><a href="index.php"><i class="fa fa-tachometer"></i><span>Dashboard</span></a>
+            <li><a href="index.php"><i class="fa fa-tachometer"></i><span><?php echo _('Dashboard'); ?></span></a>
             </li>
-            <li><a href="target_list.php"><i class="fa fa-server"></i><span>Target List</span></a>
+            <li><a href="target_list.php"><i class="fa fa-server"></i><span><?php echo _('Target List'); ?></span></a>
             </li>
             <li><a href="host_manager.php"><i
-                        class="fa fa-server"></i><span>Host Manager</span></a></li>
-            <li><a href="packageResult.php"><i class="fa fa-server"></i><span>Package Log</span></a></li>
-            <li><a href="logger.php"><i class="fa fa-server"></i><span>Error Log</span></a></li>
-            <li><a href="profile.php"><i class="fa fa-cog"></i><span>Settings</span></a></li>
+                        class="fa fa-server"></i><span><?php echo _('Host Manager'); ?></span></a></li>
+            <li><a href="packageResult.php"><i class="fa fa-list-alt"></i><span><?php echo _('Package log'); ?></span></a></li>
+            <li><a href="logger.php"><i class="fa fa-list-alt"></i><span><?php echo _('Error log'); ?></span></a></li>
+            <li><a href="profile.php"><i class="fa fa-cog"></i><span><?php echo _('Settings'); ?></span></a></li>
         </ul>
     </div>
 </div>
