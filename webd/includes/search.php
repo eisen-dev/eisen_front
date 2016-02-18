@@ -33,11 +33,19 @@ class AjaxValidate
         $list = @$_POST['list-action-package'];
         $update = @$_POST['list-action-general'];
         $target_host = @$_POST['target_ipaddress'];
+        if (!empty($_POST['start_row'])) {
+            $start_row = @$_POST['start_row'];
+            $row_in_table = @$_POST['row_in_table'];
+        }else{
+            $start_row = 0;
+            $row_in_table = 500;
+        }
+
 
         if ($list == INSTALLED) {
             $return = $this->isInstalled($dba, $dbh, $search, $update, $target_host);
         } elseif ($list == REPOSITORY) {
-            $return = $this->isRepository($dba, $dbh, $search, $update, $target_host);
+            $return = $this->isRepository($dba, $dbh, $search, $update, $target_host, $start_row, $row_in_table);
         } else {
             $return = '$list: '.$list.' not recognized';
         }
@@ -94,14 +102,14 @@ class AjaxValidate
         return $return;
     }
 
-    public function isRepository($dba,$dbh,$search,$update,$target_host) {
+    public function isRepository($dba,$dbh,$search,$update,$target_host, $start_row, $row_in_table) {
         $return = array();
 
         $return['msg'] = '';
         $return['error'] = false;
         if (!isset($search) || empty($search)) {
             $return['error'] = true;
-            $package = $dba->PackageList($target_host, $dbh);
+            $package = $dba->PackageList($target_host, $dbh, $start_row, $row_in_table);
             foreach ($package as $i => $row) {
                 $return['msg'] .= '<tr class="cell-which-triggers-popup"
                    data-modal="open"
