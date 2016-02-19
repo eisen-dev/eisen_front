@@ -5,7 +5,7 @@ Frontend interacting with the Eisen agent.
 [![Code Climate](https://codeclimate.com/repos/56a62c2dd078df0fb201ebb9/badges/465da1a8c5e08ba742c3/gpa.svg)](https://codeclimate.com/repos/56a62c2dd078df0fb201ebb9/feed)
 
 For know more please read:
-[Eisen Documentation](https://github.com/eisen_dev/eisen_docs)
+[Eisen Documentation](https://github.com/eisen-dev/eisen_docs)
 
 ####code style:  
 4 space indent  
@@ -33,3 +33,4 @@ Open Source used:
 [font Awesome](https://fortawesome.github.io/Font-Awesome/)
 [chartjs](http://chartjs.org/)
 [FeedEk](https://github.com/enginkizil/FeedEk)
+[Notify.js](https://notifyjs.com/)
