@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /*
  * Eisen Frontend
  * http://eisen-dev.github.io
@@ -7,14 +8,21 @@
  * http://eisen-dev.github.io/License.md
  *
  */
-
-@charset "UTF-8";
 /*style.scss
 ------------------------------------------------//
 
 ------------------------------------------------*/
 /* colors
 ------------------------------------------------*/
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 /* universal
 ------------------------------------------------*/
 * {
@@ -78,6 +86,15 @@ h3.title-c {
 
 /* parts
 ------------------------------------------------*/
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 body {
   margin: 0;
   font-size: 14px;
@@ -189,6 +206,15 @@ body {
     padding-left: 200px;
   }
 }
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 .topbar {
   position: fixed;
   top: 0;
@@ -402,6 +428,15 @@ body {
     left: 0;
   }
 }
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 .navigation {
   padding: 48px 0 0 0;
   position: fixed;
@@ -456,6 +491,15 @@ body {
   }
 }
 /*汎用パーツ*/
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 input[type="submit"] {
   -webkit-appearance: none;
   border: none;
@@ -582,6 +626,15 @@ a.btn {
   font-size: 1em;
 }
 
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 #fullheight {
   overflow: scroll;
 }
@@ -839,6 +892,15 @@ a.btn {
   background-color: #f5f5f5;
 }
 
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 /*inputスタイル*/
 input[type="checkbox"] {
   display: none;
@@ -913,6 +975,15 @@ input[type="radio"]:checked + label .select {
     flex-basis: 33%;
   }
 }
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 .modal {
   visibility: hidden;
   position: fixed;
@@ -995,6 +1066,15 @@ input[type="radio"]:checked + label .select {
     width: 700px;
   }
 }
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 .settings {
   width: 100%;
   height: auto;
@@ -1031,6 +1111,15 @@ input[type="radio"]:checked + label .select {
   }
 }
 /*ページスタイル*/
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 .login-header {
   width: 100%;
   max-width: 300px;
@@ -1081,6 +1170,15 @@ input[type="radio"]:checked + label .select {
     max-width: 300px;
   }
 }
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 .title-c {
   font-size: 1.8em;
   text-align: center;
@@ -1155,6 +1253,15 @@ input[type="radio"]:checked + label .select {
   text-align: center;
 }
 
+/*
+ * Eisen Frontend
+ * http://eisen-dev.github.io
+ *
+ * Copyright (c) 2016 Alice Ferrazzi <alice.ferrazzi@gmail.com> - Takuma Muramatsu <t.muramatu59@gmail.com>
+ * Dual licensed under the MIT or GPL Version 3 licenses or later.
+ * http://eisen-dev.github.io/License.md
+ *
+ */
 .widgets-wrapper {
   display: flex;
   flex-wrap: wrap;
