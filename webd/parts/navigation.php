@@ -2,15 +2,15 @@
 <div class="navigation">
     <div class="navigation-menu">
         <ul>
-            <li><a href="index.php"><i class="fa fa-tachometer"></i><span><?php echo _('Dashboard'); ?></span></a>
+            <li><a href="index.php"><i class="fa fa-tachometer"></i><span><?php echo _('ダッシュボード'); ?></span></a>
             </li>
-            <li><a href="target_list.php"><i class="fa fa-server"></i><span><?php echo _('Target List'); ?></span></a>
+            <li><a href="target_list.php"><i class="fa fa-server"></i><span><?php echo _('タッゲットホスト'); ?></span></a>
             </li>
             <li><a href="host_manager.php"><i
                         class="fa fa-server"></i><span><?php echo _('Host Manager'); ?></span></a></li>
-            <li><a href="packageResult.php"><i class="fa fa-list-alt"></i><span><?php echo _('Package log'); ?></span></a></li>
-            <li><a href="logger.php"><i class="fa fa-list-alt"></i><span><?php echo _('Error log'); ?></span></a></li>
-            <li><a href="profile.php"><i class="fa fa-cog"></i><span><?php echo _('Settings'); ?></span></a></li>
+            <li><a href="packageResult.php"><i class="fa fa-list-alt"></i><span><?php echo _('パッケージログ'); ?></span></a></li>
+            <li><a href="logger.php"><i class="fa fa-list-alt"></i><span><?php echo _('エラーログ'); ?></span></a></li>
+            <li><a href="profile.php"><i class="fa fa-cog"></i><span><?php echo _('設定'); ?></span></a></li>
         </ul>
     </div>
 </div>
@@ -72,7 +72,7 @@
                     </div>
                 </div>
             </div>
-            <div class="menu-button menu-notifications menu-border">
+            <div class="menu-button menu-notifications menu-border" id="notification">
                 <div class="menu-icon">
                     <i class="fa fa-bell-o"></i>
                 </div>
@@ -83,51 +83,20 @@
                     <div class="popup-contents">
                         <div class="menu-list-items">
                             <ul>
-                                <li>
-                                    <span class="notifications-machine-name">WebServer</span>
-                                    <span class="notifications-time">2015/07/07 14:44</span>
-                                    <br>
-                                    <span class="notifications-message">
-                                        <i class="fa fa-check-circle fa-inline"></i>
-                                        パッケージのインストールが完了しました
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="notifications-machine-name">WebServer</span>
-                                    <span class="notifications-time">2015/07/07 12:31</span>
-                                    <br>
-                                    <span class="notifications-message">
-                                        <i class="fa fa-times-circle fa-inline"></i>
-                                        パッケージのインストールが失敗しました
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="notifications-machine-name">WebServer</span>
-                                    <span class="notifications-time">2015/07/03 09:55</span>
-                                    <br>
-                                    <span class="notifications-message">
-                                        <i class="fa fa-exclamation-circle fa-inline"></i>
-                                        新しいパッケージの更新があります
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="notifications-machine-name">WebServer</span>
-                                    <span class="notifications-time">2015/07/02 11:25</span>
-                                    <br>
-                                    <span class="notifications-message">
-                                        <i class="fa fa-check-circle fa-inline"></i>
-                                        パッケージの更新が完了しました
-                                    </span>
-                                </li>
-                                <li>
-                                    <span class="notifications-machine-name">WebServer</span>
-                                    <span class="notifications-time">2015/07/01 21:19</span>
-                                    <br>
-                                    <span class="notifications-message">
-                                        <i class="fa fa-check-circle fa-inline"></i>
-                                        パッケージのインストールが完了しました
-                                    </span>
-                                </li>
+                            <?php
+                            $dba = new DbAction();
+                            $dbh = $dba->Connect();
+                            $user_id = $me->get_user_id();
+                            $packageResult = $dba->packageGetResult($dbh);
+                            foreach ($packageResult as $index => $packres) {
+                                $notify = '<li>';
+                                $notify .= '<span class="notifications-machine-name"><pre>' . $packres['targetHost'] . '</pre></span>';
+                                $notify .= '<span class="notifications-time">' . $packres['created_at'] . '</span>';
+                                $notify .= '<span class="notifications-message"><i class="fa fa-check-circle fa-inline"> ' .$packres['packageAction'].' '. $packres['packageName'] . '</i></span>';
+                                $notify .= '</li>';
+                                echo($notify);
+                            }
+                            ?>
                             </ul>
                         </div>
                     </div>
