@@ -192,7 +192,7 @@ jQuery(document).ajaxComplete(function (event, xhr, settings) {
                     console.log('data: ');
                     console.log(data);
                     jQuery("p.item-5").html("<pre><code>"+ data +"</code></pre>");
-                    jQuery("p.item-6").html("<p>" + Action + "ドが成功です。</p>");
+                    jQuery("p.item-6").html("<p>" + Action + "が成功です。</p>");
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     jQuery("p.item-5").html("<p>"+ xhr.status + "<br>"+xhr.responseText+"<br>"+thrownError+"</p>");
