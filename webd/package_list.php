@@ -124,10 +124,30 @@ $user_id = $me->get_user_id();
     <div class="modal-overlay"  data-modal="close"></div>
 </div>
 <?php require_once __DIR__ .'/parts/scripts.php'; ?>
+<script type="text/javascript" src="includes/notify/notify.js"></script>
 <script>
 var target_ipaddress = '<?php echo $_SESSION['target_host'][0]['ipaddress'];?>';
 var target_os = '<?php echo $_SESSION['target_host'][0]['os'] ;?>';
 var machine_id = '<?php echo $_SESSION['target_host'][0]['machine_id'] ;?>';
+
+var updateAlerts = function refresh(event){
+    jQuery.ajax({
+        url: "includes/checkPackageAction.php",
+        dataType: "text",
+        success: function (data) {
+            console.log(data);
+            if (data > 0){
+                $('#notification').notify("コマンド成功", { position:"bottom right",  clickToHide: true , className: "success", autoHide: false });
+            }
+        },
+        error: function (xhr, ajaxOptions, thrownError) {
+            console.log(xhr.status);
+            console.log(thrownError);
+            console.log(xhr.responseText);
+        }
+    });
+}
+setInterval('updateAlerts()', 15000);
 </script>
 <script type="text/javascript" src="includes/tablesorter/jquery.tablesorter.js"></script>
 <script type="text/javascript" src="ts/async.js"></script>

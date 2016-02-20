@@ -141,3 +141,32 @@ jQuery(
         });
     });
 
+$(function() { // on document ready
+
+    function updateAlerts() {
+        $.ajax({
+            url : "/includes/check.php",
+            type : "POST",
+            data : {
+                method : 'checkAlerts'
+            },
+            success : function(data, textStatus, XMLHttpRequest) {
+                var response = $.parseJSON(data);
+
+                // Update the DOM to show the new alerts!
+                if (response.friendRequests > 0) {
+                    // update the number in the DOM and make sure it is visible...
+                    $('#unreadFriendRequestsNum').show().text(response.friendRequests);
+                }
+                else {
+                    // Hide the number, since there are no pending friend requests
+                    $('#unreadFriendRequestsNum').hide();
+                }
+
+                // Do something similar for unreadMessages, if required...
+            }
+        });
+        setTimeout('updateAlerts()', 15000); // Every 15 seconds.
+    }
+
+});

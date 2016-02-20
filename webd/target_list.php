@@ -208,6 +208,7 @@ $dbh = $dba->Connect();
     <div class="modal-overlay" data-modal="close"></div>
 </div>
 <?php require_once __DIR__ . '/parts/scripts.php'; ?>
+<script type="text/javascript" src="includes/notify/notify.js"></script>
 <script>
     function refresh(event){
         jQuery.ajax({
@@ -225,6 +226,24 @@ $dbh = $dba->Connect();
             }
         });
     }
+    var updateAlerts = function refresh(event){
+        jQuery.ajax({
+            url: "includes/checkPackageAction.php",
+            dataType: "text",
+            success: function (data) {
+                console.log(data);
+                if (data > 0){
+                    $('#notification').notify("コマンド成功", { position:"bottom right",  clickToHide: true , className: "success", autoHide: false });
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                console.log(xhr.status);
+                console.log(thrownError);
+                console.log(xhr.responseText);
+            }
+        });
+    }
+    setInterval('updateAlerts()', 15000);
 </script>
 </body>
 </html>
