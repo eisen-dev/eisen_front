@@ -162,6 +162,7 @@ class DbAction
                 'task_id' => 'VARCHAR(516)',
                 'packageAction' => 'VARCHAR(256)',
                 'result_short' => 'VARCHAR(256)',
+                'isRead' => 'INT',
             ],
             $dbh
         );
@@ -315,7 +316,6 @@ UNIQUE INDEX (ipaddress, machine_id)');
                 'user_id' => $row['user_id']
             ];
         }
-        kint::dump($myMachine);
         return $myMachine;
     }
 
@@ -479,6 +479,44 @@ UNIQUE INDEX (ipaddress, machine_id)');
             $data = $query->fetchAll();
             $cnt  = count($data); //in case you need to count all rows
             return $data;
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+
+        }
+    }
+
+    public function packageGetResult($dbh)
+    {
+        $query = $dbh->prepare('SELECT * FROM package_result ORDER BY created_at DESC LIMIT 3;');
+        try {
+            $query->execute(); //invalid query!
+            $data = $query->fetchAll();
+            $cnt  = count($data); //in case you need to count all rows
+            return $data;
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+
+        }
+    }
+
+    public function packageCheckNotRead($dbh)
+    {
+        $query = $dbh->prepare('SELECT COUNT(*) FROM package_result WHERE isRead = 0;');
+        try {
+            $query->execute(); //invalid query!
+            $data = $query->fetchAll();
+            return $data;
+        } catch (PDOException $ex) {
+            $this->errorHandler($ex->getMessage());
+
+        }
+    }
+    
+    public function packageSetRead($dbh)
+    {
+        $query = $dbh->prepare('UPDATE package_result SET isRead = 1;');
+        try {
+            $query->execute(); //invalid query!
         } catch (PDOException $ex) {
             $this->errorHandler($ex->getMessage());
 
