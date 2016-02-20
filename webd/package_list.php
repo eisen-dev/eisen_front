@@ -137,7 +137,7 @@ var updateAlerts = function refresh(event){
         success: function (data) {
             console.log(data);
             if (data > 0){
-                $('#notification').notify("コマンド成功", { position:"bottom right",  clickToHide: true , className: "success", autoHide: false });
+                $('#notification').notify("コマンドの実行が完了しました", { position:"bottom right",  clickToHide: true , className: "success", autoHide: false });
             }
         },
         error: function (xhr, ajaxOptions, thrownError) {
