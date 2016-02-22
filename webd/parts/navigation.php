@@ -84,17 +84,21 @@
                         <div class="menu-list-items">
                             <ul>
                             <?php
-                            $dba = new DbAction();
-                            $dbh = $dba->Connect();
-                            $user_id = $me->get_user_id();
-                            $packageResult = $dba->packageGetResult($dbh);
-                            foreach ($packageResult as $index => $packres) {
-                                $notify = '<li>';
-                                $notify .= '<span class="notifications-machine-name"><pre>' . $packres['targetHost'] . '</pre></span>';
-                                $notify .= '<span class="notifications-time">' . $packres['created_at'] . '</span>';
-                                $notify .= '<span class="notifications-message"><i class="fa fa-check-circle fa-inline"> ' .$packres['packageAction'].' '. $packres['packageName'] . '</i></span>';
-                                $notify .= '</li>';
-                                echo($notify);
+                            try {
+                                $dba = new DbAction();
+                                $dbh = $dba->Connect();
+                                $user_id = $me->get_user_id();
+                                $packageResult = $dba->packageGetResult($dbh);
+                                foreach ($packageResult as $index => $packres) {
+                                    $notify = '<li>';
+                                    $notify .= '<span class="notifications-machine-name"><pre>' . $packres['targetHost'] . '</pre></span>';
+                                    $notify .= '<span class="notifications-time">' . $packres['created_at'] . '</span>';
+                                    $notify .= '<span class="notifications-message"><i class="fa fa-check-circle fa-inline"> ' .$packres['packageAction'].' '. $packres['packageName'] . '</i></span>';
+                                    $notify .= '</li>';
+                                    echo($notify);
+                                }
+                            } catch (Exception $e) {
+                                echo('no activity');
                             }
                             ?>
                             </ul>
