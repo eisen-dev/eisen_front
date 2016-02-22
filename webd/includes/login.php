@@ -27,20 +27,25 @@ array(PDO::ATTR_EMULATE_PREPARES => false,
  exit('データベース接続に失敗しました'.$e->getMessage());
 }
 
-$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
-$query = $dbh->prepare("SELECT * FROM user_info WHERE user_id = ? AND password = ? ");
-$query->bindParam(1, $user_name);
-$query->bindParam(2, $password);
-$query->execute();
-if ($query->rowCount() > 0){
-	print_r($user_name.'<br>');
-	print_r($password.'<br>');
-	$me = new Session();
-	$me->start_session();
-	$me->is_session_started();
-	$me->set_user_id($user_name);
-	header('location:../index.php');
-} else{
-	echo 'Error login.';
+try {
+	$dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	$dbh->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+	$query = $dbh->prepare("SELECT * FROM user_info WHERE user_id = ? AND password = ? ");
+	$query->bindParam(1, $user_name);
+	$query->bindParam(2, $password);
+	$query->execute();
+	if ($query->rowCount() > 0){
+		print_r($user_name.'<br>');
+		print_r($password.'<br>');
+		$me = new Session();
+		$me->start_session();
+		$me->is_session_started();
+		$me->set_user_id($user_name);
+		header('location:../index.php');
+	} else{
+		echo 'Error login.';
+	}
+} catch (PDOException $e) {
+	echo('データベース接続に失敗しました'.$e->getMessage());
+	header('location:../init-setup1.php');
 }
