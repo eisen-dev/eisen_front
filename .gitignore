@@ -13,3 +13,5 @@ gen
 /webd/test/
 /webd/logs/
 .ini
+.vagrant
+/vendor
