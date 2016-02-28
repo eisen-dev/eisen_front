@@ -3,6 +3,7 @@ Frontend interacting with the Eisen agent.
   
 ####Badge:  
 [![Code Climate](https://codeclimate.com/github/eisen-dev/eisen_front/badges/gpa.svg)](https://codeclimate.com/github/eisen-dev/eisen_front)　　  
+[![ZenHub] (https://raw.githubusercontent.com/ZenHubIO/support/master/zenhub-badge.png)] (https://zenhub.io)   
   
 For know more please read:  
 [Eisen Documentation](https://github.com/eisen-dev/eisen_docs)  
