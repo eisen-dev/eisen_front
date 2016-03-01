@@ -62,11 +62,9 @@ $dbh = $dba->Connect();
                 <div class="content-header-buttons">
                     <div class="content-header-button">
                         <!-- header button area, example for add new machine button. -->
-                        <button class="btn btn-sm"><i class="fa fa-plus"></i>新規マシン追加</button>
+                        <button class="btn btn-sm" data-modal="open" data-modal-target="target_host_list-setting"><i class="fa fa-plus"></i>新規マシン追加</button>
                     </div>
                     <!-- setting button, open setting modal. this is optional button. -->
-                    <button class="content-header-setting" data-modal="open"
-                            data-modal-target="target_host_list-setting"><i class="fa fa-cog"></i></button>
                 </div>
             </div>
             <form action="includes/target_host_checkbox.php" method="post">
