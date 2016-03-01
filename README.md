@@ -1,7 +1,8 @@
-Eisen is a Web application for remote package management and job task manager.  
-  
 # Eisen_Frontend  
-Frontend interacting with the Eisen Engine.
+Frontend interacting with the Eisen Engine.  
+  
+## About Eisen  
+Eisen is a Web application for remote package management and job task manager.  
   
 ####Badge:  
 [![Code Climate](https://codeclimate.com/github/eisen-dev/eisen_front/badges/gpa.svg)](https://codeclimate.com/github/eisen-dev/eisen_front)　　  
