@@ -49,7 +49,6 @@ require_once __DIR__ .'/parts/head.php';
                 <!-- page general setting button and useful buttons area -->
                 <div class="content-header-buttons">
                     <!-- setting button, open setting modal. this is optional button. -->
-                    <button class="content-header-setting" data-modal="open" data-modal-target="machine_list-setting"><i class="fa fa-cog"></i></button>
                 </div>
             </div>
             <form action="includes/manager_host_checkbox.php" method="post">
