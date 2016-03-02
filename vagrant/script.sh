@@ -102,7 +102,7 @@ apt-get -y install nodejs > /dev/null 2>&1
 curl --silent https://npmjs.org/install.sh | sh > /dev/null 2>&1
 
 echo -e "\n--- Installing javascript components ---\n"
-npm install -g gulp bower > /dev/null 2>&1
+npm install -g gulp bower typescript dtsm > /dev/null 2>&1
 
 echo -e "\n--- Updating project components and pulling latest versions ---\n"
 cd /vagrant
@@ -110,6 +110,7 @@ sudo -u vagrant -H sh -c "composer install" > /dev/null 2>&1
 sudo -u vagrant -H sh -c "npm install" > /dev/null 2>&1
 sudo -u vagrant -H sh -c "bower install -s" > /dev/null 2>&1
 sudo -u vagrant -H sh -c "gulp" > /dev/null 2>&1
+sudo -u vagrant -H sh -c "tsc webd/ts/script.ts" > /dev/null 2>&1
 
 echo -e "\n--- Creating a symlink for future phpunit use ---\n"
 ln -fs /vagrant/vendor/bin/phpunit /usr/local/bin/phpunit
