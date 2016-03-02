@@ -11,9 +11,9 @@ Eisen is a Web application for remote package management and job task manager.
 For know more please read:  
 [Eisen Documentation](https://github.com/eisen-dev/eisen_docs)  
   
-####Browser Requirements
-- Chrome 48.0.2564.116  
-- Firefox 44.0.2   
+####Working Checked Browsers
+- Chrome 48.0.2564.116(windows)  
+- Firefox 44.0.2(windows)   
 
 ####code style:  
 4 space indent  
