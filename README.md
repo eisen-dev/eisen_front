@@ -12,8 +12,8 @@ For know more please read:
 [Eisen Documentation](https://github.com/eisen-dev/eisen_docs)  
   
 ####Working Checked Browsers
-- Chrome 48.0.2564.116(windows)  
-- Firefox 44.0.2(windows)   
+- Chrome 48.0  
+- Firefox 44  
 
 ####code style:  
 4 space indent  
