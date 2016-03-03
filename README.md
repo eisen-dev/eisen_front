@@ -8,6 +8,10 @@ Eisen Frontend is a Web application for remote package management and job task m
 For know more please read:  
 [Eisen Documentation](https://github.com/eisen-dev/eisen_docs)  
   
+####Working Checked Browsers
+- Chrome 48.0  
+- Firefox 44  
+
 ####code style:  
 4 space indent  
 [psr-1](http://www.php-fig.org/psr/psr-1/), [psr-2](http://www.php-fig.org/psr/psr-1/)  
