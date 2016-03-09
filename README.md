@@ -1,3 +1,6 @@
+<p align="center">
+  <img src="https://github.com/eisen-dev/eisen_docs/raw/master/images/eisen-readme-header.png" alt="Eisen">
+</p>
 # Eisen Frontend
 Eisen Frontend is a Web application for remote package management and job task manager, interacting with the Eisen Engine RESTful api.
   
