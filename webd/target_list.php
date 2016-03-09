@@ -130,27 +130,29 @@ $dbh = $dba->Connect();
                                 echo 'failed';
                             }
                         }
-                        foreach ($data as $i => $manager) {
-                            foreach ($manager as $x => $targetHost) {
-                                $table = '<tr class="cell-which-triggers-popup">
+                        if (!empty($data)) {
+                            foreach ($data as $i => $manager) {
+                                foreach ($manager as $x => $targetHost) {
+                                    $table = '<tr class="cell-which-triggers-popup">
                         <td class="list-data-ctrl">
                         <div class="list-data-cbox">
                             <input type="radio" id="cbox-' . $targetHost['host_id'] .
-                                    '" value="' . $targetHost['host_id'] . '" name="check[]">
+                                        '" value="' . $targetHost['host_id'] . '" name="check[]">
                             <label for="cbox-' . $targetHost['host_id'] . '">
                         <div class="select"></div></label></div>';
-                                $table .= '</td>';
-                                $table .= '<td class="ipaddress"><input type="hidden" id="test"' .
-                                    ' value="' . $targetHost['ipaddress'] . '" name="targetHostIp[]">' .
-                                    $targetHost['ipaddress'] . '</td>';
-                                $table .= '<td class="port">' . $targetHost['port'] . '</td>';
-                                $table .= '<td class="groups">' . $targetHost['groups'] . '</td>';
-                                $table .= '<td class="os">' . $targetHost['os'] . '</td>';
-                                $table .= '<td class="ipaddress"><input type="hidden" id="test"' .
-                                    ' value="' . $targetHost['machine_id'] . '" name="managerHostId[]">' .
-                                    $targetHost['machine_id'] . '</td>';
-                                $table .= '<td class="status_id">' . $targetHost['status_id'] . '</td>';
-                                echo($table);
+                                    $table .= '</td>';
+                                    $table .= '<td class="ipaddress"><input type="hidden" id="test"' .
+                                        ' value="' . $targetHost['ipaddress'] . '" name="targetHostIp[]">' .
+                                        $targetHost['ipaddress'] . '</td>';
+                                    $table .= '<td class="port">' . $targetHost['port'] . '</td>';
+                                    $table .= '<td class="groups">' . $targetHost['groups'] . '</td>';
+                                    $table .= '<td class="os">' . $targetHost['os'] . '</td>';
+                                    $table .= '<td class="ipaddress"><input type="hidden" id="test"' .
+                                        ' value="' . $targetHost['machine_id'] . '" name="managerHostId[]">' .
+                                        $targetHost['machine_id'] . '</td>';
+                                    $table .= '<td class="status_id">' . $targetHost['status_id'] . '</td>';
+                                    echo($table);
+                                }
                             }
                         }
                         ?>
