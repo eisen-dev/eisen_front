@@ -33,7 +33,7 @@ $rest = new restclient();
 $status_id = $rest->restconnect($rest_host,$rest_port,$rest_user,$rest_pass);
 
 try {
-    $query = $dbh->prepare('INSERT INTO manager_host (ipaddress, port, module, username, password, status_id ,user_id) VALUES ( :ipaddress, :port, :module, :username, :password, :status_id, :user_id );');
+    $query = $dbh->prepare('INSERT INTO manager_host (ipaddress, port, module, username, password, status_id ,user_id, active) VALUES ( :ipaddress, :port, :module, :username, :password, :status_id, :user_id, 1 );');
     $query-> bindParam(':ipaddress', $rest_host, PDO::PARAM_STR);
     $query-> bindParam(':port', $rest_port, PDO::PARAM_STR);
     $query-> bindParam(':username', $rest_user, PDO::PARAM_STR);
