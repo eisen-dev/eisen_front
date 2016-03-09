@@ -168,6 +168,17 @@ class DbAction
         );
 
         $this->CreateDbTable(
+            'monolog',
+            [
+                'channel' => 'VARCHAR(255)',
+                'level' => 'INTEGER',
+                'message' => 'LONGTEXT',
+                'time' => 'INTEGER UNSIGNED',
+            ],
+            $dbh
+        );
+
+        $this->CreateDbTable(
             'manager_host',
             [
                 'machine_id' => 'INT AUTO_INCREMENT',
@@ -257,7 +268,8 @@ class DbAction
             ],
             $dbh
         );
-
+        $stm = $dbh->prepare('ALTER TABLE package_result ADD created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL;');
+        $stm->execute();
         // Making constraint for have unique installed package linked to package system id only
         $stm = $dbh->prepare('Alter table installed_package ADD CONSTRAINT installed_package_uc
 UNIQUE INDEX (pack_sys_id, installed_pack_name);');
