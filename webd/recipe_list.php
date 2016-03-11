@@ -63,6 +63,7 @@ require_once __DIR__ .'/parts/head.php';
                     <select name="list-action" class="input-list">
                         <option value="0"><?php echo _('select action'); ?></option>
                         <option value="1"><?php echo _('run'); ?></option>
+                        <option value="2"><?php echo _('result'); ?></option>
                     </select>
                             <button type="submit" value="適用" class="btn btn-sm"><?php echo _('execute'); ?></button>
                             <!-- additional control button is here,use button tag -->
@@ -160,10 +161,10 @@ require_once __DIR__ .'/parts/head.php';
 <div class="modal" id="task_list-setting">
     <div class="modal-wrapper">
         <div class="modal-window">
-            <form action="includes/task_registration.php" method="post">
+            <form action="includes/recipe_registration.php" method="post">
                 <div class="modal-header">
                     <i class="fa fa-times modal-close" data-modal="close"></i>
-                    <span class="modal-title"><?php echo _('task settings'); ?></span>
+                    <span class="modal-title"><?php echo _('recipe settings'); ?></span>
                 </div>
                 <div class="modal-contents">
                     <div class="compact-form">
@@ -185,18 +186,18 @@ require_once __DIR__ .'/parts/head.php';
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span><?php echo _('Module'); ?></span>
+                                <span><?php echo _('package'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
-                                <input type="text" name="module">
+                                <input type="text" name="package">
                             </div>
                         </div>
                         <div class="compact-form-row">
                             <div class="compact-form-item-left">
-                                <span><?php echo _('command'); ?></span>
+                                <span><?php echo _('file'); ?></span>
                             </div>
                             <div class="compact-form-item-right">
-                                <input type="text" name="command">
+                                <input type="text" name="file">
                             </div>
                         </div>
                     </div>
@@ -217,7 +218,9 @@ require_once __DIR__ .'/parts/head.php';
                 <span class="modal-title"><?php echo _('Title'); ?></span>
             </div>
             <div class="modal-contents" id="modal-contents">
+                <pre>
                 <p class="item-1"></p>
+                </pre>
             </div>
             <div class="modal-ctrl"></div>
         </div>
@@ -267,22 +270,24 @@ jQuery(document).ready(function () {
     });
     jQuery(document).on("click", '[data-modal-type="test"]', function (event) {
         var task_id = $(event.target).closest('tr').find('.task_id').text();
-        if (task_id) {
-            showPopup(task_id);
+        var managerHost = $(event.target).closest('tr').find('.managerHost').text();
+        if (task_id && managerHost) {
+            showPopup(task_id, managerHost);
         }
     });
 
-    function showPopup(task_id) {
+    function showPopup(task_id, managerHost) {
         $.ajax({
-                url: 'taskResultModal.php',
+                url: 'recipeResultModal.php',
                 dataType: 'text json',
                 type: 'POST',
-                data: {task_id: task_id},
+                data: {task_id: task_id, managerHost: managerHost},
                 dataType: 'json'
             })
             .done(function (response) {
-                $('.modal-header > .modal-title').text(response.return[0]);
-                $('p.item-1').text(response.return[1]);
+                console.log(response)
+                $('.modal-header > .modal-title').text('recipe id: ' + response.return[0]);
+                $('p.item-1').text(JSON.stringify(response.return[1]));
             })
             .fail(function () {
                 alert('失敗しました');
