@@ -24,46 +24,57 @@ $user_id = $me->get_user_id();
 if (isset($_POST['list-action']) )
 {
     $action = ($_POST['list-action']);
-    kint::dump($action);
 }
 if (isset($_POST['managerHostAddress'])) {
     $managerHostAddress = ($_POST['managerHostAddress']);
-    Kint::dump($managerHostAddress);
 }
 
 $check = $_POST['managerHostId'];
 if (empty($check)) {
     echo('You didnt select any checks.');
     //header('location:../target_list.php');
-}
-else
-{
+} else {
     $N = count($check);
-    kint::dump($check);
 
     echo('You selected $N check(s): ');
-    for ($i=0; $i < $N; $i++) {
+    for ($i = 0; $i < $N; $i++) {
         echo($check[$i] . ' ');
         if ($action == 1) {
-                $machine = $dba->hostManagerActiveListFind(
-                    $user_id,
-                    $dbh,
-                    $managerHostAddress[$check[$i]]
+            $machine = $dba->hostManagerActiveListFind(
+                $user_id,
+                $dbh,
+                $managerHostAddress[$check[$i]]
+            );
+            try {
+                $rest->tasks_run(
+                    $machine[0]['ipaddress'],
+                    $machine[0]['port'],
+                    $machine[0]['username'],
+                    $machine[0]['password'],
+                    $check[$i]
                 );
-                try {
-                    $rest->tasks_run(
-                        $machine[0]['ipaddress'],
-                        $machine[0]['port'],
-                        $machine[0]['username'],
-                        $machine[0]['password'],
-                        $check[$i]
-                    );
-                } catch (HttpException $ex) {
-                    echo $ex;
-                }
-        } elseif ($action ==2) {
-            $dba->hostTaskRemove($dbh, $action, $check[$i]);
+            } catch (HttpException $ex) {
+                echo $ex;
+            }
+            header('location:../task_list.php');
+        } elseif ($action == 2) {
+            $machine = $dba->hostManagerActiveListFind(
+                $user_id,
+                $dbh,
+                $managerHostAddress[$check[$i]]
+            );
+            try {
+                $result = $rest->tasks_result(
+                    $machine[0]['ipaddress'],
+                    $machine[0]['port'],
+                    $machine[0]['username'],
+                    $machine[0]['password'],
+                    $check[$i]
+                );
+                kint::dump($result);
+            } catch (HttpException $ex) {
+                echo $ex;
+            }
         }
     }
 }
-    //
