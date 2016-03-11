@@ -259,6 +259,34 @@ class restclient
      * @param $rest_port
      * @param $username
      * @param $password
+     * @param $task_id
+     * @return \Httpful\Response|mixed
+     * @throws \Httpful\Exception\ConnectionErrorException
+     */
+    public function recipe_result($rest_host, $rest_port, $username, $password, $recipe_id)
+    {
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/recipe/' . $recipe_id . '/result';
+            $response = \Httpful\Request::get($uri)
+                ->authenticateWith($username, $password)
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->send();
+            # convert json from stdobject to array
+            $response = json_decode($response->raw_body, true);
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
+        return $response;
+    }
+    /**
+     * @param $rest_host
+     * @param $rest_port
+     * @param $username
+     * @param $password
      * @param $host
      * @param $groups
      */
@@ -337,7 +365,54 @@ class restclient
         }
         return $uri[5];
     }
+    /**
+     * @param $rest_host
+     * @param $rest_port
+     * @param $username
+     * @param $password
+     * @param $hosts
+     * @param $command
+     * @param $module
+     *
+     * @return mixed
+     */
 
+    public function recipe_register(
+        $rest_host,
+        $rest_port,
+        $username,
+        $password,
+        $hosts,
+        $package,
+        $file
+    ) {
+        try {
+            $uri = 'http://' . $rest_host . ':' . $rest_port . '/eisen/api/v1.0/recipes';
+            $response = \Httpful\Request::post($uri)
+                ->sendsJson()// tell it we're sending (Content-Type) JSON...
+                ->authenticateWith($username, $password)
+                ->body(
+                    '{"host":"' .
+                    $hosts .
+                    '","file":"' .
+                    $file .
+                    '","package":"' .
+                    $package .
+                    '"}'
+                )
+                ->whenError(
+                    function ($error) {
+                        $this->errorHandler($error);
+                    }
+                )
+                ->sendIt();
+            $uri = $response->body->task->uri;
+            $uri = explode("/", $uri);
+        } catch (ConnectionErrorException $ex) {
+            $this->errorHandler($ex);
+        }
+        return $uri[5];
+    }
     /**
      * @param $rest_host
      * @param $rest_port
