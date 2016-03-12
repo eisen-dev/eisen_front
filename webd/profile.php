@@ -71,8 +71,11 @@ catch (PDOException $e) {
                                 <span><?php echo $data[0]['mail_address'] ?></span>
                         </div>
                         <div class="compact-form-row">
-                            <span><?php echo _('Language settings:') ?></span>
-                            <span><?php echo $_SESSION['Language'] ?></span>
+                            <span><?php echo _('Current Language:') ?></span>
+                            <span><?php echo $_SESSION[SESSION_LOCALE_KEY] ?></span>
+                            <br><?php echo _('Change Language:') ?>
+                            <li><a href="?lang=en_US"> English</a></li>
+                            <li><a href="?lang=ja_JP.UTF8"> 日本語</a></li>
                         </div>
                     <div class="compact-form-row">
                         <div class="compact-form-item-left">

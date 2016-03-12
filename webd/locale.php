@@ -15,27 +15,27 @@ $me = new Session();
 $me->start_session();
 $me->is_session_started();
 
-// get language preference
-if (isset($_GET['lang'])) {
-    $language = $_GET['lang'];
-} elseif (isset($_SESSION['lang'])) {
-    $language  = $_SESSION['lang'];
+define('SESSION_LOCALE_KEY', 'eisen_locale');
+define('DEFAULT_LOCALE', 'en_US');
+define('LOCALE_REQUEST_PARAM', 'lang');
+define('WEBSITE_DOMAIN', 'messages');
+
+if (array_key_exists(LOCALE_REQUEST_PARAM, $_REQUEST)) {
+    $current_locale = $_REQUEST[LOCALE_REQUEST_PARAM];
+    $_SESSION[SESSION_LOCALE_KEY] = $current_locale;
+} elseif (array_key_exists(SESSION_LOCALE_KEY, $_SESSION)) {
+    $current_locale = $_SESSION[SESSION_LOCALE_KEY];
 } else {
-    $language = 'ja_JP.UTF8';
+    $current_locale = DEFAULT_LOCALE;
 }
 
-//$language = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-// save language preference for future page requests
-$_SESSION['Language']  = $language;
-
 $folder = 'locale';
-$domain = 'messages';
 $encoding = 'UTF-8';
 
-putenv('LANG=' . $language);
-setlocale(LC_ALL, $language);
+putenv("LC_ALL=$current_locale");
+setlocale(LC_ALL, $current_locale);
 
-bindtextdomain($domain, $folder);
-bind_textdomain_codeset($domain, $encoding);
+bindtextdomain(WEBSITE_DOMAIN, $folder);
+bind_textdomain_codeset(WEBSITE_DOMAIN, $encoding);
 
-textdomain($domain);
+textdomain(WEBSITE_DOMAIN);
