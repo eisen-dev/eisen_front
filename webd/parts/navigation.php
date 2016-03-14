@@ -61,11 +61,11 @@
                             <ul class="link-list-fw">
                                 <li>
                                     <a href="logout.php"><i
-                                            class="fa fa-cog"></i><span>ログオフ</span></a>
+                                            class="fa fa-cog"></i><span><?php echo _('Logout'); ?></span></a>
                                 </li>
                                 <li>
                                     <a href="profile.php"><i
-                                            class="fa fa-cog"></i><span>設定</span></a>
+                                            class="fa fa-cog"></i><span><?php echo _('Settings'); ?></span></a>
                                 </li>
                             </ul>
                         </div>
@@ -78,7 +78,7 @@
                 </div>
                 <div class="menu-popup">
                     <div class="popup-title">
-                        <i class="fa fa-bell-o fa-inline"></i>Notifications
+                        <i class="fa fa-bell-o fa-inline"></i><?php echo _('Notifications'); ?>
                     </div>
                     <div class="popup-contents">
                         <div class="menu-list-items">
