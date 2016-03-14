@@ -31,25 +31,24 @@ require_once __DIR__ . '/locale.php'; ?>
     <div class="contentswrapper menu-set">
         <main class="contents">
             <div class="content-header">
-                <h2 class="title content-header-title">ダッシュボード</h2>
+                <h2 class="title content-header-title"><?php echo _('Dashboard'); ?></h2>
             </div>
             <div class="widgets-wrapper">
                 <div class="widget widget-large">
                     <div class="widget-base">
                         <div class="widget-header">
-                            <span class="widget-title">ようこそ</span>
+                            <span class="widget-title"><?php echo _('Welcome'); ?></span>
                         </div>
                         <div class="widget-contents">
                             <div class="wgt-welcome">
                                     <span>
-                                    eisenへようこそ！<br>
-                                    まずは
-                                    <a href="target_list.php">ターゲットホスト</a>
-                                    を追加してみましょう。
+                                    <?php echo _('Welcome to Eisen'); ?><br>
+                                    <li>
+                                        <?php echo _("Let's add a <a href='host_manager.php'>Host manager</a>"); ?>
+                                    </li>
                                     <br>
-                                    分からないことは
-                                    <a href="#">ヘルプ</a>
-                                    をご覧ください。
+                                        <?php echo _("For any problem please check the <a href='https://github.com/eisen-dev/eisen_docs/blob/master/README.md' target='_blank'>documentation</a>"); ?>
+                                    </br>
                                     </span>
                             </div>
 
@@ -59,7 +58,7 @@ require_once __DIR__ . '/locale.php'; ?>
                 <div class="widget widget-medium">
                     <div class="widget-base">
                         <div class="widget-header">
-                            <span class="widget-title">マシンステータス</span>
+                            <span class="widget-title"><?php echo _('Machine Status'); ?></span>
                         </div>
                         <div class="widget-contents">
                             <div class="wgt-mstat">
@@ -175,7 +174,7 @@ require_once __DIR__ . '/locale.php'; ?>
                 <div class="widget widget-medium">
                     <div class="widget-base">
                         <div class="widget-header">
-                            <span class="widget-title">最近のアクティビティ</span>
+                            <span class="widget-title"><?php echo _('Recent activity'); ?></span>
                         </div>
                         <div class="widget-contents">
                             <div class="wgt-activity">
@@ -236,7 +235,7 @@ require_once __DIR__ . '/locale.php'; ?>
                                     </tr>
                                     </tbody>
                                 </table>
-                                <span>直近の5件を表示しています - <a href="#">すべてのログを見る</a></span>
+                                <span>直近の5件を表示しています - <a href="packageResult.php">すべてのログを見る</a></span>
                             </div>
                         </div>
                     </div>
@@ -244,7 +243,7 @@ require_once __DIR__ . '/locale.php'; ?>
                 <div class="widget widget-medium">
                     <div class="widget-base">
                         <div class="widget-header">
-                            <span class="widget-title">ログイン履歴</span>
+                            <span class="widget-title"><?php echo _('Login history'); ?></span>
                         </div>
                         <div class="widget-contents">
                             <div class="wgt-activity">
@@ -304,7 +303,7 @@ require_once __DIR__ . '/locale.php'; ?>
                 <div class="widget widget-medium">
                     <div class="widget-base">
                         <div class="widget-header">
-                            <span class="widget-title">ニュースフィード</span>
+                            <span class="widget-title"><?php echo _('News feed'); ?></span>
                         </div>
                         <div class="widget-contents">
                             <div class="wgt-news">
