@@ -63,7 +63,7 @@ $dbh = $dba->Connect();
                     <div class="content-header-button">
                         <!-- header button area, example for add new machine button. -->
                         <button class="btn btn-sm" data-modal="open"
-                            data-modal-target="target_host_list-setting"><i class="fa fa-plus"></i>新規マシン追加</button>
+                            data-modal-target="target_host_list-setting"><i class="fa fa-plus"></i><?php echo _('Add target host'); ?></button>
                     </div>
                     <!-- setting button, open setting modal. this is optional button. -->
                 </div>
@@ -83,10 +83,10 @@ $dbh = $dba->Connect();
                                     <option value="4"><?php echo _('recipe list'); ?></option>
                                     <option value="3"><?php echo _('settings'); ?></option>
                                 </select>
-                                <button type="submit" value="適用" class="btn btn-sm">実行</button>
+                                <button type="submit" value="適用" class="btn btn-sm"><?php echo _('Run'); ?></button>
                                 <!-- additional control button is here,use button tag -->
                                 <button class="btn btn-sm" onclick="refresh()">
-                                <i class="fa fa-refresh"></i>リストを更新</button>
+                                <i class="fa fa-refresh"></i><?php echo _('Update the list'); ?></button>
                             </div>
                             <div class="n-searchbox">
                                 <input type="text" class="n-search-box-input" placeholder="全てのパッケージを検索">
@@ -170,7 +170,7 @@ $dbh = $dba->Connect();
             <form action="includes/hosts_registration.php" method="post">
                 <div class="modal-header">
                     <i class="fa fa-times modal-close" data-modal="close"></i>
-                    <span class="modal-title">ホスト設定</span>
+                    <span class="modal-title"><?php echo _('Target host settings'); ?></span>
                 </div>
                 <div class="modal-contents">
                     <div class="compact-form">
