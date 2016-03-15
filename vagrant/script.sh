@@ -112,6 +112,11 @@ sudo -u vagrant -H sh -c "bower install -s" > /dev/null 2>&1
 sudo -u vagrant -H sh -c "gulp" > /dev/null 2>&1
 sudo -u vagrant -H sh -c "tsc webd/ts/script.ts" > /dev/null 2>&1
 
+echo -e "\n--- Updating css ---\n"
+gem install compass
+cd /vagrant/webd
+compass compile
+
 echo -e "\n--- Creating a symlink for future phpunit use ---\n"
 ln -fs /vagrant/vendor/bin/phpunit /usr/local/bin/phpunit
 
