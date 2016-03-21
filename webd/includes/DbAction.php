@@ -154,7 +154,7 @@ class DbAction
             'package_result',
             [
                 'unique_id' => 'INT AUTO_INCREMENT',
-                'result_string' => 'VARCHAR(75)',
+                'result_string' => 'LONGTEXT',
                 'packageName' => 'VARCHAR(200)',
                 'packageVersion' => 'VARCHAR(20)',
                 'targetOS' => 'VARCHAR(516)',
