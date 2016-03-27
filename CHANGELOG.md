@@ -1,4 +1,4 @@
-0.1.0 / 2016-03-24
+1.0.0 / 2016-03-24
 ==================
 
 * Added autogenerating css file on vagrant up with compass compile
